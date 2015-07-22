@@ -1,0 +1,26 @@
+msg.newversion.txt=A new version of BetterRecords is available!
+
+key.betterconfig.category=Better Records Config
+key.betterconfig.desc=Open Configuration GUI
+
+itemGroup.betterrecords=Better Records
+
+item.urlrecord.name=Blank Record
+item.urlmultirecord.name=Multi Record
+item.freqcrystal.name=Frequency Crystal
+
+item.recordwire.name=Speaker Wire
+item.recordwirecutters.name=Wire Cutters
+
+tile.recordetcher.name=Record Etcher
+tile.recordplayer.name=Record Player
+tile.frequencytuner.name=Frequency Tuner
+tile.shoutcastradio.name=Radio
+
+tile.recordspeaker.sm.name=Small Speaker
+tile.recordspeaker.md.name=Medium Speaker
+tile.recordspeaker.lg.name=Large Speaker
+
+tile.strobelight.name=Strobe Light
+tile.lazer.name=Lazer
+tile.lazercluster.name=Lazer Cluster

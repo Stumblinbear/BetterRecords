@@ -1,0 +1,16 @@
+[
+{
+  "modid": "betterrecords",
+  "name": "Better Records",
+  "description": "Adds records that can play songs via URLs.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://www.codingforcookies.com/",
+  "updateUrl": "",
+  "authors": ["Stumblinbear", "Borlea"],
+  "credits": "CodingForCookies",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
