@@ -2,19 +2,19 @@ package com.codingforcookies.betterrecords.src.client.models;
 
 import java.util.Map.Entry;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.tileentity.TileEntity;
-
 import org.lwjgl.opengl.GL11;
 
 import com.codingforcookies.betterrecords.src.StaticInfo;
 import com.codingforcookies.betterrecords.src.betterenums.IRecordWireManipulator;
 import com.codingforcookies.betterrecords.src.betterenums.RecordConnection;
 import com.codingforcookies.betterrecords.src.items.TileEntityRecordPlayer;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 
 public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 	public BlockRecordPlayerRenderer() { }
@@ -35,7 +35,7 @@ public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 					GL11.glDisable(GL11.GL_TEXTURE_2D);
 					
 					GL11.glLineWidth(2F);
-					for(RecordConnection rec : tileEntityRecordPlayer.getConnections()) {
+					for(RecordConnection rec : tileEntityRecordPlayer.getConnections()){
 						int x1 = -(tileEntityRecordPlayer.xCoord - rec.x2);
 						int y1 = -(tileEntityRecordPlayer.yCoord - rec.y2);
 						int z1 = -(tileEntityRecordPlayer.zCoord - rec.z2);

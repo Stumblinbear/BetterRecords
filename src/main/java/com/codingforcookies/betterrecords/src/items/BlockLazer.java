@@ -1,14 +1,5 @@
 package com.codingforcookies.betterrecords.src.items;
 
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-
 import com.codingforcookies.betterrecords.src.BetterUtils;
 import com.codingforcookies.betterrecords.src.betterenums.ConnectionHelper;
 import com.codingforcookies.betterrecords.src.betterenums.IRecordWire;
@@ -17,6 +8,16 @@ import com.codingforcookies.betterrecords.src.client.ClientProxy;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.BlockContainer;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentTranslation;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 
 public class BlockLazer extends BlockContainer {
 	public BlockLazer() {
@@ -64,6 +65,26 @@ public class BlockLazer extends BlockContainer {
 		return super.removedByPlayer(world,player, x, y, z, willHarvest);
 	}
 	
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are){
+		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		if(tileEntity == null || !(tileEntity instanceof TileEntityLazer)) return false;
+		TileEntityLazer tileEntityLazer = (TileEntityLazer) tileEntity;
+		float length = tileEntityLazer.length;
+		if(player.isSneaking()) {
+			if(tileEntityLazer.length > 0) {
+				tileEntityLazer.length--;
+			}
+		}else{
+			if(tileEntityLazer.length < 25) {
+				tileEntityLazer.length++;
+			}
+		}
+		if(tileEntityLazer.length != length && !world.isRemote) {
+			Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("msg.lazerlength." + (tileEntityLazer.length > length ? "increase" : "decrease")).appendText(" " + tileEntityLazer.length));
+		}
+		return true;
+	}
+
 	@SideOnly(Side.CLIENT)
     public int getRenderType() {
 		return -1;

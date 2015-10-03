@@ -2,13 +2,6 @@ package com.codingforcookies.betterrecords.src.items;
 
 import java.util.List;
 
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
-
 import com.codingforcookies.betterrecords.src.BetterRecords;
 import com.codingforcookies.betterrecords.src.betterenums.IRecord;
 import com.codingforcookies.betterrecords.src.betterenums.IRecordWireHome;
@@ -16,6 +9,12 @@ import com.codingforcookies.betterrecords.src.packets.PacketHandler;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 
 public class ItemURLRecord extends Item implements IRecord {
 	private static IIcon iconBase, iconOverlay;
@@ -71,6 +70,6 @@ public class ItemURLRecord extends Item implements IRecord {
 	}
 	
 	public void onRecordInserted(IRecordWireHome par1WireHome, ItemStack par2ItemStack) {
-		PacketHandler.sendRecordPlayToAllFromServer(par1WireHome.getTileEntity().xCoord, par1WireHome.getTileEntity().yCoord, par1WireHome.getTileEntity().zCoord, par1WireHome.getTileEntity().getWorldObj().provider.dimensionId, par1WireHome.getSongRadius(), par2ItemStack.stackTagCompound.getString("name"), par2ItemStack.stackTagCompound.getString("url"), par2ItemStack.stackTagCompound.getString("local"), par2ItemStack.stackTagCompound.hasKey("repeat") ? par2ItemStack.stackTagCompound.getBoolean("repeat") : false);
+		PacketHandler.sendRecordPlayToAllFromServer(par1WireHome.getTileEntity().xCoord, par1WireHome.getTileEntity().yCoord, par1WireHome.getTileEntity().zCoord, par1WireHome.getTileEntity().getWorldObj().provider.dimensionId, par1WireHome.getSongRadius(), par2ItemStack.stackTagCompound.getString("name"), par2ItemStack.stackTagCompound.getString("url"), par2ItemStack.stackTagCompound.getString("local"), par2ItemStack.stackTagCompound.hasKey("repeat") ? par2ItemStack.stackTagCompound.getBoolean("repeat") : false, false);
 	}
 }

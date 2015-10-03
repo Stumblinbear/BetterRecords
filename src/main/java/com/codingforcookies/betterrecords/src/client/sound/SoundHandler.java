@@ -17,18 +17,16 @@ import javax.sound.sampled.DataLine.Info;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.SourceDataLine;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.tileentity.TileEntity;
-
 import com.codingforcookies.betterrecords.src.ClasspathInjector;
 import com.codingforcookies.betterrecords.src.betterenums.IRecordAmplitude;
 import com.codingforcookies.betterrecords.src.betterenums.IRecordWireHome;
 import com.codingforcookies.betterrecords.src.betterenums.RecordConnection;
 import com.codingforcookies.betterrecords.src.client.ClientProxy;
-import com.codingforcookies.betterrecords.src.items.TileEntityRecordPlayer;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModClassLoader;
+import net.minecraft.client.Minecraft;
+import net.minecraft.tileentity.TileEntity;
 
 public class SoundHandler {
 	public static File soundLocation;
@@ -91,8 +89,8 @@ public class SoundHandler {
 		}
 	}
 	
-	public static void playSound(final int x, final int y, final int z, final int dimension, final float playRadius, final List<Sound> sounds, boolean repeat) {
-		playSound(x, y, z, dimension, playRadius, sounds, repeat, 0);
+	public static void playSound(final int x, final int y, final int z, final int dimension, final float playRadius, final List<Sound> sounds, boolean repeat, boolean shuffle){
+		playSound(x, y, z, dimension, playRadius, sounds, repeat, shuffle, 0);
 	}
 	
 	private static void obtainSound(final SoundManager manager, final int songIndex) {
@@ -109,17 +107,17 @@ public class SoundHandler {
 	
 	protected static void playSound(SoundManager manager, int songIndex) {
 		if(songIndex == -1)
-			playSound(manager.songs.get(0).x, manager.songs.get(0).y, manager.songs.get(0).z, manager.songs.get(0).dimension, manager.songs.get(0).playRadius, manager.songs, manager.repeat, -1);
+ playSound(manager.songs.get(0).x, manager.songs.get(0).y, manager.songs.get(0).z, manager.songs.get(0).dimension, manager.songs.get(0).playRadius, manager.songs, manager.repeat, manager.shuffle, -1);
 		else
-			playSound(manager.songs.get(songIndex).x, manager.songs.get(songIndex).y, manager.songs.get(songIndex).z, manager.songs.get(songIndex).dimension, manager.songs.get(songIndex).playRadius, manager.songs, manager.repeat, songIndex);
+ playSound(manager.songs.get(songIndex).x, manager.songs.get(songIndex).y, manager.songs.get(songIndex).z, manager.songs.get(songIndex).dimension, manager.songs.get(songIndex).playRadius, manager.songs, manager.repeat, manager.shuffle, songIndex);
 	}
 	
-	private static void playSound(final int x, final int y, final int z, final int dimension, final float playRadius, final List<Sound> sounds, boolean repeat, int songIndex) {
+	private static void playSound(final int x, final int y, final int z, final int dimension, final float playRadius, final List<Sound> sounds, boolean repeat, boolean shuffle, int songIndex){
 		if(songIndex >= 0) {
 			SoundManager sndMgr = null;
 			
 			if(soundPlaying.get(x + "," + y + "," + z + "," + dimension) == null) {
-				sndMgr = new SoundManager(repeat);
+				sndMgr = new SoundManager(repeat, shuffle);
 				sndMgr.songs = sounds;
 				soundPlaying.put(x + "," + y + "," + z + "," + dimension, sndMgr);
 			}else
@@ -158,7 +156,7 @@ public class SoundHandler {
 				}
 			}
 		}
-		
+
 		tryToStart(x, y, z, dimension);
 	}
 	
@@ -184,7 +182,7 @@ public class SoundHandler {
 		if(!streamRadio)
 			return;
 		
-		soundPlaying.put(x + "," + y + "," + z + "," + dimension, new SoundManager(new Sound(x, y, z, dimension, playRadius).setInfo("", url, localName), false));
+		soundPlaying.put(x + "," + y + "," + z + "," + dimension, new SoundManager(new Sound(x, y, z, dimension, playRadius).setInfo("", url, localName), false, false));
 		
 		new Thread(new Runnable() {
 			public void run() {
@@ -230,9 +228,10 @@ public class SoundHandler {
 				if(line != null) {
 					line.open(outFormat);
 
-					if(snd.volume == null)
+					if(snd.volume == null) {
 						snd.volume = (FloatControl)line.getControl(FloatControl.Type.MASTER_GAIN);
-
+						snd.volume.setValue(-20F);
+					}
 					line.start();
 					stream(getAudioInputStream(outFormat, in), line, x, y, z, dimension, type);
 					line.drain();
@@ -294,8 +293,8 @@ public class SoundHandler {
 		float unscaledBass = -1F;
 		TileEntity tileEntity = Minecraft.getMinecraft().theWorld.getTileEntity(x, y, z);
 		if(tileEntity != null && tileEntity instanceof IRecordWireHome) {
-			((TileEntityRecordPlayer)tileEntity).addTreble(getUnscaledWaveform(buffer, true, false));
-			((TileEntityRecordPlayer)tileEntity).addBass(getUnscaledWaveform(buffer, false, false));
+			((IRecordWireHome) tileEntity).addTreble(getUnscaledWaveform(buffer, true, false));
+			((IRecordWireHome) tileEntity).addBass(getUnscaledWaveform(buffer, false, false));
 			
 			for(RecordConnection con : ((IRecordWireHome)tileEntity).getConnections()) {
 				if(buffer == null)
@@ -314,27 +313,24 @@ public class SoundHandler {
 	}
 
 	public static float getUnscaledWaveform(byte[] eightBitByteArray, boolean high, boolean control) {
-		int[] toReturn = new int[eightBitByteArray.length / 2];
-		float avg = 0;
-		int index = 0;
-		
-		for(int audioByte = high ? 1 : 0; audioByte < eightBitByteArray.length; audioByte += 2) {
-			toReturn[index] = (int)eightBitByteArray[audioByte];
-			avg += toReturn[index];
-			index++;
+		if(eightBitByteArray != null) {
+			int[] toReturn = new int[eightBitByteArray.length / 2];
+			float avg = 0;
+			int index = 0;
+			for(int audioByte = high ? 1 : 0; audioByte < eightBitByteArray.length; audioByte += 2){
+				toReturn[index] = (int) eightBitByteArray[audioByte];
+				avg += toReturn[index];
+				index++;
+			}
+			avg = avg / toReturn.length;
+			if(control) {
+				if(avg < 0F) avg = Math.abs(avg);
+				if(avg > 20F) return(ClientProxy.flashyMode < 3 ? 10F : 20F);
+				else return (int) (avg * (ClientProxy.flashyMode < 3 ? 1F : 2F));
+			}
+			return avg;
 		}
-		
-		avg = avg / toReturn.length;
-		
-		if(control) {
-			if(avg < 0F)
-				avg = Math.abs(avg);
-			if(avg > 20F)
-				return (ClientProxy.flashyMode < 3 ? 10F : 20F);
-			else
-				return (int)(avg * (ClientProxy.flashyMode < 3 ? 1F : 2F));
-		}
-		return avg;
+		return 0;
 	}
 	
 	private static int getSixteenBitSample(int high, int low) {

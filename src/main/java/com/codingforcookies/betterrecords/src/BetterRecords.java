@@ -1,9 +1,5 @@
 package com.codingforcookies.betterrecords.src;
 
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-
 import org.apache.commons.lang3.text.WordUtils;
 
 import com.codingforcookies.betterrecords.src.client.BetterCreativeTab;
@@ -41,12 +37,10 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 
-import static org.lwjgl.demo.util.IOUtil.*;
-import static org.lwjgl.glfw.Callbacks.*;
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 @Mod(modid = BetterRecords.ID, version = "@VERSION@", useMetadata = true, name = "Better Records",
 acceptableRemoteVersions = "@CHANGE_VERSION@", acceptedMinecraftVersions = "@MC_VERSION@", acceptableSaveVersions = "@CHANGE_VERSION@")
@@ -85,26 +79,13 @@ public class BetterRecords {
 	public static final BlockLazerCluster blockLazerCluster = (BlockLazerCluster)new BlockLazerCluster().setBlockName("lazercluster").setBlockTextureName(ID + ":breaktexture").setHardness(4.8F).setResistance(4.8F).setCreativeTab(recordsTab);
 	
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		glfwSetDropCallback(window, new GLFWDropCallback() {
-			@Override
-			public void invoke(long window, int count, long names) {
-				printEvent("drop %d file%s", window, count, count == 1 ? "" : "s");
+	public void preInit(final FMLPreInitializationEvent event) {
 
-				dropCallbackNamesApply(count, names, new DropConsumerString() {
-					@Override
-					public void accept(int index, String name) {
-						System.out.format("\t%d: %s%n", index + 1, name);
-					}
-				});
-			}
-		});
-		
 		proxy.preInit();
 	}
 	
 	@EventHandler
-	public void init(FMLInitializationEvent event) {
+	public void init(final FMLInitializationEvent event) {
 		PacketHandler.channels = NetworkRegistry.INSTANCE.newChannel("BetterRecords", new ChannelHandler());
 
 		GameRegistry.registerItem(itemURLRecord, "urlrecord");
@@ -137,6 +118,7 @@ public class BetterRecords {
 		GameRegistry.addRecipe(new RecipeRecord());
 		GameRegistry.addRecipe(new RecipeMultiRecord());
 		GameRegistry.addRecipe(new RecipeRecordRepeatable());
+		GameRegistry.addRecipe(new RecipeRecordShuffle());
 		GameRegistry.addRecipe(new RecipeColoredRecord());
 		
 		GameRegistry.addShapedRecipe(new ItemStack(itemFreqCrystal), "RQR", "QDQ", "RQR", 'R', Items.redstone, 'Q', Items.quartz, 'D', Items.diamond);
@@ -165,11 +147,11 @@ public class BetterRecords {
 	}
 	
 	@EventHandler
-	public void postInit(FMLPostInitializationEvent evt) {
+	public void postInit(final FMLPostInitializationEvent evt) {
 		
 	}
 
-	public static String[] getWordWrappedString(int maxWidth, String string) {
+	public static String[] getWordWrappedString(final int maxWidth, final String string) {
 		return WordUtils.wrap(string, maxWidth, "\n", false).replace("\\n", "\n").split("\n");
 	}
 }

@@ -6,14 +6,14 @@ import com.codingforcookies.betterrecords.src.BetterRecords;
 import com.codingforcookies.betterrecords.src.betterenums.IRecordWireHome;
 import com.codingforcookies.betterrecords.src.packets.PacketHandler;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemURLMultiRecord extends ItemURLRecord {
 	private static IIcon iconBase, iconOverlay;
@@ -32,8 +32,12 @@ public class ItemURLMultiRecord extends ItemURLRecord {
 				par3List.add("Song #" + (i + 1) + ": " + songList.getCompoundTagAt(i).getString("local"));
 		}
 		if(par1ItemStack.stackTagCompound != null && par1ItemStack.stackTagCompound.hasKey("repeat") ? par1ItemStack.stackTagCompound.getBoolean("repeat") : false) {
-			par3List.add("");
+			if(!par3List.contains("\247eShuffle Enabled")) par3List.add("");
 			par3List.add("\247eRepeat Enabled");
+		}
+		if(par1ItemStack.stackTagCompound != null && par1ItemStack.stackTagCompound.hasKey("shuffle") ? par1ItemStack.stackTagCompound.getBoolean("shuffle") : false) {
+			if(!par3List.contains("\247eRepeat Enabled")) par3List.add("");
+			par3List.add("\247eShuffle Enabled");
 		}
 	}
 	
@@ -53,6 +57,6 @@ public class ItemURLMultiRecord extends ItemURLRecord {
 	}
 	
 	public void onRecordInserted(IRecordWireHome par1WireHome, ItemStack par2ItemStack) {
-		PacketHandler.sendRecordPlayToAllFromServer(par1WireHome.getTileEntity().xCoord, par1WireHome.getTileEntity().yCoord, par1WireHome.getTileEntity().zCoord, par1WireHome.getTileEntity().getWorldObj().provider.dimensionId, par1WireHome.getSongRadius(), par2ItemStack.stackTagCompound, par2ItemStack.stackTagCompound.hasKey("repeat") ? par2ItemStack.stackTagCompound.getBoolean("repeat") : false);
+		PacketHandler.sendRecordPlayToAllFromServer(par1WireHome.getTileEntity().xCoord, par1WireHome.getTileEntity().yCoord, par1WireHome.getTileEntity().zCoord, par1WireHome.getTileEntity().getWorldObj().provider.dimensionId, par1WireHome.getSongRadius(), par2ItemStack.stackTagCompound, par2ItemStack.stackTagCompound.hasKey("repeat") ? par2ItemStack.stackTagCompound.getBoolean("repeat") : false, par2ItemStack.stackTagCompound.hasKey("shuffle") ? par2ItemStack.stackTagCompound.getBoolean("shuffle") : false);
 	}
 }

@@ -1,17 +1,14 @@
 package com.codingforcookies.betterrecords.src.client.models;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
-import net.minecraft.tileentity.TileEntity;
-
 import org.lwjgl.opengl.GL11;
 
 import com.codingforcookies.betterrecords.src.StaticInfo;
 import com.codingforcookies.betterrecords.src.client.ClientProxy;
 import com.codingforcookies.betterrecords.src.items.TileEntityLazer;
+
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.entity.Entity;
+import net.minecraft.tileentity.TileEntity;
 
 public class BlockLazerRenderer extends TileEntitySpecialRenderer {
 	public BlockLazerRenderer() { }
@@ -24,7 +21,7 @@ public class BlockLazerRenderer extends TileEntitySpecialRenderer {
 		
 		GL11.glPushMatrix();
 		{
-			GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
+			GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 			GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 			
 			bindTexture(StaticInfo.modelLazerRes);
@@ -43,11 +40,11 @@ public class BlockLazerRenderer extends TileEntitySpecialRenderer {
 					GL11.glRotatef(-tileEntityLazer.yaw + 180F, 0F, 1F, 0F);
 					GL11.glRotatef(-tileEntityLazer.pitch + 90F, 1F, 0F, 0F);
 					
-					float length = 10F;
-					
+					int length = tileEntityLazer.length;
+
 					float yaw = tileEntityLazer.yaw;
 					float pitch = tileEntityLazer.pitch;
-					float startX = tileEntityLazer.xCoord - 0.5F;
+					/*float startX = tileEntityLazer.xCoord - 0.5F;
 					float startY = tileEntityLazer.yCoord;
 					float startZ = tileEntityLazer.zCoord + .5F;
 					float stopX = (float)(startX + length * Math.cos(yaw) * Math.cos(pitch));
@@ -68,7 +65,7 @@ public class BlockLazerRenderer extends TileEntitySpecialRenderer {
 							tileEntityLazer.getWorldObj().setBlock(posX, posY, posZ, Blocks.gold_block);
 						}
 					}
-
+					*/
 					float width = tileEntityLazer.bass / 400F;
 					GL11.glBegin(GL11.GL_QUADS);
 					{
