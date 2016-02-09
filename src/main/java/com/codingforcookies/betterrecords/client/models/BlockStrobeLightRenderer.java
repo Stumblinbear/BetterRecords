@@ -16,7 +16,7 @@ import com.codingforcookies.betterrecords.items.TileEntityStrobeLight;
 public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer {
 	public BlockStrobeLightRenderer() { }
 
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
 		if(!(te instanceof TileEntityStrobeLight))
 			return;
 
@@ -37,8 +37,8 @@ public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer {
 				
 				GL11.glPushMatrix();
 				{
-		            GL11.glRotatef(RenderManager.instance.playerViewY - 180F, 0F, 1F, 0F);
-		            GL11.glRotatef(RenderManager.instance.playerViewX, 1F, 0F, 0F);
+		            GL11.glRotatef(Minecraft.getMinecraft().getRenderManager().playerViewY - 180F, 0F, 1F, 0F);
+		            GL11.glRotatef(Minecraft.getMinecraft().getRenderManager().playerViewX, 1F, 0F, 0F);
 
 					GL11.glDisable(GL11.GL_DEPTH_TEST);
 					GL11.glDisable(GL11.GL_LIGHTING);

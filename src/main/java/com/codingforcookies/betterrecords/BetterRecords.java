@@ -118,10 +118,10 @@ public class BetterRecords {
 		GameRegistry.addRecipe(new RecipeMultiRecord());
 		GameRegistry.addRecipe(new RecipeRecordRepeatable());
 		GameRegistry.addRecipe(new RecipeRecordShuffle());
-		GameRegistry.addRecipe(new RecipeColoredRecord());
+		//GameRegistry.addRecipe(new RecipeColoredRecord());
 		
 		GameRegistry.addShapedRecipe(new ItemStack(itemFreqCrystal), "RQR", "QDQ", "RQR", 'R', Items.redstone, 'Q', Items.quartz, 'D', Items.diamond);
-		GameRegistry.addRecipe(new RecipeColoredFreqCrystal());
+		//GameRegistry.addRecipe(new RecipeColoredFreqCrystal());
 		
 		GameRegistry.addShapedRecipe(new ItemStack(itemRecordWire, 4), "WWW", "III", "WWW", 'I', Items.iron_ingot, 'W', new ItemStack(Blocks.wool, 1, 15));
 		GameRegistry.addShapedRecipe(new ItemStack(itemRecordWire, 4), "WIW", "WIW", "WIW", 'I', Items.iron_ingot, 'W', new ItemStack(Blocks.wool, 1, 15));

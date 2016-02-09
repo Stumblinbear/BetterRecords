@@ -58,4 +58,9 @@ public class RecipeRecordShuffle implements IRecipe{
 	public ItemStack getRecipeOutput(){
 		return null;
 	}
+
+	//TODO
+	public ItemStack[] getRemainingItems(InventoryCrafting inv) {
+		return null;
+	}
 }

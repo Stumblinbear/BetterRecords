@@ -42,4 +42,9 @@ public class RecipeRecord implements IRecipe {
 	public ItemStack getRecipeOutput() {
 		return new ItemStack(BetterRecords.itemURLRecord);
 	}
+
+	//TODO
+	public ItemStack[] getRemainingItems(InventoryCrafting inv) {
+		return null;
+	}
 }
