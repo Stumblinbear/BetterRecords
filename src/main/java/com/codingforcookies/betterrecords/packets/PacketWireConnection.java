@@ -1,15 +1,15 @@
-package com.codingforcookies.betterrecords.src.packets;
+package com.codingforcookies.betterrecords.packets;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-import com.codingforcookies.betterrecords.src.betterenums.ConnectionHelper;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWire;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWireHome;
-import com.codingforcookies.betterrecords.src.betterenums.RecordConnection;
+import com.codingforcookies.betterrecords.betterenums.ConnectionHelper;
+import com.codingforcookies.betterrecords.betterenums.IRecordWire;
+import com.codingforcookies.betterrecords.betterenums.IRecordWireHome;
+import com.codingforcookies.betterrecords.betterenums.RecordConnection;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class PacketWireConnection implements IPacket {
 	private RecordConnection connection;

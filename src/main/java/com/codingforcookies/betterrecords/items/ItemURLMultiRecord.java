@@ -1,14 +1,14 @@
-package com.codingforcookies.betterrecords.src.items;
+package com.codingforcookies.betterrecords.items;
 
 import java.util.List;
 
-import com.codingforcookies.betterrecords.src.BetterRecords;
-import com.codingforcookies.betterrecords.src.BetterUtils;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWireHome;
-import com.codingforcookies.betterrecords.src.packets.PacketHandler;
+import com.codingforcookies.betterrecords.BetterRecords;
+import com.codingforcookies.betterrecords.BetterUtils;
+import com.codingforcookies.betterrecords.betterenums.IRecordWireHome;
+import com.codingforcookies.betterrecords.packets.PacketHandler;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

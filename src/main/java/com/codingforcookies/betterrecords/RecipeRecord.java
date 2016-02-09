@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src;
+package com.codingforcookies.betterrecords;
 
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;

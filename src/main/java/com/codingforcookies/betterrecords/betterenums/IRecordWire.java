@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.betterenums;
+package com.codingforcookies.betterrecords.betterenums;
 
 import java.util.ArrayList;
 

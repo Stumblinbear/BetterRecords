@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.client.models;
+package com.codingforcookies.betterrecords.client.models;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -8,8 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.codingforcookies.betterrecords.src.StaticInfo;
-import com.codingforcookies.betterrecords.src.items.TileEntityRecordEtcher;
+import com.codingforcookies.betterrecords.StaticInfo;
+import com.codingforcookies.betterrecords.items.TileEntityRecordEtcher;
 
 public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer {
 	public BlockRecordEtcherRenderer() { }

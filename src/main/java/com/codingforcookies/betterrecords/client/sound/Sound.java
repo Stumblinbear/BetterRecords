@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.client.sound;
+package com.codingforcookies.betterrecords.client.sound;
 
 import javax.sound.sampled.FloatControl;
 

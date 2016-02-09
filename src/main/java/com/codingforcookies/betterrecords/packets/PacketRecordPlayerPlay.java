@@ -1,12 +1,12 @@
-package com.codingforcookies.betterrecords.src.packets;
+package com.codingforcookies.betterrecords.packets;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.codingforcookies.betterrecords.src.client.sound.Sound;
-import com.codingforcookies.betterrecords.src.client.sound.SoundHandler;
+import com.codingforcookies.betterrecords.client.sound.Sound;
+import com.codingforcookies.betterrecords.client.sound.SoundHandler;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

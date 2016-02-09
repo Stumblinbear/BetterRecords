@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src;
+package com.codingforcookies.betterrecords;
 
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
@@ -7,7 +7,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.codingforcookies.betterrecords.src.items.ItemURLRecord;
+import com.codingforcookies.betterrecords.items.ItemURLRecord;
 
 public class RecipeRecordRepeatable implements IRecipe {
 	public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {

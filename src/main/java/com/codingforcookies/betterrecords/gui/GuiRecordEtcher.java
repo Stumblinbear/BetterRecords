@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.gui;
+package com.codingforcookies.betterrecords.gui;
 
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -19,12 +19,12 @@ import java.util.Map.Entry;
 import org.apache.commons.io.FilenameUtils;
 import org.lwjgl.opengl.GL11;
 
-import com.codingforcookies.betterrecords.src.BetterUtils;
-import com.codingforcookies.betterrecords.src.LibrarySong;
-import com.codingforcookies.betterrecords.src.StaticInfo;
-import com.codingforcookies.betterrecords.src.client.ClientProxy;
-import com.codingforcookies.betterrecords.src.items.TileEntityRecordEtcher;
-import com.codingforcookies.betterrecords.src.packets.PacketHandler;
+import com.codingforcookies.betterrecords.BetterUtils;
+import com.codingforcookies.betterrecords.LibrarySong;
+import com.codingforcookies.betterrecords.StaticInfo;
+import com.codingforcookies.betterrecords.client.ClientProxy;
+import com.codingforcookies.betterrecords.items.TileEntityRecordEtcher;
+import com.codingforcookies.betterrecords.packets.PacketHandler;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

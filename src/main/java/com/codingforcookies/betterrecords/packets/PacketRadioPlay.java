@@ -1,11 +1,11 @@
-package com.codingforcookies.betterrecords.src.packets;
+package com.codingforcookies.betterrecords.packets;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.codingforcookies.betterrecords.src.client.sound.SoundHandler;
+import com.codingforcookies.betterrecords.client.sound.SoundHandler;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class PacketRadioPlay implements IPacket {
 	int x, y, z, dimension;

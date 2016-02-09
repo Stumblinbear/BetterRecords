@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.items;
+package com.codingforcookies.betterrecords.items;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -6,12 +6,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.codingforcookies.betterrecords.src.betterenums.ConnectionHelper;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWire;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWireHome;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWireManipulator;
-import com.codingforcookies.betterrecords.src.betterenums.RecordConnection;
-import com.codingforcookies.betterrecords.src.packets.PacketHandler;
+import com.codingforcookies.betterrecords.betterenums.ConnectionHelper;
+import com.codingforcookies.betterrecords.betterenums.IRecordWire;
+import com.codingforcookies.betterrecords.betterenums.IRecordWireHome;
+import com.codingforcookies.betterrecords.betterenums.IRecordWireManipulator;
+import com.codingforcookies.betterrecords.betterenums.RecordConnection;
+import com.codingforcookies.betterrecords.packets.PacketHandler;
 
 public class ItemRecordWire extends Item implements IRecordWireManipulator {
 	public static RecordConnection connection;

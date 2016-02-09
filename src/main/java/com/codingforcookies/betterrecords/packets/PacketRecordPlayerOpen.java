@@ -1,12 +1,12 @@
-package com.codingforcookies.betterrecords.src.packets;
+package com.codingforcookies.betterrecords.packets;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 
-import com.codingforcookies.betterrecords.src.items.TileEntityRecordPlayer;
+import com.codingforcookies.betterrecords.items.TileEntityRecordPlayer;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class PacketRecordPlayerOpen implements IPacket {
 	int x, y, z, dimension;

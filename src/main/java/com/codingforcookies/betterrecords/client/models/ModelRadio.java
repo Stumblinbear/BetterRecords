@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.client.models;
+package com.codingforcookies.betterrecords.client.models;
 
 import java.awt.Color;
 

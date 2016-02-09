@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.client.models;
+package com.codingforcookies.betterrecords.client.models;
 
 import java.util.Map.Entry;
 
@@ -11,10 +11,10 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.codingforcookies.betterrecords.src.StaticInfo;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWireManipulator;
-import com.codingforcookies.betterrecords.src.betterenums.RecordConnection;
-import com.codingforcookies.betterrecords.src.items.TileEntityRadio;
+import com.codingforcookies.betterrecords.StaticInfo;
+import com.codingforcookies.betterrecords.betterenums.IRecordWireManipulator;
+import com.codingforcookies.betterrecords.betterenums.RecordConnection;
+import com.codingforcookies.betterrecords.items.TileEntityRadio;
 
 public class BlockRadioRenderer extends TileEntitySpecialRenderer {
 	public BlockRadioRenderer() { }

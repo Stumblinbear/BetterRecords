@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.gui;
+package com.codingforcookies.betterrecords.gui;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -8,11 +8,11 @@ import java.net.URL;
 import org.apache.commons.io.FilenameUtils;
 import org.lwjgl.opengl.GL11;
 
-import com.codingforcookies.betterrecords.src.BetterUtils;
-import com.codingforcookies.betterrecords.src.StaticInfo;
-import com.codingforcookies.betterrecords.src.client.sound.IcyURLConnection;
-import com.codingforcookies.betterrecords.src.items.TileEntityFrequencyTuner;
-import com.codingforcookies.betterrecords.src.packets.PacketHandler;
+import com.codingforcookies.betterrecords.BetterUtils;
+import com.codingforcookies.betterrecords.StaticInfo;
+import com.codingforcookies.betterrecords.client.sound.IcyURLConnection;
+import com.codingforcookies.betterrecords.items.TileEntityFrequencyTuner;
+import com.codingforcookies.betterrecords.packets.PacketHandler;
 
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;

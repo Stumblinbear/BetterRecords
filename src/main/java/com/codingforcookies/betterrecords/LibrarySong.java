@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src;
+package com.codingforcookies.betterrecords;
 
 public class LibrarySong {
 	public String local = "";

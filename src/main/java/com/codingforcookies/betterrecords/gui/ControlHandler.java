@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.gui;
+package com.codingforcookies.betterrecords.gui;
 
 import java.util.ArrayList;
 

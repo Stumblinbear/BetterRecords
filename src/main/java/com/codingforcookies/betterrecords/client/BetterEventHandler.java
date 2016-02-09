@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.client;
+package com.codingforcookies.betterrecords.client;
 
 import java.awt.Color;
 import java.io.IOException;
@@ -9,19 +9,19 @@ import java.util.Scanner;
 
 import org.lwjgl.opengl.GL11;
 
-import com.codingforcookies.betterrecords.src.BetterRecords;
-import com.codingforcookies.betterrecords.src.BetterUtils;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWire;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWireHome;
-import com.codingforcookies.betterrecords.src.betterenums.RecordConnection;
-import com.codingforcookies.betterrecords.src.client.sound.FileDownloader;
-import com.codingforcookies.betterrecords.src.client.sound.SoundHandler;
-import com.codingforcookies.betterrecords.src.client.sound.SoundManager;
-import com.codingforcookies.betterrecords.src.items.ItemRecordWire;
+import com.codingforcookies.betterrecords.BetterRecords;
+import com.codingforcookies.betterrecords.BetterUtils;
+import com.codingforcookies.betterrecords.betterenums.IRecordWire;
+import com.codingforcookies.betterrecords.betterenums.IRecordWireHome;
+import com.codingforcookies.betterrecords.betterenums.RecordConnection;
+import com.codingforcookies.betterrecords.client.sound.FileDownloader;
+import com.codingforcookies.betterrecords.client.sound.SoundHandler;
+import com.codingforcookies.betterrecords.client.sound.SoundManager;
+import com.codingforcookies.betterrecords.items.ItemRecordWire;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundCategory;

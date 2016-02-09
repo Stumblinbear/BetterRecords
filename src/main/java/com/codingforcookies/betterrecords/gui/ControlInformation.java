@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.gui;
+package com.codingforcookies.betterrecords.gui;
 
 public abstract class ControlInformation {
 	public abstract void onActivated(int mousebtn, int ctrlNum);

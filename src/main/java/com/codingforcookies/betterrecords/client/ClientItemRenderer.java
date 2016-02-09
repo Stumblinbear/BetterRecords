@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.client;
+package com.codingforcookies.betterrecords.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
@@ -7,8 +7,8 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import com.codingforcookies.betterrecords.src.BetterRecords;
-import com.codingforcookies.betterrecords.src.StaticInfo;
+import com.codingforcookies.betterrecords.BetterRecords;
+import com.codingforcookies.betterrecords.StaticInfo;
 
 public class ClientItemRenderer implements IItemRenderer {
 	public ClientItemRenderer() { }

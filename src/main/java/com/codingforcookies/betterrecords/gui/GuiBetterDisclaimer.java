@@ -1,13 +1,13 @@
-package com.codingforcookies.betterrecords.src.gui;
+package com.codingforcookies.betterrecords.gui;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.opengl.GL11;
 
-import com.codingforcookies.betterrecords.src.BetterRecords;
-import com.codingforcookies.betterrecords.src.BetterUtils;
-import com.codingforcookies.betterrecords.src.client.ClientProxy;
+import com.codingforcookies.betterrecords.BetterRecords;
+import com.codingforcookies.betterrecords.BetterUtils;
+import com.codingforcookies.betterrecords.client.ClientProxy;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;

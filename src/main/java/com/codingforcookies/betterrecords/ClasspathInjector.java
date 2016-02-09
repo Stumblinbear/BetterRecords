@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src;
+package com.codingforcookies.betterrecords;
 
 import java.io.File;
 import java.io.IOException;

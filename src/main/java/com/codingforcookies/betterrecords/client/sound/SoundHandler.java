@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.client.sound;
+package com.codingforcookies.betterrecords.client.sound;
 
 import static javax.sound.sampled.AudioFormat.Encoding.PCM_SIGNED;
 import static javax.sound.sampled.AudioSystem.getAudioInputStream;
@@ -17,15 +17,15 @@ import javax.sound.sampled.DataLine.Info;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.SourceDataLine;
 
-import com.codingforcookies.betterrecords.src.BetterUtils;
-import com.codingforcookies.betterrecords.src.ClasspathInjector;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordAmplitude;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWireHome;
-import com.codingforcookies.betterrecords.src.betterenums.RecordConnection;
-import com.codingforcookies.betterrecords.src.client.ClientProxy;
+import com.codingforcookies.betterrecords.BetterUtils;
+import com.codingforcookies.betterrecords.ClasspathInjector;
+import com.codingforcookies.betterrecords.betterenums.IRecordAmplitude;
+import com.codingforcookies.betterrecords.betterenums.IRecordWireHome;
+import com.codingforcookies.betterrecords.betterenums.RecordConnection;
+import com.codingforcookies.betterrecords.client.ClientProxy;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.ModClassLoader;
+import net.minecraftforge.fml.common.Loader;
+import net.minecraftforge.fml.common.ModClassLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 

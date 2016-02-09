@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.client.models;
+package com.codingforcookies.betterrecords.client.models;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
@@ -6,8 +6,8 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.codingforcookies.betterrecords.src.StaticInfo;
-import com.codingforcookies.betterrecords.src.items.TileEntityFrequencyTuner;
+import com.codingforcookies.betterrecords.StaticInfo;
+import com.codingforcookies.betterrecords.items.TileEntityFrequencyTuner;
 
 public class BlockFrequencyTunerRenderer extends TileEntitySpecialRenderer {
 	public BlockFrequencyTunerRenderer() { }

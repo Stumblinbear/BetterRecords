@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.betterenums;
+package com.codingforcookies.betterrecords.betterenums;
 
 public class RecordConnection {
 	public int x1, y1, z1, x2, y2, z2;

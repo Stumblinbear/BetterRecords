@@ -1,16 +1,16 @@
-package com.codingforcookies.betterrecords.src;
+package com.codingforcookies.betterrecords;
 
 import net.minecraft.util.ResourceLocation;
 
-import com.codingforcookies.betterrecords.src.client.models.ModelFrequencyTuner;
-import com.codingforcookies.betterrecords.src.client.models.ModelLGSpeaker;
-import com.codingforcookies.betterrecords.src.client.models.ModelLazer;
-import com.codingforcookies.betterrecords.src.client.models.ModelMDSpeaker;
-import com.codingforcookies.betterrecords.src.client.models.ModelRadio;
-import com.codingforcookies.betterrecords.src.client.models.ModelRecordEtcher;
-import com.codingforcookies.betterrecords.src.client.models.ModelRecordPlayer;
-import com.codingforcookies.betterrecords.src.client.models.ModelSMSpeaker;
-import com.codingforcookies.betterrecords.src.client.models.ModelStrobeLight;
+import com.codingforcookies.betterrecords.client.models.ModelFrequencyTuner;
+import com.codingforcookies.betterrecords.client.models.ModelLGSpeaker;
+import com.codingforcookies.betterrecords.client.models.ModelLazer;
+import com.codingforcookies.betterrecords.client.models.ModelMDSpeaker;
+import com.codingforcookies.betterrecords.client.models.ModelRadio;
+import com.codingforcookies.betterrecords.client.models.ModelRecordEtcher;
+import com.codingforcookies.betterrecords.client.models.ModelRecordPlayer;
+import com.codingforcookies.betterrecords.client.models.ModelSMSpeaker;
+import com.codingforcookies.betterrecords.client.models.ModelStrobeLight;
 
 public class StaticInfo {
 	public static final ResourceLocation GUIRecordEtcher = new ResourceLocation(BetterRecords.ID, "textures/gui/recordetcher.png");

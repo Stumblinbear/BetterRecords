@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.betterenums;
+package com.codingforcookies.betterrecords.betterenums;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import com.codingforcookies.betterrecords.src.BetterRecords;
+import com.codingforcookies.betterrecords.BetterRecords;
 
 public class ConnectionHelper {
 	public static String serializeConnections(ArrayList<RecordConnection> rec) {

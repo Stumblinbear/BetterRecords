@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.client.sound;
+package com.codingforcookies.betterrecords.client.sound;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.codingforcookies.betterrecords.src.client.ClientProxy;
+import com.codingforcookies.betterrecords.client.ClientProxy;
 
 public class FileDownloader {
 	public static String nowDownloading = "";

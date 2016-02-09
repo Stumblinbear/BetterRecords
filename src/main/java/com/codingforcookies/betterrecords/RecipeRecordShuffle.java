@@ -1,7 +1,7 @@
-package com.codingforcookies.betterrecords.src;
+package com.codingforcookies.betterrecords;
 
-import com.codingforcookies.betterrecords.src.items.ItemURLMultiRecord;
-import com.codingforcookies.betterrecords.src.items.ItemURLRecord;
+import com.codingforcookies.betterrecords.items.ItemURLMultiRecord;
+import com.codingforcookies.betterrecords.items.ItemURLRecord;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryCrafting;

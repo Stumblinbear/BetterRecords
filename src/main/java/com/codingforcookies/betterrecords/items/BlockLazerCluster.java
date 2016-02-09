@@ -1,13 +1,13 @@
-package com.codingforcookies.betterrecords.src.items;
+package com.codingforcookies.betterrecords.items;
 
-import com.codingforcookies.betterrecords.src.BetterUtils;
-import com.codingforcookies.betterrecords.src.betterenums.ConnectionHelper;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWire;
-import com.codingforcookies.betterrecords.src.client.BetterEventHandler;
-import com.codingforcookies.betterrecords.src.client.ClientProxy;
+import com.codingforcookies.betterrecords.BetterUtils;
+import com.codingforcookies.betterrecords.betterenums.ConnectionHelper;
+import com.codingforcookies.betterrecords.betterenums.IRecordWire;
+import com.codingforcookies.betterrecords.client.BetterEventHandler;
+import com.codingforcookies.betterrecords.client.ClientProxy;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;

@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.gui;
+package com.codingforcookies.betterrecords.gui;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

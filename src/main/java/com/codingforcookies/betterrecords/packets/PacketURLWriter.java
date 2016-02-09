@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.packets;
+package com.codingforcookies.betterrecords.packets;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
@@ -6,10 +6,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-import com.codingforcookies.betterrecords.src.items.TileEntityFrequencyTuner;
-import com.codingforcookies.betterrecords.src.items.TileEntityRecordEtcher;
+import com.codingforcookies.betterrecords.items.TileEntityFrequencyTuner;
+import com.codingforcookies.betterrecords.items.TileEntityRecordEtcher;
 
-import cpw.mods.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class PacketURLWriter implements IPacket {
 	int x, y, z, size, color = -999;

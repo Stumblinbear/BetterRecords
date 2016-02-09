@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.items;
+package com.codingforcookies.betterrecords.items;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -9,13 +9,13 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-import com.codingforcookies.betterrecords.src.betterenums.ConnectionHelper;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordAmplitude;
-import com.codingforcookies.betterrecords.src.betterenums.IRecordWire;
-import com.codingforcookies.betterrecords.src.betterenums.RecordConnection;
+import com.codingforcookies.betterrecords.betterenums.ConnectionHelper;
+import com.codingforcookies.betterrecords.betterenums.IRecordAmplitude;
+import com.codingforcookies.betterrecords.betterenums.IRecordWire;
+import com.codingforcookies.betterrecords.betterenums.RecordConnection;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityLazerCluster extends TileEntity implements IRecordWire, IRecordAmplitude {
 	public ArrayList<RecordConnection> connections = null;

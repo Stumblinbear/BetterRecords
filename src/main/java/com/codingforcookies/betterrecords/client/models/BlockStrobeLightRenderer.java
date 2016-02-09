@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src.client.models;
+package com.codingforcookies.betterrecords.client.models;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -8,10 +8,10 @@ import net.minecraft.tileentity.TileEntity;
 
 import org.lwjgl.opengl.GL11;
 
-import com.codingforcookies.betterrecords.src.StaticInfo;
-import com.codingforcookies.betterrecords.src.client.BetterEventHandler;
-import com.codingforcookies.betterrecords.src.client.ClientProxy;
-import com.codingforcookies.betterrecords.src.items.TileEntityStrobeLight;
+import com.codingforcookies.betterrecords.StaticInfo;
+import com.codingforcookies.betterrecords.client.BetterEventHandler;
+import com.codingforcookies.betterrecords.client.ClientProxy;
+import com.codingforcookies.betterrecords.items.TileEntityStrobeLight;
 
 public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer {
 	public BlockStrobeLightRenderer() { }

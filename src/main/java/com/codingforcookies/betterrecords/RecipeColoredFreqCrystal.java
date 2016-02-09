@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.src;
+package com.codingforcookies.betterrecords;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.codingforcookies.betterrecords.src.items.ItemFreqCrystal;
+import com.codingforcookies.betterrecords.items.ItemFreqCrystal;
 
 public class RecipeColoredFreqCrystal implements IRecipe {
 	//If something changes, check RecipesArmorDyes

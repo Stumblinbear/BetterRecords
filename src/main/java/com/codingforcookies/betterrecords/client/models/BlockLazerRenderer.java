@@ -1,10 +1,10 @@
-package com.codingforcookies.betterrecords.src.client.models;
+package com.codingforcookies.betterrecords.client.models;
 
 import org.lwjgl.opengl.GL11;
 
-import com.codingforcookies.betterrecords.src.StaticInfo;
-import com.codingforcookies.betterrecords.src.client.ClientProxy;
-import com.codingforcookies.betterrecords.src.items.TileEntityLazer;
+import com.codingforcookies.betterrecords.StaticInfo;
+import com.codingforcookies.betterrecords.client.ClientProxy;
+import com.codingforcookies.betterrecords.items.TileEntityLazer;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
