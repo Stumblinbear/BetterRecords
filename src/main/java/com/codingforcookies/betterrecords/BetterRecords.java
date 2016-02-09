@@ -1,5 +1,9 @@
 package com.codingforcookies.betterrecords;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
 import org.apache.commons.lang3.text.WordUtils;
 
 import com.codingforcookies.betterrecords.client.BetterCreativeTab;
@@ -51,7 +55,7 @@ public class BetterRecords {
 	@Instance(value = ID)
 	public static BetterRecords instance;
 	
-	@SidedProxy(clientSide = "com.codingforcookies.betterrecords.src.client.ClientProxy", serverSide = "com.codingforcookies.betterrecords.src.CommonProxy")
+	@SidedProxy(clientSide = "com.codingforcookies.betterrecords.client.ClientProxy", serverSide = "com.codingforcookies.betterrecords.CommonProxy")
 	public static CommonProxy proxy;
 	
 	public static final BetterCreativeTab recordsTab = new BetterCreativeTab();

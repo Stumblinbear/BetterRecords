@@ -1,0 +1,7 @@
+{
+  "parent": "betterrecords:item/default_item",
+  "textures": {
+    "layer0": "betterrecords:items/urlrecord",
+    "layer1": "betterrecords:items/urlrecord_overlay"
+  }
+}
