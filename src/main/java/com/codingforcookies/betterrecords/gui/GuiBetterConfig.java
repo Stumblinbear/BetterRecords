@@ -1,5 +1,7 @@
 package com.codingforcookies.betterrecords.gui;
 
+import java.io.IOError;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -155,7 +157,7 @@ public class GuiBetterConfig extends GuiScreen{
 		}));
 	}
 
-	protected void mouseClicked(int par1, int par2, int par3){
+	protected void mouseClicked(int par1, int par2, int par3) throws IOException {
 		super.mouseClicked(par1, par2, par3);
 		controlHandler.mousepressed(par3, par1, par2);
 	}

@@ -212,8 +212,8 @@ public class ModelRadio extends ModelBase {
 				GL11.glPushMatrix();
 				{
 					GL11.glEnable(GL11.GL_BLEND);
-					if(crystal.stackTagCompound.hasKey("color")) {
-						Color color = new Color(crystal.stackTagCompound.getInteger("color"));
+					if(crystal.getTagCompound().hasKey("color")) {
+						Color color = new Color(crystal.getTagCompound().getInteger("color"));
 						GL11.glColor4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, .6F);
 					}else
 						GL11.glColor4f(1F, 1F, 1F, .6F);

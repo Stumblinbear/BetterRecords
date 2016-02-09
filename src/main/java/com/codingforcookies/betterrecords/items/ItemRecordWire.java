@@ -4,6 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 import com.codingforcookies.betterrecords.betterenums.ConnectionHelper;
@@ -19,41 +21,42 @@ public class ItemRecordWire extends Item implements IRecordWireManipulator {
 	public ItemRecordWire() {
 		
 	}
-	
-	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par3EntityPlayer, World par3World, int x, int y, int z, int side, float px, float py, float pz) {
-		if(!par3World.isRemote)
+
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+		if(!world.isRemote)
 			return true;
 		
-		TileEntity te = par3World.getTileEntity(x, y, z);
+		TileEntity te = world.getTileEntity(pos);
 		if(te == null || !(te instanceof IRecordWire))
 			return false;
 		
 		if(connection == null) {
-			connection = new RecordConnection(x, y, z, te instanceof IRecordWireHome);
+			connection = new RecordConnection(pos.getX(), pos.getY(), pos.getZ(), te instanceof IRecordWireHome);
 		}else{
-			float x1 = -(float)(x - (connection.fromHome ? connection.x1 : connection.x2));
-			float y1 = -(float)(y - (connection.fromHome ? connection.y1 : connection.y2));
-			float z1 = -(float)(z - (connection.fromHome ? connection.z1 : connection.z2));
+			float x1 = -(float)(pos.getX() - (connection.fromHome ? connection.x1 : connection.x2));
+			float y1 = -(float)(pos.getY() - (connection.fromHome ? connection.y1 : connection.y2));
+			float z1 = -(float)(pos.getZ() - (connection.fromHome ? connection.z1 : connection.z2));
 			
-			if((int)Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2) + Math.pow(z1, 2)) > 7 || connection.sameInitial(x, y, z)) {
+			if((int)Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2) + Math.pow(z1, 2)) > 7 || connection.sameInitial(pos.getX(), pos.getY(), pos.getZ())) {
 				connection = null;
 				return true;
 			}
 			
 			if(!connection.fromHome)
-				connection.setConnection1(x, y, z);
+				connection.setConnection1(pos.getX(), pos.getY(), pos.getZ());
 			else
-				connection.setConnection2(x, y, z);
+				connection.setConnection2(pos.getX(), pos.getY(), pos.getZ());
 			
-			TileEntity te1 = par3World.getTileEntity(connection.x1, connection.y1, connection.z1);
-			TileEntity te2 = par3World.getTileEntity(connection.x2, connection.y2, connection.z2);
+			TileEntity te1 = world.getTileEntity(new BlockPos(connection.x1, connection.y1, connection.z1));
+			TileEntity te2 = world.getTileEntity(new BlockPos(connection.x2, connection.y2, connection.z2));
 			
 			if(te2 instanceof IRecordWire) {
 				if(!(te1 instanceof IRecordWireHome && te2 instanceof IRecordWireHome)) {
-					ConnectionHelper.addConnection(te.getWorldObj(), (IRecordWire)te1, connection);
-					ConnectionHelper.addConnection(te.getWorldObj(), (IRecordWire)te2, connection);
+					ConnectionHelper.addConnection(te.getWorld(), (IRecordWire)te1, connection);
+					ConnectionHelper.addConnection(te.getWorld(), (IRecordWire)te2, connection);
 					PacketHandler.sendWireConnectionFromClient(connection);
-					par1ItemStack.stackSize--;
+					stack.stackSize--;
 				}
 			}
 			

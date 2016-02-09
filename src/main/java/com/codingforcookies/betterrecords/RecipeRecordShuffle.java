@@ -19,7 +19,7 @@ public class RecipeRecordShuffle implements IRecipe{
 		for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); ++i){
 			ItemStack itemstack = par1InventoryCrafting.getStackInSlot(i);
 			if(itemstack != null) {
-				if(itemstack.getItem() instanceof ItemURLMultiRecord && itemstack.stackTagCompound != null) if(record != null) return false;
+				if(itemstack.getItem() instanceof ItemURLMultiRecord && itemstack.getTagCompound() != null) if(record != null) return false;
 				else record = itemstack;
 				else if(itemstack.getItem() == Item.getItemFromBlock(Blocks.redstone_torch)) if(shuffle) return false;
 				else shuffle = true;
@@ -35,7 +35,7 @@ public class RecipeRecordShuffle implements IRecipe{
 		for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); i++){
 			ItemStack itemstack = par1InventoryCrafting.getStackInSlot(i);
 			if(itemstack != null) {
-				if(itemstack.getItem() instanceof ItemURLRecord && itemstack.stackTagCompound != null) if(record != null) return null;
+				if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null) if(record != null) return null;
 				else record = itemstack;
 				else if(itemstack.getItem() == Item.getItemFromBlock(Blocks.redstone_torch)) if(shuffle) return null;
 				else shuffle = true;
@@ -45,8 +45,8 @@ public class RecipeRecordShuffle implements IRecipe{
 		if(record == null || !shuffle) return null;
 		else{
 			ItemStack newRecord = ItemStack.copyItemStack(record);
-			if(newRecord.stackTagCompound == null) newRecord.stackTagCompound = new NBTTagCompound();
-			newRecord.stackTagCompound.setBoolean("shuffle", true);
+			if(newRecord.getTagCompound() == null) newRecord.setTagCompound(new NBTTagCompound());
+			newRecord.getTagCompound().setBoolean("shuffle", true);
 			return newRecord;
 		}
 	}

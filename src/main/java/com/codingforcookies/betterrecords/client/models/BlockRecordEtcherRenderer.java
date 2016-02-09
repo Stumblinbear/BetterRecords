@@ -14,7 +14,7 @@ import com.codingforcookies.betterrecords.items.TileEntityRecordEtcher;
 public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer {
 	public BlockRecordEtcherRenderer() { }
 	
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
 		if(!(te instanceof TileEntityRecordEtcher))
 			return;
 		
@@ -29,10 +29,10 @@ public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer {
 				GL11.glRotatef(tileEntityRecordEtcher.recordRotation * 57.3F, 0F, 0F, 1F);
 				GL11.glTranslatef(0F, -.225F, 0F);
 				if(Minecraft.getMinecraft().gameSettings.fancyGraphics)
-					RenderManager.instance.renderEntityWithPosYaw(tileEntityRecordEtcher.recordEntity, 0, 0, 0, 0, 0);
+					Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(tileEntityRecordEtcher.recordEntity, 0, 0, 0, 0, 0);
 				else{
 					Minecraft.getMinecraft().gameSettings.fancyGraphics = true;
-					RenderManager.instance.renderEntityWithPosYaw(tileEntityRecordEtcher.recordEntity, 0, 0, 0, 0, 0);
+					Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(tileEntityRecordEtcher.recordEntity, 0, 0, 0, 0, 0);
 					Minecraft.getMinecraft().gameSettings.fancyGraphics = false;
 				}
 			}

@@ -19,7 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 	public BlockRecordPlayerRenderer() { }
 	
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
 		if(!(te instanceof TileEntityRecordPlayer))
 			return;
 		
@@ -36,9 +36,9 @@ public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 					
 					GL11.glLineWidth(2F);
 					for(RecordConnection rec : tileEntityRecordPlayer.getConnections()){
-						int x1 = -(tileEntityRecordPlayer.xCoord - rec.x2);
-						int y1 = -(tileEntityRecordPlayer.yCoord - rec.y2);
-						int z1 = -(tileEntityRecordPlayer.zCoord - rec.z2);
+						int x1 = -(tileEntityRecordPlayer.getPos().getX() - rec.x2);
+						int y1 = -(tileEntityRecordPlayer.getPos().getY() - rec.y2);
+						int z1 = -(tileEntityRecordPlayer.getPos().getZ() - rec.z2);
 						GL11.glPushMatrix();
 						{
 							GL11.glBegin(GL11.GL_LINE_STRIP);
@@ -56,7 +56,7 @@ public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 				}
 				
 				GL11.glScalef(.01F, -.01F, .01F);
-	            GL11.glRotatef(-RenderManager.instance.playerViewY - 180F, 0F, 1F, 0F);
+	            GL11.glRotatef(-Minecraft.getMinecraft().getRenderManager().playerViewY - 180F, 0F, 1F, 0F);
 
 				
 				if(tileEntityRecordPlayer.formTreble.size() != 0) {
@@ -122,7 +122,7 @@ public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 	            
 	            GL11.glColor3f(1F, 1F, 1F);
 				int currentY = tileEntityRecordPlayer.wireSystemInfo.size() * -10 - 75;
-				FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+				FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
 				fontRenderer.drawString("Play Radius: " + tileEntityRecordPlayer.getSongRadius(), -fontRenderer.getStringWidth("Play Radius: " + tileEntityRecordPlayer.getSongRadius()) / 2, currentY, 0xFFFFFF);
 				for(Entry<String, Integer> nfo : tileEntityRecordPlayer.wireSystemInfo.entrySet()) {
 					currentY += 10;
@@ -143,10 +143,10 @@ public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glDisable(GL11.GL_CULL_FACE);
 				if(Minecraft.getMinecraft().gameSettings.fancyGraphics)
-					RenderManager.instance.renderEntityWithPosYaw(tileEntityRecordPlayer.recordEntity, 0, 0, 0, 0, 0);
+					Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(tileEntityRecordPlayer.recordEntity, 0, 0, 0, 0, 0);
 				else{
 					Minecraft.getMinecraft().gameSettings.fancyGraphics = true;
-					RenderManager.instance.renderEntityWithPosYaw(tileEntityRecordPlayer.recordEntity, 0, 0, 0, 0, 0);
+					Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(tileEntityRecordPlayer.recordEntity, 0, 0, 0, 0, 0);
 					Minecraft.getMinecraft().gameSettings.fancyGraphics = false;
 				}
 				GL11.glEnable(GL11.GL_CULL_FACE);
@@ -160,7 +160,7 @@ public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 		{
 			GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
 			GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
-			GL11.glRotatef(te.blockMetadata * (90) + 180, 0.0F, 1.0F, 0.0F);
+			GL11.glRotatef(te.getBlockMetadata() * (90) + 180, 0.0F, 1.0F, 0.0F);
 			bindTexture(StaticInfo.modelRecordPlayerRes);
 			StaticInfo.modelRecordPlayer.render((Entity)null, tileEntityRecordPlayer.openAmount, tileEntityRecordPlayer.needleLocation, tileEntityRecordPlayer.recordRotation, 0.0F, 0.0F, 0.0625F);
 		}

@@ -2,6 +2,7 @@ package com.codingforcookies.betterrecords.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.codingforcookies.betterrecords.items.TileEntityFrequencyTuner;
@@ -14,12 +15,12 @@ public class GuiHandler implements IGuiHandler {
     	TileEntity tileEntity;
     	switch(id) {
 			case 0:
-				tileEntity = world.getTileEntity(x, y, z);
+				tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 				if(tileEntity instanceof TileEntityRecordEtcher)
 						return new ContainerRecordEtcher(player.inventory, (TileEntityRecordEtcher)tileEntity);
 				break;
 			case 1:
-				tileEntity = world.getTileEntity(x, y, z);
+				tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 				if(tileEntity instanceof TileEntityFrequencyTuner)
 					return new ContainerFrequencyTuner(player.inventory, (TileEntityFrequencyTuner)tileEntity);
 				break;
@@ -31,12 +32,12 @@ public class GuiHandler implements IGuiHandler {
     	TileEntity tileEntity;
     	switch(id) {
     		case 0:
-	    		tileEntity = world.getTileEntity(x, y, z);
+	    		tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 	            if(tileEntity instanceof TileEntityRecordEtcher)
 	            	return new GuiRecordEtcher(player.inventory, (TileEntityRecordEtcher)tileEntity);
 	            break;
     		case 1:
-	    		tileEntity = world.getTileEntity(x, y, z);
+	    		tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 	            if(tileEntity instanceof TileEntityFrequencyTuner)
 	            	return new GuiFrequencyTuner(player.inventory, (TileEntityFrequencyTuner)tileEntity);
 	            break;

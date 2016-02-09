@@ -8,6 +8,7 @@ import java.util.Random;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
 import com.codingforcookies.betterrecords.BetterRecords;
@@ -72,23 +73,23 @@ public class ConnectionHelper {
 				return;
 
 		iRecordWire.getConnections().add(rec);
-		world.markBlockForUpdate(((TileEntity)iRecordWire).xCoord, ((TileEntity)iRecordWire).yCoord, ((TileEntity)iRecordWire).zCoord);
-		
-		TileEntity te = world.getTileEntity(rec.x1, rec.y1, rec.z1);
+		world.markBlockForUpdate(new BlockPos(((TileEntity)iRecordWire).getPos().getX(), ((TileEntity)iRecordWire).getPos().getY(), ((TileEntity)iRecordWire).getPos().getZ()));
+
+		TileEntity te = world.getTileEntity(new BlockPos(rec.x1, rec.y1, rec.z1));
 		if(te != null && te instanceof IRecordWireHome && te != iRecordWire) {
 			((IRecordWireHome)te).increaseAmount(iRecordWire);
-			world.markBlockForUpdate(((TileEntity)te).xCoord, ((TileEntity)te).yCoord, ((TileEntity)te).zCoord);
+			world.markBlockForUpdate(new BlockPos(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ()));
 		}
 	}
 	
 	public static void removeConnection(World world, IRecordWire iRecordWire, RecordConnection rec) {
 		for(int i = 0; i < iRecordWire.getConnections().size(); i++)
 			if(iRecordWire.getConnections().get(i).same(rec)) {
-				TileEntity te = world.getTileEntity(iRecordWire.getConnections().get(i).x1, iRecordWire.getConnections().get(i).y1, iRecordWire.getConnections().get(i).z1);
+				TileEntity te = world.getTileEntity(new BlockPos(iRecordWire.getConnections().get(i).x1, iRecordWire.getConnections().get(i).y1, iRecordWire.getConnections().get(i).z1));
 				
 				if(te != null && te instanceof IRecordWireHome && te != iRecordWire) {
 					((IRecordWireHome)te).decreaseAmount(iRecordWire);
-					world.markBlockForUpdate(te.xCoord, te.yCoord, te.zCoord);
+					world.markBlockForUpdate(new BlockPos(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ()));
 					
 					Random rand = new Random();
 					
@@ -96,7 +97,7 @@ public class ConnectionHelper {
 					float ry = rand.nextFloat() * 0.8F + 0.1F;
 					float rz = rand.nextFloat() * 0.8F + 0.1F;
 					
-					EntityItem entityItem = new EntityItem(world, te.xCoord + rx, te.yCoord + ry, te.zCoord + rz, new ItemStack(BetterRecords.itemRecordWire));
+					EntityItem entityItem = new EntityItem(world, te.getPos().getX() + rx, te.getPos().getY() + ry, te.getPos().getZ() + rz, new ItemStack(BetterRecords.itemRecordWire));
 					
 					entityItem.motionX = rand.nextGaussian() * 0.05F;
 					entityItem.motionY = rand.nextGaussian() * 0.05F + 0.2F;
@@ -114,7 +115,7 @@ public class ConnectionHelper {
 	public static void clearConnections(World world, IRecordWire iRecordWire) {
 		while(iRecordWire.getConnections().size() != 0) {
 			RecordConnection rec = iRecordWire.getConnections().get(0);
-			TileEntity te = world.getTileEntity(rec.x1, rec.y1, rec.z1);
+			TileEntity te = world.getTileEntity(new BlockPos(rec.x1, rec.y1, rec.z1));
 			if(te != null && te instanceof IRecordWire) {
 				removeConnection(world, iRecordWire, rec);
 			}else{
@@ -122,6 +123,6 @@ public class ConnectionHelper {
 				iRecordWire.getConnections().remove(0);
 			}
 		}
-		world.markBlockForUpdate(((TileEntity)iRecordWire).xCoord, ((TileEntity)iRecordWire).yCoord, ((TileEntity)iRecordWire).zCoord);
+		world.markBlockForUpdate(new BlockPos(((TileEntity)iRecordWire).getPos().getX(), ((TileEntity)iRecordWire).getPos().getY(), ((TileEntity)iRecordWire).getPos().getZ()));
 	}
 }

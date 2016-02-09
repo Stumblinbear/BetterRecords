@@ -9,6 +9,7 @@ import net.minecraft.tileentity.TileEntity;
 import com.codingforcookies.betterrecords.items.TileEntityFrequencyTuner;
 import com.codingforcookies.betterrecords.items.TileEntityRecordEtcher;
 
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class PacketURLWriter implements IPacket {
@@ -63,7 +64,7 @@ public class PacketURLWriter implements IPacket {
 	public void executeClient(EntityPlayer player) { }
 	
 	public void executeServer(EntityPlayer player) {
-		TileEntity te = player.worldObj.getTileEntity(x, y, z);
+		TileEntity te = player.worldObj.getTileEntity(new BlockPos(x, y, z));
 		if(te == null || !(te instanceof TileEntityRecordEtcher || te instanceof TileEntityFrequencyTuner))
 			return;
 		
@@ -71,29 +72,29 @@ public class PacketURLWriter implements IPacket {
 			TileEntityRecordEtcher tileEntityRecordEtcher = (TileEntityRecordEtcher)te;
 			ItemStack itemStack = tileEntityRecordEtcher.record;
 			if(itemStack != null) {
-				if(itemStack.stackTagCompound == null)
-					itemStack.stackTagCompound = new NBTTagCompound();
-				itemStack.stackTagCompound.setString("name", name);
-				itemStack.stackTagCompound.setString("url", url);
-				itemStack.stackTagCompound.setString("local", localName);
-				itemStack.stackTagCompound.setInteger("size", size);
+				if(itemStack.getTagCompound() == null)
+					itemStack.setTagCompound(new NBTTagCompound());
+				itemStack.getTagCompound().setString("name", name);
+				itemStack.getTagCompound().setString("url", url);
+				itemStack.getTagCompound().setString("local", localName);
+				itemStack.getTagCompound().setInteger("size", size);
 				if(color != -999) {
-					itemStack.stackTagCompound.setInteger("color", color);
-					itemStack.stackTagCompound.setString("author", author);
+					itemStack.getTagCompound().setInteger("color", color);
+					itemStack.getTagCompound().setString("author", author);
 				}
-				player.worldObj.markBlockForUpdate(x, y, z);
+				player.worldObj.markBlockForUpdate(new BlockPos(x, y, z));
 			}
 		}else if(te instanceof TileEntityFrequencyTuner) {
 			TileEntityFrequencyTuner tileEntityFrequencyTuner = (TileEntityFrequencyTuner)te;
 			ItemStack itemStack = tileEntityFrequencyTuner.crystal;
 			if(itemStack != null) {
-				if(itemStack.stackTagCompound == null)
-					itemStack.stackTagCompound = new NBTTagCompound();
-				itemStack.stackTagCompound.setString("url", url);
-				itemStack.stackTagCompound.setString("local", localName);
+				if(itemStack.getTagCompound() == null)
+					itemStack.setTagCompound(new NBTTagCompound());
+				itemStack.getTagCompound().setString("url", url);
+				itemStack.getTagCompound().setString("local", localName);
 				if(color != -999)
-					itemStack.stackTagCompound.setInteger("color", color);
-				player.worldObj.markBlockForUpdate(x, y, z);
+					itemStack.getTagCompound().setInteger("color", color);
+				player.worldObj.markBlockForUpdate(new BlockPos(x, y, z));
 			}
 		}
 	}

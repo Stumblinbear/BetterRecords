@@ -11,6 +11,9 @@ import com.codingforcookies.betterrecords.client.BetterEventHandler;
 import com.codingforcookies.betterrecords.client.ClientProxy;
 import com.codingforcookies.betterrecords.packets.PacketHandler;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -33,8 +36,9 @@ public class BlockRadio extends BlockContainer{
 		setBlockBounds(0.13F, 0F, 0.2F, 0.87F, 0.98F, 0.8F);
 	}
 
-	public void setBlockBoundsBasedOnState(IBlockAccess block, int x, int y, int z){
-		switch (block.getTileEntity(x, y, z).blockMetadata){
+	@Override
+	public void setBlockBoundsBasedOnState(IBlockAccess block, BlockPos pos) {
+		switch (block.getTileEntity(pos).getBlockMetadata()){
 			case 0:
 			case 2:
 				setBlockBounds(0.13F, 0F, 0.2F, 0.87F, 0.98F, 0.8F);
@@ -46,39 +50,43 @@ public class BlockRadio extends BlockContainer{
 		}
 	}
 
-	public void onBlockAdded(World world, int x, int y, int z){
-		super.onBlockAdded(world, x, y, z);
-		world.markBlockForUpdate(x, y, z);
+	@Override
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
+		super.onBlockAdded(world, pos, state);
+		world.markBlockForUpdate(pos);
 	}
 
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are){
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
 		if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IRecordWireManipulator) return false;
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
+		TileEntity tileEntity = world.getTileEntity(pos);
 		if(tileEntity == null || !(tileEntity instanceof TileEntityRadio)) return false;
 		TileEntityRadio tileEntityRadio = (TileEntityRadio) tileEntity;
 		if(player.isSneaking()) {
 			tileEntityRadio.opening = !tileEntityRadio.opening;
-			world.markBlockForUpdate(x, y, z);
-			if(tileEntityRadio.opening) world.playSoundEffect(x, (double) y + 0.5D, z, "random.chestopen", 0.2F, world.rand.nextFloat() * 0.2F + 3F);
-			else world.playSoundEffect(x, (double) y + 0.5D, z, "random.chestclosed", 0.2F, world.rand.nextFloat() * 0.2F + 3F);
+			world.markBlockForUpdate(pos);
+			if(tileEntityRadio.opening) world.playSoundEffect(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), "random.chestopen", 0.2F, world.rand.nextFloat() * 0.2F + 3F);
+			else world.playSoundEffect(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), "random.chestclosed", 0.2F, world.rand.nextFloat() * 0.2F + 3F);
 		}else if(tileEntityRadio.opening) {
 			if(tileEntityRadio.crystal != null) {
-				if(!world.isRemote) dropItem(world, x, y, z);
+				if(!world.isRemote) dropItem(world, pos);
 				tileEntityRadio.setCrystal(null);
-				world.markBlockForUpdate(x, y, z);
-			}else if(player.getHeldItem() != null && (player.getHeldItem().getItem() == BetterRecords.itemFreqCrystal && player.getHeldItem().stackTagCompound != null && player.getHeldItem().stackTagCompound.hasKey("url"))) {
+				world.markBlockForUpdate(pos);
+			}else if(player.getHeldItem() != null && (player.getHeldItem().getItem() == BetterRecords.itemFreqCrystal && player.getHeldItem().getTagCompound() != null && player.getHeldItem().getTagCompound().hasKey("url"))) {
 				tileEntityRadio.setCrystal(player.getHeldItem());
-				world.markBlockForUpdate(x, y, z);
+				world.markBlockForUpdate(pos);
 				player.getHeldItem().stackSize--;
-				if(!world.isRemote) PacketHandler.sendRadioPlayToAllFromServer(tileEntityRadio.xCoord, tileEntityRadio.yCoord, tileEntityRadio.zCoord, world.provider.dimensionId, tileEntityRadio.getSongRadius(), tileEntityRadio.crystal.stackTagCompound.getString("name"), tileEntityRadio.crystal.stackTagCompound.getString("url"));
+				if(!world.isRemote) PacketHandler.sendRadioPlayToAllFromServer(tileEntityRadio.getPos().getX(), tileEntityRadio.getPos().getY(), tileEntityRadio.getPos().getZ(), world.provider.getDimensionId(), tileEntityRadio.getSongRadius(), tileEntityRadio.crystal.getTagCompound().getString("name"), tileEntityRadio.crystal.getTagCompound().getString("url"));
 			}
 		}
 		return true;
 	}
 
-	public void onBlockPlacedBy(World world, int i, int j, int k, EntityLivingBase entityLiving, ItemStack itemStack){
+	//TODO
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entityLiving, ItemStack itemStack){
 		int rotation = MathHelper.floor_double((double) ((entityLiving.rotationYaw * 4.0f) / 360F) + 2.5D) & 3;
-		world.setBlockMetadataWithNotify(i, j, k, rotation, 2);
+		//world.setBlockMetadataWithNotify(i, j, k, rotation, 2);
 		if(world.isRemote && !ClientProxy.tutorials.get("radio")) {
 			BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.radio");
 			BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000;
@@ -86,20 +94,22 @@ public class BlockRadio extends BlockContainer{
 		}
 	}
 
-	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest){
-		if(world.isRemote) return super.removedByPlayer(world, player, x, y, z, willHarvest);
-		TileEntity te = world.getTileEntity(x, y, z);
+	@Override
+	public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest){
+		if(world.isRemote) return super.removedByPlayer(world, pos, player, willHarvest);
+		TileEntity te = world.getTileEntity(pos);
 		if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
-		return super.removedByPlayer(world, player, x, y, z, willHarvest);
+		return super.removedByPlayer(world, pos, player, willHarvest);
 	}
 
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta){
-		dropItem(world, x, y, z);
-		super.breakBlock(world, x, y, z, block, meta);
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		dropItem(world, pos);
+		super.breakBlock(world, pos, state);
 	}
 
-	private void dropItem(World world, int x, int y, int z){
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
+	private void dropItem(World world, BlockPos pos){
+		TileEntity tileEntity = world.getTileEntity(pos);
 		if(tileEntity == null || !(tileEntity instanceof TileEntityRadio)) return;
 		TileEntityRadio tileEntityRadio = (TileEntityRadio) tileEntity;
 		ItemStack item = tileEntityRadio.crystal;
@@ -108,7 +118,7 @@ public class BlockRadio extends BlockContainer{
 			float rx = rand.nextFloat() * 0.8F + 0.1F;
 			float ry = rand.nextFloat() * 0.8F + 0.1F;
 			float rz = rand.nextFloat() * 0.8F + 0.1F;
-			EntityItem entityItem = new EntityItem(world, x + rx, y + ry, z + rz, new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
+			EntityItem entityItem = new EntityItem(world, pos.getX() + rx, pos.getY() + ry, pos.getZ() + rz, new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
 			if(item.hasTagCompound()) entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
 			entityItem.motionX = rand.nextGaussian() * 0.05F;
 			entityItem.motionY = rand.nextGaussian() * 0.05F + 0.2F;
@@ -116,25 +126,29 @@ public class BlockRadio extends BlockContainer{
 			world.spawnEntityInWorld(entityItem);
 			item.stackSize = 0;
 			tileEntityRadio.crystal = null;
-			PacketHandler.sendSoundStopToAllFromServer(tileEntityRadio.xCoord, tileEntityRadio.yCoord, tileEntityRadio.zCoord, world.provider.dimensionId);
+			PacketHandler.sendSoundStopToAllFromServer(tileEntityRadio.getPos().getX(), tileEntityRadio.getPos().getY(), tileEntityRadio.getPos().getZ(), world.provider.getDimensionId());
 		}
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderType(){
 		return -1;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isOpaqueCube(){
 		return false;
 	}
 
+	//TODO
 	@SideOnly(Side.CLIENT)
 	public boolean renderAsNormalBlock(){
 		return false;
 	}
 
+	@Override
 	public TileEntity createNewTileEntity(World var1, int var2){
 		return new TileEntityRadio();
 	}

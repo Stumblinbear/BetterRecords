@@ -24,10 +24,12 @@ import com.codingforcookies.betterrecords.betterenums.IRecordWireHome;
 import com.codingforcookies.betterrecords.betterenums.RecordConnection;
 import com.codingforcookies.betterrecords.client.ClientProxy;
 
+import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModClassLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
+import scala.collection.parallel.ParIterableLike;
 
 public class SoundHandler{
 
@@ -245,16 +247,16 @@ public class SoundHandler{
 	}
 
 	private static void updateAmplitude(byte[] buffer, int x, int y, int z, int dimension){
-		if(Minecraft.getMinecraft().theWorld.provider.dimensionId != dimension) return;
+		if (Minecraft.getMinecraft().theWorld.provider.getDimensionId() != dimension) return;
 		float unscaledTreble = -1F;
 		float unscaledBass = -1F;
-		TileEntity tileEntity = Minecraft.getMinecraft().theWorld.getTileEntity(x, y, z);
+		TileEntity tileEntity = Minecraft.getMinecraft().theWorld.getTileEntity(new BlockPos(x, y, z));
 		if(tileEntity != null && tileEntity instanceof IRecordWireHome) {
 			((IRecordWireHome) tileEntity).addTreble(getUnscaledWaveform(buffer, true, false));
 			((IRecordWireHome) tileEntity).addBass(getUnscaledWaveform(buffer, false, false));
 			for(RecordConnection con : ((IRecordWireHome) tileEntity).getConnections()){
 				if(buffer == null) return;
-				TileEntity tileEntityCon = Minecraft.getMinecraft().theWorld.getTileEntity(con.x2, con.y2, con.z2);
+				TileEntity tileEntityCon = Minecraft.getMinecraft().theWorld.getTileEntity(new BlockPos(con.x2, con.y2, con.z2));
 				if(tileEntityCon != null && tileEntityCon instanceof IRecordAmplitude) {
 					if(unscaledTreble == -1F || unscaledBass == 11F) {
 						unscaledTreble = getUnscaledWaveform(buffer, true, true);

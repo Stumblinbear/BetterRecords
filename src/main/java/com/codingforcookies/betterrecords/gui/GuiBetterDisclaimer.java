@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import net.minecraft.client.gui.GuiScreen;
 
 public class GuiBetterDisclaimer extends GuiScreen{
 
-	protected void mouseClicked(int par1, int par2, int par3){
+	protected void mouseClicked(int par1, int par2, int par3) throws IOException {
 		super.mouseClicked(par1, par2, par3);
 		int x = width / 2 - 100;
 		int y = height / 2 - 35;

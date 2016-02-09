@@ -77,7 +77,7 @@ public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer {
 				
 				if(ClientProxy.flashyMode > 1) {
 					Minecraft mc = Minecraft.getMinecraft();
-					float dist = (float)Math.sqrt(Math.pow(tileEntityStrobeLight.xCoord - mc.thePlayer.posX, 2) + Math.pow(tileEntityStrobeLight.yCoord - mc.thePlayer.posY, 2) + Math.pow(tileEntityStrobeLight.zCoord - mc.thePlayer.posZ, 2));
+					float dist = (float)Math.sqrt(Math.pow(tileEntityStrobeLight.getPos().getX() - mc.thePlayer.posX, 2) + Math.pow(tileEntityStrobeLight.getPos().getY() - mc.thePlayer.posY, 2) + Math.pow(tileEntityStrobeLight.getPos().getZ() - mc.thePlayer.posZ, 2));
 					if(dist < 4 * tileEntityStrobeLight.bass) {
 						float newStrobe = Math.abs(dist - 4F * tileEntityStrobeLight.bass) / 100F;
 						if(newStrobe > 0F && BetterEventHandler.strobeLinger < newStrobe)

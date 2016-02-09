@@ -104,7 +104,7 @@ public class RecipeColoredRecord implements IRecipe {
 			l1 = (k << 8) + i1;
 			l1 = (l1 << 8) + currentColor;
 			if(!itemToColor.hasTagCompound())
-				itemToColor.stackTagCompound = new NBTTagCompound();
+				itemToColor.setTagCompound(new NBTTagCompound());
 			itemToColor.getTagCompound().setInteger("color", l1);
 			return itemToColor;
 		}

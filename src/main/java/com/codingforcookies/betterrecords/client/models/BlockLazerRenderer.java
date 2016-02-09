@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 public class BlockLazerRenderer extends TileEntitySpecialRenderer {
 	public BlockLazerRenderer() { }
 
-	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale) {
+	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
 		if(!(te instanceof TileEntityLazer))
 			return;
 		
@@ -44,9 +44,9 @@ public class BlockLazerRenderer extends TileEntitySpecialRenderer {
 
 					float yaw = tileEntityLazer.yaw;
 					float pitch = tileEntityLazer.pitch;
-					/*float startX = tileEntityLazer.xCoord - 0.5F;
-					float startY = tileEntityLazer.yCoord;
-					float startZ = tileEntityLazer.zCoord + .5F;
+					/*float startX = tileEntityLazer.getPos().getX() - 0.5F;
+					float startY = tileEntityLazer.getPos().getY();
+					float startZ = tileEntityLazer.getPos().getZ() + .5F;
 					float stopX = (float)(startX + length * Math.cos(yaw) * Math.cos(pitch));
 					float stopY = (float)(startY + length * Math.sin(yaw));
 					float stopZ = (float)(startZ + length * Math.cos(yaw) * Math.sin(pitch));

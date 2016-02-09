@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.typesafe.config.ConfigException;
 import org.apache.commons.io.FilenameUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -59,8 +60,8 @@ public class GuiRecordEtcher extends GuiContainer{
 
 	public void initGui(){
 		super.initGui();
-		nameField = new GuiTextField(this.fontRendererObj, 44, 20, 124, 10);
-		urlField = new GuiTextField(this.fontRendererObj, 44, 35, 124, 10);
+		nameField = new GuiTextField(1, this.fontRendererObj, 44, 20, 124, 10);
+		urlField = new GuiTextField(2, this.fontRendererObj, 44, 35, 124, 10);
 		urlField.setMaxStringLength(256);
 		if(ClientProxy.defaultLibrary.size() == 0 || (ClientProxy.lastCheckType == 0 || ClientProxy.lastCheckType != (Minecraft.getMinecraft().theWorld.isRemote ? 1 : 2))){
 			System.out.println("Loading default library...");
@@ -147,7 +148,7 @@ public class GuiRecordEtcher extends GuiContainer{
 		}
 	}
 
-	protected void keyTyped(char par1, int par2){
+	protected void keyTyped(char par1, int par2) throws IOException {
 		checkedURL = false;
 		checkURLTime = System.currentTimeMillis() + 2000;
 		if(nameField.isFocused()) nameField.textboxKeyTyped(par1, par2);
@@ -155,7 +156,7 @@ public class GuiRecordEtcher extends GuiContainer{
 		else super.keyTyped(par1, par2);
 	}
 
-	protected void mouseClicked(int par1, int par2, int par3){
+	protected void mouseClicked(int par1, int par2, int par3) throws IOException{
 		super.mouseClicked(par1, par2, par3);
 		int x = par1 - (width - xSize) / 2;
 		int y = par2 - (height - ySize) / 2;
@@ -165,7 +166,7 @@ public class GuiRecordEtcher extends GuiContainer{
 			if(selectedLib != -1){
 				LibrarySong sel = ClientProxy.defaultLibrary.get(selectedLib);
 				try{
-					PacketHandler.sendURLWriteFromClient(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, sel.name, sel.url, sel.local, new URL(sel.url).openConnection().getContentLength() / 1024 / 1024, sel.color, sel.author);
+					PacketHandler.sendURLWriteFromClient(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(), sel.name, sel.url, sel.local, new URL(sel.url).openConnection().getContentLength() / 1024 / 1024, sel.color, sel.author);
 				}catch(MalformedURLException e){
 					e.printStackTrace();
 				}catch(IOException e){
@@ -217,7 +218,7 @@ public class GuiRecordEtcher extends GuiContainer{
 						}
 					}
 				}
-				PacketHandler.sendURLWriteFromClient(tileEntity.xCoord, tileEntity.yCoord, tileEntity.zCoord, superName, urlField.getText(), superLocal, etchSize);
+				PacketHandler.sendURLWriteFromClient(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(), superName, urlField.getText(), superLocal, etchSize);
 			}
 		}
 		if(x >= 175 && x <= 195 && y >= 150 && y <= 159){
@@ -254,7 +255,7 @@ public class GuiRecordEtcher extends GuiContainer{
 		nameField.drawTextBox();
 		urlField.drawTextBox();
 		if(tileEntity.record == null) error = BetterUtils.getTranslatedString("gui.recordetcher.error1");
-		else if(tileEntity.record.hasTagCompound() && tileEntity.record.stackTagCompound.hasKey("url")) error = BetterUtils.getTranslatedString("gui.recordetcher.error2");
+		else if(tileEntity.record.hasTagCompound() && tileEntity.record.getTagCompound().hasKey("url")) error = BetterUtils.getTranslatedString("gui.recordetcher.error2");
 		else if(selectedLib != -1) error = BetterUtils.getTranslatedString("gui.recordetcher.ready");
 		else if(nameField.getText().length() == 0) error = BetterUtils.getTranslatedString("gui.error1");
 		else if(nameField.getText().length() < 3) error = BetterUtils.getTranslatedString("gui.error2");
@@ -287,7 +288,9 @@ public class GuiRecordEtcher extends GuiContainer{
 						if(ClientProxy.encodings.contains(contentType)) error = BetterUtils.getTranslatedString("gui.recordetcher.ready");
 						else error = BetterUtils.getTranslatedString("gui.recordetcher.error1").replace("<type>", contentType);
 					}
-				}catch(MalformedURLException | StringIndexOutOfBoundsException e){
+				}catch(MalformedURLException e) {
+					error = BetterUtils.getTranslatedString("gui.error5");
+				}catch (StringIndexOutOfBoundsException e) {
 					error = BetterUtils.getTranslatedString("gui.error5");
 				}catch(IOException e){
 					error = BetterUtils.getTranslatedString("gui.error6");

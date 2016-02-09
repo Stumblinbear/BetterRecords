@@ -6,6 +6,9 @@ import com.codingforcookies.betterrecords.betterenums.IRecordWire;
 import com.codingforcookies.betterrecords.client.BetterEventHandler;
 import com.codingforcookies.betterrecords.client.ClientProxy;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockContainer;
@@ -25,20 +28,23 @@ public class BlockLazer extends BlockContainer{
 		setBlockBounds(0.25F, 0F, 0.25F, 0.75F, 0.75F, 0.74F);
 	}
 
-	public int getLightValue(IBlockAccess world, int x, int y, int z){
-		TileEntity te = world.getTileEntity(x, y, z);
+	@Override
+	public int getLightValue(IBlockAccess world, BlockPos pos){
+		TileEntity te = world.getTileEntity(pos);
 		if(te == null || !(te instanceof IRecordWire)) return 0;
-		BetterUtils.markBlockDirty(te.getWorldObj(), te.xCoord, te.yCoord, te.zCoord);
+		BetterUtils.markBlockDirty(te.getWorld(), te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
 		return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
 	}
 
-	public void onBlockAdded(World world, int x, int y, int z){
-		super.onBlockAdded(world, x, y, z);
-		world.markBlockForUpdate(x, y, z);
+	@Override
+	public void onBlockAdded(World world, BlockPos pos, IBlockState state){
+		super.onBlockAdded(world, pos, state);
+		world.markBlockForUpdate(pos);
 	}
 
-	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack){
-		TileEntity te = world.getTileEntity(x, y, z);
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entityLiving, ItemStack itemStack){
+		TileEntity te = world.getTileEntity(pos);
 		if(te != null && te instanceof TileEntityLazer){
 			((TileEntityLazer) te).pitch = entityLiving.rotationPitch;
 			((TileEntityLazer) te).yaw = entityLiving.rotationYaw;
@@ -50,15 +56,17 @@ public class BlockLazer extends BlockContainer{
 		}
 	}
 
-	public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest){
-		if(world.isRemote) return super.removedByPlayer(world, player, x, y, z, willHarvest);
-		TileEntity te = world.getTileEntity(x, y, z);
+	@Override
+	public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest){
+		if(world.isRemote) return super.removedByPlayer(world, pos, player, willHarvest);
+		TileEntity te = world.getTileEntity(pos);
 		if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
-		return super.removedByPlayer(world, player, x, y, z, willHarvest);
+		return super.removedByPlayer(world, pos, player, willHarvest);
 	}
 
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int metadata, float what, float these, float are){
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
+		TileEntity tileEntity = world.getTileEntity(pos);
 		if(tileEntity == null || !(tileEntity instanceof TileEntityLazer)) return false;
 		TileEntityLazer tileEntityLazer = (TileEntityLazer) tileEntity;
 		float length = tileEntityLazer.length;
@@ -77,21 +85,25 @@ public class BlockLazer extends BlockContainer{
 		return true;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderType(){
 		return -1;
 	}
 
+	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isOpaqueCube(){
 		return false;
 	}
 
+	//TODO
 	@SideOnly(Side.CLIENT)
 	public boolean renderAsNormalBlock(){
 		return false;
 	}
 
+	@Override
 	public TileEntity createNewTileEntity(World var1, int var2){
 		return new TileEntityLazer();
 	}

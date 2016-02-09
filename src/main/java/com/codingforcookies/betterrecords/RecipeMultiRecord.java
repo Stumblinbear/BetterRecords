@@ -18,7 +18,7 @@ public class RecipeMultiRecord implements IRecipe {
 		for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); ++i) {
 			ItemStack itemstack = par1InventoryCrafting.getStackInSlot(i);
 			if(itemstack != null)
-				if(itemstack.getItem() instanceof ItemURLRecord && itemstack.stackTagCompound != null && itemstack.stackTagCompound.hasKey("name"))
+				if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null && itemstack.getTagCompound().hasKey("name"))
 					records.add(itemstack);
 				else
 					return false;
@@ -33,7 +33,7 @@ public class RecipeMultiRecord implements IRecipe {
 		for(int k = 0; k < par1InventoryCrafting.getSizeInventory(); ++k) {
 			ItemStack itemstack = par1InventoryCrafting.getStackInSlot(k);
 			if(itemstack != null) {
-				if(itemstack.getItem() instanceof ItemURLRecord && itemstack.stackTagCompound != null && itemstack.stackTagCompound.hasKey("name"))
+				if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null && itemstack.getTagCompound().hasKey("name"))
 					records.add(itemstack);
 				else
 					return null;
@@ -44,19 +44,19 @@ public class RecipeMultiRecord implements IRecipe {
 			return null;
 		else{
 			ItemStack itemMultiRecord = new ItemStack(BetterRecords.itemURLMultiRecord);
-			itemMultiRecord.stackTagCompound = new NBTTagCompound();
+			itemMultiRecord.setTagCompound(new NBTTagCompound());
 			
 			NBTTagList songs = new NBTTagList();
 			
 			for(ItemStack record : records) {
 				NBTTagCompound song = new NBTTagCompound();
-				song.setString("name", record.stackTagCompound.getString("name"));
-				song.setString("url", record.stackTagCompound.getString("url"));
-				song.setString("local", record.stackTagCompound.getString("local"));
+				song.setString("name", record.getTagCompound().getString("name"));
+				song.setString("url", record.getTagCompound().getString("url"));
+				song.setString("local", record.getTagCompound().getString("local"));
 				songs.appendTag(song);
 			}
 			
-			itemMultiRecord.stackTagCompound.setTag("songs", songs);
+			itemMultiRecord.getTagCompound().setTag("songs", songs);
 			return itemMultiRecord;
 		}
 	}

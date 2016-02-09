@@ -27,16 +27,16 @@ public class ItemURLMultiRecord extends ItemURLRecord{
 
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4){
-		if(par1ItemStack.stackTagCompound != null && par1ItemStack.stackTagCompound.hasKey("songs")){
-			NBTTagList songList = par1ItemStack.stackTagCompound.getTagList("songs", 10);
+		if(par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("songs")){
+			NBTTagList songList = par1ItemStack.getTagCompound().getTagList("songs", 10);
 			for(int i = 0; i < songList.tagCount(); i++)
 				par3List.add(BetterUtils.getTranslatedString("item.record.song") + " #" + (i + 1) + ": " + songList.getCompoundTagAt(i).getString("local"));
 		}
-		if(par1ItemStack.stackTagCompound != null && par1ItemStack.stackTagCompound.hasKey("repeat") ? par1ItemStack.stackTagCompound.getBoolean("repeat") : false){
+		if(par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("repeat") ? par1ItemStack.getTagCompound().getBoolean("repeat") : false){
 			if(!par3List.contains("\247e" + BetterUtils.getTranslatedString("item.record.shuffleenabled"))) par3List.add("");
 			par3List.add("\247e" + BetterUtils.getTranslatedString("item.record.repeatenabled"));
 		}
-		if(par1ItemStack.stackTagCompound != null && par1ItemStack.stackTagCompound.hasKey("shuffle") ? par1ItemStack.stackTagCompound.getBoolean("shuffle") : false){
+		if(par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("shuffle") ? par1ItemStack.getTagCompound().getBoolean("shuffle") : false){
 			if(!par3List.contains("\247e" + BetterUtils.getTranslatedString("item.record.repeatenabled"))) par3List.add("");
 			par3List.add("\247e" + BetterUtils.getTranslatedString("item.record.shuffleenabled"));
 		}
@@ -54,10 +54,10 @@ public class ItemURLMultiRecord extends ItemURLRecord{
 	}
 
 	public boolean isRecordValid(ItemStack par1ItemStack){
-		return par1ItemStack.stackTagCompound != null && par1ItemStack.stackTagCompound.hasKey("songs");
+		return par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("songs");
 	}
 
 	public void onRecordInserted(IRecordWireHome par1WireHome, ItemStack par2ItemStack){
-		PacketHandler.sendRecordPlayToAllFromServer(par1WireHome.getTileEntity().xCoord, par1WireHome.getTileEntity().yCoord, par1WireHome.getTileEntity().zCoord, par1WireHome.getTileEntity().getWorldObj().provider.dimensionId, par1WireHome.getSongRadius(), par2ItemStack.stackTagCompound, par2ItemStack.stackTagCompound.hasKey("repeat") ? par2ItemStack.stackTagCompound.getBoolean("repeat") : false, par2ItemStack.stackTagCompound.hasKey("shuffle") ? par2ItemStack.stackTagCompound.getBoolean("shuffle") : false);
+		PacketHandler.sendRecordPlayToAllFromServer(par1WireHome.getTileEntity().getPos().getX(), par1WireHome.getTileEntity().getPos().getY(), par1WireHome.getTileEntity().getPos().getZ(), par1WireHome.getTileEntity().getWorldObj().provider.dimensionId, par1WireHome.getSongRadius(), par2ItemStack.stackTagCompound, par2ItemStack.stackTagCompound.hasKey("repeat") ? par2ItemStack.stackTagCompound.getBoolean("repeat") : false, par2ItemStack.stackTagCompound.hasKey("shuffle") ? par2ItemStack.stackTagCompound.getBoolean("shuffle") : false);
 	}
 }

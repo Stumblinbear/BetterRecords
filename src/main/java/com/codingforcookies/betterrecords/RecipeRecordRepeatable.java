@@ -17,7 +17,7 @@ public class RecipeRecordRepeatable implements IRecipe {
 		for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); ++i) {
 			ItemStack itemstack = par1InventoryCrafting.getStackInSlot(i);
 			if(itemstack != null) {
-				if(itemstack.getItem() instanceof ItemURLRecord && itemstack.stackTagCompound != null)
+				if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null)
 					if(record != null)
 						return false;
 					else
@@ -42,7 +42,7 @@ public class RecipeRecordRepeatable implements IRecipe {
 		for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); i++) {
 			ItemStack itemstack = par1InventoryCrafting.getStackInSlot(i);
 			if(itemstack != null) {
-				if(itemstack.getItem() instanceof ItemURLRecord && itemstack.stackTagCompound != null)
+				if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null)
 					if(record != null)
 						return null;
 					else
@@ -62,10 +62,10 @@ public class RecipeRecordRepeatable implements IRecipe {
 		else{
 			ItemStack newRecord = ItemStack.copyItemStack(record);
 			
-			if(newRecord.stackTagCompound == null)
-				newRecord.stackTagCompound = new NBTTagCompound();
+			if(newRecord.getTagCompound() == null)
+				newRecord.setTagCompound(new NBTTagCompound());
 			
-			newRecord.stackTagCompound.setBoolean("repeat", true);
+			newRecord.getTagCompound().setBoolean("repeat", true);
 			
 			return newRecord;
 		}
