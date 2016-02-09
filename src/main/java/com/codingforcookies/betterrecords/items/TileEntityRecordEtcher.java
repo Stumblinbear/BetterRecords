@@ -124,6 +124,11 @@ public class TileEntityRecordEtcher extends TileEntity implements IInventory, IT
 					setInventorySlotContents(slot, null);
 		return stack;
 	}
+
+	@Override
+	public ItemStack removeStackFromSlot(int slot) {
+		return getStackInSlot(slot);
+	}
 	
 	public ItemStack getStackInSlotOnClosing(int slot) {
 		ItemStack stack = getStackInSlot(slot);
@@ -142,7 +147,7 @@ public class TileEntityRecordEtcher extends TileEntity implements IInventory, IT
 	}
 
 	@Override
-	public String getCommandSenderName() {
+	public String getName() {
 		return "Record Etcher";
 	}
 

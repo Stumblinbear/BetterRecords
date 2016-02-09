@@ -105,6 +105,10 @@ public class TileEntityFrequencyTuner extends TileEntity implements IInventory, 
 	}
 
 	@Override
+	public ItemStack removeStackFromSlot(int slot) {
+		return getStackInSlot(slot);
+	}
+
 	public ItemStack getStackInSlotOnClosing(int slot) {
 		ItemStack stack = getStackInSlot(slot);
 		if(stack != null)
@@ -128,7 +132,7 @@ public class TileEntityFrequencyTuner extends TileEntity implements IInventory, 
 	}
 
 	@Override
-	public String getCommandSenderName() {
+	public String getName() {
 		return "Frequency Tuner";
 	}
 

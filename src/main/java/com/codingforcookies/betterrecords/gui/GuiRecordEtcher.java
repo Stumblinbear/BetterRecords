@@ -187,14 +187,14 @@ public class GuiRecordEtcher extends GuiContainer{
 					}
 					if(!exists){
 						JsonObject elmnt = new JsonObject();
-						elmnt.addProperty("author", Minecraft.getMinecraft().thePlayer.getCommandSenderName());
+						elmnt.addProperty("author", Minecraft.getMinecraft().thePlayer.getName());
 						elmnt.addProperty("name", superName);
 						elmnt.addProperty("url", urlField.getText());
 						elmnt.addProperty("color", "#FFFFFF");
 						if(rootObj == null) loadLocalLibrary();
 						if(rootObj != null){
 							rootObj.add(superLocal, elmnt);
-							ClientProxy.defaultLibrary.add(0, new LibrarySong(superLocal, Minecraft.getMinecraft().thePlayer.getCommandSenderName(), superName, urlField.getText(), Integer.parseInt("FFFFFF", 16)));
+							ClientProxy.defaultLibrary.add(0, new LibrarySong(superLocal, Minecraft.getMinecraft().thePlayer.getName(), superName, urlField.getText(), Integer.parseInt("FFFFFF", 16)));
 							if(!ClientProxy.localLibrary.exists()){
 								if(ClientProxy.localLibrary.getParentFile().mkdirs()) try{
 									ClientProxy.localLibrary.createNewFile();
