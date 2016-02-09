@@ -8,6 +8,7 @@ import com.codingforcookies.betterrecords.betterenums.IRecordAmplitude;
 import com.codingforcookies.betterrecords.betterenums.IRecordWire;
 import com.codingforcookies.betterrecords.betterenums.RecordConnection;
 
+import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,7 +17,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityLazer extends TileEntity implements IRecordWire, IRecordAmplitude {
+public class TileEntityLazer extends TileEntity implements IRecordWire, IRecordAmplitude, ITickable {
 	public ArrayList<RecordConnection> connections = null;
 	public ArrayList<RecordConnection> getConnections() { return connections; }
 	
@@ -67,10 +68,9 @@ public class TileEntityLazer extends TileEntity implements IRecordWire, IRecordA
 	public boolean canUpdate() {
 		return false;
 	}
-	
-	public void updateEntity() {
-		super.updateEntity();
-		
+
+	@Override
+	public void tick() {
 		if(bass > 0F)
 			bass--;
 		if(bass < 0F)
@@ -102,10 +102,10 @@ public class TileEntityLazer extends TileEntity implements IRecordWire, IRecordA
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
         writeToNBT(nbt);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+        return new S35PacketUpdateTileEntity(pos, 1, nbt);
 	}
 	
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)  { 
-		readFromNBT(pkt.func_148857_g());
+		readFromNBT(pkt.getNbtCompound());
 	}
 }

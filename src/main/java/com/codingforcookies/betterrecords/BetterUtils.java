@@ -5,6 +5,7 @@ import java.util.Map;
 import com.google.common.collect.Maps;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 
@@ -14,7 +15,8 @@ public class BetterUtils{
 	private static String lang = "en_US";
 
 	public static void markBlockDirty(World par1World, int x, int y, int z){
-		if(par1World.blockExists(x, y, z)) par1World.getChunkFromBlockCoords(x, z).setChunkModified();
+		//if(par1World.blockExists(x, y, z)) par1World.getChunkFromBlockCoords(x, z).setChunkModified();
+		par1World.getChunkFromBlockCoords(new BlockPos(x,y,z)).setChunkModified();
 	}
 
 	public static String getTranslatedString(String str){

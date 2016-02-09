@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,7 +21,7 @@ import com.codingforcookies.betterrecords.betterenums.RecordConnection;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, IRecordWireHome {
+public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, IRecordWireHome, ITickable {
 	public ArrayList<Float> formTreble = new ArrayList<Float>();
 	public synchronized void addTreble(float form) { formTreble.add(form); }
 	public ArrayList<Float> formBass = new ArrayList<Float>();
@@ -83,7 +84,7 @@ public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, I
 
 		record = par1ItemStack.copy();
 		record.stackSize = 1;
-		recordEntity = new EntityItem(worldObj, xCoord, yCoord, zCoord, record);
+		recordEntity = new EntityItem(worldObj, pos.getX(), pos.getY(), pos.getZ(), record);
 		recordEntity.hoverStart = 0;
 		recordEntity.rotationPitch = 0F;
 		recordEntity.rotationYaw = 0F;
@@ -94,11 +95,10 @@ public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, I
 	public boolean canUpdate() {
 		return false;
 	}
-	
+
+	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateEntity() {
-		super.updateEntity();
-		
+	public void tick() {
 		if(opening) {
 			if(openAmount > -0.8F)
 				openAmount -= 0.08F;
@@ -135,8 +135,8 @@ public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, I
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
 		
-		if(compound.hasKey("rotation"))
-			blockMetadata = compound.getInteger("rotation");
+		//if(compound.hasKey("rotation"))
+		//	blockMetadata = compound.getInteger("rotation");
 		if(compound.hasKey("record"))
 			setRecord(ItemStack.loadItemStackFromNBT(compound.getCompoundTag("record")));
 		if(compound.hasKey("opening"))
@@ -152,7 +152,7 @@ public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, I
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		
-		compound.setFloat("rotation", blockMetadata);
+		compound.setFloat("rotation", getBlockMetadata());
 		compound.setTag("record", getStackTagCompound(record));
 		compound.setBoolean("opening", opening);
 		compound.setString("connections", ConnectionHelper.serializeConnections(connections));
@@ -170,11 +170,11 @@ public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, I
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
         writeToNBT(nbt);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+        return new S35PacketUpdateTileEntity(pos, 1, nbt);
 	}
 	
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)  { 
-		readFromNBT(pkt.func_148857_g());
-		Minecraft.getMinecraft().renderGlobal.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+		readFromNBT(pkt.getNbtCompound());
+		Minecraft.getMinecraft().renderGlobal.markBlockForUpdate(pos);
 	}
 }

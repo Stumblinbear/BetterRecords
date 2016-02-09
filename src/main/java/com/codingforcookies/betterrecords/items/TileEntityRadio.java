@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -19,7 +20,7 @@ import com.codingforcookies.betterrecords.betterenums.RecordConnection;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityRadio extends TileEntity implements IRecordWire, IRecordWireHome {
+public class TileEntityRadio extends TileEntity implements IRecordWire, IRecordWireHome, ITickable {
 	public ArrayList<Float> formTreble = new ArrayList<Float>();
 	public synchronized void addTreble(float form) { formTreble.add(form); }
 	public ArrayList<Float> formBass = new ArrayList<Float>();
@@ -84,11 +85,10 @@ public class TileEntityRadio extends TileEntity implements IRecordWire, IRecordW
 	public boolean canUpdate() {
 		return false;
 	}
-	
+
+	@Override
 	@SideOnly(Side.CLIENT)
-	public void updateEntity() {
-		super.updateEntity();
-		
+	public void tick() {
 		if(opening) {
 			if(openAmount < 0.268F)
 				openAmount += 0.04F;
@@ -116,8 +116,8 @@ public class TileEntityRadio extends TileEntity implements IRecordWire, IRecordW
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
 		
-		if(compound.hasKey("rotation"))
-			blockMetadata = compound.getInteger("rotation");
+		//if(compound.hasKey("rotation"))
+		//	blockMetadata = compound.getInteger("rotation");
 		if(compound.hasKey("crystal"))
 			setCrystal(ItemStack.loadItemStackFromNBT(compound.getCompoundTag("crystal")));
 		if(compound.hasKey("opening"))
@@ -133,7 +133,7 @@ public class TileEntityRadio extends TileEntity implements IRecordWire, IRecordW
 	public void writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		
-		compound.setFloat("rotation", blockMetadata);
+		compound.setFloat("rotation", getBlockMetadata());
 		compound.setTag("crystal", getStackTagCompound(crystal));
 		compound.setBoolean("opening", opening);
 		compound.setString("connections", ConnectionHelper.serializeConnections(connections));
@@ -151,11 +151,11 @@ public class TileEntityRadio extends TileEntity implements IRecordWire, IRecordW
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
         writeToNBT(nbt);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+        return new S35PacketUpdateTileEntity(pos, 1, nbt);
 	}
 	
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)  { 
-		readFromNBT(pkt.func_148857_g());
-		Minecraft.getMinecraft().renderGlobal.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+		readFromNBT(pkt.getNbtCompound());
+		Minecraft.getMinecraft().renderGlobal.markBlockForUpdate(pos);
 	}
 }

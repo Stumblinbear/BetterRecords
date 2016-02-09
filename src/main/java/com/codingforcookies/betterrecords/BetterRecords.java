@@ -56,31 +56,30 @@ public class BetterRecords {
 	
 	public static final BetterCreativeTab recordsTab = new BetterCreativeTab();
 	
-	public static final ItemURLRecord itemURLRecord = (ItemURLRecord)new ItemURLRecord().setUnlocalizedName("urlrecord").setTextureName(ID + ":urlrecord").setCreativeTab(recordsTab);
-	public static final ItemURLMultiRecord itemURLMultiRecord = (ItemURLMultiRecord)new ItemURLMultiRecord().setUnlocalizedName("urlmultirecord").setTextureName(ID + ":urlmultirecord").setCreativeTab(recordsTab);
-	public static final ItemFreqCrystal itemFreqCrystal = (ItemFreqCrystal)new ItemFreqCrystal().setUnlocalizedName("freqcrystal").setTextureName(ID + ":freqcrystal").setCreativeTab(recordsTab);
+	public static final ItemURLRecord itemURLRecord = (ItemURLRecord)new ItemURLRecord().setUnlocalizedName("urlrecord").setCreativeTab(recordsTab);
+	public static final ItemURLMultiRecord itemURLMultiRecord = (ItemURLMultiRecord)new ItemURLMultiRecord().setUnlocalizedName("urlmultirecord").setCreativeTab(recordsTab);
+	public static final ItemFreqCrystal itemFreqCrystal = (ItemFreqCrystal)new ItemFreqCrystal().setUnlocalizedName("freqcrystal").setCreativeTab(recordsTab);
 	
 	
-	public static final ItemRecordWire itemRecordWire = (ItemRecordWire)new ItemRecordWire().setUnlocalizedName("recordwire").setTextureName(ID + ":recordwire").setCreativeTab(recordsTab);
-	public static final ItemRecordWireCutter itemRecordCutters = (ItemRecordWireCutter)new ItemRecordWireCutter().setUnlocalizedName("recordwirecutters").setTextureName(ID + ":recordwirecutters").setCreativeTab(recordsTab);
+	public static final ItemRecordWire itemRecordWire = (ItemRecordWire)new ItemRecordWire().setUnlocalizedName("recordwire").setCreativeTab(recordsTab);
+	public static final ItemRecordWireCutter itemRecordCutters = (ItemRecordWireCutter)new ItemRecordWireCutter().setUnlocalizedName("recordwirecutters").setCreativeTab(recordsTab);
 	
 	
-	public static final BlockRecordEtcher blockRecordEtcher = (BlockRecordEtcher)new BlockRecordEtcher().setBlockName("recordetcher").setBlockTextureName(ID + ":breaktexture").setHardness(1.5F).setResistance(5.5F).setCreativeTab(recordsTab);
-	public static final BlockRecordPlayer blockRecordPlayer = (BlockRecordPlayer)new BlockRecordPlayer().setBlockName("recordplayer").setBlockTextureName(ID + ":breaktexture").setHardness(1F).setResistance(5F).setCreativeTab(recordsTab);
-	public static final BlockFrequencyTuner blockFrequencyTuner = (BlockFrequencyTuner)new BlockFrequencyTuner().setBlockName("frequencytuner").setBlockTextureName(ID + ":breaktexture").setHardness(1.5F).setResistance(5.5F).setCreativeTab(recordsTab);
-	public static final BlockRadio blockRadio = (BlockRadio)new BlockRadio().setBlockName("shoutcastradio").setBlockTextureName(ID + ":breaktexture").setHardness(2F).setResistance(6.3F).setCreativeTab(recordsTab);
+	public static final BlockRecordEtcher blockRecordEtcher = (BlockRecordEtcher)new BlockRecordEtcher().setUnlocalizedName("recordetcher").setHardness(1.5F).setResistance(5.5F).setCreativeTab(recordsTab);
+	public static final BlockRecordPlayer blockRecordPlayer = (BlockRecordPlayer)new BlockRecordPlayer().setUnlocalizedName("recordplayer").setHardness(1F).setResistance(5F).setCreativeTab(recordsTab);
+	public static final BlockFrequencyTuner blockFrequencyTuner = (BlockFrequencyTuner)new BlockFrequencyTuner().setUnlocalizedName("frequencytuner").setHardness(1.5F).setResistance(5.5F).setCreativeTab(recordsTab);
+	public static final BlockRadio blockRadio = (BlockRadio)new BlockRadio().setUnlocalizedName("shoutcastradio").setHardness(2F).setResistance(6.3F).setCreativeTab(recordsTab);
 	
-	public static final BlockRecordSpeaker blockSMSpeaker = (BlockRecordSpeaker)new BlockRecordSpeaker(0).setBlockName("recordspeaker.sm").setBlockTextureName(ID + ":breaktexture").setHardness(2F).setResistance(7.5F).setCreativeTab(recordsTab);
-	public static final BlockRecordSpeaker blockMDSpeaker = (BlockRecordSpeaker)new BlockRecordSpeaker(1).setBlockName("recordspeaker.md").setBlockTextureName(ID + ":breaktexture").setHardness(3F).setResistance(8F).setCreativeTab(recordsTab);
-	public static final BlockRecordSpeaker blockLGSpeaker = (BlockRecordSpeaker)new BlockRecordSpeaker(2).setBlockName("recordspeaker.lg").setBlockTextureName(ID + ":breaktexture").setHardness(4F).setResistance(9.5F).setCreativeTab(recordsTab);
-	
-	public static final BlockStrobeLight blockStrobeLight = (BlockStrobeLight)new BlockStrobeLight().setBlockName("strobelight").setBlockTextureName(ID + ":breaktexture").setHardness(2.75F).setResistance(4F).setCreativeTab(recordsTab);
-	public static final BlockLazer blockLazer = (BlockLazer)new BlockLazer().setBlockName("lazer").setBlockTextureName(ID + ":breaktexture").setHardness(3.2F).setResistance(4.3F).setCreativeTab(recordsTab);
-	public static final BlockLazerCluster blockLazerCluster = (BlockLazerCluster)new BlockLazerCluster().setBlockName("lazercluster").setBlockTextureName(ID + ":breaktexture").setHardness(4.8F).setResistance(4.8F).setCreativeTab(recordsTab);
+	public static final BlockRecordSpeaker blockSMSpeaker = (BlockRecordSpeaker)new BlockRecordSpeaker(0).setUnlocalizedName("recordspeaker.sm").setHardness(2F).setResistance(7.5F).setCreativeTab(recordsTab);
+	public static final BlockRecordSpeaker blockMDSpeaker = (BlockRecordSpeaker)new BlockRecordSpeaker(1).setUnlocalizedName("recordspeaker.md").setHardness(3F).setResistance(8F).setCreativeTab(recordsTab);
+	public static final BlockRecordSpeaker blockLGSpeaker = (BlockRecordSpeaker)new BlockRecordSpeaker(2).setUnlocalizedName("recordspeaker.lg").setHardness(4F).setResistance(9.5F).setCreativeTab(recordsTab);
+
+	public static final BlockStrobeLight blockStrobeLight = (BlockStrobeLight)new BlockStrobeLight().setUnlocalizedName("strobelight").setHardness(2.75F).setResistance(4F).setCreativeTab(recordsTab);
+	public static final BlockLazer blockLazer = (BlockLazer)new BlockLazer().setUnlocalizedName("lazer").setHardness(3.2F).setResistance(4.3F).setCreativeTab(recordsTab);
+	public static final BlockLazerCluster blockLazerCluster = (BlockLazerCluster)new BlockLazerCluster().setUnlocalizedName("lazercluster").setHardness(4.8F).setResistance(4.8F).setCreativeTab(recordsTab);
 	
 	@EventHandler
 	public void preInit(final FMLPreInitializationEvent event) {
-
 		proxy.preInit();
 	}
 	

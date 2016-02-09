@@ -56,11 +56,11 @@ public class TileEntityRecordSpeaker extends TileEntity implements IRecordWire {
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
         writeToNBT(nbt);
-        return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, nbt);
+        return new S35PacketUpdateTileEntity(pos, 1, nbt);
 	}
 	
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)  { 
-		readFromNBT(pkt.func_148857_g());
-		Minecraft.getMinecraft().renderGlobal.markBlockForRenderUpdate(xCoord, yCoord, zCoord);
+		readFromNBT(pkt.getNbtCompound());
+		Minecraft.getMinecraft().renderGlobal.markBlockForUpdate(pos);
 	} 
 }

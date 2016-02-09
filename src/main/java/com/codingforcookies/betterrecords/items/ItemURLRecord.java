@@ -10,16 +10,14 @@ import com.codingforcookies.betterrecords.packets.PacketHandler;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
 public class ItemURLRecord extends Item implements IRecord{
 
-	private static IIcon iconBase, iconOverlay;
+	//private static IIcon iconBase, iconOverlay;
 
 	public ItemURLRecord(){
 		setMaxStackSize(1);
@@ -54,16 +52,16 @@ public class ItemURLRecord extends Item implements IRecord{
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister){
-		iconBase = par1IconRegister.registerIcon(BetterRecords.ID + ":urlrecord");
-		iconOverlay = par1IconRegister.registerIcon(BetterRecords.ID + ":urlrecord_overlay");
-	}
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamageForRenderPass(int par1, int par2){
-		return par2 == 0 ? iconBase : iconOverlay;
-	}
+//	@SideOnly(Side.CLIENT)
+//	public void registerIcons(IIconRegister par1IconRegister){
+//		iconBase = par1IconRegister.registerIcon(BetterRecords.ID + ":urlrecord");
+//		iconOverlay = par1IconRegister.registerIcon(BetterRecords.ID + ":urlrecord_overlay");
+//	}
+//
+//	@SideOnly(Side.CLIENT)
+//	public IIcon getIconFromDamageForRenderPass(int par1, int par2){
+//		return par2 == 0 ? iconBase : iconOverlay;
+//	}
 
 	public boolean isRecordValid(ItemStack par1ItemStack){
 		return par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("name");

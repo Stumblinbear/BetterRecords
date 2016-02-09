@@ -9,16 +9,14 @@ import com.codingforcookies.betterrecords.packets.PacketHandler;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
 public class ItemURLMultiRecord extends ItemURLRecord{
 
-	private static IIcon iconBase, iconOverlay;
+	//private static IIcon iconBase, iconOverlay;
 
 	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack par1ItemStack){
@@ -42,22 +40,22 @@ public class ItemURLMultiRecord extends ItemURLRecord{
 		}
 	}
 
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister par1IconRegister){
-		iconBase = par1IconRegister.registerIcon(BetterRecords.ID + ":urlmultirecord");
-		iconOverlay = par1IconRegister.registerIcon(BetterRecords.ID + ":urlrecord_overlay");
-	}
-
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamageForRenderPass(int par1, int par2){
-		return par2 == 0 ? iconBase : iconOverlay;
-	}
+//	@SideOnly(Side.CLIENT)
+//	public void registerIcons(IIconRegister par1IconRegister){
+//		iconBase = par1IconRegister.registerIcon(BetterRecords.ID + ":urlmultirecord");
+//		iconOverlay = par1IconRegister.registerIcon(BetterRecords.ID + ":urlrecord_overlay");
+//	}
+//
+//	@SideOnly(Side.CLIENT)
+//	public IIcon getIconFromDamageForRenderPass(int par1, int par2){
+//		return par2 == 0 ? iconBase : iconOverlay;
+//	}
 
 	public boolean isRecordValid(ItemStack par1ItemStack){
 		return par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("songs");
 	}
 
 	public void onRecordInserted(IRecordWireHome par1WireHome, ItemStack par2ItemStack){
-		PacketHandler.sendRecordPlayToAllFromServer(par1WireHome.getTileEntity().getPos().getX(), par1WireHome.getTileEntity().getPos().getY(), par1WireHome.getTileEntity().getPos().getZ(), par1WireHome.getTileEntity().getWorldObj().provider.dimensionId, par1WireHome.getSongRadius(), par2ItemStack.stackTagCompound, par2ItemStack.stackTagCompound.hasKey("repeat") ? par2ItemStack.stackTagCompound.getBoolean("repeat") : false, par2ItemStack.stackTagCompound.hasKey("shuffle") ? par2ItemStack.stackTagCompound.getBoolean("shuffle") : false);
+		PacketHandler.sendRecordPlayToAllFromServer(par1WireHome.getTileEntity().getPos().getX(), par1WireHome.getTileEntity().getPos().getY(), par1WireHome.getTileEntity().getPos().getZ(), par1WireHome.getTileEntity().getWorld().provider.getDimensionId(), par1WireHome.getSongRadius(), par2ItemStack.getTagCompound(), par2ItemStack.getTagCompound().hasKey("repeat") ? par2ItemStack.getTagCompound().getBoolean("repeat") : false, par2ItemStack.getTagCompound().hasKey("shuffle") ? par2ItemStack.getTagCompound().getBoolean("shuffle") : false);
 	}
 }
