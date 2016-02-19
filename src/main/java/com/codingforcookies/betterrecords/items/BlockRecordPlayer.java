@@ -137,7 +137,7 @@ public class BlockRecordPlayer extends BlockContainer{
 	@Override
 	@SideOnly(Side.CLIENT)
 	public int getRenderType(){
-		return -1;
+		return 2;
 	}
 
 	@Override
@@ -146,11 +146,6 @@ public class BlockRecordPlayer extends BlockContainer{
 		return false;
 	}
 
-	//TODO
-	@SideOnly(Side.CLIENT)
-	public boolean renderAsNormalBlock(){
-		return false;
-	}
 
 	@Override
 	public boolean hasComparatorInputOverride(){

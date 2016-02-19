@@ -105,18 +105,12 @@ public class BlockFrequencyTuner extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
     public int getRenderType() {
-		return -1;
+		return 2;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	//TODO
-	@SideOnly(Side.CLIENT)
-	public boolean renderAsNormalBlock() {
 		return false;
 	}
 

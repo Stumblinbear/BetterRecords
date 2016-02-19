@@ -89,12 +89,6 @@ public class BlockRecordEtcher extends BlockContainer {
 		return false;
 	}
 
-	//TODO
-	@SideOnly(Side.CLIENT)
-	public boolean renderAsNormalBlock() {
-		return false;
-	}
-
 	@Override
 	public TileEntity createNewTileEntity(World var1, int var2) {
 		return new TileEntityRecordEtcher();
