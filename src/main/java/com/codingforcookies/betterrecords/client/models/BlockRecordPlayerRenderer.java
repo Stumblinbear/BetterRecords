@@ -17,11 +17,19 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 
 public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
-	public BlockRecordPlayerRenderer() { }
 	
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
-		if(!(te instanceof TileEntityRecordPlayer))
+		if(!(te instanceof TileEntityRecordPlayer)) {
+			GL11.glPushMatrix();
+			{
+				GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
+				GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+				bindTexture(StaticInfo.modelRecordPlayerRes);
+				StaticInfo.modelRecordPlayer.render(null, 0, 0, 0, 0.0F, 0.0F, 0.0625F);
+			}
+			GL11.glPopMatrix();
 			return;
+		}
 		
 		TileEntityRecordPlayer tileEntityRecordPlayer = (TileEntityRecordPlayer)te;
 		

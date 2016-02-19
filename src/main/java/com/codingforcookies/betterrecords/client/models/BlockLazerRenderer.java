@@ -11,11 +11,23 @@ import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 
 public class BlockLazerRenderer extends TileEntitySpecialRenderer {
-	public BlockLazerRenderer() { }
 
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
-		if(!(te instanceof TileEntityLazer))
+		if(!(te instanceof TileEntityLazer)) {
+			GL11.glPushMatrix();
+			{
+				GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+				GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+
+				bindTexture(StaticInfo.modelLazerRes);
+				StaticInfo.modelLazer.render(null, 0, 0, 0, 0.0F, 0.0F, 0.0625F);
+
+				GL11.glRotatef(-180F, 0.0F, 0.0F, 1.0F);
+				GL11.glTranslatef(0.0F, -.926F, 0.0F);
+			}
+			GL11.glPopMatrix();
 			return;
+		}
 		
 		TileEntityLazer tileEntityLazer = (TileEntityLazer)te;
 		

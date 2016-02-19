@@ -17,11 +17,20 @@ import com.codingforcookies.betterrecords.betterenums.RecordConnection;
 import com.codingforcookies.betterrecords.items.TileEntityRadio;
 
 public class BlockRadioRenderer extends TileEntitySpecialRenderer {
-	public BlockRadioRenderer() { }
 	
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
-		if(!(te instanceof TileEntityRadio))
+		if(!(te instanceof TileEntityRadio)) {
+			GL11.glPushMatrix();
+			{
+				GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
+				GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+				GL11.glRotatef(180F, 0.0F, 1.0F, 0.0F);
+				bindTexture(StaticInfo.modelRadioRes);
+				StaticInfo.modelRadio.render(null, 0, 0, 0F, 0.0F, 0.0F, 0.0625F, null);
+			}
+			GL11.glPopMatrix();
 			return;
+		}
 		
 		TileEntityRadio tileEntityRadio = (TileEntityRadio)te;
 

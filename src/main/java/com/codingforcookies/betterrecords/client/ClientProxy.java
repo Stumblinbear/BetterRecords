@@ -8,13 +8,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import com.codingforcookies.betterrecords.BetterUtils;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 
@@ -92,10 +96,31 @@ public class ClientProxy extends CommonProxy {
 		tutorials.put("strobelight", false);
 		tutorials.put("lazer", false);
 		tutorials.put("lazercluster", false);
-		
+
+		registerTESRRender(BetterRecords.blockRecordEtcher, new BlockRecordEtcherRenderer(), TileEntityRecordEtcher.class, "recordetcher");
+		registerTESRRender(BetterRecords.blockRecordPlayer, new BlockRecordPlayerRenderer(), TileEntityRecordPlayer.class, "recordplayer");
+		registerTESRRender(BetterRecords.blockFrequencyTuner, new BlockFrequencyTunerRenderer(), TileEntityFrequencyTuner.class, "frequencytuner");
+		registerTESRRender(BetterRecords.blockRadio, new BlockRadioRenderer(), TileEntityRadio.class, "radio");
+		registerTESRRender(BetterRecords.blockSMSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "recordspeaker.sm");
+		registerTESRRender(BetterRecords.blockMDSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "recordspeaker.md");
+		registerTESRRender(BetterRecords.blockLGSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "recordspeaker.lg");
+		registerTESRRender(BetterRecords.blockStrobeLight, new BlockStrobeLightRenderer(), TileEntityStrobeLight.class, "strobelight");
+		registerTESRRender(BetterRecords.blockLazer, new BlockLazerRenderer(), TileEntityLazer.class, "lazer");
+		registerTESRRender(BetterRecords.blockLazerCluster, new BlockLazerClusterRenderer(), TileEntityLazerCluster.class, "lazercluster");
+		MinecraftForge.EVENT_BUS.register(new TESRRenderHelper());
+
+
 		SoundHandler.initalize();
 		loadConfig();
 	}
+
+	private void registerTESRRender(Block block, TileEntitySpecialRenderer renderer,  Class<? extends TileEntity> te, String name) {
+		ClientRegistry.bindTileEntitySpecialRenderer(te, renderer);
+		Item item = Item.getItemFromBlock(block);
+		ForgeHooksClient.registerTESRItemStack(item, 0, te);
+		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(BetterRecords.ID + ":" + name, "inventory"));
+	}
+
 	
 	public void init() {
 		instance = this;
@@ -128,27 +153,6 @@ public class ClientProxy extends CommonProxy {
 		renderItem.getItemModelMesher().register(BetterRecords.itemRecordCutters, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "recordwirecutters", "inventory"));
 		renderItem.getItemModelMesher().register(BetterRecords.itemURLMultiRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlmultirecord", "inventory"));
 		renderItem.getItemModelMesher().register(BetterRecords.itemURLRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlrecord", "inventory"));
-
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRecordEtcher.class, new BlockRecordEtcherRenderer());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BetterRecords.blockRecordEtcher), new ClientItemRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRecordPlayer.class, new BlockRecordPlayerRenderer());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BetterRecords.blockRecordPlayer), new ClientItemRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFrequencyTuner.class, new BlockFrequencyTunerRenderer());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BetterRecords.blockFrequencyTuner), new ClientItemRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRadio.class, new BlockRadioRenderer());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BetterRecords.blockRadio), new ClientItemRenderer());
-		
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRecordSpeaker.class, new BlockRecordSpeakerRenderer());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BetterRecords.blockSMSpeaker), new ClientItemRenderer());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BetterRecords.blockMDSpeaker), new ClientItemRenderer());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BetterRecords.blockLGSpeaker), new ClientItemRenderer());
-
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityStrobeLight.class, new BlockStrobeLightRenderer());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BetterRecords.blockStrobeLight), new ClientItemRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLazer.class, new BlockLazerRenderer());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BetterRecords.blockLazer), new ClientItemRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLazerCluster.class, new BlockLazerClusterRenderer());
-		//MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BetterRecords.blockLazerCluster), new ClientItemRenderer());
 	}
 	
 	public static void loadConfig() {

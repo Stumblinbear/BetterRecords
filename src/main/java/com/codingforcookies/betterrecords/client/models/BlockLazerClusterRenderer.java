@@ -10,7 +10,6 @@ import com.codingforcookies.betterrecords.client.ClientProxy;
 import com.codingforcookies.betterrecords.items.TileEntityLazerCluster;
 
 public class BlockLazerClusterRenderer extends TileEntitySpecialRenderer {
-	public BlockLazerClusterRenderer() { }
 
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
 		if(!(te instanceof TileEntityLazerCluster))

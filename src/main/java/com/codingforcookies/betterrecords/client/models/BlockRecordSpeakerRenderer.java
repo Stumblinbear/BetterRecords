@@ -10,7 +10,6 @@ import com.codingforcookies.betterrecords.StaticInfo;
 import com.codingforcookies.betterrecords.items.TileEntityRecordSpeaker;
 
 public class BlockRecordSpeakerRenderer extends TileEntitySpecialRenderer {
-	public BlockRecordSpeakerRenderer() { }
 
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
 		if(!(te instanceof TileEntityRecordSpeaker))

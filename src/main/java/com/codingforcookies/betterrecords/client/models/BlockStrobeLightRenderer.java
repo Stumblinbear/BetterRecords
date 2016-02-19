@@ -14,11 +14,22 @@ import com.codingforcookies.betterrecords.client.ClientProxy;
 import com.codingforcookies.betterrecords.items.TileEntityStrobeLight;
 
 public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer {
-	public BlockStrobeLightRenderer() { }
 
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
-		if(!(te instanceof TileEntityStrobeLight))
+		if(!(te instanceof TileEntityStrobeLight)) {
+			GL11.glPushMatrix();
+			{
+				GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
+				GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+
+				bindTexture(StaticInfo.modelStrobeLightRes);
+				StaticInfo.modelStrobeLight.render(null, 0F, 0F, 0F, 0.0F, 0.0F, 0.0625F);
+
+				GL11.glTranslatef(0.0F, 1.0F, 0.0F);
+			}
+			GL11.glPopMatrix();
 			return;
+		}
 
 		TileEntityStrobeLight tileEntityStrobeLight = (TileEntityStrobeLight)te;
 		

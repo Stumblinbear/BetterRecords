@@ -80,7 +80,7 @@ public class BlockRecordEtcher extends BlockContainer {
 	@Override
 	@SideOnly(Side.CLIENT)
     public int getRenderType() {
-		return -1;
+		return 2;
 	}
 
 	@Override

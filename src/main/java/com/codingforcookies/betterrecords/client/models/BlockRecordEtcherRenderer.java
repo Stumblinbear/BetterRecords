@@ -12,14 +12,23 @@ import com.codingforcookies.betterrecords.StaticInfo;
 import com.codingforcookies.betterrecords.items.TileEntityRecordEtcher;
 
 public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer {
-	public BlockRecordEtcherRenderer() { }
 	
 	public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
-		if(!(te instanceof TileEntityRecordEtcher))
+		if(!(te instanceof TileEntityRecordEtcher)) {
+			GL11.glPushMatrix();
+			{
+				GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
+				GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
+				bindTexture(StaticInfo.modelRecordEtcherRes);
+				StaticInfo.modelRecordEtcher.render(null, 0, 0, 0F, 0.0F, 0.0F, 0.0625F);
+			}
+			GL11.glPopMatrix();
 			return;
+		}
+
 		
 		TileEntityRecordEtcher tileEntityRecordEtcher = (TileEntityRecordEtcher)te;
-		
+
 		if(tileEntityRecordEtcher.recordEntity != null) {
 			GL11.glPushMatrix();
 			{
@@ -38,7 +47,7 @@ public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer {
 			}
 			GL11.glPopMatrix();
 		}
-		
+
 		GL11.glPushMatrix();
 		{
 			GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);

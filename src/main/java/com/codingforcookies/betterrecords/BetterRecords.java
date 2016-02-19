@@ -84,39 +84,38 @@ public class BetterRecords {
 	
 	@EventHandler
 	public void preInit(final FMLPreInitializationEvent event) {
-		proxy.preInit();
-	}
-	
-	@EventHandler
-	public void init(final FMLInitializationEvent event) {
-		PacketHandler.channels = NetworkRegistry.INSTANCE.newChannel("BetterRecords", new ChannelHandler());
-
 		GameRegistry.registerItem(itemURLRecord, "urlrecord");
 		GameRegistry.registerItem(itemURLMultiRecord, "urlmultirecord");
 		GameRegistry.registerItem(itemFreqCrystal, "freqcrystal");
 		GameRegistry.registerItem(itemRecordWire, "recordwire");
 		GameRegistry.registerItem(itemRecordCutters, "recordwirecutters");
-		
+
 		GameRegistry.registerBlock(blockRecordEtcher, "recordetcher");
 		GameRegistry.registerBlock(blockRecordPlayer, "recordplayer");
 		GameRegistry.registerBlock(blockFrequencyTuner, "frequencytuner");
-		GameRegistry.registerBlock(blockRadio, "shoutcastradio");
+		GameRegistry.registerBlock(blockRadio, "radio");
 		GameRegistry.registerBlock(blockSMSpeaker, "recordspeaker.sm");
 		GameRegistry.registerBlock(blockMDSpeaker, "recordspeaker.md");
 		GameRegistry.registerBlock(blockLGSpeaker, "recordspeaker.lg");
 		GameRegistry.registerBlock(blockStrobeLight, "strobelight");
 		GameRegistry.registerBlock(blockLazer, "lazer");
 		GameRegistry.registerBlock(blockLazerCluster, "lazercluster");
-		
-		
-		GameRegistry.registerTileEntity(TileEntityRecordEtcher.class, "recordetcher");
+
+		GameRegistry.registerTileEntity(TileEntityRecordEtcher.class, ID.toLowerCase()+":recordetcher");
 		GameRegistry.registerTileEntity(TileEntityRecordPlayer.class, "recordplayer");
 		GameRegistry.registerTileEntity(TileEntityFrequencyTuner.class, "frequencytuner");
-		GameRegistry.registerTileEntity(TileEntityRadio.class, "shoutcastradio");
+		GameRegistry.registerTileEntity(TileEntityRadio.class, "radio");
 		GameRegistry.registerTileEntity(TileEntityRecordSpeaker.class, "recordspeaker");
 		GameRegistry.registerTileEntity(TileEntityStrobeLight.class, "strobelight");
 		GameRegistry.registerTileEntity(TileEntityLazer.class, "lazer");
 		GameRegistry.registerTileEntity(TileEntityLazerCluster.class, "lazercluster");
+
+		proxy.preInit();
+	}
+	
+	@EventHandler
+	public void init(final FMLInitializationEvent event) {
+		PacketHandler.channels = NetworkRegistry.INSTANCE.newChannel("BetterRecords", new ChannelHandler());
 		
 		GameRegistry.addRecipe(new RecipeRecord());
 		GameRegistry.addRecipe(new RecipeMultiRecord());
