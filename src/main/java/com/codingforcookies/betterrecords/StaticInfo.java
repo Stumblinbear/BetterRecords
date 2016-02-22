@@ -1,5 +1,7 @@
 package com.codingforcookies.betterrecords;
 
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 
 import com.codingforcookies.betterrecords.client.models.ModelFrequencyTuner;
@@ -36,4 +38,6 @@ public class StaticInfo {
 	public static ResourceLocation modelStrobeLightRes = new ResourceLocation(BetterRecords.ID, "textures/models/strobelight.png");
 	public static final ModelLazer modelLazer = new ModelLazer();
 	public static ResourceLocation modelLazerRes = new ResourceLocation(BetterRecords.ID, "textures/models/lazer.png");
+
+	public static final PropertyEnum<EnumFacing> CARDINAL_DIRECTIONS = PropertyEnum.create("facing", EnumFacing.class, EnumFacing.Plane.HORIZONTAL);
 }

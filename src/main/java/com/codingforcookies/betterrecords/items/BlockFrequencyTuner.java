@@ -2,9 +2,11 @@ package com.codingforcookies.betterrecords.items;
 
 import java.util.Random;
 
+import com.codingforcookies.betterrecords.StaticInfo;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.BlockStateBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -59,11 +61,24 @@ public class BlockFrequencyTuner extends BlockContainer {
 		return true;
 	}
 
-	//TODO
+	@Override
+	public BlockState createBlockState() {
+		return new BlockState(this, StaticInfo.CARDINAL_DIRECTIONS);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(StaticInfo.CARDINAL_DIRECTIONS).getHorizontalIndex();
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(StaticInfo.CARDINAL_DIRECTIONS, EnumFacing.getHorizontal(meta));
+	}
+
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		int rotation = MathHelper.floor_double((double)((placer.rotationYaw * 4.0f) / 360F) + 2.5D) & 3;
-		//world.setBlockMetadataWithNotify(i, j, k, rotation, 2);
+		world.setBlockState(pos, state.withProperty(StaticInfo.CARDINAL_DIRECTIONS, placer.getHorizontalFacing().getOpposite()));
 	}
 
 	@Override

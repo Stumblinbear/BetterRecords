@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.codingforcookies.betterrecords.BetterRecords;
 import com.codingforcookies.betterrecords.BetterUtils;
+import com.codingforcookies.betterrecords.StaticInfo;
 import com.codingforcookies.betterrecords.betterenums.ConnectionHelper;
 import com.codingforcookies.betterrecords.betterenums.IRecordWire;
 import com.codingforcookies.betterrecords.betterenums.IRecordWireManipulator;
@@ -11,6 +12,7 @@ import com.codingforcookies.betterrecords.client.BetterEventHandler;
 import com.codingforcookies.betterrecords.client.ClientProxy;
 import com.codingforcookies.betterrecords.packets.PacketHandler;
 
+import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
@@ -82,11 +84,24 @@ public class BlockRadio extends BlockContainer{
 		return true;
 	}
 
-	//TODO
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entityLiving, ItemStack itemStack){
-		int rotation = MathHelper.floor_double((double) ((entityLiving.rotationYaw * 4.0f) / 360F) + 2.5D) & 3;
-		//world.setBlockMetadataWithNotify(i, j, k, rotation, 2);
+	public BlockState createBlockState() {
+		return new BlockState(this, StaticInfo.CARDINAL_DIRECTIONS);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(StaticInfo.CARDINAL_DIRECTIONS).getHorizontalIndex();
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return getDefaultState().withProperty(StaticInfo.CARDINAL_DIRECTIONS, EnumFacing.getHorizontal(meta));
+	}
+
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack itemStack){
+		world.setBlockState(pos, state.withProperty(StaticInfo.CARDINAL_DIRECTIONS, placer.getHorizontalFacing().getOpposite()));
 		if(world.isRemote && !ClientProxy.tutorials.get("radio")) {
 			BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.radio");
 			BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000;
