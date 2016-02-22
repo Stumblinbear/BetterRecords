@@ -57,7 +57,6 @@ public class BlockRecordPlayer extends BlockContainer {
 			if(world.getBlockState(pos.add(0,1,0)).getBlock() == Blocks.air){
 				if (!world.isRemote) {
 					tileEntityRecordPlayer.opening = !tileEntityRecordPlayer.opening;
-					tileEntityRecordPlayer.test();
 				}
 				world.markBlockForUpdate(pos);
 				if(tileEntityRecordPlayer.opening) world.playSoundEffect(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), "random.chestopen", 0.5F, world.rand.nextFloat() * 0.2F + 3F);

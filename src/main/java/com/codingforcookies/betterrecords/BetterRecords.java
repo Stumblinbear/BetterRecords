@@ -101,7 +101,7 @@ public class BetterRecords {
 		GameRegistry.registerBlock(blockLazer, "lazer");
 		GameRegistry.registerBlock(blockLazerCluster, "lazercluster");
 
-		GameRegistry.registerTileEntity(TileEntityRecordEtcher.class, ID.toLowerCase()+":recordetcher");
+		GameRegistry.registerTileEntity(TileEntityRecordEtcher.class, "recordetcher");
 		GameRegistry.registerTileEntity(TileEntityRecordPlayer.class, "recordplayer");
 		GameRegistry.registerTileEntity(TileEntityFrequencyTuner.class, "frequencytuner");
 		GameRegistry.registerTileEntity(TileEntityRadio.class, "radio");
