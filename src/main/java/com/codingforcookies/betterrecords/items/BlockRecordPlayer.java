@@ -34,7 +34,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockRecordPlayer extends BlockContainer{
+public class BlockRecordPlayer extends BlockContainer {
 
 	public BlockRecordPlayer(){
 		super(Material.wood);
@@ -55,7 +55,10 @@ public class BlockRecordPlayer extends BlockContainer{
 		TileEntityRecordPlayer tileEntityRecordPlayer = (TileEntityRecordPlayer) tileEntity;
 		if(player.isSneaking()){
 			if(world.getBlockState(pos.add(0,1,0)).getBlock() == Blocks.air){
-				tileEntityRecordPlayer.opening = !tileEntityRecordPlayer.opening;
+				if (!world.isRemote) {
+					tileEntityRecordPlayer.opening = !tileEntityRecordPlayer.opening;
+					tileEntityRecordPlayer.test();
+				}
 				world.markBlockForUpdate(pos);
 				if(tileEntityRecordPlayer.opening) world.playSoundEffect(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), "random.chestopen", 0.5F, world.rand.nextFloat() * 0.2F + 3F);
 				else world.playSoundEffect(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), "random.chestclosed", 0.5F, world.rand.nextFloat() * 0.2F + 3F);

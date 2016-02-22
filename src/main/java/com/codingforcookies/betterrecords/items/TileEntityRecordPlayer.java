@@ -90,7 +90,7 @@ public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, I
 		recordEntity.rotationYaw = 0F;
 		recordRotation = 0F;
 	}
-	
+
 	@SideOnly(Side.SERVER)
 	public boolean canUpdate() {
 		return false;

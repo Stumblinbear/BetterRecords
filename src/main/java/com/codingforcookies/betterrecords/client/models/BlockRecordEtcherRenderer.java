@@ -36,7 +36,7 @@ public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer {
 				GL11.glScalef(2F, 2F, 2F);
 				GL11.glRotatef(90F, 1F, 0F, 0F);
 				GL11.glRotatef(tileEntityRecordEtcher.recordRotation * 57.3F, 0F, 0F, 1F);
-				GL11.glTranslatef(0F, -.225F, 0F);
+				GL11.glTranslatef(0F, -.35F, 0F);
 				if(Minecraft.getMinecraft().gameSettings.fancyGraphics)
 					Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(tileEntityRecordEtcher.recordEntity, 0, 0, 0, 0, 0);
 				else{

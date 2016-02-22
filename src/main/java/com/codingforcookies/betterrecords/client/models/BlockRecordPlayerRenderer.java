@@ -147,7 +147,7 @@ public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 				GL11.glScalef(2F, 2F, 2F);
 				GL11.glRotatef(90F, 1F, 0F, 0F);
 				GL11.glRotatef(tileEntityRecordPlayer.recordRotation * 57.3F, 0F, 0F, 1F);
-				GL11.glTranslatef(0F, -.225F, 0F);
+				GL11.glTranslatef(0F, -.35F, 0F);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				GL11.glDisable(GL11.GL_CULL_FACE);
 				if(Minecraft.getMinecraft().gameSettings.fancyGraphics)
