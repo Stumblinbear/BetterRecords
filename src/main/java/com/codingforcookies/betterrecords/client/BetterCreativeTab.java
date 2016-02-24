@@ -3,7 +3,7 @@ package com.codingforcookies.betterrecords.client;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 
-import com.codingforcookies.betterrecords.BetterRecords;
+import com.codingforcookies.betterrecords.common.BetterRecords;
 
 public class BetterCreativeTab extends CreativeTabs {
 	public BetterCreativeTab() {

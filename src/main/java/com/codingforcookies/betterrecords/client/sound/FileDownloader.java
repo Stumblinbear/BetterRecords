@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import com.codingforcookies.betterrecords.client.ClientProxy;
+import com.codingforcookies.betterrecords.client.core.ClientProxy;
 
 public class FileDownloader {
 	public static String nowDownloading = "";

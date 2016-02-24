@@ -17,19 +17,18 @@ import javax.sound.sampled.DataLine.Info;
 import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.SourceDataLine;
 
-import com.codingforcookies.betterrecords.BetterUtils;
-import com.codingforcookies.betterrecords.ClasspathInjector;
-import com.codingforcookies.betterrecords.betterenums.IRecordAmplitude;
-import com.codingforcookies.betterrecords.betterenums.IRecordWireHome;
-import com.codingforcookies.betterrecords.betterenums.RecordConnection;
-import com.codingforcookies.betterrecords.client.ClientProxy;
+import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import com.codingforcookies.betterrecords.common.util.ClasspathInjector;
+import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
+import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
+import com.codingforcookies.betterrecords.api.connection.RecordConnection;
+import com.codingforcookies.betterrecords.client.core.ClientProxy;
 
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModClassLoader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
-import scala.collection.parallel.ParIterableLike;
 
 public class SoundHandler{
 
