@@ -13,6 +13,7 @@ import net.minecraft.world.World;
 
 public class RecipeRecordShuffle implements IRecipe{
 
+	@Override
 	public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World){
 		ItemStack record = null;
 		boolean shuffle = false;
@@ -29,6 +30,7 @@ public class RecipeRecordShuffle implements IRecipe{
 		return record != null && shuffle;
 	}
 
+	@Override
 	public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting){
 		ItemStack record = null;
 		boolean shuffle = false;
@@ -51,16 +53,19 @@ public class RecipeRecordShuffle implements IRecipe{
 		}
 	}
 
+	@Override
 	public int getRecipeSize(){
 		return 10;
 	}
 
+	@Override
 	public ItemStack getRecipeOutput(){
 		return null;
 	}
 
-	//TODO
+	@Override
 	public ItemStack[] getRemainingItems(InventoryCrafting inv) {
-		return null;
+		inv.clear();
+		return new ItemStack[] {};
 	}
 }

@@ -12,6 +12,8 @@ import net.minecraft.world.World;
 import com.codingforcookies.betterrecords.items.ItemURLRecord;
 
 public class RecipeMultiRecord implements IRecipe {
+
+	@Override
 	public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
 		ArrayList<ItemStack> records = new ArrayList<ItemStack>();
 		
@@ -26,7 +28,8 @@ public class RecipeMultiRecord implements IRecipe {
 
 		return !records.isEmpty() && records.size() != 1;
 	}
-	
+
+	@Override
 	public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
 		ArrayList<ItemStack> records = new ArrayList<ItemStack>();
 		
@@ -60,17 +63,20 @@ public class RecipeMultiRecord implements IRecipe {
 			return itemMultiRecord;
 		}
 	}
-	
+
+	@Override
 	public int getRecipeSize() {
 		return 10;
 	}
 
+	@Override
 	public ItemStack getRecipeOutput() {
-		return null;
+		return new ItemStack(BetterRecords.itemURLRecord);
 	}
 
-	//TODO
+	@Override
 	public ItemStack[] getRemainingItems(InventoryCrafting inv) {
-		return null;
+		inv.clear();
+		return new ItemStack[] {};
 	}
 }

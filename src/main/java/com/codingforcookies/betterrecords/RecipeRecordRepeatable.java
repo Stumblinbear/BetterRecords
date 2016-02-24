@@ -10,6 +10,8 @@ import net.minecraft.world.World;
 import com.codingforcookies.betterrecords.items.ItemURLRecord;
 
 public class RecipeRecordRepeatable implements IRecipe {
+
+	@Override
 	public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
 		ItemStack record = null;
 		boolean comparator = false;
@@ -34,7 +36,8 @@ public class RecipeRecordRepeatable implements IRecipe {
 		
 		return record != null && comparator;
 	}
-	
+
+	@Override
 	public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
 		ItemStack record = null;
 		boolean comparator = false;
@@ -70,17 +73,20 @@ public class RecipeRecordRepeatable implements IRecipe {
 			return newRecord;
 		}
 	}
-	
+
+	@Override
 	public int getRecipeSize() {
 		return 10;
 	}
 
+	@Override
 	public ItemStack getRecipeOutput() {
 		return null;
 	}
 
-	//TODO
+	@Override
 	public ItemStack[] getRemainingItems(InventoryCrafting inv) {
-		return null;
+		inv.clear();
+		return new ItemStack[] {};
 	}
 }

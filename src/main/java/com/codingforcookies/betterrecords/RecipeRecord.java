@@ -8,6 +8,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
 
 public class RecipeRecord implements IRecipe {
+
+	@Override
 	public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
 		boolean record = false;
 		boolean eye = false;
@@ -30,21 +32,25 @@ public class RecipeRecord implements IRecipe {
 		
 		return record && eye;
 	}
-	
+
+	@Override
 	public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
 		return new ItemStack(BetterRecords.itemURLRecord);
 	}
-	
+
+	@Override
 	public int getRecipeSize() {
 		return 10;
 	}
 
+	@Override
 	public ItemStack getRecipeOutput() {
 		return new ItemStack(BetterRecords.itemURLRecord);
 	}
 
-	//TODO
+	@Override
 	public ItemStack[] getRemainingItems(InventoryCrafting inv) {
-		return null;
+		inv.clear();
+		return new ItemStack[] {};
 	}
 }

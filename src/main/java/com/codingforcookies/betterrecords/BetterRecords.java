@@ -4,6 +4,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 import org.apache.commons.lang3.text.WordUtils;
 
 import com.codingforcookies.betterrecords.client.BetterCreativeTab;
@@ -116,15 +118,26 @@ public class BetterRecords {
 	@EventHandler
 	public void init(final FMLInitializationEvent event) {
 		PacketHandler.channels = NetworkRegistry.INSTANCE.newChannel("BetterRecords", new ChannelHandler());
-		
+
 		GameRegistry.addRecipe(new RecipeRecord());
+		RecipeSorter.register("bettrecords:urlrecord", RecipeRecord.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+
 		GameRegistry.addRecipe(new RecipeMultiRecord());
+		RecipeSorter.register("betterrecords:urlmultirecord", RecipeMultiRecord.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+
 		GameRegistry.addRecipe(new RecipeRecordRepeatable());
+		RecipeSorter.register("betterrecords:urlrecord", RecipeRecordRepeatable.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+
 		GameRegistry.addRecipe(new RecipeRecordShuffle());
-		//GameRegistry.addRecipe(new RecipeColoredRecord());
-		
+		RecipeSorter.register("betterrecords:urlrecord", RecipeRecordShuffle.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+
+		GameRegistry.addRecipe(new RecipeColoredFreqCrystal());
+		RecipeSorter.register("betterrecords:freqcrystal", RecipeColoredFreqCrystal.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+
+		GameRegistry.addRecipe(new RecipeColoredRecord());
+		RecipeSorter.register("betterrecords:urlrecord", RecipeColoredRecord.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+
 		GameRegistry.addShapedRecipe(new ItemStack(itemFreqCrystal), "RQR", "QDQ", "RQR", 'R', Items.redstone, 'Q', Items.quartz, 'D', Items.diamond);
-		//GameRegistry.addRecipe(new RecipeColoredFreqCrystal());
 		
 		GameRegistry.addShapedRecipe(new ItemStack(itemRecordWire, 4), "WWW", "III", "WWW", 'I', Items.iron_ingot, 'W', new ItemStack(Blocks.wool, 1, 15));
 		GameRegistry.addShapedRecipe(new ItemStack(itemRecordWire, 4), "WIW", "WIW", "WIW", 'I', Items.iron_ingot, 'W', new ItemStack(Blocks.wool, 1, 15));
