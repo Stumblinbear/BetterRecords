@@ -7,13 +7,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 
 public interface IRecordWireHome {
-	public void addTreble(float form);
-	public void addBass(float form);
-	
-	public ArrayList<RecordConnection> getConnections();
-	public void increaseAmount(IRecordWire wireComponent);
-	public void decreaseAmount(IRecordWire wireComponent);
-	public float getSongRadius();
-	public TileEntity getTileEntity();
-	public ItemStack getItemStack();
+    void addTreble(float form);
+    void addBass(float form);
+
+    ArrayList<RecordConnection> getConnections();
+    void increaseAmount(IRecordWire wireComponent);
+    void decreaseAmount(IRecordWire wireComponent);
+    float getSongRadius();
+    TileEntity getTileEntity();
+    ItemStack getItemStack();
 }

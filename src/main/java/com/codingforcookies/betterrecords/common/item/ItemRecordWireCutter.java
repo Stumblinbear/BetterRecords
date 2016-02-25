@@ -8,26 +8,26 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-import com.codingforcookies.betterrecords.api.connection.ConnectionHelper;
+import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
 
 public class ItemRecordWireCutter extends Item implements IRecordWireManipulator {
-	public ItemRecordWireCutter() {
-		setMaxStackSize(1);
-	}
+    public ItemRecordWireCutter() {
+        setMaxStackSize(1);
+    }
 
-	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
-		TileEntity te = world.getTileEntity(pos);
-		if(te == null || !(te instanceof IRecordWire) || te instanceof IRecordWireHome)
-			return false;
-		
-		if(world.isRemote)
-			return true;
-		
-		ConnectionHelper.clearConnections(te.getWorld(), (IRecordWire)te);
-		return true;
-	}
+    @Override
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {
+        TileEntity te = world.getTileEntity(pos);
+        if(te == null || !(te instanceof IRecordWire) || te instanceof IRecordWireHome)
+            return false;
+
+        if(world.isRemote)
+            return true;
+
+        ConnectionHelper.clearConnections(te.getWorld(), (IRecordWire)te);
+        return true;
+    }
 }
