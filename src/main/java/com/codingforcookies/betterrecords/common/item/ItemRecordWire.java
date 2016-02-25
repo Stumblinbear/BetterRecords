@@ -16,11 +16,8 @@ import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 
 public class ItemRecordWire extends Item implements IRecordWireManipulator {
+
     public static RecordConnection connection;
-
-    public ItemRecordWire() {
-
-    }
 
     @Override
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ) {

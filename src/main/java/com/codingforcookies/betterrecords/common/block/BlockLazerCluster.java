@@ -20,7 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockLazerCluster extends BlockContainer{
+public class BlockLazerCluster extends BlockContainer {
 
     public BlockLazerCluster(){
         super(Material.iron);

@@ -30,7 +30,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockRadio extends BlockContainer{
+public class BlockRadio extends BlockContainer {
 
     public BlockRadio(){
         super(Material.wood);

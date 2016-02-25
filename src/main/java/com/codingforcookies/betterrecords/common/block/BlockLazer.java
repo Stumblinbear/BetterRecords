@@ -22,7 +22,7 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockLazer extends BlockContainer{
+public class BlockLazer extends BlockContainer {
 
     public BlockLazer(){
         super(Material.iron);

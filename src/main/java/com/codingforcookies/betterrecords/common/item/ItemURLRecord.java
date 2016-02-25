@@ -16,8 +16,6 @@ import net.minecraft.util.StatCollector;
 
 public class ItemURLRecord extends Item implements IRecord{
 
-    //private static IIcon iconBase, iconOverlay;
-
     public ItemURLRecord(){
         setMaxStackSize(1);
     }
@@ -46,26 +44,12 @@ public class ItemURLRecord extends Item implements IRecord{
         return(par2 == 0 ? 0xFFFFFF : (par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("color") ? par1ItemStack.getTagCompound().getInteger("color") : 0xFFFFFF));
     }
 
-    @SideOnly(Side.CLIENT)
-    public boolean requiresMultipleRenderPasses(){
-        return true;
-    }
-
-//    @SideOnly(Side.CLIENT)
-//    public void registerIcons(IIconRegister par1IconRegister){
-//        iconBase = par1IconRegister.registerIcon(BetterRecords.ID + ":urlrecord");
-//        iconOverlay = par1IconRegister.registerIcon(BetterRecords.ID + ":urlrecord_overlay");
-//    }
-//
-//    @SideOnly(Side.CLIENT)
-//    public IIcon getIconFromDamageForRenderPass(int par1, int par2){
-//        return par2 == 0 ? iconBase : iconOverlay;
-//    }
-
+    @Override
     public boolean isRecordValid(ItemStack par1ItemStack){
         return par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("name");
     }
 
+    @Override
     public void onRecordInserted(IRecordWireHome par1WireHome, ItemStack par2ItemStack){
         PacketHandler.sendRecordPlayToAllFromServer(par1WireHome.getTileEntity().getPos().getX(), par1WireHome.getTileEntity().getPos().getY(), par1WireHome.getTileEntity().getPos().getZ(), par1WireHome.getTileEntity().getWorld().provider.getDimensionId(), par1WireHome.getSongRadius(), par2ItemStack.getTagCompound().getString("name"), par2ItemStack.getTagCompound().getString("url"), par2ItemStack.getTagCompound().getString("local"), par2ItemStack.getTagCompound().hasKey("repeat") ? par2ItemStack.getTagCompound().getBoolean("repeat") : false, par2ItemStack.getTagCompound().hasKey("shuffle") ? par2ItemStack.getTagCompound().getBoolean("shuffle") : false);
     }

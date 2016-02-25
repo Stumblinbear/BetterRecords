@@ -20,7 +20,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockRecordSpeaker extends BlockContainer{
+public class BlockRecordSpeaker extends BlockContainer {
 
     public static String[] speakers = new String[]{"sm", "md", "lg"};
     public int meta = 0;

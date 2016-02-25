@@ -21,7 +21,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockStrobeLight extends BlockContainer{
+public class BlockStrobeLight extends BlockContainer {
 
     public BlockStrobeLight(){
         super(Material.iron);

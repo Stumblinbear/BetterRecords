@@ -25,6 +25,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFrequencyTuner extends BlockContainer {
+
     public BlockFrequencyTuner() {
         super(Material.wood);
         setBlockBounds(.18F, 0F, .12F, .82F, .6F, .88F);

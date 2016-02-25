@@ -21,6 +21,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockRecordEtcher extends BlockContainer {
+
     public BlockRecordEtcher() {
         super(Material.wood);
         setBlockBounds(.065F, 0F, .065F, .935F, .875F, .935F);

@@ -14,6 +14,7 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
 
 public class ItemRecordWireCutter extends Item implements IRecordWireManipulator {
+
     public ItemRecordWireCutter() {
         setMaxStackSize(1);
     }
