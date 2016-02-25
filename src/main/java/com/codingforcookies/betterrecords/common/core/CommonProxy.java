@@ -1,8 +1,13 @@
 package com.codingforcookies.betterrecords.common.core;
 
-public class CommonProxy {
-    public void preInit() {
+import com.codingforcookies.betterrecords.common.block.ModBlocks;
+import com.codingforcookies.betterrecords.common.item.ModItems;
 
+public class CommonProxy {
+
+    public void preInit() {
+        ModBlocks.init();
+        ModItems.init();
     }
 
     public void init() {

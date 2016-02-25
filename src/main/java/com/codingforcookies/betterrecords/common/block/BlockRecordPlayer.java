@@ -8,6 +8,7 @@ import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordPlayer;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
+import com.codingforcookies.betterrecords.common.item.ModItems;
 import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
@@ -31,11 +32,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockRecordPlayer extends BlockContainer {
+public class BlockRecordPlayer extends BetterBlock {
 
-    public BlockRecordPlayer(){
-        super(Material.wood);
+    public BlockRecordPlayer(String name){
+        super(Material.wood, name);
         setBlockBounds(.025F, 0F, .025F, .975F, .975F, .975F);
+        setHardness(1F);
+        setResistance(5F);
     }
 
     @Override
@@ -66,7 +69,7 @@ public class BlockRecordPlayer extends BlockContainer {
                 world.markBlockForUpdate(pos);
             }else if(player.getHeldItem() != null && (player.getHeldItem().getItem() == Items.diamond || (player.getHeldItem().getItem() instanceof IRecord && ((IRecord) player.getHeldItem().getItem()).isRecordValid(player.getHeldItem())))){
                 if(player.getHeldItem().getItem() == Items.diamond){
-                    ItemStack itemStack = new ItemStack(BetterRecords.itemURLRecord);
+                    ItemStack itemStack = new ItemStack(ModItems.itemURLRecord);
                     itemStack.setTagCompound(new NBTTagCompound());
                     itemStack.getTagCompound().setString("name", "easteregg.ogg");
                     itemStack.getTagCompound().setString("url", "http://files.enjin.com/788858/SBear'sMods/Songs/easteregg.ogg");
@@ -146,18 +149,6 @@ public class BlockRecordPlayer extends BlockContainer {
             tileEntityRecordPlayer.record = null;
             PacketHandler.sendSoundStopToAllFromServer(tileEntityRecordPlayer.getPos().getX(), tileEntityRecordPlayer.getPos().getY(), tileEntityRecordPlayer.getPos().getZ(), world.provider.getDimensionId());
         }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderType(){
-        return 2;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean isOpaqueCube(){
-        return false;
     }
 
 

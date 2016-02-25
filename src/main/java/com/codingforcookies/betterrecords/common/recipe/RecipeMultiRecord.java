@@ -2,6 +2,7 @@ package com.codingforcookies.betterrecords.common.recipe;
 
 import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.item.ItemURLRecord;
+import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -46,7 +47,7 @@ public class RecipeMultiRecord implements IRecipe {
         if(records.isEmpty() || records.size() == 1)
             return null;
         else{
-            ItemStack itemMultiRecord = new ItemStack(BetterRecords.itemURLMultiRecord);
+            ItemStack itemMultiRecord = new ItemStack(ModItems.itemURLMultiRecord);
             itemMultiRecord.setTagCompound(new NBTTagCompound());
 
             NBTTagList songs = new NBTTagList();
@@ -71,7 +72,7 @@ public class RecipeMultiRecord implements IRecipe {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return new ItemStack(BetterRecords.itemURLRecord);
+        return new ItemStack(ModItems.itemURLRecord);
     }
 
     @Override

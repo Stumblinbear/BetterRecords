@@ -19,14 +19,20 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockRecordSpeaker extends BlockContainer {
+public class BlockRecordSpeaker extends BetterBlock {
 
     public static String[] speakers = new String[]{"sm", "md", "lg"};
     public int meta = 0;
 
-    public BlockRecordSpeaker(int meta){
-        super(Material.wood);
+    public BlockRecordSpeaker(String name, int meta){
+        super(Material.wood, name);
         this.meta = meta;
+
+        switch (meta) {
+            case 0: setHardness(2F); setResistance(7.5F); break;
+            case 1: setHardness(3F); setResistance(8F);   break;
+            case 2: setHardness(4F); setResistance(9.5F); break;
+        }
     }
 
     @Override
@@ -71,18 +77,6 @@ public class BlockRecordSpeaker extends BlockContainer {
         TileEntity te = world.getTileEntity(pos);
         if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
         return super.removedByPlayer(world, pos, player, willHarvest);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderType(){
-        return 2;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean isOpaqueCube(){
-        return false;
     }
 
     @Override

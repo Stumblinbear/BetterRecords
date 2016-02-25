@@ -1,6 +1,7 @@
 package com.codingforcookies.betterrecords.common.block.tile;
 
 import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.item.EntityItem;
@@ -173,7 +174,7 @@ public class TileEntityRecordEtcher extends TileEntity implements IInventory, IT
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
-        return itemStack.getItem() == BetterRecords.itemURLRecord && (!itemStack.hasTagCompound() || !itemStack.getTagCompound().hasKey("url"));
+        return itemStack.getItem() == ModItems.itemURLRecord && (!itemStack.hasTagCompound() || !itemStack.getTagCompound().hasKey("url"));
     }
 
     @Override

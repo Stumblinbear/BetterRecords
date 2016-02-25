@@ -4,6 +4,7 @@ import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -99,7 +100,7 @@ public class ConnectionHelper {
                     float ry = rand.nextFloat() * 0.8F + 0.1F;
                     float rz = rand.nextFloat() * 0.8F + 0.1F;
 
-                    EntityItem entityItem = new EntityItem(world, te.getPos().getX() + rx, te.getPos().getY() + ry, te.getPos().getZ() + rz, new ItemStack(BetterRecords.itemRecordWire));
+                    EntityItem entityItem = new EntityItem(world, te.getPos().getX() + rx, te.getPos().getY() + ry, te.getPos().getZ() + rz, new ItemStack(ModItems.itemRecordWire));
 
                     entityItem.motionX = rand.nextGaussian() * 0.05F;
                     entityItem.motionY = rand.nextGaussian() * 0.05F + 0.2F;

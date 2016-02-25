@@ -1,6 +1,7 @@
 package com.codingforcookies.betterrecords.common.block.tile;
 
 import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -152,7 +153,7 @@ public class TileEntityFrequencyTuner extends TileEntity implements IInventory, 
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
-        return itemStack.getItem() == BetterRecords.itemFreqCrystal && (!itemStack.hasTagCompound() || !itemStack.getTagCompound().hasKey("url"));
+        return itemStack.getItem() == ModItems.itemFreqCrystal && (!itemStack.hasTagCompound() || !itemStack.getTagCompound().hasKey("url"));
     }
 
     @Override

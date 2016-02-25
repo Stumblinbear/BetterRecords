@@ -12,7 +12,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemURLMultiRecord extends ItemURLRecord{
+public class ItemURLMultiRecord extends ItemURLRecord {
+
+    public ItemURLMultiRecord(String name) {
+        super(name);
+    }
 
     @Override
     @SideOnly(Side.CLIENT)

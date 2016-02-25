@@ -19,10 +19,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockLazerCluster extends BlockContainer {
+public class BlockLazerCluster extends BetterBlock {
 
-    public BlockLazerCluster(){
-        super(Material.iron);
+    public BlockLazerCluster(String name){
+        super(Material.iron, name);
+
+        setHardness(4.8F);
+        setResistance(4.8F);
     }
 
     @Override
@@ -54,18 +57,6 @@ public class BlockLazerCluster extends BlockContainer {
         TileEntity te = world.getTileEntity(pos);
         if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
         return super.removedByPlayer(world, pos, player, willHarvest);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderType(){
-        return 2;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean isOpaqueCube(){
-        return false;
     }
 
     @Override

@@ -18,11 +18,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockRecordEtcher extends BlockContainer {
+public class BlockRecordEtcher extends BetterBlock {
 
-    public BlockRecordEtcher() {
-        super(Material.wood);
+    public BlockRecordEtcher(String name) {
+        super(Material.wood, name);
         setBlockBounds(.065F, 0F, .065F, .935F, .875F, .935F);
+        setHardness(1.5F);
+        setResistance(5.5F);
     }
 
     @Override
@@ -74,18 +76,6 @@ public class BlockRecordEtcher extends BlockContainer {
 
             tileEntityRecordEtcher.record = null;
         }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderType() {
-        return 2;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean isOpaqueCube() {
-        return false;
     }
 
     @Override

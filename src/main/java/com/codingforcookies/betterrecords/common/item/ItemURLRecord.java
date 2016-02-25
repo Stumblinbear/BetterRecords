@@ -13,9 +13,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemURLRecord extends Item implements IRecord{
+public class ItemURLRecord extends BetterItem implements IRecord {
 
-    public ItemURLRecord(){
+    public ItemURLRecord(String name){
+        super(name);
         setMaxStackSize(1);
     }
 

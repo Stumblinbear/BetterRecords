@@ -20,11 +20,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockStrobeLight extends BlockContainer {
+public class BlockStrobeLight extends BetterBlock {
 
-    public BlockStrobeLight(){
-        super(Material.iron);
+    public BlockStrobeLight(String name){
+        super(Material.iron, name);
         setBlockBounds(0.25F, 0F, 0.25F, 0.75F, 0.75F, 0.74F);
+        setHardness(2.75F);
+        setResistance(4F);
     }
 
     @Override
@@ -56,18 +58,6 @@ public class BlockStrobeLight extends BlockContainer {
         TileEntity te = world.getTileEntity(pos);
         if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
         return super.removedByPlayer(world, pos, player, willHarvest);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderType(){
-        return 2;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean isOpaqueCube(){
-        return false;
     }
 
     @Override

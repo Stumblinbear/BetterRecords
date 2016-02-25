@@ -12,9 +12,10 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public class ItemRecordWireCutter extends Item implements IRecordWireManipulator {
+public class ItemRecordWireCutter extends BetterItem implements IRecordWireManipulator {
 
-    public ItemRecordWireCutter() {
+    public ItemRecordWireCutter(String name) {
+        super(name);
         setMaxStackSize(1);
     }
 

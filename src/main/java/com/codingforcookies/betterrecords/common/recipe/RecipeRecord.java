@@ -1,6 +1,7 @@
 package com.codingforcookies.betterrecords.common.recipe;
 
 import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemRecord;
@@ -36,7 +37,7 @@ public class RecipeRecord implements IRecipe {
 
     @Override
     public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
-        return new ItemStack(BetterRecords.itemURLRecord);
+        return new ItemStack(ModItems.itemURLRecord);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class RecipeRecord implements IRecipe {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return new ItemStack(BetterRecords.itemURLRecord);
+        return new ItemStack(ModItems.itemURLRecord);
     }
 
     @Override

@@ -8,9 +8,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFreqCrystal extends Item {
+public class ItemFreqCrystal extends BetterItem {
 
-    public ItemFreqCrystal() {
+    public ItemFreqCrystal(String name) {
+        super(name);
         setMaxStackSize(1);
     }
 

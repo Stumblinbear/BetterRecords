@@ -21,11 +21,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockLazer extends BlockContainer {
+public class BlockLazer extends BetterBlock {
 
-    public BlockLazer(){
-        super(Material.iron);
+    public BlockLazer(String name){
+        super(Material.iron, name);
         setBlockBounds(0.25F, 0F, 0.25F, 0.75F, 0.75F, 0.74F);
+        setHardness(3.2F);
+        setResistance(4.3F);
     }
 
     @Override
@@ -83,18 +85,6 @@ public class BlockLazer extends BlockContainer {
             player.addChatMessage(new ChatComponentTranslation("msg.lazerlength." + (tileEntityLazer.length > length ? "increase" : "decrease")).appendText(" " + tileEntityLazer.length));
         }
         return true;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderType(){
-        return 2;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean isOpaqueCube(){
-        return false;
     }
 
     @Override

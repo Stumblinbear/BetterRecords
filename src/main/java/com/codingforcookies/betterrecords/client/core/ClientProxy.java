@@ -6,8 +6,10 @@ import com.codingforcookies.betterrecords.client.core.handler.TESRRenderHandler;
 import com.codingforcookies.betterrecords.client.render.*;
 import com.codingforcookies.betterrecords.client.sound.SoundHandler;
 import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.common.block.ModBlocks;
 import com.codingforcookies.betterrecords.common.block.tile.*;
 import com.codingforcookies.betterrecords.common.core.CommonProxy;
+import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -62,6 +64,8 @@ public class ClientProxy extends CommonProxy {
     public static int flashyMode = -1;
 
     public void preInit() {
+        super.preInit();
+
         defaultLibrary = new ArrayList<LibrarySong>();
         encodings = new ArrayList<String>();
         encodings.add("audio/ogg");
@@ -80,16 +84,16 @@ public class ClientProxy extends CommonProxy {
         tutorials.put("lazer", false);
         tutorials.put("lazercluster", false);
 
-        registerTESRRender(BetterRecords.blockRecordEtcher, new BlockRecordEtcherRenderer(), TileEntityRecordEtcher.class, "recordetcher");
-        registerTESRRender(BetterRecords.blockRecordPlayer, new BlockRecordPlayerRenderer(), TileEntityRecordPlayer.class, "recordplayer");
-        registerTESRRender(BetterRecords.blockFrequencyTuner, new BlockFrequencyTunerRenderer(), TileEntityFrequencyTuner.class, "frequencytuner");
-        registerTESRRender(BetterRecords.blockRadio, new BlockRadioRenderer(), TileEntityRadio.class, "radio");
-        registerTESRRender(BetterRecords.blockSMSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "recordspeaker.sm");
-        registerTESRRender(BetterRecords.blockMDSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "recordspeaker.md");
-        registerTESRRender(BetterRecords.blockLGSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "recordspeaker.lg");
-        registerTESRRender(BetterRecords.blockStrobeLight, new BlockStrobeLightRenderer(), TileEntityStrobeLight.class, "strobelight");
-        registerTESRRender(BetterRecords.blockLazer, new BlockLazerRenderer(), TileEntityLazer.class, "lazer");
-        registerTESRRender(BetterRecords.blockLazerCluster, new BlockLazerClusterRenderer(), TileEntityLazerCluster.class, "lazercluster");
+        registerTESRRender(ModBlocks.blockRecordEtcher, new BlockRecordEtcherRenderer(), TileEntityRecordEtcher.class, "recordetcher");
+        registerTESRRender(ModBlocks.blockRecordPlayer, new BlockRecordPlayerRenderer(), TileEntityRecordPlayer.class, "recordplayer");
+        registerTESRRender(ModBlocks.blockFrequencyTuner, new BlockFrequencyTunerRenderer(), TileEntityFrequencyTuner.class, "frequencytuner");
+        registerTESRRender(ModBlocks.blockRadio, new BlockRadioRenderer(), TileEntityRadio.class, "radio");
+        registerTESRRender(ModBlocks.blockSMSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "speaker.sm");
+        registerTESRRender(ModBlocks.blockMDSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "speaker.md");
+        registerTESRRender(ModBlocks.blockLGSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "speaker.lg");
+        registerTESRRender(ModBlocks.blockStrobeLight, new BlockStrobeLightRenderer(), TileEntityStrobeLight.class, "strobelight");
+        registerTESRRender(ModBlocks.blockLazer, new BlockLazerRenderer(), TileEntityLazer.class, "lazer");
+        registerTESRRender(ModBlocks.blockLazerCluster, new BlockLazerClusterRenderer(), TileEntityLazerCluster.class, "lazercluster");
         MinecraftForge.EVENT_BUS.register(new TESRRenderHandler());
 
 
@@ -131,11 +135,11 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new BetterEventHandler());
 
         RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-        renderItem.getItemModelMesher().register(BetterRecords.itemFreqCrystal, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "freqcrystal", "inventory"));
-        renderItem.getItemModelMesher().register(BetterRecords.itemRecordWire, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "recordwire", "inventory"));
-        renderItem.getItemModelMesher().register(BetterRecords.itemRecordCutters, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "recordwirecutters", "inventory"));
-        renderItem.getItemModelMesher().register(BetterRecords.itemURLMultiRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlmultirecord", "inventory"));
-        renderItem.getItemModelMesher().register(BetterRecords.itemURLRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlrecord", "inventory"));
+        renderItem.getItemModelMesher().register(ModItems.itemFreqCrystal, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "freqcrystal", "inventory"));
+        renderItem.getItemModelMesher().register(ModItems.itemRecordWire, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "recordwire", "inventory"));
+        renderItem.getItemModelMesher().register(ModItems.itemRecordCutters, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "recordwirecutters", "inventory"));
+        renderItem.getItemModelMesher().register(ModItems.itemURLMultiRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlmultirecord", "inventory"));
+        renderItem.getItemModelMesher().register(ModItems.itemURLRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlrecord", "inventory"));
     }
 
     public static void loadConfig() {

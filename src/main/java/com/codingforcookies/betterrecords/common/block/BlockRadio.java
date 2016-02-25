@@ -7,6 +7,7 @@ import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRadio;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
+import com.codingforcookies.betterrecords.common.item.ModItems;
 import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
@@ -29,11 +30,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockRadio extends BlockContainer {
+public class BlockRadio extends BetterBlock {
 
-    public BlockRadio(){
-        super(Material.wood);
+    public BlockRadio(String name){
+        super(Material.wood, name);
         setBlockBounds(0.13F, 0F, 0.2F, 0.87F, 0.98F, 0.8F);
+        setHardness(2F);
+        setResistance(6.3F);
     }
 
     @Override
@@ -72,7 +75,7 @@ public class BlockRadio extends BlockContainer {
                 if(!world.isRemote) dropItem(world, pos);
                 tileEntityRadio.setCrystal(null);
                 world.markBlockForUpdate(pos);
-            }else if(player.getHeldItem() != null && (player.getHeldItem().getItem() == BetterRecords.itemFreqCrystal && player.getHeldItem().getTagCompound() != null && player.getHeldItem().getTagCompound().hasKey("url"))) {
+            }else if(player.getHeldItem() != null && (player.getHeldItem().getItem() == ModItems.itemFreqCrystal && player.getHeldItem().getTagCompound() != null && player.getHeldItem().getTagCompound().hasKey("url"))) {
                 tileEntityRadio.setCrystal(player.getHeldItem());
                 world.markBlockForUpdate(pos);
                 player.getHeldItem().stackSize--;
@@ -141,18 +144,6 @@ public class BlockRadio extends BlockContainer {
             tileEntityRadio.crystal = null;
             PacketHandler.sendSoundStopToAllFromServer(tileEntityRadio.getPos().getX(), tileEntityRadio.getPos().getY(), tileEntityRadio.getPos().getZ(), world.provider.getDimensionId());
         }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderType(){
-        return 2;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean isOpaqueCube(){
-        return false;
     }
 
     @Override

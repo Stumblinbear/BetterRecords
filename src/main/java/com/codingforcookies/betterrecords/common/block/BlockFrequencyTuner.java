@@ -22,11 +22,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockFrequencyTuner extends BlockContainer {
+public class BlockFrequencyTuner extends BetterBlock {
 
-    public BlockFrequencyTuner() {
-        super(Material.wood);
+    public BlockFrequencyTuner(String name) {
+        super(Material.wood, name);
         setBlockBounds(.18F, 0F, .12F, .82F, .6F, .88F);
+        setHardness(1.5F);
+        setResistance(5.5F);
     }
 
     @Override
@@ -112,18 +114,6 @@ public class BlockFrequencyTuner extends BlockContainer {
 
             tileEntityFrequencyTuner.crystal = null;
         }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderType() {
-        return 2;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public boolean isOpaqueCube() {
-        return false;
     }
 
     @Override

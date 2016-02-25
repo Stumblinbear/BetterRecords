@@ -8,25 +8,25 @@ key.betterconfig.desc=Open Configuration GUI
 
 itemGroup.betterrecords=Better Records
 
-item.urlrecord.name=Blank Record
-item.urlmultirecord.name=Multi Record
-item.freqcrystal.name=Frequency Crystal
+item.betterrecords:urlrecord.name=Blank Record
+item.betterrecords:urlmultirecord.name=Multi Record
+item.betterrecords:freqcrystal.name=Frequency Crystal
 
-item.recordwire.name=Speaker Wire
-item.recordwirecutters.name=Wire Cutters
+item.betterrecords:recordwire.name=Speaker Wire
+item.betterrecords:recordwirecutters.name=Wire Cutters
 
-tile.recordetcher.name=Record Etcher
-tile.recordplayer.name=Record Player
-tile.frequencytuner.name=Frequency Tuner
-tile.shoutcastradio.name=Radio
+tile.betterrecords:recordetcher.name=Record Etcher
+tile.betterrecords:recordplayer.name=Record Player
+tile.betterrecords:frequencytuner.name=Frequency Tuner
+tile.betterrecords:radio.name=Radio
 
-tile.recordspeaker.sm.name=Small Speaker
-tile.recordspeaker.md.name=Medium Speaker
-tile.recordspeaker.lg.name=Large Speaker
+tile.betterrecords:speaker.sm.name=Small Speaker
+tile.betterrecords:speaker.md.name=Medium Speaker
+tile.betterrecords:speaker.lg.name=Large Speaker
 
-tile.strobelight.name=Strobe Light
-tile.lazer.name=Lazer
-tile.lazercluster.name=Lazer Cluster
+tile.betterrecords:strobelight.name=Strobe Light
+tile.betterrecords:lazer.name=Lazer
+tile.betterrecords:lazercluster.name=Lazer Cluster
 
 gui.recordetcher=Record Etcher
 gui.frequencytuner=Crystal Tune
