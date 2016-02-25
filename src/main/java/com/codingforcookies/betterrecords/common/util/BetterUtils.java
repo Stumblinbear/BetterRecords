@@ -1,13 +1,12 @@
 package com.codingforcookies.betterrecords.common.util;
 
-import java.util.Map;
-
 import com.google.common.collect.Maps;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
+
+import java.util.Map;
 
 public class BetterUtils{
 

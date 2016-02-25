@@ -1,8 +1,18 @@
 package com.codingforcookies.betterrecords.client.sound;
 
-import static javax.sound.sampled.AudioFormat.Encoding.PCM_SIGNED;
-import static javax.sound.sampled.AudioSystem.getAudioInputStream;
+import com.codingforcookies.betterrecords.api.connection.RecordConnection;
+import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
+import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
+import com.codingforcookies.betterrecords.client.core.ClientProxy;
+import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import com.codingforcookies.betterrecords.common.util.ClasspathInjector;
+import net.minecraft.client.Minecraft;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockPos;
+import net.minecraftforge.fml.common.Loader;
 
+import javax.sound.sampled.*;
+import javax.sound.sampled.DataLine.Info;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
@@ -10,24 +20,8 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.DataLine.Info;
-import javax.sound.sampled.FloatControl;
-import javax.sound.sampled.SourceDataLine;
-
-import com.codingforcookies.betterrecords.common.util.BetterUtils;
-import com.codingforcookies.betterrecords.common.util.ClasspathInjector;
-import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
-import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
-import com.codingforcookies.betterrecords.api.connection.RecordConnection;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
-
-import net.minecraft.util.BlockPos;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraft.client.Minecraft;
-import net.minecraft.tileentity.TileEntity;
+import static javax.sound.sampled.AudioFormat.Encoding.PCM_SIGNED;
+import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 
 public class SoundHandler{
 

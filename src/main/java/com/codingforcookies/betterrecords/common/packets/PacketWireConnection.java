@@ -1,14 +1,12 @@
 package com.codingforcookies.betterrecords.common.packets;
 
+import com.codingforcookies.betterrecords.api.connection.RecordConnection;
+import com.codingforcookies.betterrecords.api.wire.IRecordWire;
+import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
+import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
-import com.codingforcookies.betterrecords.api.wire.IRecordWire;
-import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
-import com.codingforcookies.betterrecords.api.connection.RecordConnection;
-
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 

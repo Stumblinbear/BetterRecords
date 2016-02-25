@@ -1,15 +1,13 @@
 package com.codingforcookies.betterrecords.client.core;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
-
+import com.codingforcookies.betterrecords.api.song.LibrarySong;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
 import com.codingforcookies.betterrecords.client.core.handler.TESRRenderHandler;
+import com.codingforcookies.betterrecords.client.render.*;
+import com.codingforcookies.betterrecords.client.sound.SoundHandler;
+import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.common.block.tile.*;
+import com.codingforcookies.betterrecords.common.core.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
@@ -22,31 +20,16 @@ import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import org.lwjgl.input.Keyboard;
 
-import com.codingforcookies.betterrecords.common.BetterRecords;
-import com.codingforcookies.betterrecords.common.core.CommonProxy;
-import com.codingforcookies.betterrecords.api.song.LibrarySong;
-import com.codingforcookies.betterrecords.client.render.BlockFrequencyTunerRenderer;
-import com.codingforcookies.betterrecords.client.render.BlockLazerClusterRenderer;
-import com.codingforcookies.betterrecords.client.render.BlockLazerRenderer;
-import com.codingforcookies.betterrecords.client.render.BlockRadioRenderer;
-import com.codingforcookies.betterrecords.client.render.BlockRecordEtcherRenderer;
-import com.codingforcookies.betterrecords.client.render.BlockRecordPlayerRenderer;
-import com.codingforcookies.betterrecords.client.render.BlockRecordSpeakerRenderer;
-import com.codingforcookies.betterrecords.client.render.BlockStrobeLightRenderer;
-import com.codingforcookies.betterrecords.client.sound.SoundHandler;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazer;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazerCluster;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRadio;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordPlayer;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordSpeaker;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityStrobeLight;
-
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 public class ClientProxy extends CommonProxy {
     public static ClientProxy instance;

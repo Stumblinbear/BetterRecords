@@ -1,13 +1,12 @@
 package com.codingforcookies.betterrecords.client.model;
 
-import java.awt.Color;
-
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
-
 import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
 
 public class ModelRadio extends ModelBase {
     ModelRenderer Crystal_1;

@@ -1,36 +1,17 @@
 package com.codingforcookies.betterrecords.common;
 
-import com.codingforcookies.betterrecords.common.core.CommonProxy;
-import com.codingforcookies.betterrecords.common.recipe.*;
-import net.minecraftforge.oredict.RecipeSorter;
-import org.apache.commons.lang3.text.WordUtils;
-
 import com.codingforcookies.betterrecords.client.BetterCreativeTab;
 import com.codingforcookies.betterrecords.client.gui.GuiHandler;
-import com.codingforcookies.betterrecords.common.block.BlockFrequencyTuner;
-import com.codingforcookies.betterrecords.common.block.BlockLazer;
-import com.codingforcookies.betterrecords.common.block.BlockLazerCluster;
-import com.codingforcookies.betterrecords.common.block.BlockRadio;
-import com.codingforcookies.betterrecords.common.block.BlockRecordEtcher;
-import com.codingforcookies.betterrecords.common.block.BlockRecordPlayer;
-import com.codingforcookies.betterrecords.common.block.BlockRecordSpeaker;
-import com.codingforcookies.betterrecords.common.block.BlockStrobeLight;
-import com.codingforcookies.betterrecords.common.item.ItemFreqCrystal;
-import com.codingforcookies.betterrecords.common.item.ItemRecordWire;
-import com.codingforcookies.betterrecords.common.item.ItemRecordWireCutter;
-import com.codingforcookies.betterrecords.common.item.ItemURLMultiRecord;
-import com.codingforcookies.betterrecords.common.item.ItemURLRecord;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazer;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazerCluster;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRadio;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordPlayer;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordSpeaker;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityStrobeLight;
+import com.codingforcookies.betterrecords.common.block.*;
+import com.codingforcookies.betterrecords.common.block.tile.*;
+import com.codingforcookies.betterrecords.common.core.CommonProxy;
+import com.codingforcookies.betterrecords.common.item.*;
 import com.codingforcookies.betterrecords.common.packets.ChannelHandler;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
-
+import com.codingforcookies.betterrecords.common.recipe.*;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -40,9 +21,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.RecipeSorter;
+import org.apache.commons.lang3.text.WordUtils;
 
 
 @Mod(modid = BetterRecords.ID, version = "@VERSION@", useMetadata = true, name = "Better Records",

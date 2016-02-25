@@ -1,16 +1,15 @@
 package com.codingforcookies.betterrecords.common.packets;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.codingforcookies.betterrecords.client.sound.Sound;
 import com.codingforcookies.betterrecords.client.sound.SoundHandler;
-
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PacketRecordPlayerPlay implements IPacket {
     int x, y, z, dimension;

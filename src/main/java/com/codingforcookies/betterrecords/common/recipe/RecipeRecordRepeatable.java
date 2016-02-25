@@ -1,13 +1,12 @@
 package com.codingforcookies.betterrecords.common.recipe;
 
+import com.codingforcookies.betterrecords.common.item.ItemURLRecord;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-
-import com.codingforcookies.betterrecords.common.item.ItemURLRecord;
 
 public class RecipeRecordRepeatable implements IRecipe {
 

@@ -1,17 +1,15 @@
 package com.codingforcookies.betterrecords.client.gui;
 
+import com.codingforcookies.betterrecords.client.core.ClientProxy;
+import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
+import org.lwjgl.opengl.GL11;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
-import com.codingforcookies.betterrecords.common.BetterRecords;
-import com.codingforcookies.betterrecords.common.util.BetterUtils;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 
 public class GuiBetterDisclaimer extends GuiScreen{
 

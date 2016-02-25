@@ -1,11 +1,9 @@
 package com.codingforcookies.betterrecords.common.packets;
 
+import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordPlayer;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordPlayer;
-
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 

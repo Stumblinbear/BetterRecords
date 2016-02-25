@@ -1,13 +1,11 @@
 package com.codingforcookies.betterrecords.client.gui;
 
+import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
+import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
-
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
-
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {

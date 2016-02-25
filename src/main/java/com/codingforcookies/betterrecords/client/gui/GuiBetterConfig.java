@@ -1,17 +1,16 @@
 package com.codingforcookies.betterrecords.client.gui;
 
+import com.codingforcookies.betterrecords.client.core.ClientProxy;
+import com.codingforcookies.betterrecords.client.gui.Control.ControlType;
+import com.codingforcookies.betterrecords.client.sound.SoundHandler;
+import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiScreen;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.codingforcookies.betterrecords.common.BetterRecords;
-import com.codingforcookies.betterrecords.common.util.BetterUtils;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
-import com.codingforcookies.betterrecords.client.sound.SoundHandler;
-import com.codingforcookies.betterrecords.client.gui.Control.ControlType;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiScreen;
 
 public class GuiBetterConfig extends GuiScreen{
 

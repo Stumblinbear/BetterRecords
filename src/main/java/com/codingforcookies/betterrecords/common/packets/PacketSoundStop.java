@@ -1,10 +1,8 @@
 package com.codingforcookies.betterrecords.common.packets;
 
+import com.codingforcookies.betterrecords.client.sound.SoundHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
-
-import com.codingforcookies.betterrecords.client.sound.SoundHandler;
-
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class PacketSoundStop implements IPacket {

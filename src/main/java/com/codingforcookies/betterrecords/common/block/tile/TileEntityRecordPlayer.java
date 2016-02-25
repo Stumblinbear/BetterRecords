@@ -1,8 +1,9 @@
 package com.codingforcookies.betterrecords.common.block.tile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import com.codingforcookies.betterrecords.api.connection.RecordConnection;
+import com.codingforcookies.betterrecords.api.wire.IRecordWire;
+import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
+import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.item.EntityItem;
@@ -12,14 +13,11 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
-import com.codingforcookies.betterrecords.api.wire.IRecordWire;
-import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
-import com.codingforcookies.betterrecords.api.connection.RecordConnection;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, IRecordWireHome, ITickable {
     public ArrayList<Float> formTreble = new ArrayList<Float>();

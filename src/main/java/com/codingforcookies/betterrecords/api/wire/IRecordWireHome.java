@@ -1,10 +1,10 @@
 package com.codingforcookies.betterrecords.api.wire;
 
-import java.util.ArrayList;
-
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+
+import java.util.ArrayList;
 
 public interface IRecordWireHome {
     void addTreble(float form);

@@ -1,7 +1,9 @@
 package com.codingforcookies.betterrecords.common.block.tile;
 
-import java.util.ArrayList;
-
+import com.codingforcookies.betterrecords.api.connection.RecordConnection;
+import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
+import com.codingforcookies.betterrecords.api.wire.IRecordWire;
+import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -9,10 +11,7 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
-import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
-import com.codingforcookies.betterrecords.api.wire.IRecordWire;
-import com.codingforcookies.betterrecords.api.connection.RecordConnection;
+import java.util.ArrayList;
 
 public class TileEntityStrobeLight extends TileEntity implements IRecordWire, IRecordAmplitude, ITickable {
     public ArrayList<RecordConnection> connections = null;

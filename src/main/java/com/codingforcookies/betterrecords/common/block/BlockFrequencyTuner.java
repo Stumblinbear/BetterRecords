@@ -1,9 +1,8 @@
 package com.codingforcookies.betterrecords.common.block;
 
-import java.util.Random;
-
-import com.codingforcookies.betterrecords.common.lib.StaticInfo;
+import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
+import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockState;
@@ -18,11 +17,10 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import com.codingforcookies.betterrecords.common.BetterRecords;
-
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class BlockFrequencyTuner extends BlockContainer {
 

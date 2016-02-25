@@ -1,13 +1,12 @@
 package com.codingforcookies.betterrecords.common.packets;
 
-import java.util.EnumMap;
-
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
-
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.network.FMLEmbeddedChannel;
 import net.minecraftforge.fml.common.network.FMLOutboundHandler;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.EnumMap;
 
 public class PacketHandler{
 

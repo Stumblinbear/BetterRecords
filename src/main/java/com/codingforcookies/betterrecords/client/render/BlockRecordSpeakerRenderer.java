@@ -1,12 +1,10 @@
 package com.codingforcookies.betterrecords.client.render;
 
+import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordSpeaker;
+import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-
 import org.lwjgl.opengl.GL11;
-
-import com.codingforcookies.betterrecords.common.lib.StaticInfo;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordSpeaker;
 
 public class BlockRecordSpeakerRenderer extends TileEntitySpecialRenderer {
 

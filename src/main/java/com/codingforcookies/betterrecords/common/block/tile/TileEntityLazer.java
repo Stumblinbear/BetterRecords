@@ -1,21 +1,20 @@
 package com.codingforcookies.betterrecords.common.block.tile;
 
-import java.util.ArrayList;
-import java.util.Random;
-
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
+import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
-import com.codingforcookies.betterrecords.api.connection.RecordConnection;
-
+import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import net.minecraft.client.renderer.texture.ITickable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class TileEntityLazer extends TileEntity implements IRecordWire, IRecordAmplitude, ITickable {
     public ArrayList<RecordConnection> connections = null;

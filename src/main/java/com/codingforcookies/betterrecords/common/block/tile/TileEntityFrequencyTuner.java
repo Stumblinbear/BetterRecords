@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.common.block.tile;
 
+import com.codingforcookies.betterrecords.common.BetterRecords;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.ITickable;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,9 +11,6 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-
-import com.codingforcookies.betterrecords.common.BetterRecords;
-
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.fml.relauncher.Side;

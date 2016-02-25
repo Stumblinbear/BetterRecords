@@ -1,14 +1,12 @@
 package com.codingforcookies.betterrecords.common.packets;
 
+import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
+import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
-
 import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 

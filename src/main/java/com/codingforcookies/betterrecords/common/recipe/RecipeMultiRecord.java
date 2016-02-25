@@ -1,8 +1,7 @@
 package com.codingforcookies.betterrecords.common.recipe;
 
-import java.util.ArrayList;
-
 import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.common.item.ItemURLRecord;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -10,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
-import com.codingforcookies.betterrecords.common.item.ItemURLRecord;
+import java.util.ArrayList;
 
 public class RecipeMultiRecord implements IRecipe {
 

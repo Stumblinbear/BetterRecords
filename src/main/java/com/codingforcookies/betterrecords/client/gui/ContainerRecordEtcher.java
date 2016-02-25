@@ -1,12 +1,11 @@
 package com.codingforcookies.betterrecords.client.gui;
 
+import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
 
 public class ContainerRecordEtcher extends Container {
     protected TileEntityRecordEtcher tileEntity;

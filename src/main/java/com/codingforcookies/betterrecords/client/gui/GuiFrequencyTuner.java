@@ -1,22 +1,20 @@
 package com.codingforcookies.betterrecords.client.gui;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import org.apache.commons.io.FilenameUtils;
-import org.lwjgl.opengl.GL11;
-
-import com.codingforcookies.betterrecords.common.util.BetterUtils;
-import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import com.codingforcookies.betterrecords.client.sound.IcyURLConnection;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
+import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
-
+import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.StatCollector;
+import org.apache.commons.io.FilenameUtils;
+import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class GuiFrequencyTuner extends GuiContainer{
 

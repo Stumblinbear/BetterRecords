@@ -1,18 +1,16 @@
 package com.codingforcookies.betterrecords.client.render;
 
-import java.util.Map.Entry;
-
-import org.lwjgl.opengl.GL11;
-
-import com.codingforcookies.betterrecords.common.lib.StaticInfo;
-import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
+import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordPlayer;
-
+import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import org.lwjgl.opengl.GL11;
+
+import java.util.Map.Entry;
 
 public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 

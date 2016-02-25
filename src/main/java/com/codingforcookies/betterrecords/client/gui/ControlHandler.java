@@ -1,10 +1,9 @@
 package com.codingforcookies.betterrecords.client.gui;
 
-import java.util.ArrayList;
-
+import net.minecraft.client.gui.FontRenderer;
 import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.gui.FontRenderer;
+import java.util.ArrayList;
 
 public class ControlHandler {
     public ArrayList<Control> controls;

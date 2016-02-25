@@ -1,7 +1,6 @@
 package com.codingforcookies.betterrecords.common.recipe;
 
-import java.util.ArrayList;
-
+import com.codingforcookies.betterrecords.common.item.ItemFreqCrystal;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
@@ -11,7 +10,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import com.codingforcookies.betterrecords.common.item.ItemFreqCrystal;
+import java.util.ArrayList;
 
 public class RecipeColoredFreqCrystal implements IRecipe {
     //If something changes, check RecipesArmorDyes

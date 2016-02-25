@@ -1,13 +1,25 @@
 package com.codingforcookies.betterrecords.client.gui;
 
-import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.codingforcookies.betterrecords.api.song.LibrarySong;
+import com.codingforcookies.betterrecords.client.core.ClientProxy;
+import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
+import com.codingforcookies.betterrecords.common.lib.StaticInfo;
+import com.codingforcookies.betterrecords.common.packets.PacketHandler;
+import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.StatCollector;
+import org.apache.commons.io.FilenameUtils;
+import org.lwjgl.opengl.GL11;
+
+import java.awt.*;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -15,26 +27,6 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-
-import org.apache.commons.io.FilenameUtils;
-import org.lwjgl.opengl.GL11;
-
-import com.codingforcookies.betterrecords.common.util.BetterUtils;
-import com.codingforcookies.betterrecords.api.song.LibrarySong;
-import com.codingforcookies.betterrecords.common.lib.StaticInfo;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
-import com.codingforcookies.betterrecords.common.packets.PacketHandler;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiTextField;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.StatCollector;
 
 public class GuiRecordEtcher extends GuiContainer{
 

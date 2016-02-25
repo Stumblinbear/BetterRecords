@@ -1,19 +1,10 @@
 package com.codingforcookies.betterrecords.common.lib;
 
+import com.codingforcookies.betterrecords.client.model.*;
 import com.codingforcookies.betterrecords.common.BetterRecords;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-
-import com.codingforcookies.betterrecords.client.model.ModelFrequencyTuner;
-import com.codingforcookies.betterrecords.client.model.ModelLGSpeaker;
-import com.codingforcookies.betterrecords.client.model.ModelLazer;
-import com.codingforcookies.betterrecords.client.model.ModelMDSpeaker;
-import com.codingforcookies.betterrecords.client.model.ModelRadio;
-import com.codingforcookies.betterrecords.client.model.ModelRecordEtcher;
-import com.codingforcookies.betterrecords.client.model.ModelRecordPlayer;
-import com.codingforcookies.betterrecords.client.model.ModelSMSpeaker;
-import com.codingforcookies.betterrecords.client.model.ModelStrobeLight;
 
 public class StaticInfo {
     public static final ResourceLocation GUIRecordEtcher = new ResourceLocation(BetterRecords.ID, "textures/gui/recordetcher.png");
