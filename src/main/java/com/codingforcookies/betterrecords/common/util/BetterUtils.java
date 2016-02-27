@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
+import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.Map;
 
@@ -32,5 +33,9 @@ public class BetterUtils{
             translations.put(str, cct);
             return cct.getFormattedText();
         }
+    }
+
+    public static String[] getWordWrappedString(final int maxWidth, final String string) {
+        return WordUtils.wrap(string, maxWidth, "\n", false).replace("\\n", "\n").split("\n");
     }
 }

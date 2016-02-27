@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.common.recipe;
+package com.codingforcookies.betterrecords.common.crafting.recipe;
 
 import com.codingforcookies.betterrecords.common.item.ItemURLMultiRecord;
 import com.codingforcookies.betterrecords.common.item.ItemURLRecord;

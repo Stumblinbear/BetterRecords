@@ -142,6 +142,10 @@ public class ClientProxy extends CommonProxy {
         renderItem.getItemModelMesher().register(ModItems.itemURLRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlrecord", "inventory"));
     }
 
+    public void postInit() {
+
+    }
+
     public static void loadConfig() {
         config = new Configuration(new File(Minecraft.getMinecraft().mcDataDir, "betterrecords/config.cfg"));
         config.load();

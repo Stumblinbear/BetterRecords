@@ -1,6 +1,5 @@
-package com.codingforcookies.betterrecords.common.recipe;
+package com.codingforcookies.betterrecords.common.crafting.recipe;
 
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.item.ItemURLRecord;
 import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.inventory.InventoryCrafting;

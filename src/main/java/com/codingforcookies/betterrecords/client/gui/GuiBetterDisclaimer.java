@@ -88,7 +88,7 @@ public class GuiBetterDisclaimer extends GuiScreen{
         GL11.glPushMatrix();
         {
             GL11.glScalef(.5F, .5F, 0F);
-            String[] wrapped = BetterRecords.getWordWrappedString(75, BetterUtils.getTranslatedString("gui.disclaimer.warning"));
+            String[] wrapped = BetterUtils.getWordWrappedString(75, BetterUtils.getTranslatedString("gui.disclaimer.warning"));
             for(int i = 0; i < wrapped.length; i++)
                 fontRendererObj.drawString(wrapped[i], x * 2 + 6, y * 2 + 42 + i * 12, 0xFFFFFF);
         }

@@ -1,5 +1,6 @@
-package com.codingforcookies.betterrecords.client.gui;
+package com.codingforcookies.betterrecords.common.core.handler;
 
+import com.codingforcookies.betterrecords.client.gui.*;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler {
+
     public Object getServerGuiElement(int id, EntityPlayer player, World world, int x, int y, int z) {
         TileEntity tileEntity;
         switch(id) {

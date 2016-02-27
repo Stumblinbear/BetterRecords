@@ -188,7 +188,7 @@ public class BetterEventHandler{
             }
             if(!tutorialText.equals("")){
                 if(tutorialTime > System.currentTimeMillis()){
-                    String[] str = BetterRecords.getWordWrappedString(70, tutorialText);
+                    String[] str = BetterUtils.getWordWrappedString(70, tutorialText);
                     long difference = tutorialTime - System.currentTimeMillis();
                     if(difference > 9000) difference = 10000 - difference;
                     else if(difference > 1000) difference = 1000;
