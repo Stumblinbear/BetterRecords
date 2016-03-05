@@ -2,6 +2,7 @@ package com.codingforcookies.betterrecords.common;
 
 import com.codingforcookies.betterrecords.client.BetterCreativeTab;
 import com.codingforcookies.betterrecords.common.core.CommonProxy;
+import com.codingforcookies.betterrecords.common.core.handler.GuiHandler;
 import com.codingforcookies.betterrecords.common.packets.ChannelHandler;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import net.minecraftforge.fml.common.Mod;
@@ -37,6 +38,7 @@ public class BetterRecords {
 
     @EventHandler
     public void init(final FMLInitializationEvent event) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(BetterRecords.instance, new GuiHandler());
         proxy.init();
     }
 

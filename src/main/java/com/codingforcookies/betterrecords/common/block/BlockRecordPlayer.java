@@ -48,7 +48,7 @@ public class BlockRecordPlayer extends BetterBlock {
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
         if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IRecordWireManipulator) return false;
         TileEntity tileEntity = world.getTileEntity(pos);
         if(tileEntity == null || !(tileEntity instanceof TileEntityRecordPlayer)) return false;
