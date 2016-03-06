@@ -81,8 +81,8 @@ public class BlockRecordPlayer extends BetterBlock {
                 }else{
                     tileEntityRecordPlayer.setRecord(player.getHeldItem());
                     world.markBlockForUpdate(pos);
+                    if (!world.isRemote) ((IRecord) player.getHeldItem().getItem()).onRecordInserted(tileEntityRecordPlayer, player.getHeldItem());
                     player.getHeldItem().stackSize--;
-                    if(!world.isRemote) ((IRecord) player.getHeldItem().getItem()).onRecordInserted(tileEntityRecordPlayer, player.getHeldItem());
                 }
             }
         }

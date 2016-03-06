@@ -18,7 +18,6 @@ public class CommonProxy {
 
     public void init() {
         ModCrafingRecipes.init();
-        PacketHandler.channels = NetworkRegistry.INSTANCE.newChannel("BetterRecords", new ChannelHandler());
     }
 
     public void postInit() {

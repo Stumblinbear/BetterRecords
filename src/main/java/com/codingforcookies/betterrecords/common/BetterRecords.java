@@ -38,6 +38,7 @@ public class BetterRecords {
 
     @EventHandler
     public void init(final FMLInitializationEvent event) {
+        PacketHandler.channels = NetworkRegistry.INSTANCE.newChannel("BetterRecords", new ChannelHandler());
         NetworkRegistry.INSTANCE.registerGuiHandler(BetterRecords.instance, new GuiHandler());
         proxy.init();
     }
