@@ -1,9 +1,8 @@
 package com.codingforcookies.betterrecords.common.block.tile;
 
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.ITickable;
+import net.minecraft.util.ITickable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -36,7 +35,7 @@ public class TileEntityFrequencyTuner extends TileEntity implements IInventory, 
     }
 
     @SideOnly(Side.CLIENT)
-    public void tick() {
+    public void update() {
         if(crystal != null)
             crystalFloaty += 0.86F;
     }

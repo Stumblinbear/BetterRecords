@@ -1,9 +1,8 @@
 package com.codingforcookies.betterrecords.common.block.tile;
 
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.ITickable;
+import net.minecraft.util.ITickable;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -50,8 +49,7 @@ public class TileEntityRecordEtcher extends TileEntity implements IInventory, IT
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void tick() {
+    public void update() {
         if(record != null) {
             recordRotation += 0.08F;
             if(needleOut)

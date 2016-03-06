@@ -5,7 +5,7 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.ITickable;
+import net.minecraft.util.ITickable;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,6 +15,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,8 +96,7 @@ public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, I
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void tick() {
+    public void update() {
         if(opening) {
             if(openAmount > -0.8F)
                 openAmount -= 0.08F;

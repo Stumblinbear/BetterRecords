@@ -5,7 +5,7 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.ITickable;
+import net.minecraft.util.ITickable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -85,8 +85,7 @@ public class TileEntityRadio extends TileEntity implements IRecordWire, IRecordW
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void tick() {
+    public void update() {
         if(opening) {
             if(openAmount < 0.268F)
                 openAmount += 0.04F;

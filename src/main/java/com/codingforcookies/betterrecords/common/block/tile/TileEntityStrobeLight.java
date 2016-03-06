@@ -4,7 +4,7 @@ import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
-import net.minecraft.client.renderer.texture.ITickable;
+import net.minecraft.util.ITickable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -35,7 +35,7 @@ public class TileEntityStrobeLight extends TileEntity implements IRecordWire, IR
     }
 
     @Override
-    public void tick() {
+    public void update() {
         if(bass > 0F)
             bass--;
         if(bass < 0F)
