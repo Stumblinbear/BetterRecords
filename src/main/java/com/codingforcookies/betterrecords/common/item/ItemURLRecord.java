@@ -32,7 +32,7 @@ public class ItemURLRecord extends BetterItem implements IRecord {
     public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> tooltip, boolean advanced){
         if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("author")) tooltip.add(BetterUtils.getTranslatedString("item.record.by") + ": " + itemStack.getTagCompound().getString("author"));
         if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("size")) tooltip.add(BetterUtils.getTranslatedString("item.record.size") + ": " + itemStack.getTagCompound().getString("size") + "mb");
-        if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("repeat") ? itemStack.getTagCompound().getBoolean("repeat") : false){
+        if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("repeat") && itemStack.getTagCompound().getBoolean("repeat")){
             tooltip.add("");
             tooltip.add("\247e" + BetterUtils.getTranslatedString("item.record.repeatenabled"));
         }

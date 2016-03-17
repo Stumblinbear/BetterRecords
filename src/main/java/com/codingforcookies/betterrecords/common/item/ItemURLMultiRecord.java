@@ -32,11 +32,11 @@ public class ItemURLMultiRecord extends ItemURLRecord {
             for(int i = 0; i < songList.tagCount(); i++)
                 tooltip.add(BetterUtils.getTranslatedString("item.record.song") + " #" + (i + 1) + ": " + songList.getCompoundTagAt(i).getString("local"));
         }
-        if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("repeat") ? itemStack.getTagCompound().getBoolean("repeat") : false){
+        if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("repeat") && itemStack.getTagCompound().getBoolean("repeat")){
             if(!tooltip.contains("\247e" + BetterUtils.getTranslatedString("item.record.shuffleenabled"))) tooltip.add("");
             tooltip.add("\247e" + BetterUtils.getTranslatedString("item.record.repeatenabled"));
         }
-        if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("shuffle") ? itemStack.getTagCompound().getBoolean("shuffle") : false){
+        if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("shuffle") && itemStack.getTagCompound().getBoolean("shuffle")){
             if(!tooltip.contains("\247e" + BetterUtils.getTranslatedString("item.record.repeatenabled"))) tooltip.add("");
             tooltip.add("\247e" + BetterUtils.getTranslatedString("item.record.shuffleenabled"));
         }

@@ -19,7 +19,8 @@ public class RecipeRecord implements IRecipe {
             ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
             if(itemStack == null)
                 continue;
-            else if(itemStack.getItem() instanceof ItemRecord)
+
+            if(itemStack.getItem() instanceof ItemRecord)
                 if(record)
                     return false;
                 else
