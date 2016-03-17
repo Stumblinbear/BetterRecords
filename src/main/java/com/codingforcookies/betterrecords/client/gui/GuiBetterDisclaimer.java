@@ -1,7 +1,6 @@
 package com.codingforcookies.betterrecords.client.gui;
 
 import com.codingforcookies.betterrecords.client.core.ClientProxy;
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
