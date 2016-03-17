@@ -11,12 +11,12 @@ import net.minecraft.world.World;
 public class RecipeRecord implements IRecipe {
 
     @Override
-    public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
+    public boolean matches(InventoryCrafting inventoryCrafting, World world) {
         boolean record = false;
         boolean eye = false;
 
-        for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); ++i) {
-            ItemStack itemStack = par1InventoryCrafting.getStackInSlot(i);
+        for(int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
+            ItemStack itemStack = inventoryCrafting.getStackInSlot(i);
             if(itemStack == null)
                 continue;
             else if(itemStack.getItem() instanceof ItemRecord)
@@ -35,7 +35,7 @@ public class RecipeRecord implements IRecipe {
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
+    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
         return new ItemStack(ModItems.itemURLRecord);
     }
 

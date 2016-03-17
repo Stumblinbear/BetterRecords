@@ -14,11 +14,11 @@ import java.util.ArrayList;
 public class RecipeMultiRecord implements IRecipe {
 
     @Override
-    public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
+    public boolean matches(InventoryCrafting inventoryCrafting, World world) {
         ArrayList<ItemStack> records = new ArrayList<ItemStack>();
 
-        for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); ++i) {
-            ItemStack itemstack = par1InventoryCrafting.getStackInSlot(i);
+        for(int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
+            ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
             if(itemstack != null)
                 if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null && itemstack.getTagCompound().hasKey("name"))
                     records.add(itemstack);
@@ -30,11 +30,11 @@ public class RecipeMultiRecord implements IRecipe {
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
+    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
         ArrayList<ItemStack> records = new ArrayList<ItemStack>();
 
-        for(int k = 0; k < par1InventoryCrafting.getSizeInventory(); ++k) {
-            ItemStack itemstack = par1InventoryCrafting.getStackInSlot(k);
+        for(int k = 0; k < inventoryCrafting.getSizeInventory(); ++k) {
+            ItemStack itemstack = inventoryCrafting.getStackInSlot(k);
             if(itemstack != null) {
                 if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null && itemstack.getTagCompound().hasKey("name"))
                     records.add(itemstack);

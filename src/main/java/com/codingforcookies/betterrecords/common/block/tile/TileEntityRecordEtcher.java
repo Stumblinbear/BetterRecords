@@ -28,15 +28,15 @@ public class TileEntityRecordEtcher extends TileEntity implements IInventory, IT
 
     public TileEntityRecordEtcher() { }
 
-    public void setRecord(ItemStack par1ItemStack) {
-        if(par1ItemStack == null) {
+    public void setRecord(ItemStack itemStack) {
+        if(itemStack == null) {
             record = null;
             recordEntity = null;
             recordRotation = 0F;
             return;
         }
 
-        record = par1ItemStack.copy();
+        record = itemStack.copy();
         record.stackSize = 1;
         recordEntity = new EntityItem(worldObj, pos.getX(), pos.getY(), pos.getZ(), record);
         recordEntity.hoverStart = 0;

@@ -11,12 +11,12 @@ import net.minecraft.world.World;
 public class RecipeRecordRepeatable implements IRecipe {
 
     @Override
-    public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
+    public boolean matches(InventoryCrafting inventoryCrafting, World world) {
         ItemStack record = null;
         boolean comparator = false;
 
-        for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); ++i) {
-            ItemStack itemstack = par1InventoryCrafting.getStackInSlot(i);
+        for(int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
+            ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
             if(itemstack != null) {
                 if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null)
                     if(record != null)
@@ -37,12 +37,12 @@ public class RecipeRecordRepeatable implements IRecipe {
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
+    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
         ItemStack record = null;
         boolean comparator = false;
 
-        for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); i++) {
-            ItemStack itemstack = par1InventoryCrafting.getStackInSlot(i);
+        for(int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
+            ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
             if(itemstack != null) {
                 if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null)
                     if(record != null)

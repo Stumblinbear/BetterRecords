@@ -12,13 +12,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiBetterConfig extends GuiScreen{
+public class GuiBetterConfig extends GuiScreen {
 
     public ControlHandler controlHandler;
 
-    public GuiBetterConfig(){}
-
-    public void initGui(){
+    @Override
+    public void initGui() {
         controlHandler = new ControlHandler(width / 2 - 80, height / 2 - 75, 166, 155);
         controlHandler.controls.add(new Control(ControlType.BUTTON, BetterUtils.getTranslatedString("gui.config.downloadsongs"), 125, 20, 36, 11, new ControlInformation(){
 
@@ -155,13 +154,15 @@ public class GuiBetterConfig extends GuiScreen{
         }));
     }
 
-    protected void mouseClicked(int par1, int par2, int par3) throws IOException {
-        super.mouseClicked(par1, par2, par3);
-        controlHandler.mousepressed(par3, par1, par2);
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+        controlHandler.mousepressed(mouseButton, mouseX, mouseY);
     }
 
-    public void drawScreen(int par1, int par2, float par3){
-        controlHandler.render(fontRendererObj, par1, par2);
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks){
+        controlHandler.render(fontRendererObj, mouseX, mouseY);
         fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.config.title"), (width - fontRendererObj.getStringWidth(BetterUtils.getTranslatedString("gui.configname"))) / 2, height / 2 - 75 + 6, 0xFFFFFF);
     }
 }

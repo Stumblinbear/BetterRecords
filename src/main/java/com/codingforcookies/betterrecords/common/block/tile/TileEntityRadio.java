@@ -69,13 +69,13 @@ public class TileEntityRadio extends TileEntity implements IRecordWire, IRecordW
         wireSystemInfo = new HashMap<String, Integer>();
     }
 
-    public void setCrystal(ItemStack par1ItemStack) {
-        if(par1ItemStack == null) {
+    public void setCrystal(ItemStack itemStack) {
+        if(itemStack == null) {
             crystal = null;
             return;
         }
 
-        crystal = par1ItemStack.copy();
+        crystal = itemStack.copy();
         crystal.stackSize = 1;
     }
 

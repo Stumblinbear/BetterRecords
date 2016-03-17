@@ -16,12 +16,12 @@ public class RecipeColoredRecord implements IRecipe {
     //If something changes, check RecipesArmorDyes
 
     @Override
-    public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World) {
+    public boolean matches(InventoryCrafting inventoryCrafting, World world) {
         ItemStack itemToColor = null;
         ArrayList<ItemStack> dyes = new ArrayList<ItemStack>();
 
-        for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); ++i) {
-            ItemStack itemstack1 = par1InventoryCrafting.getStackInSlot(i);
+        for(int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
+            ItemStack itemstack1 = inventoryCrafting.getStackInSlot(i);
             if(itemstack1 != null) {
                 if(itemstack1.getItem() instanceof ItemURLRecord) {
                     if(itemToColor != null)
@@ -39,7 +39,7 @@ public class RecipeColoredRecord implements IRecipe {
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting) {
+    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
         ItemStack itemToColor = null;
         ItemURLRecord itemRecord = null;
         int[] aint = new int[3];
@@ -51,8 +51,8 @@ public class RecipeColoredRecord implements IRecipe {
         float f1;
         int l1;
 
-        for(k = 0; k < par1InventoryCrafting.getSizeInventory(); ++k) {
-            ItemStack itemstack1 = par1InventoryCrafting.getStackInSlot(k);
+        for(k = 0; k < inventoryCrafting.getSizeInventory(); ++k) {
+            ItemStack itemstack1 = inventoryCrafting.getStackInSlot(k);
             if(itemstack1 != null) {
                 if(itemstack1.getItem() instanceof ItemURLRecord) {
                     if(itemToColor != null)

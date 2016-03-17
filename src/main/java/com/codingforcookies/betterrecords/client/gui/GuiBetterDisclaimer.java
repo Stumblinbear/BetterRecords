@@ -11,23 +11,25 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuiBetterDisclaimer extends GuiScreen{
+public class GuiBetterDisclaimer extends GuiScreen {
 
-    protected void mouseClicked(int par1, int par2, int par3) throws IOException {
-        super.mouseClicked(par1, par2, par3);
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
         int x = width / 2 - 100;
         int y = height / 2 - 35;
-        if(par1 > x + 5 && par1 < x + 45 && par2 > y + 50 && par2 < y + 65) ClientProxy.flashyMode = 0;
-        else if(par1 > x + 50 && par1 < x + 90 && par2 > y + 50 && par2 < y + 65) ClientProxy.flashyMode = 1;
-        else if(par1 > x + 95 && par1 < x + 150 && par2 > y + 50 && par2 < y + 65) ClientProxy.flashyMode = 2;
-        else if(par1 > x + 155 && par1 < x + 195 && par2 > y + 50 && par2 < y + 65) ClientProxy.flashyMode = 3;
+        if(mouseX > x + 5 && mouseX < x + 45 && mouseY > y + 50 && mouseY < y + 65) ClientProxy.flashyMode = 0;
+        else if(mouseX > x + 50 && mouseX < x + 90 && mouseY > y + 50 && mouseY < y + 65) ClientProxy.flashyMode = 1;
+        else if(mouseX > x + 95 && mouseX < x + 150 && mouseY > y + 50 && mouseY < y + 65) ClientProxy.flashyMode = 2;
+        else if(mouseX > x + 155 && mouseX < x + 195 && mouseY > y + 50 && mouseY < y + 65) ClientProxy.flashyMode = 3;
         if(ClientProxy.flashyMode != -1) {
             ClientProxy.saveConfig();
             Minecraft.getMinecraft().displayGuiScreen(null);
         }
     }
 
-    public void drawScreen(int par1, int par2, float par3){
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks){
         int x = width / 2 - 100;
         int y = height / 2 - 35;
         GL11.glPushMatrix();
@@ -97,22 +99,22 @@ public class GuiBetterDisclaimer extends GuiScreen{
         fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.config.flashymode.low"), x + 62, y + 54, 0x000000);
         fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.config.flashymode.norm"), x + 107, y + 54, 0x000000);
         fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.config.flashymode.rave"), x + 165, y + 54, 0x000000);
-        if(par1 > x + 5 && par1 < x + 45 && par2 > y + 50 && par2 < y + 65) {
+        if(mouseX > x + 5 && mouseX < x + 45 && mouseY > y + 50 && mouseY < y + 65) {
             List<String> infoText = new ArrayList<String>();
             infoText.add(BetterUtils.getTranslatedString("gui.disclaimer.flashymode.none"));
             infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.none.line1"));
-            drawHoveringText(infoText, par1, par2, fontRendererObj);
-        }else if(par1 > x + 50 && par1 < x + 90 && par2 > y + 50 && par2 < y + 65) {
+            drawHoveringText(infoText, mouseX, mouseY, fontRendererObj);
+        }else if(mouseX > x + 50 && mouseX < x + 90 && mouseY > y + 50 && mouseY < y + 65) {
             List<String> infoText = new ArrayList<String>();
             infoText.add(BetterUtils.getTranslatedString("gui.disclaimer.flashymode.low"));
             infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.low.line1"));
-            drawHoveringText(infoText, par1, par2, fontRendererObj);
-        }else if(par1 > x + 95 && par1 < x + 150 && par2 > y + 50 && par2 < y + 65) {
+            drawHoveringText(infoText, mouseX, mouseY, fontRendererObj);
+        }else if(mouseX > x + 95 && mouseX < x + 150 && mouseY > y + 50 && mouseY < y + 65) {
             List<String> infoText = new ArrayList<String>();
             infoText.add(BetterUtils.getTranslatedString("gui.disclaimer.flashymode.norm"));
             infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.norm.line1"));
-            drawHoveringText(infoText, par1, par2, fontRendererObj);
-        }else if(par1 > x + 155 && par1 < x + 195 && par2 > y + 50 && par2 < y + 65) {
+            drawHoveringText(infoText, mouseX, mouseY, fontRendererObj);
+        }else if(mouseX > x + 155 && mouseX < x + 195 && mouseY > y + 50 && mouseY < y + 65) {
             List<String> infoText = new ArrayList<String>();
             infoText.add(BetterUtils.getTranslatedString("gui.disclaimer.flashymode.rave"));
             infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.rave.line1"));
@@ -120,7 +122,7 @@ public class GuiBetterDisclaimer extends GuiScreen{
             infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.rave.line3"));
             infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.rave.line4"));
             infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.rave.line5"));
-            drawHoveringText(infoText, par1, par2, fontRendererObj);
+            drawHoveringText(infoText, mouseX, mouseY, fontRendererObj);
         }
     }
 }

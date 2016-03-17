@@ -16,22 +16,22 @@ public class ItemFreqCrystal extends BetterItem {
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
-        return par1ItemStack;
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+        return itemStack;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack par1ItemStack)  {
-        if(par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("local"))
-            return par1ItemStack.getTagCompound().getString("local");
+    public String getItemStackDisplayName(ItemStack itemStack)  {
+        if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("local"))
+            return itemStack.getTagCompound().getString("local");
         else
             return StatCollector.translateToLocal(getUnlocalizedName() + ".name");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack par1ItemStack, int par2) {
-        return (par1ItemStack.getTagCompound() != null && par1ItemStack.getTagCompound().hasKey("color") ? par1ItemStack.getTagCompound().getInteger("color") : 0xFFFFFF);
+    public int getColorFromItemStack(ItemStack itemStack, int renderPass) {
+        return (itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("color") ? itemStack.getTagCompound().getInteger("color") : 0xFFFFFF);
     }
 }
