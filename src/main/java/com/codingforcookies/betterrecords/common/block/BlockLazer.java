@@ -34,7 +34,7 @@ public class BlockLazer extends BetterBlock {
     public int getLightValue(IBlockAccess world, BlockPos pos){
         TileEntity te = world.getTileEntity(pos);
         if(te == null || !(te instanceof IRecordWire)) return 0;
-        BetterUtils.markBlockDirty(te.getWorld(), te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
+        BetterUtils.markBlockDirty(te.getWorld(), te.getPos());
         return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
     }
 
