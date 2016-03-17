@@ -1,0 +1,6 @@
+{
+  "parent": "betterrecords:item/default_item",
+  "textures": {
+    "layer0": "betterrecords:items/freqcrystal"
+  }
+}

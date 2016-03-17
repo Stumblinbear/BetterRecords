@@ -1,0 +1,76 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            name 'forge'
+            url 'http://files.minecraftforge.net/maven'
+        }
+    }
+    dependencies {
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.1-SNAPSHOT'
+    }
+}
+
+repositories {
+   flatDir {
+       dirs 'libs'
+   }
+}
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+
+
+version = "$minecraft_version-$mod_version"
+group = "com.codingforcookies.betterrecords"
+archivesBaseName = "betterrecords"
+
+minecraft {
+    version = "$minecraft_version-$forge_version"
+    mappings = "$forge_mappings"
+    runDir = "run"
+
+    replaceIn "BetterRecords.java"
+    replace "@VERSION@", project.version
+}
+
+dependencies {
+   compile name: 'mp3plugin'
+   compile name: 'mp3spi1.9.5'
+   compile name: 'tritonus-share-0.3.7-2'
+   compile name: 'vorbisspi-1.0.3-1'
+}
+
+
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
+
+task deobfJar(type: Jar) {
+    from sourceSets.main.output
+    classifier = 'deobf'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives deobfJar
+    archives sourcesJar
+    archives javadocJar
+}

@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "betterrecords:dummy",
+    "textures": {
+      "particle": "betterrecords:models/frequencytuner"
+    }
+  },
+  "variants": {
+    "normal": [{}]
+  }
+}
