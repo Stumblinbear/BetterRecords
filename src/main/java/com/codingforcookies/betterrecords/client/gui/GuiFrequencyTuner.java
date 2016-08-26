@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class GuiFrequencyTuner extends GuiContainer{
+public class GuiFrequencyTuner extends GuiContainer {
 
     TileEntityFrequencyTuner tileEntity;
     GuiTextField nameField;
@@ -30,6 +30,7 @@ public class GuiFrequencyTuner extends GuiContainer{
         this.tileEntity = tileEntity;
     }
 
+    @Override
     public void initGui(){
         super.initGui();
         nameField = new GuiTextField(1, this.fontRendererObj, 44, 20, 124, 10);
@@ -37,20 +38,22 @@ public class GuiFrequencyTuner extends GuiContainer{
         urlField.setMaxStringLength(128);
     }
 
-    protected void keyTyped(char par1, int par2) throws IOException {
+    @Override
+    protected void keyTyped(char typedChar, int keyCode) throws IOException {
         checkedURL = false;
         checkURLTime = System.currentTimeMillis() + 2000;
-        if(nameField.isFocused()) nameField.textboxKeyTyped(par1, par2);
-        else if(urlField.isFocused()) urlField.textboxKeyTyped(par1, par2);
-        else super.keyTyped(par1, par2);
+        if(nameField.isFocused()) nameField.textboxKeyTyped(typedChar, keyCode);
+        else if(urlField.isFocused()) urlField.textboxKeyTyped(typedChar, keyCode);
+        else super.keyTyped(typedChar, keyCode);
     }
 
-    protected void mouseClicked(int par1, int par2, int par3) throws IOException {
-        super.mouseClicked(par1, par2, par3);
-        int x = par1 - (width - xSize) / 2;
-        int y = par2 - (height - ySize) / 2;
-        nameField.mouseClicked(x, y, par3);
-        urlField.mouseClicked(x, y, par3);
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+        int x = mouseX - (width - xSize) / 2;
+        int y = mouseY - (height - ySize) / 2;
+        nameField.mouseClicked(x, y, mouseButton);
+        urlField.mouseClicked(x, y, mouseButton);
         if(error.equals(BetterUtils.getTranslatedString("gui.frequencytuner.ready")) && x >= 44 && x <= 75 && y >= 51 && y <= 66){
             String superName = FilenameUtils.getName(urlField.getText());
             superName = superName.split("#")[0];
@@ -59,13 +62,14 @@ public class GuiFrequencyTuner extends GuiContainer{
         }
     }
 
-    protected void drawGuiContainerForegroundLayer(int par1, int par2){
+    @Override
+    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
         fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.frequencytuner"), 8, 6, 4210752);
         fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
         fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.name") + ": ", 10, 21, 4210752);
         fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.url") + ": ", 10, 36, 4210752);
-        int mx = par1 - (width - xSize) / 2;
-        int my = par2 - (height - ySize) / 2;
+        int mx = mouseX - (width - xSize) / 2;
+        int my = mouseY - (height - ySize) / 2;
         fontRendererObj.drawStringWithShadow(BetterUtils.getTranslatedString("gui.frequencytuner.tune"), 48, 53, (error.equals(BetterUtils.getTranslatedString("gui.frequencytuner.ready")) ? (mx >= 44 && mx <= 75 && my >= 51 && my <= 66 ? 0xFFFF55 : 0xFFFFFF) : 0x555555));
         fontRendererObj.drawString(error, 172 - fontRendererObj.getStringWidth(error), 65, (error.equals(BetterUtils.getTranslatedString("gui.frequencytuner.ready")) ? 0x229922 : 0x992222));
         nameField.drawTextBox();
@@ -98,7 +102,8 @@ public class GuiFrequencyTuner extends GuiContainer{
         }
     }
 
-    protected void drawGuiContainerBackgroundLayer(float par1, int par2, int par3){
+    @Override
+    protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY){
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;

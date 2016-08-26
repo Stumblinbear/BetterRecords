@@ -15,7 +15,6 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,15 +72,15 @@ public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, I
         wireSystemInfo = new HashMap<String, Integer>();
     }
 
-    public void setRecord(ItemStack par1ItemStack) {
-        if(par1ItemStack == null) {
+    public void setRecord(ItemStack itemStack) {
+        if(itemStack == null) {
             record = null;
             recordEntity = null;
             recordRotation = 0F;
             return;
         }
 
-        record = par1ItemStack.copy();
+        record = itemStack.copy();
         record.stackSize = 1;
         recordEntity = new EntityItem(worldObj, pos.getX(), pos.getY(), pos.getZ(), record);
         recordEntity.hoverStart = 0;

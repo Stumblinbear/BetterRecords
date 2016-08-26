@@ -22,9 +22,9 @@ public class TileEntityFrequencyTuner extends TileEntity implements IInventory, 
 
     public TileEntityFrequencyTuner() { }
 
-    public void setRecord(ItemStack par1ItemStack) {
-        if(par1ItemStack != null)
-            crystal = par1ItemStack.copy();
+    public void setRecord(ItemStack itemStack) {
+        if(itemStack != null)
+            crystal = itemStack.copy();
         else
             crystal = null;
     }

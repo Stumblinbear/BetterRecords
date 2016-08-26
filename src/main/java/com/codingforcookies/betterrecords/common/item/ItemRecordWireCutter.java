@@ -5,7 +5,6 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;

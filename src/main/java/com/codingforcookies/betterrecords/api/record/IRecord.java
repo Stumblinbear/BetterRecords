@@ -4,6 +4,6 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import net.minecraft.item.ItemStack;
 
 public interface IRecord {
-    boolean isRecordValid(ItemStack par1ItemStack);
-    void onRecordInserted(IRecordWireHome par1WireHome, ItemStack par2ItemStack);
+    boolean isRecordValid(ItemStack itemStack);
+    void onRecordInserted(IRecordWireHome wireHome, ItemStack itemStack);
 }

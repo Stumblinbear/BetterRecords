@@ -6,7 +6,6 @@ import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazerCluster;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
-import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,8 +15,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockLazerCluster extends BetterBlock {
 
@@ -32,7 +29,7 @@ public class BlockLazerCluster extends BetterBlock {
     public int getLightValue(IBlockAccess world, BlockPos pos){
         TileEntity te = world.getTileEntity(pos);
         if(te == null || !(te instanceof IRecordWire)) return 0;
-        BetterUtils.markBlockDirty(te.getWorld(), te.getPos().getX(), te.getPos().getY(), te.getPos().getZ());
+        BetterUtils.markBlockDirty(te.getWorld(), te.getPos());
         return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
     }
 

@@ -14,9 +14,8 @@ public class BetterUtils{
     private static Map<String, ChatComponentTranslation> translations = Maps.newHashMap();
     private static String lang = "en_US";
 
-    public static void markBlockDirty(World par1World, int x, int y, int z){
-        //if(par1World.blockExists(x, y, z)) par1World.getChunkFromBlockCoords(x, z).setChunkModified();
-        par1World.getChunkFromBlockCoords(new BlockPos(x,y,z)).setChunkModified();
+    public static void markBlockDirty(World world, BlockPos pos){
+        world.getChunkFromBlockCoords(pos).setChunkModified();
     }
 
     public static String getTranslatedString(String str){

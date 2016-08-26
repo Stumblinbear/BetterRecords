@@ -10,14 +10,14 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class RecipeRecordShuffle implements IRecipe{
+public class RecipeRecordShuffle implements IRecipe {
 
     @Override
-    public boolean matches(InventoryCrafting par1InventoryCrafting, World par2World){
+    public boolean matches(InventoryCrafting inventoryCrafting, World world) {
         ItemStack record = null;
         boolean shuffle = false;
-        for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); ++i){
-            ItemStack itemstack = par1InventoryCrafting.getStackInSlot(i);
+        for(int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
+            ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
             if(itemstack != null) {
                 if(itemstack.getItem() instanceof ItemURLMultiRecord && itemstack.getTagCompound() != null) if(record != null) return false;
                 else record = itemstack;
@@ -30,11 +30,11 @@ public class RecipeRecordShuffle implements IRecipe{
     }
 
     @Override
-    public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting){
+    public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
         ItemStack record = null;
         boolean shuffle = false;
-        for(int i = 0; i < par1InventoryCrafting.getSizeInventory(); i++){
-            ItemStack itemstack = par1InventoryCrafting.getStackInSlot(i);
+        for(int i = 0; i < inventoryCrafting.getSizeInventory(); i++){
+            ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
             if(itemstack != null) {
                 if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null) if(record != null) return null;
                 else record = itemstack;

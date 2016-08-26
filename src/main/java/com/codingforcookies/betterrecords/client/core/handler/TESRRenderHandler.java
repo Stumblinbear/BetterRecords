@@ -1,6 +1,5 @@
 package com.codingforcookies.betterrecords.client.core.handler;
 
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.ModBlocks;
 import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;

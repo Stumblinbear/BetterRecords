@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import org.apache.commons.lang3.text.WordUtils;
 
 
 @Mod(modid = BetterRecords.ID, version = "@VERSION@", useMetadata = true, name = "Better Records",

@@ -84,6 +84,7 @@ public class ClientProxy extends CommonProxy {
         tutorials.put("lazer", false);
         tutorials.put("lazercluster", false);
 
+        // Temporary way to render TESR's in the inventory. Should be changed once the JSON format supports animations
         registerTESRRender(ModBlocks.blockRecordEtcher, new BlockRecordEtcherRenderer(), TileEntityRecordEtcher.class, "recordetcher");
         registerTESRRender(ModBlocks.blockRecordPlayer, new BlockRecordPlayerRenderer(), TileEntityRecordPlayer.class, "recordplayer");
         registerTESRRender(ModBlocks.blockFrequencyTuner, new BlockFrequencyTunerRenderer(), TileEntityFrequencyTuner.class, "frequencytuner");
