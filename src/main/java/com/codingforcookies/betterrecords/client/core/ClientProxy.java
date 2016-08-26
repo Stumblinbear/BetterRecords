@@ -23,6 +23,9 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.lwjgl.input.Keyboard;
 
 import java.io.BufferedWriter;
@@ -63,8 +66,9 @@ public class ClientProxy extends CommonProxy {
     public static int downloadMax = 10;
     public static int flashyMode = -1;
 
-    public void preInit() {
-        super.preInit();
+    @Override
+    public void preInit(FMLPreInitializationEvent event) {
+        super.preInit(event);
 
         defaultLibrary = new ArrayList<LibrarySong>();
         encodings = new ArrayList<String>();
@@ -99,7 +103,7 @@ public class ClientProxy extends CommonProxy {
 
 
         SoundHandler.initalize();
-        loadConfig();
+        loadConfig(event);
     }
 
     private void registerTESRRender(Block block, TileEntitySpecialRenderer renderer,  Class<? extends TileEntity> te, String name) {
@@ -110,7 +114,8 @@ public class ClientProxy extends CommonProxy {
     }
 
 
-    public void init() {
+    @Override
+    public void init(FMLInitializationEvent event) {
         instance = this;
 
         keyConfig = new KeyBinding("key.betterconfig.desc", Keyboard.KEY_N, "key.betterconfig.category");
@@ -143,12 +148,13 @@ public class ClientProxy extends CommonProxy {
         renderItem.getItemModelMesher().register(ModItems.itemURLRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlrecord", "inventory"));
     }
 
-    public void postInit() {
+    @Override
+    public void postInit(FMLPostInitializationEvent event) {
 
     }
 
-    public static void loadConfig() {
-        config = new Configuration(new File(Minecraft.getMinecraft().mcDataDir, "betterrecords/config.cfg"));
+    public static void loadConfig(FMLPreInitializationEvent event) {
+        config = new Configuration(event.getSuggestedConfigurationFile());
         config.load();
 
         SoundHandler.downloadSongs = config.get(Configuration.CATEGORY_GENERAL, "downloadSongs", true).getBoolean(true);
