@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 public class BlockLazerRenderer extends TileEntitySpecialRenderer {
 
+    @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
         if(!(te instanceof TileEntityLazer)) {
             GL11.glPushMatrix();

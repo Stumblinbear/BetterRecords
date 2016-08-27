@@ -8,7 +8,7 @@ import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import org.apache.commons.io.FilenameUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -65,7 +65,7 @@ public class GuiFrequencyTuner extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
         fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.frequencytuner"), 8, 6, 4210752);
-        fontRendererObj.drawString(StatCollector.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
+        fontRendererObj.drawString(I18n.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
         fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.name") + ": ", 10, 21, 4210752);
         fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.url") + ": ", 10, 36, 4210752);
         int mx = mouseX - (width - xSize) / 2;

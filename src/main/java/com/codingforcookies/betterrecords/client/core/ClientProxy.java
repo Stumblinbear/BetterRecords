@@ -12,9 +12,9 @@ import com.codingforcookies.betterrecords.common.core.CommonProxy;
 import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -110,7 +110,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(te, renderer);
         Item item = Item.getItemFromBlock(block);
         ForgeHooksClient.registerTESRItemStack(item, 0, te);
-        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(BetterRecords.ID + ":" + name, "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, 0, new net.minecraft.client.renderer.block.model.ModelResourceLocation(BetterRecords.ID + ":" + name, "inventory"));
     }
 
 

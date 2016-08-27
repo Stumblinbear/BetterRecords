@@ -28,7 +28,7 @@ public class RecipeColoredRecord implements IRecipe {
                         return false;
                     itemToColor = itemstack1;
                 }else{
-                    if(itemstack1.getItem() != Items.dye)
+                    if(itemstack1.getItem() != Items.DYE)
                         return false;
                     dyes.add(itemstack1);
                 }
@@ -75,10 +75,10 @@ public class RecipeColoredRecord implements IRecipe {
                         ++j;
                     }
                 }else{
-                    if(itemstack1.getItem() != Items.dye)
+                    if(itemstack1.getItem() != Items.DYE)
                         return null;
 
-                    float[] afloat = EntitySheep.func_175513_a(EnumDyeColor.byDyeDamage(itemstack1.getItemDamage()));
+                    float[] afloat = EntitySheep.getDyeRgb(EnumDyeColor.byDyeDamage(itemstack1.getItemDamage()));
                     int j1 = (int)(afloat[0] * 255.0F);
                     int k1 = (int)(afloat[1] * 255.0F);
                     l1 = (int)(afloat[2] * 255.0F);

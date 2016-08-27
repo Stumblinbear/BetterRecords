@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 
 public class BlockRadioRenderer extends TileEntitySpecialRenderer {
 
+    @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
         if(!(te instanceof TileEntityRadio)) {
             GL11.glPushMatrix();
@@ -30,7 +31,7 @@ public class BlockRadioRenderer extends TileEntitySpecialRenderer {
 
         TileEntityRadio tileEntityRadio = (TileEntityRadio)te;
 
-        if(Minecraft.getMinecraft().thePlayer.getHeldItem() != null && Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() instanceof IRecordWireManipulator) {
+        if(Minecraft.getMinecraft().thePlayer.getHeldItemMainhand() != null && Minecraft.getMinecraft().thePlayer.getHeldItemMainhand().getItem() instanceof IRecordWireManipulator) {
             GL11.glPushMatrix();
             {
                 GL11.glTranslatef((float)x + .5F, (float)y + .5F, (float)z + .5F);

@@ -7,7 +7,7 @@ import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -69,18 +69,19 @@ public class ConnectionHelper {
         return ret;
     }
 
+    //TODO
     public static void addConnection(World world, IRecordWire iRecordWire, RecordConnection rec) {
         for(int i = 0; i < iRecordWire.getConnections().size(); i++)
             if(iRecordWire.getConnections().get(i).same(rec))
                 return;
 
         iRecordWire.getConnections().add(rec);
-        world.markBlockForUpdate(new BlockPos(((TileEntity)iRecordWire).getPos().getX(), ((TileEntity)iRecordWire).getPos().getY(), ((TileEntity)iRecordWire).getPos().getZ()));
+        //world.markBlockForUpdate(new net.minecraft.util.math.BlockPos(((TileEntity)iRecordWire).getPos().getX(), ((TileEntity)iRecordWire).getPos().getY(), ((TileEntity)iRecordWire).getPos().getZ()));
 
         TileEntity te = world.getTileEntity(new BlockPos(rec.x1, rec.y1, rec.z1));
         if(te != null && te instanceof IRecordWireHome && te != iRecordWire) {
             ((IRecordWireHome)te).increaseAmount(iRecordWire);
-            world.markBlockForUpdate(new BlockPos(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ()));
+            //world.markBlockForUpdate(new BlockPos(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ()));
         }
     }
 
@@ -91,7 +92,7 @@ public class ConnectionHelper {
 
                 if(te != null && te instanceof IRecordWireHome && te != iRecordWire) {
                     ((IRecordWireHome)te).decreaseAmount(iRecordWire);
-                    world.markBlockForUpdate(new BlockPos(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ()));
+                    //world.markBlockForUpdate(new net.minecraft.util.math.BlockPos(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ()));
 
                     Random rand = new Random();
 
@@ -125,6 +126,7 @@ public class ConnectionHelper {
                 iRecordWire.getConnections().remove(0);
             }
         }
-        world.markBlockForUpdate(new BlockPos(((TileEntity)iRecordWire).getPos().getX(), ((TileEntity)iRecordWire).getPos().getY(), ((TileEntity)iRecordWire).getPos().getZ()));
+        //world.markBlockForUpdate(new net.minecraft.util.math.BlockPos(((TileEntity)iRecordWire).getPos().getX(), ((TileEntity)iRecordWire).getPos().getY(), ((TileEntity)iRecordWire).getPos().getZ()));
     }
+    //TODO
 }

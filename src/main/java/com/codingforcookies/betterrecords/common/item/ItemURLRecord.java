@@ -4,15 +4,16 @@ import com.codingforcookies.betterrecords.api.record.IRecord;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemURLRecord extends BetterItem implements IRecord {
+public class ItemURLRecord extends BetterItem implements IRecord, IItemColor {
 
     public ItemURLRecord(String name){
         super(name);
@@ -23,7 +24,7 @@ public class ItemURLRecord extends BetterItem implements IRecord {
     @SideOnly(Side.CLIENT)
     public String getItemStackDisplayName(ItemStack itemStack){
         if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("local")) return itemStack.getTagCompound().getString("local");
-        else return StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+        else return I18n.translateToLocal(getUnlocalizedName() + ".name");
     }
 
     @Override
@@ -39,7 +40,7 @@ public class ItemURLRecord extends BetterItem implements IRecord {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack itemStack, int renderPass){
+    public int getColorFromItemstack(ItemStack itemStack, int renderPass){
         return(renderPass == 0 ? 0xFFFFFF : (itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("color") ? itemStack.getTagCompound().getInteger("color") : 0xFFFFFF));
     }
 
@@ -50,6 +51,6 @@ public class ItemURLRecord extends BetterItem implements IRecord {
 
     @Override
     public void onRecordInserted(IRecordWireHome wireHome, ItemStack itemStack){
-        PacketHandler.sendRecordPlayToAllFromServer(wireHome.getTileEntity().getPos().getX(), wireHome.getTileEntity().getPos().getY(), wireHome.getTileEntity().getPos().getZ(), wireHome.getTileEntity().getWorld().provider.getDimensionId(), wireHome.getSongRadius(), itemStack.getTagCompound().getString("name"), itemStack.getTagCompound().getString("url"), itemStack.getTagCompound().getString("local"), itemStack.getTagCompound().hasKey("repeat") ? itemStack.getTagCompound().getBoolean("repeat") : false, itemStack.getTagCompound().hasKey("shuffle") ? itemStack.getTagCompound().getBoolean("shuffle") : false);
+        PacketHandler.sendRecordPlayToAllFromServer(wireHome.getTileEntity().getPos().getX(), wireHome.getTileEntity().getPos().getY(), wireHome.getTileEntity().getPos().getZ(), wireHome.getTileEntity().getWorld().provider.getDimension(), wireHome.getSongRadius(), itemStack.getTagCompound().getString("name"), itemStack.getTagCompound().getString("url"), itemStack.getTagCompound().getString("local"), itemStack.getTagCompound().hasKey("repeat") ? itemStack.getTagCompound().getBoolean("repeat") : false, itemStack.getTagCompound().hasKey("shuffle") ? itemStack.getTagCompound().getBoolean("shuffle") : false);
     }
 }

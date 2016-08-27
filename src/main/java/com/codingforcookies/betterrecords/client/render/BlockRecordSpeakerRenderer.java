@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 public class BlockRecordSpeakerRenderer extends TileEntitySpecialRenderer {
 
+    @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
         int size = -1;
         if (te != null)

@@ -4,11 +4,11 @@ import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -81,19 +81,21 @@ public class TileEntityLazerCluster extends TileEntity implements IRecordWire, I
             connections = ConnectionHelper.unserializeConnections(compound.getString("connections"));
     }
 
-    public void writeToNBT(NBTTagCompound compound) {
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
         compound.setString("connections", ConnectionHelper.serializeConnections(connections));
+
+        return compound;
     }
 
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeToNBT(nbt);
-        return new S35PacketUpdateTileEntity(pos, 1, nbt);
+        return new SPacketUpdateTileEntity(pos, 1, nbt);
     }
 
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)  {
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)  {
         readFromNBT(pkt.getNbtCompound());
     }
 }

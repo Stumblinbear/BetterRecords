@@ -12,8 +12,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockRecordSpeaker extends BetterBlock {
@@ -22,7 +21,7 @@ public class BlockRecordSpeaker extends BetterBlock {
     public int meta = 0;
 
     public BlockRecordSpeaker(String name, int meta){
-        super(Material.wood, name);
+        super(Material.WOOD, name);
         this.meta = meta;
 
         switch (meta) {
@@ -32,31 +31,32 @@ public class BlockRecordSpeaker extends BetterBlock {
         }
     }
 
+    //TODO
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state){
         super.onBlockAdded(world, pos, state);
-        world.markBlockForUpdate(pos);
+        //world.markBlockForUpdate(pos);
     }
 
-    @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess block, BlockPos pos) {
-        switch (meta){
-            case 0:
-                setBlockBounds(0.26F, 0.05F, 0.25F, 0.75F, 0.65F, 0.74F);
-                break;
-            case 1:
-                setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.88F, 0.8F);
-                break;
-            case 2:
-                setBlockBounds(0.12F, 0.0F, 0.12F, 0.88F, 1.51F, 0.88F);
-                break;
-            default:
-                break;
-        }
-    }
+//    @Override
+//    public void setBlockBoundsBasedOnState(IBlockAccess block, BlockPos pos) {
+//        switch (meta){
+//            case 0:
+//                setBlockBounds(0.26F, 0.05F, 0.25F, 0.75F, 0.65F, 0.74F);
+//                break;
+//            case 1:
+//                setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.88F, 0.8F);
+//                break;
+//            case 2:
+//                setBlockBounds(0.12F, 0.0F, 0.12F, 0.88F, 1.51F, 0.88F);
+//                break;
+//            default:
+//                break;
+//        }
+//    }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World world, net.minecraft.util.math.BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         TileEntity tileEntity = world.getTileEntity(pos);
         if(tileEntity == null || !(tileEntity instanceof TileEntityRecordSpeaker)) return;
         ((TileEntityRecordSpeaker) tileEntity).rotation = placer.rotationYaw;
@@ -69,11 +69,11 @@ public class BlockRecordSpeaker extends BetterBlock {
     }
 
     @Override
-    public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest){
-        if(world.isRemote) return super.removedByPlayer(world, pos, player, willHarvest);
+    public boolean removedByPlayer(IBlockState state, World world, net.minecraft.util.math.BlockPos pos, EntityPlayer player, boolean willHarvest){
+        if(world.isRemote) return super.removedByPlayer(state, world, pos, player, willHarvest);
         TileEntity te = world.getTileEntity(pos);
         if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
-        return super.removedByPlayer(world, pos, player, willHarvest);
+        return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 
     @Override

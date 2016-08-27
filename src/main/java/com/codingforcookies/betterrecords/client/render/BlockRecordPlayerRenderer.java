@@ -14,6 +14,7 @@ import java.util.Map.Entry;
 
 public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 
+    @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
         if(!(te instanceof TileEntityRecordPlayer)) {
             GL11.glPushMatrix();
@@ -29,7 +30,7 @@ public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
 
         TileEntityRecordPlayer tileEntityRecordPlayer = (TileEntityRecordPlayer)te;
 
-        if(Minecraft.getMinecraft().thePlayer.getHeldItem() != null && Minecraft.getMinecraft().thePlayer.getHeldItem().getItem() instanceof IRecordWireManipulator) {
+        if(Minecraft.getMinecraft().thePlayer.getHeldItemMainhand() != null && Minecraft.getMinecraft().thePlayer.getHeldItemMainhand().getItem() instanceof IRecordWireManipulator) {
             GL11.glPushMatrix();
             {
                 GL11.glTranslatef((float)x + .5F, (float)y + .5F, (float)z + .5F);
@@ -147,10 +148,10 @@ public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer {
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glDisable(GL11.GL_CULL_FACE);
                 if(Minecraft.getMinecraft().gameSettings.fancyGraphics)
-                    Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(tileEntityRecordPlayer.recordEntity, 0, 0, 0, 0, 0);
+                    Minecraft.getMinecraft().getRenderManager().doRenderEntity(tileEntityRecordPlayer.recordEntity, 0, 0, 0, 0, 0, false);
                 else{
                     Minecraft.getMinecraft().gameSettings.fancyGraphics = true;
-                    Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(tileEntityRecordPlayer.recordEntity, 0, 0, 0, 0, 0);
+                    Minecraft.getMinecraft().getRenderManager().doRenderEntity(tileEntityRecordPlayer.recordEntity, 0, 0, 0, 0, 0, false);
                     Minecraft.getMinecraft().gameSettings.fancyGraphics = false;
                 }
                 GL11.glEnable(GL11.GL_CULL_FACE);

@@ -30,23 +30,23 @@ public final class ModCrafingRecipes {
         GameRegistry.addRecipe(new RecipeColoredRecord());
         RecipeSorter.register("betterrecords:urlrecord", RecipeColoredRecord.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
 
-        GameRegistry.addShapedRecipe(new ItemStack(ModItems.itemFreqCrystal), "RQR", "QDQ", "RQR", 'R', Items.redstone, 'Q', Items.quartz, 'D', Items.diamond);
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.itemFreqCrystal), "RQR", "QDQ", "RQR", 'R', Items.REDSTONE, 'Q', Items.QUARTZ, 'D', Items.DIAMOND);
 
-        GameRegistry.addShapedRecipe(new ItemStack(ModItems.itemRecordWire, 4), "WWW", "III", "WWW", 'I', Items.iron_ingot, 'W', new ItemStack(Blocks.wool, 1, 15));
-        GameRegistry.addShapedRecipe(new ItemStack(ModItems.itemRecordWire, 4), "WIW", "WIW", "WIW", 'I', Items.iron_ingot, 'W', new ItemStack(Blocks.wool, 1, 15));
-        GameRegistry.addShapedRecipe(new ItemStack(ModItems.itemRecordCutters), "I I", " I ", "WIW", 'I', Items.iron_ingot, 'W', new ItemStack(Blocks.wool, 1, 15));
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.itemRecordWire, 4), "WWW", "III", "WWW", 'I', Items.IRON_INGOT, 'W', new ItemStack(Blocks.WOOL, 1, 15));
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.itemRecordWire, 4), "WIW", "WIW", "WIW", 'I', Items.IRON_INGOT, 'W', new ItemStack(Blocks.WOOL, 1, 15));
+        GameRegistry.addShapedRecipe(new ItemStack(ModItems.itemRecordCutters), "I I", " I ", "WIW", 'I', Items.IRON_INGOT, 'W', new ItemStack(Blocks.WOOL, 1, 15));
 
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockRecordEtcher), "HIH", "PQP", "PPP", 'H', Blocks.wooden_slab, 'I', Items.iron_ingot, 'P', Blocks.planks, 'Q', Items.quartz);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockRecordPlayer), "GGG", "PDP", "PPP", 'G', Blocks.glass_pane, 'P', Blocks.planks, 'D', Blocks.diamond_block);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockFrequencyTuner), "SHH", "PQP", "PIP", 'H', Blocks.wooden_slab, 'I', Items.iron_ingot, 'S', Items.stick, 'P', Blocks.planks, 'Q', ModItems.itemFreqCrystal);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockRadio), "HIH", "PQP", "PHP", 'H', Blocks.wooden_slab, 'I', Items.iron_ingot, 'P', Blocks.planks, 'Q', ModItems.itemFreqCrystal);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockRecordEtcher), "HIH", "PQP", "PPP", 'H', Blocks.WOODEN_SLAB, 'I', Items.IRON_INGOT, 'P', Blocks.PLANKS, 'Q', Items.QUARTZ);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockRecordPlayer), "GGG", "PDP", "PPP", 'G', Blocks.GLASS_PANE, 'P', Blocks.PLANKS, 'D', Blocks.DIAMOND_BLOCK);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockFrequencyTuner), "SHH", "PQP", "PIP", 'H', Blocks.WOODEN_SLAB, 'I', Items.IRON_INGOT, 'S', Items.STICK, 'P', Blocks.PLANKS, 'Q', ModItems.itemFreqCrystal);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockRadio), "HIH", "PQP", "PHP", 'H', Blocks.WOODEN_SLAB, 'I', Items.IRON_INGOT, 'P', Blocks.PLANKS, 'Q', ModItems.itemFreqCrystal);
 
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockSMSpeaker), "LLW", "QDW", "LLW", 'L', Blocks.log, 'W', new ItemStack(Blocks.wool, 1, 15), 'D', Items.diamond, 'Q', Items.quartz);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockMDSpeaker), "LLW", "ESW", "LLW", 'L', Blocks.log, 'W', new ItemStack(Blocks.wool, 1, 15), 'S', ModBlocks.blockSMSpeaker, 'E', Items.ender_eye);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockLGSpeaker), "LLW", "CMW", "LLW", 'L', Blocks.log, 'W', new ItemStack(Blocks.wool, 1, 15), 'M', ModBlocks.blockMDSpeaker, 'C', Items.comparator);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockSMSpeaker), "LLW", "QDW", "LLW", 'L', Blocks.LOG, 'W', new ItemStack(Blocks.WOOL, 1, 15), 'D', Items.DIAMOND, 'Q', Items.QUARTZ);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockMDSpeaker), "LLW", "ESW", "LLW", 'L', Blocks.LOG, 'W', new ItemStack(Blocks.WOOL, 1, 15), 'S', ModBlocks.blockSMSpeaker, 'E', Items.ENDER_EYE);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockLGSpeaker), "LLW", "CMW", "LLW", 'L', Blocks.LOG, 'W', new ItemStack(Blocks.WOOL, 1, 15), 'M', ModBlocks.blockMDSpeaker, 'C', Items.COMPARATOR);
 
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockStrobeLight), "GGG", "GRG", "CTC", 'G', Blocks.glass, 'C', Items.comparator, 'R', Blocks.redstone_lamp, 'T', Blocks.redstone_torch);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockLazer), "LLL", "LQG", "HLH", 'L', Blocks.log, 'H', Blocks.wooden_slab, 'G', Blocks.glass, 'Q', Items.quartz);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockLazerCluster), "LLL", "LRL", "LLL", 'L', ModBlocks.blockLazer, 'R', Items.redstone);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockStrobeLight), "GGG", "GRG", "CTC", 'G', Blocks.GLASS, 'C', Items.COMPARATOR, 'R', Blocks.REDSTONE_LAMP, 'T', Blocks.REDSTONE_TORCH);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockLazer), "LLL", "LQG", "HLH", 'L', Blocks.LOG, 'H', Blocks.WOODEN_SLAB, 'G', Blocks.GLASS, 'Q', Items.QUARTZ);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockLazerCluster), "LLL", "LRL", "LLL", 'L', ModBlocks.blockLazer, 'R', Items.REDSTONE);
     }
 }

@@ -7,7 +7,7 @@ import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class PacketWireConnection implements IPacket {
@@ -30,7 +30,7 @@ public class PacketWireConnection implements IPacket {
     public void executeClient(EntityPlayer player) { }
 
     public void executeServer(EntityPlayer player) {
-        TileEntity te1 = player.worldObj.getTileEntity(new BlockPos(connection.x1, connection.y1, connection.z1));
+        TileEntity te1 = player.worldObj.getTileEntity(new net.minecraft.util.math.BlockPos(connection.x1, connection.y1, connection.z1));
         TileEntity te2 = player.worldObj.getTileEntity(new BlockPos(connection.x2, connection.y2, connection.z2));
         if(te1 instanceof IRecordWire && te2 instanceof IRecordWire) {
             if(!(te1 instanceof IRecordWireHome && te2 instanceof IRecordWireHome)) {

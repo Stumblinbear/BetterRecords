@@ -23,7 +23,7 @@ public class RecipeRecordRepeatable implements IRecipe {
                         return false;
                     else
                         record = itemstack;
-                else if(itemstack.getItem() == Items.comparator)
+                else if(itemstack.getItem() == Items.COMPARATOR)
                     if(comparator)
                         return false;
                     else
@@ -49,7 +49,7 @@ public class RecipeRecordRepeatable implements IRecipe {
                         return null;
                     else
                         record = itemstack;
-                else if(itemstack.getItem() == Items.comparator)
+                else if(itemstack.getItem() == Items.COMPARATOR)
                     if(comparator)
                         return null;
                     else

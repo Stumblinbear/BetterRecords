@@ -12,33 +12,34 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 public class BlockLazer extends BetterBlock {
 
     public BlockLazer(String name){
-        super(Material.iron, name);
-        setBlockBounds(0.25F, 0F, 0.25F, 0.75F, 0.75F, 0.74F);
+        super(Material.IRON, name);
+        //setBlockBounds(0.25F, 0F, 0.25F, 0.75F, 0.75F, 0.74F);
         setHardness(3.2F);
         setResistance(4.3F);
     }
 
-    @Override
-    public int getLightValue(IBlockAccess world, BlockPos pos){
-        TileEntity te = world.getTileEntity(pos);
-        if(te == null || !(te instanceof IRecordWire)) return 0;
-        BetterUtils.markBlockDirty(te.getWorld(), te.getPos());
-        return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
-    }
+    //TODO
+//    @Override
+//    public int getLightValue(IBlockState state) {
+//        TileEntity te = world.getTileEntity(pos);
+//        if(te == null || !(te instanceof IRecordWire)) return 0;
+//        BetterUtils.markBlockDirty(te.getWorld(), te.getPos());
+//        return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
+//    }
 
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state){
         super.onBlockAdded(world, pos, state);
-        world.markBlockForUpdate(pos);
+        //world.markBlockForUpdate(pos);
     }
 
     @Override
@@ -56,15 +57,15 @@ public class BlockLazer extends BetterBlock {
     }
 
     @Override
-    public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest){
-        if(world.isRemote) return super.removedByPlayer(world, pos, player, willHarvest);
+    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest){
+        if(world.isRemote) return super.removedByPlayer(state, world, pos, player, willHarvest);
         TileEntity te = world.getTileEntity(pos);
         if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
-        return super.removedByPlayer(world, pos, player, willHarvest);
+        return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         TileEntity tileEntity = world.getTileEntity(pos);
         if(tileEntity == null || !(tileEntity instanceof TileEntityLazer)) return false;
         TileEntityLazer tileEntityLazer = (TileEntityLazer) tileEntity;
@@ -79,7 +80,7 @@ public class BlockLazer extends BetterBlock {
             }
         }
         if(tileEntityLazer.length != length && !world.isRemote){
-            player.addChatMessage(new ChatComponentTranslation("msg.lazerlength." + (tileEntityLazer.length > length ? "increase" : "decrease")).appendText(" " + tileEntityLazer.length));
+            player.addChatMessage(new TextComponentTranslation("msg.lazerlength." + (tileEntityLazer.length > length ? "increase" : "decrease")).appendText(" " + tileEntityLazer.length));
         }
         return true;
     }

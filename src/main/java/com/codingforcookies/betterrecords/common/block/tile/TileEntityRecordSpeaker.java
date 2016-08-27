@@ -3,11 +3,10 @@ package com.codingforcookies.betterrecords.common.block.tile;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 import java.util.ArrayList;
@@ -44,22 +43,25 @@ public class TileEntityRecordSpeaker extends TileEntity implements IRecordWire {
             connections = ConnectionHelper.unserializeConnections(compound.getString("connections"));
     }
 
-    public void writeToNBT(NBTTagCompound compound) {
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
         compound.setInteger("type", type);
         compound.setFloat("rotation", rotation);
         compound.setString("connections", ConnectionHelper.serializeConnections(connections));
+
+        return compound;
     }
 
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeToNBT(nbt);
-        return new S35PacketUpdateTileEntity(pos, 1, nbt);
+        return new SPacketUpdateTileEntity(pos, 1, nbt);
     }
 
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)  {
+    //TODO
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)  {
         readFromNBT(pkt.getNbtCompound());
-        Minecraft.getMinecraft().renderGlobal.markBlockForUpdate(pos);
+        //Minecraft.getMinecraft().renderGlobal.markBlockForUpdate(pos);
     }
 }

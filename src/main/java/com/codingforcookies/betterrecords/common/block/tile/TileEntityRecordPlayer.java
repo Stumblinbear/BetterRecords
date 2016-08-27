@@ -4,15 +4,14 @@ import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ITickable;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -146,7 +145,7 @@ public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, I
             playRadius = compound.getFloat("playRadius");
     }
 
-    public void writeToNBT(NBTTagCompound compound) {
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
         compound.setFloat("rotation", getBlockMetadata());
@@ -155,6 +154,8 @@ public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, I
         compound.setString("connections", ConnectionHelper.serializeConnections(connections));
         compound.setString("wireSystemInfo", ConnectionHelper.serializeWireSystemInfo(wireSystemInfo));
         compound.setFloat("playRadius", playRadius);
+
+        return compound;
     }
 
     public NBTTagCompound getStackTagCompound(ItemStack stack) {
@@ -167,11 +168,12 @@ public class TileEntityRecordPlayer extends TileEntity implements IRecordWire, I
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeToNBT(nbt);
-        return new S35PacketUpdateTileEntity(pos, 1, nbt);
+        return new SPacketUpdateTileEntity(pos, 1, nbt);
     }
 
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)  {
+    //TODO
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)  {
         readFromNBT(pkt.getNbtCompound());
-        Minecraft.getMinecraft().renderGlobal.markBlockForUpdate(pos);
+        //Minecraft.getMinecraft().renderGlobal.markBlockForUpdate(pos);
     }
 }

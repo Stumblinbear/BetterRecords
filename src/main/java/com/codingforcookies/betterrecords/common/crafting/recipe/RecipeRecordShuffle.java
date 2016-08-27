@@ -21,7 +21,7 @@ public class RecipeRecordShuffle implements IRecipe {
             if(itemstack != null) {
                 if(itemstack.getItem() instanceof ItemURLMultiRecord && itemstack.getTagCompound() != null) if(record != null) return false;
                 else record = itemstack;
-                else if(itemstack.getItem() == Item.getItemFromBlock(Blocks.redstone_torch)) if(shuffle) return false;
+                else if(itemstack.getItem() == Item.getItemFromBlock(Blocks.REDSTONE_TORCH)) if(shuffle) return false;
                 else shuffle = true;
                 else return false;
             }
@@ -38,7 +38,7 @@ public class RecipeRecordShuffle implements IRecipe {
             if(itemstack != null) {
                 if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null) if(record != null) return null;
                 else record = itemstack;
-                else if(itemstack.getItem() == Item.getItemFromBlock(Blocks.redstone_torch)) if(shuffle) return null;
+                else if(itemstack.getItem() == Item.getItemFromBlock(Blocks.REDSTONE_TORCH)) if(shuffle) return null;
                 else shuffle = true;
                 else return null;
             }

@@ -8,7 +8,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -76,6 +76,7 @@ public class TileEntityLazer extends TileEntity implements IRecordWire, IRecordA
             bass = 0F;
     }
 
+    @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
 
@@ -86,25 +87,29 @@ public class TileEntityLazer extends TileEntity implements IRecordWire, IRecordA
         if(compound.hasKey("yaw"))
             yaw = compound.getFloat("yaw");
         if(compound.hasKey("length"))
- length = compound.getInteger("length");
+            length = compound.getInteger("length");
     }
 
-    public void writeToNBT(NBTTagCompound compound) {
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
         compound.setString("connections", ConnectionHelper.serializeConnections(connections));
         compound.setFloat("pitch", pitch);
         compound.setFloat("yaw", yaw);
         compound.setInteger("length", length);
+
+        return compound;
     }
 
     public Packet getDescriptionPacket() {
         NBTTagCompound nbt = new NBTTagCompound();
         writeToNBT(nbt);
-        return new S35PacketUpdateTileEntity(pos, 1, nbt);
+        return new SPacketUpdateTileEntity(pos, 1, nbt);
     }
 
-    public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt)  {
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)  {
         readFromNBT(pkt.getNbtCompound());
     }
 }

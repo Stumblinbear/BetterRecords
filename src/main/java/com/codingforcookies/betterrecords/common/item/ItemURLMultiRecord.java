@@ -6,7 +6,7 @@ import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -21,7 +21,7 @@ public class ItemURLMultiRecord extends ItemURLRecord {
     @Override
     @SideOnly(Side.CLIENT)
     public String getItemStackDisplayName(ItemStack itemStack){
-        return StatCollector.translateToLocal(getUnlocalizedName() + ".name");
+        return I18n.translateToLocal(getUnlocalizedName() + ".name");
     }
 
     @Override
@@ -49,6 +49,6 @@ public class ItemURLMultiRecord extends ItemURLRecord {
 
     @Override
     public void onRecordInserted(IRecordWireHome wireHome, ItemStack itemStack){
-        PacketHandler.sendRecordPlayToAllFromServer(wireHome.getTileEntity().getPos().getX(), wireHome.getTileEntity().getPos().getY(), wireHome.getTileEntity().getPos().getZ(), wireHome.getTileEntity().getWorld().provider.getDimensionId(), wireHome.getSongRadius(), itemStack.getTagCompound(), itemStack.getTagCompound().hasKey("repeat") ? itemStack.getTagCompound().getBoolean("repeat") : false, itemStack.getTagCompound().hasKey("shuffle") ? itemStack.getTagCompound().getBoolean("shuffle") : false);
+        PacketHandler.sendRecordPlayToAllFromServer(wireHome.getTileEntity().getPos().getX(), wireHome.getTileEntity().getPos().getY(), wireHome.getTileEntity().getPos().getZ(), wireHome.getTileEntity().getWorld().provider.getDimension(), wireHome.getSongRadius(), itemStack.getTagCompound(), itemStack.getTagCompound().hasKey("repeat") ? itemStack.getTagCompound().getBoolean("repeat") : false, itemStack.getTagCompound().hasKey("shuffle") ? itemStack.getTagCompound().getBoolean("shuffle") : false);
     }
 }

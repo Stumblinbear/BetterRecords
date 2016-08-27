@@ -9,6 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer {
 
+    @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
         if(!(te instanceof TileEntityRecordEtcher)) {
             GL11.glPushMatrix();
@@ -34,10 +35,10 @@ public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer {
                 GL11.glRotatef(tileEntityRecordEtcher.recordRotation * 57.3F, 0F, 0F, 1F);
                 GL11.glTranslatef(0F, -.35F, 0F);
                 if(Minecraft.getMinecraft().gameSettings.fancyGraphics)
-                    Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(tileEntityRecordEtcher.recordEntity, 0, 0, 0, 0, 0);
+                    Minecraft.getMinecraft().getRenderManager().doRenderEntity(tileEntityRecordEtcher.recordEntity, 0, 0, 0, 0 ,0, false);
                 else{
                     Minecraft.getMinecraft().gameSettings.fancyGraphics = true;
-                    Minecraft.getMinecraft().getRenderManager().renderEntityWithPosYaw(tileEntityRecordEtcher.recordEntity, 0, 0, 0, 0, 0);
+                    Minecraft.getMinecraft().getRenderManager().doRenderEntity(tileEntityRecordEtcher.recordEntity, 0, 0, 0, 0, 0, false);
                     Minecraft.getMinecraft().gameSettings.fancyGraphics = false;
                 }
             }

@@ -8,15 +8,15 @@ public class TESRRenderHandler {
 
     @SubscribeEvent
     public void onModelBakeEvent(ModelBakeEvent event) {
-        event.modelManager.getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockRecordEtcher);
-        event.modelManager.getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockRecordPlayer);
-        event.modelManager.getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockFrequencyTuner);
-        event.modelManager.getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockRadio);
-        event.modelManager.getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockSMSpeaker);
-        event.modelManager.getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockMDSpeaker);
-        event.modelManager.getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockLGSpeaker);
-        event.modelManager.getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockStrobeLight);
-        event.modelManager.getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockLazer);
-        event.modelManager.getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockLazerCluster);
+        event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockRecordEtcher);
+        event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockRecordPlayer);
+        event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockFrequencyTuner);
+        event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockRadio);
+        event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockSMSpeaker);
+        event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockMDSpeaker);
+        event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockLGSpeaker);
+        event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockStrobeLight);
+        event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockLazer);
+        event.getModelManager().getBlockModelShapes().registerBuiltInBlocks(ModBlocks.blockLazerCluster);
     }
 }

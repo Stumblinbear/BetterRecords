@@ -9,7 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
@@ -18,8 +19,8 @@ import java.util.Random;
 public class BlockRecordEtcher extends BetterBlock {
 
     public BlockRecordEtcher(String name) {
-        super(Material.wood, name);
-        setBlockBounds(.065F, 0F, .065F, .935F, .875F, .935F);
+        super(Material.WOOD, name);
+        //setBlockBounds(.065F, 0F, .065F, .935F, .875F, .935F);
         setHardness(1.5F);
         setResistance(5.5F);
     }
@@ -27,11 +28,11 @@ public class BlockRecordEtcher extends BetterBlock {
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state){
         super.onBlockAdded(world, pos, state);
-        world.markBlockForUpdate(pos);
+        //world.markBlockForUpdate(pos);
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ){
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ){
         if(!(world.getTileEntity(pos) instanceof TileEntityRecordEtcher))
             return false;
 
@@ -45,7 +46,7 @@ public class BlockRecordEtcher extends BetterBlock {
         super.breakBlock(world, pos, state);
     }
 
-    private void dropItem(World world, BlockPos pos) {
+    private void dropItem(World world, net.minecraft.util.math.BlockPos pos) {
         TileEntity tileEntity = world.getTileEntity(pos);
         if(tileEntity == null || !(tileEntity instanceof TileEntityRecordEtcher))
             return;

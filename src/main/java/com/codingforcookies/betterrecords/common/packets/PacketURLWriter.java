@@ -7,7 +7,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class PacketURLWriter implements IPacket {
@@ -61,8 +60,9 @@ public class PacketURLWriter implements IPacket {
 
     public void executeClient(EntityPlayer player) { }
 
+    //TODO
     public void executeServer(EntityPlayer player) {
-        TileEntity te = player.worldObj.getTileEntity(new BlockPos(x, y, z));
+        TileEntity te = player.worldObj.getTileEntity(new net.minecraft.util.math.BlockPos(x, y, z));
         if(te == null || !(te instanceof TileEntityRecordEtcher || te instanceof TileEntityFrequencyTuner))
             return;
 
@@ -80,7 +80,7 @@ public class PacketURLWriter implements IPacket {
                     itemStack.getTagCompound().setInteger("color", color);
                     itemStack.getTagCompound().setString("author", author);
                 }
-                player.worldObj.markBlockForUpdate(new BlockPos(x, y, z));
+                //player.worldObj.markBlockForUpdate(new net.minecraft.util.math.BlockPos(x, y, z));
             }
         }else if(te instanceof TileEntityFrequencyTuner) {
             TileEntityFrequencyTuner tileEntityFrequencyTuner = (TileEntityFrequencyTuner)te;
@@ -92,7 +92,7 @@ public class PacketURLWriter implements IPacket {
                 itemStack.getTagCompound().setString("local", localName);
                 if(color != -999)
                     itemStack.getTagCompound().setInteger("color", color);
-                player.worldObj.markBlockForUpdate(new BlockPos(x, y, z));
+                //player.worldObj.markBlockForUpdate(new BlockPos(x, y, z));
             }
         }
     }

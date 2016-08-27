@@ -25,7 +25,7 @@ public class RecipeRecord implements IRecipe {
                     return false;
                 else
                     record = true;
-            else if(itemStack.getItem() == Items.ender_eye)
+            else if(itemStack.getItem() == Items.ENDER_EYE)
                 if(eye)
                     return false;
                 else

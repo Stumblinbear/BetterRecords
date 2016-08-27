@@ -4,7 +4,7 @@ import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
 import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -12,9 +12,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -22,34 +22,35 @@ import java.util.Random;
 public class BlockFrequencyTuner extends BetterBlock {
 
     public BlockFrequencyTuner(String name) {
-        super(Material.wood, name);
-        setBlockBounds(.18F, 0F, .12F, .82F, .6F, .88F);
+        super(Material.WOOD, name);
+        //setBlockBounds(.18F, 0F, .12F, .82F, .6F, .88F);
         setHardness(1.5F);
         setResistance(5.5F);
     }
 
-    @Override
-    public void setBlockBoundsBasedOnState(IBlockAccess block, BlockPos pos) {
-        switch(block.getTileEntity(pos).getBlockMetadata()) {
-            case 0:
-            case 2:
-                setBlockBounds(.18F, 0F, .12F, .82F, .6F, .88F);
-                break;
-            case 1:
-            case 3:
-                setBlockBounds(.12F, 0F, .18F, .88F, .6F, .82F);
-                break;
-        }
-    }
+    //TODO
+//    @Override
+//    public void setBlockBoundsBasedOnState(IBlockAccess block, BlockPos pos) {
+//        switch(block.getTileEntity(pos).getBlockMetadata()) {
+//            case 0:
+//            case 2:
+//                setBlockBounds(.18F, 0F, .12F, .82F, .6F, .88F);
+//                break;
+//            case 1:
+//            case 3:
+//                setBlockBounds(.12F, 0F, .18F, .88F, .6F, .82F);
+//                break;
+//        }
+//    }
+
+//    @Override
+//    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+//        super.func_181087_e(world, pos);
+//        world.markBlockForUpdate(new BlockPos(pos.getX(), pos.getY(), pos.getZ()));
+//    }
 
     @Override
-    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-        super.func_181087_e(world, pos);
-        world.markBlockForUpdate(new BlockPos(pos.getX(), pos.getY(), pos.getZ()));
-    }
-
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         if(!(world.getTileEntity(pos) instanceof TileEntityFrequencyTuner))
             return false;
 
@@ -58,8 +59,8 @@ public class BlockFrequencyTuner extends BetterBlock {
     }
 
     @Override
-    public BlockState createBlockState() {
-        return new BlockState(this, StaticInfo.CARDINAL_DIRECTIONS);
+    public BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, StaticInfo.CARDINAL_DIRECTIONS);
     }
 
     @Override

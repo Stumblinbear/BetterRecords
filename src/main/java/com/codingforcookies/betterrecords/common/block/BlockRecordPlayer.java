@@ -12,7 +12,7 @@ import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockState;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -22,8 +22,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -31,8 +31,8 @@ import java.util.Random;
 public class BlockRecordPlayer extends BetterBlock {
 
     public BlockRecordPlayer(String name){
-        super(Material.wood, name);
-        setBlockBounds(.025F, 0F, .025F, .975F, .975F, .975F);
+        super(Material.WOOD, name);
+        //setBlockBounds(.025F, 0F, .025F, .975F, .975F, .975F);
         setHardness(1F);
         setResistance(5F);
     }
@@ -40,31 +40,31 @@ public class BlockRecordPlayer extends BetterBlock {
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state){
         super.onBlockAdded(world, pos, state);
-        world.markBlockForUpdate(pos);
+        //world.markBlockForUpdate(pos);
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IRecordWireManipulator) return false;
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
+        if(heldItem != null && heldItem.getItem() instanceof IRecordWireManipulator) return false;
         TileEntity tileEntity = world.getTileEntity(pos);
         if(tileEntity == null || !(tileEntity instanceof TileEntityRecordPlayer)) return false;
         TileEntityRecordPlayer tileEntityRecordPlayer = (TileEntityRecordPlayer) tileEntity;
         if(player.isSneaking()){
-            if(world.getBlockState(pos.add(0,1,0)).getBlock() == Blocks.air){
+            if(world.getBlockState(pos.add(0,1,0)).getBlock() == Blocks.AIR){
                 if (!world.isRemote) {
                     tileEntityRecordPlayer.opening = !tileEntityRecordPlayer.opening;
                 }
-                world.markBlockForUpdate(pos);
-                if(tileEntityRecordPlayer.opening) world.playSoundEffect(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), "random.chestopen", 0.5F, world.rand.nextFloat() * 0.2F + 3F);
-                else world.playSoundEffect(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), "random.chestclosed", 0.5F, world.rand.nextFloat() * 0.2F + 3F);
+                //world.markBlockForUpdate(pos);
+                if(tileEntityRecordPlayer.opening) world.playSound(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), SoundEvent.REGISTRY.getObject(new ResourceLocation("block.chest.open")), SoundCategory.NEUTRAL, 0.2F, world.rand.nextFloat() * 0.2F + 3F, false);
+                else world.playSound(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), SoundEvent.REGISTRY.getObject(new ResourceLocation("block.chest.open")), SoundCategory.NEUTRAL, 0.2F, world.rand.nextFloat() * 0.2F + 3F, false);
             }
         }else if(tileEntityRecordPlayer.opening){
             if(tileEntityRecordPlayer.record != null){
                 if(!world.isRemote) dropItem(world, pos);
                 tileEntityRecordPlayer.setRecord(null);
-                world.markBlockForUpdate(pos);
-            }else if(player.getHeldItem() != null && (player.getHeldItem().getItem() == Items.diamond || (player.getHeldItem().getItem() instanceof IRecord && ((IRecord) player.getHeldItem().getItem()).isRecordValid(player.getHeldItem())))){
-                if(player.getHeldItem().getItem() == Items.diamond){
+                //world.markBlockForUpdate(pos);
+            }else if(heldItem != null && (heldItem.getItem() == Items.DIAMOND || (heldItem.getItem() instanceof IRecord && ((IRecord) heldItem.getItem()).isRecordValid(heldItem)))){
+                if(heldItem.getItem() == Items.DIAMOND){
                     ItemStack itemStack = new ItemStack(ModItems.itemURLRecord);
                     itemStack.setTagCompound(new NBTTagCompound());
                     itemStack.getTagCompound().setString("name", "easteregg.ogg");
@@ -72,13 +72,13 @@ public class BlockRecordPlayer extends BetterBlock {
                     itemStack.getTagCompound().setString("local", "Darude - Sandstorm");
                     itemStack.getTagCompound().setInteger("color", 0x53EAD7);
                     tileEntityRecordPlayer.setRecord(itemStack);
-                    world.markBlockForUpdate(pos);
-                    player.getHeldItem().stackSize--;
+                    //world.markBlockForUpdate(pos);
+                    heldItem.stackSize--;
                 }else{
-                    tileEntityRecordPlayer.setRecord(player.getHeldItem());
-                    world.markBlockForUpdate(pos);
-                    if (!world.isRemote) ((IRecord) player.getHeldItem().getItem()).onRecordInserted(tileEntityRecordPlayer, player.getHeldItem());
-                    player.getHeldItem().stackSize--;
+                    tileEntityRecordPlayer.setRecord(heldItem);
+                    //world.markBlockForUpdate(pos);
+                    if (!world.isRemote) ((IRecord) heldItem.getItem()).onRecordInserted(tileEntityRecordPlayer, heldItem);
+                    heldItem.stackSize--;
                 }
             }
         }
@@ -86,8 +86,8 @@ public class BlockRecordPlayer extends BetterBlock {
     }
 
     @Override
-    public BlockState createBlockState() {
-        return new BlockState(this, StaticInfo.CARDINAL_DIRECTIONS);
+    public BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, StaticInfo.CARDINAL_DIRECTIONS);
     }
 
     @Override
@@ -101,7 +101,7 @@ public class BlockRecordPlayer extends BetterBlock {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World world, net.minecraft.util.math.BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         world.setBlockState(pos, state.withProperty(StaticInfo.CARDINAL_DIRECTIONS, placer.getHorizontalFacing().getOpposite()));
         if(world.isRemote && !ClientProxy.tutorials.get("recordplayer")){
             BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.recordplayer");
@@ -111,11 +111,11 @@ public class BlockRecordPlayer extends BetterBlock {
     }
 
     @Override
-    public boolean removedByPlayer(World world, BlockPos pos, EntityPlayer player, boolean willHarvest){
-        if(world.isRemote) return super.removedByPlayer(world, pos, player, willHarvest);
+    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest){
+        if(world.isRemote) return super.removedByPlayer(state, world, pos, player, willHarvest);
         TileEntity te = world.getTileEntity(pos);
         if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
-        return super.removedByPlayer(world, pos, player, willHarvest);
+        return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 
     @Override
@@ -143,18 +143,18 @@ public class BlockRecordPlayer extends BetterBlock {
             world.spawnEntityInWorld(entityItem);
             item.stackSize = 0;
             tileEntityRecordPlayer.record = null;
-            PacketHandler.sendSoundStopToAllFromServer(tileEntityRecordPlayer.getPos().getX(), tileEntityRecordPlayer.getPos().getY(), tileEntityRecordPlayer.getPos().getZ(), world.provider.getDimensionId());
+            PacketHandler.sendSoundStopToAllFromServer(tileEntityRecordPlayer.getPos().getX(), tileEntityRecordPlayer.getPos().getY(), tileEntityRecordPlayer.getPos().getZ(), world.provider.getDimension());
         }
     }
 
 
     @Override
-    public boolean hasComparatorInputOverride(){
+    public boolean hasComparatorInputOverride(IBlockState state){
         return true;
     }
 
     @Override
-    public int getComparatorInputOverride(World world, BlockPos pos){
+    public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos){
         return 5;
     }
 
