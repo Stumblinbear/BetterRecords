@@ -20,6 +20,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -28,25 +31,23 @@ public class BlockRadio extends BetterBlock {
 
     public BlockRadio(String name){
         super(Material.WOOD, name);
-        //setBlockBounds(0.13F, 0F, 0.2F, 0.87F, 0.98F, 0.8F);
         setHardness(2F);
         setResistance(6.3F);
     }
 
-    //TODO
-//    @Override
-//    public void setBlockBoundsBasedOnState(IBlockAccess block, net.minecraft.util.math.BlockPos pos) {
-//        switch (block.getTileEntity(pos).getBlockMetadata()){
-//            case 0:
-//            case 2:
-//                setBlockBounds(0.13F, 0F, 0.2F, 0.87F, 0.98F, 0.8F);
-//                break;
-//            case 1:
-//            case 3:
-//                setBlockBounds(0.2F, 0F, 0.13F, 0.8F, 0.98F, 0.87F);
-//                break;
-//        }
-//    }
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess block, BlockPos pos) {
+        switch (getMetaFromState(state)){
+            case 0:
+            case 2:
+                return new AxisAlignedBB(0.13F, 0F, 0.2F, 0.87F, 0.98F, 0.8F);
+            case 1:
+            case 3:
+                return new AxisAlignedBB(0.2F, 0F, 0.13F, 0.8F, 0.98F, 0.87F);
+            default:
+                return FULL_BLOCK_AABB;
+        }
+    }
 //
 //    @Override
 //    public void onBlockAdded(World world, net.minecraft.util.math.BlockPos pos, IBlockState state){

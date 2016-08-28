@@ -10,8 +10,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -20,9 +22,13 @@ public class BlockRecordEtcher extends BetterBlock {
 
     public BlockRecordEtcher(String name) {
         super(Material.WOOD, name);
-        //setBlockBounds(.065F, 0F, .065F, .935F, .875F, .935F);
         setHardness(1.5F);
         setResistance(5.5F);
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess block, BlockPos pos) {
+        return new AxisAlignedBB(.065F, 0F, .065F, .935F, .875F, .935F);
     }
 
     @Override

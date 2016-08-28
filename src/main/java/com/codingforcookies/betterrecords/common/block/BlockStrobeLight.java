@@ -12,16 +12,22 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockStrobeLight extends BetterBlock {
 
     public BlockStrobeLight(String name){
         super(Material.IRON, name);
-        //setBlockBounds(0.25F, 0F, 0.25F, 0.75F, 0.75F, 0.74F);
         setHardness(2.75F);
         setResistance(4F);
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess block, BlockPos pos) {
+        return new AxisAlignedBB(0.25F, 0F, 0.25F, 0.75F, 0.75F, 0.74F);
     }
 
     //TODO

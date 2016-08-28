@@ -12,7 +12,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockRecordSpeaker extends BetterBlock {
@@ -38,22 +40,19 @@ public class BlockRecordSpeaker extends BetterBlock {
         //world.markBlockForUpdate(pos);
     }
 
-//    @Override
-//    public void setBlockBoundsBasedOnState(IBlockAccess block, BlockPos pos) {
-//        switch (meta){
-//            case 0:
-//                setBlockBounds(0.26F, 0.05F, 0.25F, 0.75F, 0.65F, 0.74F);
-//                break;
-//            case 1:
-//                setBlockBounds(0.2F, 0.0F, 0.2F, 0.8F, 0.88F, 0.8F);
-//                break;
-//            case 2:
-//                setBlockBounds(0.12F, 0.0F, 0.12F, 0.88F, 1.51F, 0.88F);
-//                break;
-//            default:
-//                break;
-//        }
-//    }
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess block, BlockPos pos) {
+        switch (meta){
+            case 0:
+                return new AxisAlignedBB(0.26F, 0.05F, 0.25F, 0.75F, 0.65F, 0.74F);
+            case 1:
+                return new AxisAlignedBB(0.2F, 0.0F, 0.2F, 0.8F, 0.88F, 0.8F);
+            case 2:
+                return new AxisAlignedBB(0.12F, 0.0F, 0.12F, 0.88F, 1.51F, 0.88F);
+            default:
+                return FULL_BLOCK_AABB;
+        }
+    }
 
     @Override
     public void onBlockPlacedBy(World world, net.minecraft.util.math.BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {

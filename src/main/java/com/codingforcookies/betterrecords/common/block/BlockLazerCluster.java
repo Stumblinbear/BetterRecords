@@ -19,7 +19,6 @@ public class BlockLazerCluster extends BetterBlock {
 
     public BlockLazerCluster(String name){
         super(Material.IRON, name);
-
         setHardness(4.8F);
         setResistance(4.8F);
     }

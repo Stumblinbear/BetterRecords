@@ -23,7 +23,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -32,9 +34,13 @@ public class BlockRecordPlayer extends BetterBlock {
 
     public BlockRecordPlayer(String name){
         super(Material.WOOD, name);
-        //setBlockBounds(.025F, 0F, .025F, .975F, .975F, .975F);
         setHardness(1F);
         setResistance(5F);
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess block, BlockPos pos) {
+        return new AxisAlignedBB(.025F, 0F, .025F, .975F, .975F, .975F);
     }
 
     @Override

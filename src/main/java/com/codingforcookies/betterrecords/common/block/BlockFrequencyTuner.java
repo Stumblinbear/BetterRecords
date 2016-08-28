@@ -14,7 +14,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -23,25 +25,24 @@ public class BlockFrequencyTuner extends BetterBlock {
 
     public BlockFrequencyTuner(String name) {
         super(Material.WOOD, name);
-        //setBlockBounds(.18F, 0F, .12F, .82F, .6F, .88F);
         setHardness(1.5F);
         setResistance(5.5F);
+
     }
 
-    //TODO
-//    @Override
-//    public void setBlockBoundsBasedOnState(IBlockAccess block, BlockPos pos) {
-//        switch(block.getTileEntity(pos).getBlockMetadata()) {
-//            case 0:
-//            case 2:
-//                setBlockBounds(.18F, 0F, .12F, .82F, .6F, .88F);
-//                break;
-//            case 1:
-//            case 3:
-//                setBlockBounds(.12F, 0F, .18F, .88F, .6F, .82F);
-//                break;
-//        }
-//    }
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess block, BlockPos pos) {
+        switch(getMetaFromState(state)) {
+            case 0:
+            case 2:
+                return new AxisAlignedBB(.18F, 0F, .12F, .82F, .6F, .88F);
+            case 1:
+            case 3:
+                return new AxisAlignedBB(.12F, 0F, .18F, .88F, .6F, .82F);
+            default:
+                return FULL_BLOCK_AABB;
+        }
+    }
 
 //    @Override
 //    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {

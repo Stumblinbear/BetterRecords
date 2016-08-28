@@ -14,15 +14,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockLazer extends BetterBlock {
 
     public BlockLazer(String name){
         super(Material.IRON, name);
-        //setBlockBounds(0.25F, 0F, 0.25F, 0.75F, 0.75F, 0.74F);
         setHardness(3.2F);
         setResistance(4.3F);
     }
@@ -35,6 +36,11 @@ public class BlockLazer extends BetterBlock {
 //        BetterUtils.markBlockDirty(te.getWorld(), te.getPos());
 //        return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
 //    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess block, BlockPos pos) {
+        return new AxisAlignedBB(0.25F, 0F, 0.25F, 0.75F, 0.75F, 0.74F);
+    }
 
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state){
