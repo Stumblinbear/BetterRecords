@@ -13,7 +13,7 @@ public class BetterItem extends Item {
 
     @Override
     public Item setUnlocalizedName(String name) {
-        GameRegistry.registerItem(this, name);
+        GameRegistry.register(this.setRegistryName(name));
         return super.setUnlocalizedName("betterrecords:" + name);
     }
 }

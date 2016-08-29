@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
@@ -23,7 +24,8 @@ public abstract class BetterBlock<T extends TileEntity> extends BlockContainer {
 
     @Override
     public Block setUnlocalizedName(String name) {
-        GameRegistry.registerBlock(this, name);
+        GameRegistry.register(this.setRegistryName(name));
+        GameRegistry.register(new ItemBlock(this).setRegistryName(name));
         return super.setUnlocalizedName("betterrecords:" + name);
     }
 
