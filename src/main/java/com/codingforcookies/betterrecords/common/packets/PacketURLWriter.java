@@ -3,6 +3,7 @@ package com.codingforcookies.betterrecords.common.packets;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -60,7 +61,6 @@ public class PacketURLWriter implements IPacket {
 
     public void executeClient(EntityPlayer player) { }
 
-    //TODO
     public void executeServer(EntityPlayer player) {
         TileEntity te = player.worldObj.getTileEntity(new net.minecraft.util.math.BlockPos(x, y, z));
         if(te == null || !(te instanceof TileEntityRecordEtcher || te instanceof TileEntityFrequencyTuner))
@@ -80,7 +80,8 @@ public class PacketURLWriter implements IPacket {
                     itemStack.getTagCompound().setInteger("color", color);
                     itemStack.getTagCompound().setString("author", author);
                 }
-                //player.worldObj.markBlockForUpdate(new net.minecraft.util.math.BlockPos(x, y, z));
+                IBlockState state = player.worldObj.getBlockState(te.getPos());
+                player.worldObj.notifyBlockUpdate(te.getPos(), state, state, 3);
             }
         }else if(te instanceof TileEntityFrequencyTuner) {
             TileEntityFrequencyTuner tileEntityFrequencyTuner = (TileEntityFrequencyTuner)te;
@@ -92,7 +93,8 @@ public class PacketURLWriter implements IPacket {
                 itemStack.getTagCompound().setString("local", localName);
                 if(color != -999)
                     itemStack.getTagCompound().setInteger("color", color);
-                //player.worldObj.markBlockForUpdate(new BlockPos(x, y, z));
+                IBlockState state = player.worldObj.getBlockState(te.getPos());
+                player.worldObj.notifyBlockUpdate(te.getPos(), state, state, 3);
             }
         }
     }

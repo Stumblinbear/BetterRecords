@@ -66,7 +66,7 @@ public class BlockLazer extends BetterBlock {
     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest){
         if(world.isRemote) return super.removedByPlayer(state, world, pos, player, willHarvest);
         TileEntity te = world.getTileEntity(pos);
-        if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te, state);
+        if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
         return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 

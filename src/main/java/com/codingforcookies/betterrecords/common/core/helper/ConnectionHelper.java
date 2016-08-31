@@ -84,14 +84,15 @@ public class ConnectionHelper {
         }
     }
 
-    public static void removeConnection(World world, IRecordWire iRecordWire, RecordConnection rec, IBlockState state) {
+    public static void removeConnection(World world, IRecordWire iRecordWire, RecordConnection rec) {
         for(int i = 0; i < iRecordWire.getConnections().size(); i++)
             if(iRecordWire.getConnections().get(i).same(rec)) {
                 TileEntity te = world.getTileEntity(new BlockPos(iRecordWire.getConnections().get(i).x1, iRecordWire.getConnections().get(i).y1, iRecordWire.getConnections().get(i).z1));
 
                 if(te != null && te instanceof IRecordWireHome && te != iRecordWire) {
                     ((IRecordWireHome)te).decreaseAmount(iRecordWire);
-                    world.notifyBlockUpdate(((TileEntity)iRecordWire).getPos(), state, state, 3);
+                    BlockPos pos = ((TileEntity)iRecordWire).getPos();
+                    world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
                     Random rand = new Random();
 
                     float rx = rand.nextFloat() * 0.8F + 0.1F;
@@ -105,7 +106,7 @@ public class ConnectionHelper {
                     entityItem.motionZ = rand.nextGaussian() * 0.05F;
                     world.spawnEntityInWorld(entityItem);
 
-                    removeConnection(world, (IRecordWire)te, rec, state);
+                    removeConnection(world, (IRecordWire)te, rec);
                 }
 
                 iRecordWire.getConnections().remove(i);
@@ -113,17 +114,19 @@ public class ConnectionHelper {
             }
     }
 
-    public static void clearConnections(World world, IRecordWire iRecordWire, IBlockState state) {
-        while(iRecordWire.getConnections().size() != 0) {
-            RecordConnection rec = iRecordWire.getConnections().get(0);
-            TileEntity te = world.getTileEntity(new BlockPos(rec.x1, rec.y1, rec.z1));
+    public static void clearConnections(World world, IRecordWire iRecordWire) {
+        while (iRecordWire.getConnections().size() != 0) {
+            RecordConnection connection = iRecordWire.getConnections().get(0);
+            TileEntity te = world.getTileEntity(new BlockPos(connection.x1, connection.y1, connection.z1));
             if(te != null && te instanceof IRecordWire) {
-                removeConnection(world, iRecordWire, rec, state);
+                removeConnection(world, iRecordWire, connection);
+                world.notifyBlockUpdate(te.getPos(), world.getBlockState(te.getPos()), world.getBlockState(te.getPos()), 3);
             }else{
                 System.err.println("Warning on clearing connections: Attached block is not a member of IRecordWire! This may cause ghost connections until a relog!");
                 iRecordWire.getConnections().remove(0);
             }
         }
-        world.notifyBlockUpdate(((TileEntity)iRecordWire).getPos(), state, state, 3);
+        BlockPos pos = ((TileEntity)iRecordWire).getPos();
+        world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
     }
 }

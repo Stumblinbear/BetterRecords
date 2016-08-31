@@ -33,7 +33,6 @@ public class BlockRecordSpeaker extends BetterBlock {
         }
     }
 
-    //TODO
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state){
         super.onBlockAdded(world, pos, state);
@@ -55,7 +54,7 @@ public class BlockRecordSpeaker extends BetterBlock {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, net.minecraft.util.math.BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         TileEntity tileEntity = world.getTileEntity(pos);
         if(tileEntity == null || !(tileEntity instanceof TileEntityRecordSpeaker)) return;
         ((TileEntityRecordSpeaker) tileEntity).rotation = placer.rotationYaw;
@@ -68,10 +67,10 @@ public class BlockRecordSpeaker extends BetterBlock {
     }
 
     @Override
-    public boolean removedByPlayer(IBlockState state, World world, net.minecraft.util.math.BlockPos pos, EntityPlayer player, boolean willHarvest){
+    public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest){
         if(world.isRemote) return super.removedByPlayer(state, world, pos, player, willHarvest);
         TileEntity te = world.getTileEntity(pos);
-        if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te, state);
+        if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
         return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 

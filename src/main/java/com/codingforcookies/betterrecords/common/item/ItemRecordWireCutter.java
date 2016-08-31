@@ -29,7 +29,7 @@ public class ItemRecordWireCutter extends BetterItem implements IRecordWireManip
         if(world.isRemote)
             return EnumActionResult.PASS;
 
-        ConnectionHelper.clearConnections(te.getWorld(), (IRecordWire)te, world.getBlockState(pos));
+        ConnectionHelper.clearConnections(te.getWorld(), (IRecordWire)te);
         return EnumActionResult.PASS;
     }
 }
