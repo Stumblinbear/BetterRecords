@@ -6,17 +6,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityRecordEtcher extends TileEntity implements IInventory, ITickable {
+public class TileEntityRecordEtcher extends BetterTile implements IInventory, ITickable {
     public ItemStack record = null;
     public EntityItem recordEntity;
 
@@ -91,18 +87,6 @@ public class TileEntityRecordEtcher extends TileEntity implements IInventory, IT
         if(stack != null)
             stack.writeToNBT(tag);
         return tag;
-    }
-
-    public Packet getDescriptionPacket() {
-        NBTTagCompound nbt = new NBTTagCompound();
-        writeToNBT(nbt);
-        return new SPacketUpdateTileEntity(pos, 1, nbt);
-    }
-
-    //TODO
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)  {
-        readFromNBT(pkt.getNbtCompound());
-        //Minecraft.getMinecraft().renderGlobal.markBlockForUpdate(pos);
     }
 
     public int getSizeInventory() {

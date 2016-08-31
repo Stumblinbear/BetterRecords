@@ -5,17 +5,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityFrequencyTuner extends TileEntity implements IInventory, ITickable {
+public class TileEntityFrequencyTuner extends BetterTile implements IInventory, ITickable {
     public ItemStack crystal = null;
     public float crystalFloaty = 0F;
 
@@ -65,19 +61,6 @@ public class TileEntityFrequencyTuner extends TileEntity implements IInventory, 
         if(stack != null)
             stack.writeToNBT(tag);
         return tag;
-    }
-
-
-    public Packet getDescriptionPacket() {
-        NBTTagCompound nbt = new NBTTagCompound();
-        writeToNBT(nbt);
-        return new SPacketUpdateTileEntity(pos, 1, nbt);
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)  {
-        readFromNBT(pkt.getNbtCompound());
-        //Minecraft.getMinecraft().renderGlobal.markBlockForUpdate(pos);
     }
 
     @Override

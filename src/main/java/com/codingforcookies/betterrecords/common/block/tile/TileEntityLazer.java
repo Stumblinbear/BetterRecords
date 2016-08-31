@@ -4,19 +4,15 @@ import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
-import net.minecraft.util.ITickable;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TileEntityLazer extends TileEntity implements IRecordWire, IRecordAmplitude, ITickable {
+public class TileEntityLazer extends BetterTile implements IRecordWire, IRecordAmplitude, ITickable {
     public ArrayList<RecordConnection> connections = null;
     public ArrayList<RecordConnection> getConnections() { return connections; }
 
@@ -100,16 +96,5 @@ public class TileEntityLazer extends TileEntity implements IRecordWire, IRecordA
         compound.setInteger("length", length);
 
         return compound;
-    }
-
-    public Packet getDescriptionPacket() {
-        NBTTagCompound nbt = new NBTTagCompound();
-        writeToNBT(nbt);
-        return new SPacketUpdateTileEntity(pos, 1, nbt);
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)  {
-        readFromNBT(pkt.getNbtCompound());
     }
 }

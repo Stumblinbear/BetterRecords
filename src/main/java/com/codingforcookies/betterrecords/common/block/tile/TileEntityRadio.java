@@ -6,9 +6,6 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.Packet;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -17,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TileEntityRadio extends TileEntity implements IRecordWire, IRecordWireHome, ITickable {
+public class TileEntityRadio extends BetterTile implements IRecordWire, IRecordWireHome, ITickable {
     public ArrayList<Float> formTreble = new ArrayList<Float>();
     public synchronized void addTreble(float form) { formTreble.add(form); }
     public ArrayList<Float> formBass = new ArrayList<Float>();
@@ -144,17 +141,5 @@ public class TileEntityRadio extends TileEntity implements IRecordWire, IRecordW
         if(stack != null)
             stack.writeToNBT(tag);
         return tag;
-    }
-
-    public Packet getDescriptionPacket() {
-        NBTTagCompound nbt = new NBTTagCompound();
-        writeToNBT(nbt);
-        return new SPacketUpdateTileEntity(pos, 1, nbt);
-    }
-
-    //TODO
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)  {
-        readFromNBT(pkt.getNbtCompound());
-        //Minecraft.getMinecraft().renderGlobal.markBlockForUpdate(pos);
     }
 }
