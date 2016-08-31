@@ -46,7 +46,7 @@ public class BlockRecordPlayer extends BetterBlock {
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state){
         super.onBlockAdded(world, pos, state);
-        //world.markBlockForUpdate(pos);
+        world.notifyBlockUpdate(pos, state, state, 3);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class BlockRecordPlayer extends BetterBlock {
                 if (!world.isRemote) {
                     tileEntityRecordPlayer.opening = !tileEntityRecordPlayer.opening;
                 }
-                //world.markBlockForUpdate(pos);
+                world.notifyBlockUpdate(pos, state, state, 3);
                 if(tileEntityRecordPlayer.opening) world.playSound(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), SoundEvent.REGISTRY.getObject(new ResourceLocation("block.chest.open")), SoundCategory.NEUTRAL, 0.2F, world.rand.nextFloat() * 0.2F + 3F, false);
                 else world.playSound(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), SoundEvent.REGISTRY.getObject(new ResourceLocation("block.chest.open")), SoundCategory.NEUTRAL, 0.2F, world.rand.nextFloat() * 0.2F + 3F, false);
             }
@@ -68,7 +68,7 @@ public class BlockRecordPlayer extends BetterBlock {
             if(tileEntityRecordPlayer.record != null){
                 if(!world.isRemote) dropItem(world, pos);
                 tileEntityRecordPlayer.setRecord(null);
-                //world.markBlockForUpdate(pos);
+                world.notifyBlockUpdate(pos, state, state, 3);
             }else if(heldItem != null && (heldItem.getItem() == Items.DIAMOND || (heldItem.getItem() instanceof IRecord && ((IRecord) heldItem.getItem()).isRecordValid(heldItem)))){
                 if(heldItem.getItem() == Items.DIAMOND){
                     ItemStack itemStack = new ItemStack(ModItems.itemURLRecord);
@@ -78,11 +78,11 @@ public class BlockRecordPlayer extends BetterBlock {
                     itemStack.getTagCompound().setString("local", "Darude - Sandstorm");
                     itemStack.getTagCompound().setInteger("color", 0x53EAD7);
                     tileEntityRecordPlayer.setRecord(itemStack);
-                    //world.markBlockForUpdate(pos);
+                    world.notifyBlockUpdate(pos, state, state, 3);
                     heldItem.stackSize--;
                 }else{
                     tileEntityRecordPlayer.setRecord(heldItem);
-                    //world.markBlockForUpdate(pos);
+                    world.notifyBlockUpdate(pos, state, state, 3);
                     if (!world.isRemote) ((IRecord) heldItem.getItem()).onRecordInserted(tileEntityRecordPlayer, heldItem);
                     heldItem.stackSize--;
                 }
@@ -120,7 +120,7 @@ public class BlockRecordPlayer extends BetterBlock {
     public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest){
         if(world.isRemote) return super.removedByPlayer(state, world, pos, player, willHarvest);
         TileEntity te = world.getTileEntity(pos);
-        if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
+        if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te, state);
         return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 

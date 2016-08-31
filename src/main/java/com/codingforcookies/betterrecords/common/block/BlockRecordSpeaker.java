@@ -37,7 +37,7 @@ public class BlockRecordSpeaker extends BetterBlock {
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state){
         super.onBlockAdded(world, pos, state);
-        //world.markBlockForUpdate(pos);
+        world.notifyBlockUpdate(pos, state, state, 3);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class BlockRecordSpeaker extends BetterBlock {
     public boolean removedByPlayer(IBlockState state, World world, net.minecraft.util.math.BlockPos pos, EntityPlayer player, boolean willHarvest){
         if(world.isRemote) return super.removedByPlayer(state, world, pos, player, willHarvest);
         TileEntity te = world.getTileEntity(pos);
-        if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
+        if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te, state);
         return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 

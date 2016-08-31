@@ -44,11 +44,11 @@ public class BlockFrequencyTuner extends BetterBlock {
         }
     }
 
-//    @Override
-//    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-//        super.func_181087_e(world, pos);
-//        world.markBlockForUpdate(new BlockPos(pos.getX(), pos.getY(), pos.getZ()));
-//    }
+    @Override
+    public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
+        super.onBlockAdded(world, pos, state);
+        world.notifyBlockUpdate(pos, state, state, 3);
+    }
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {

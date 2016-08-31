@@ -48,12 +48,12 @@ public class BlockRadio extends BetterBlock {
                 return FULL_BLOCK_AABB;
         }
     }
-//
-//    @Override
-//    public void onBlockAdded(World world, net.minecraft.util.math.BlockPos pos, IBlockState state){
-//        super.onBlockAdded(world, pos, state);
-//        world.markBlockForUpdate(pos);
-//    }
+
+    @Override
+    public void onBlockAdded(World world, net.minecraft.util.math.BlockPos pos, IBlockState state){
+        super.onBlockAdded(world, pos, state);
+        world.notifyBlockUpdate(pos, state, state, 3);
+    }
 
     @Override
     public boolean onBlockActivated(World world, net.minecraft.util.math.BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ){
@@ -63,17 +63,17 @@ public class BlockRadio extends BetterBlock {
         TileEntityRadio tileEntityRadio = (TileEntityRadio) tileEntity;
         if(player.isSneaking()) {
             tileEntityRadio.opening = !tileEntityRadio.opening;
-            //world.markBlockForUpdate(pos);
+            world.notifyBlockUpdate(pos, state, state, 3);
             if(tileEntityRadio.opening) world.playSound(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), SoundEvent.REGISTRY.getObject(new ResourceLocation("block.chest.open")), SoundCategory.NEUTRAL, 0.2F, world.rand.nextFloat() * 0.2F + 3F, false);
             else world.playSound(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), SoundEvent.REGISTRY.getObject(new ResourceLocation("block.chest.open")), SoundCategory.NEUTRAL, 0.2F, world.rand.nextFloat() * 0.2F + 3F, false);
         }else if(tileEntityRadio.opening) {
             if(tileEntityRadio.crystal != null) {
                 if(!world.isRemote) dropItem(world, pos);
                 tileEntityRadio.setCrystal(null);
-                //world.markBlockForUpdate(pos);
+                world.notifyBlockUpdate(pos, state, state, 3);
             }else if(heldItem != null && (heldItem.getItem() == ModItems.itemFreqCrystal && heldItem.getTagCompound() != null && heldItem.getTagCompound().hasKey("url"))) {
                 tileEntityRadio.setCrystal(heldItem);
-                //world.markBlockForUpdate(pos);
+                world.notifyBlockUpdate(pos, state, state, 3);
                 heldItem.stackSize--;
                 if(!world.isRemote) PacketHandler.sendRadioPlayToAllFromServer(tileEntityRadio.getPos().getX(), tileEntityRadio.getPos().getY(), tileEntityRadio.getPos().getZ(), world.provider.getDimension(), tileEntityRadio.getSongRadius(), tileEntityRadio.crystal.getTagCompound().getString("name"), tileEntityRadio.crystal.getTagCompound().getString("url"));
             }
@@ -110,7 +110,7 @@ public class BlockRadio extends BetterBlock {
     public boolean removedByPlayer(IBlockState state, World world, net.minecraft.util.math.BlockPos pos, EntityPlayer player, boolean willHarvest){
         if(world.isRemote) return super.removedByPlayer(state, world, pos, player, willHarvest);
         TileEntity te = world.getTileEntity(pos);
-        if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te);
+        if(te != null && te instanceof IRecordWire) ConnectionHelper.clearConnections(world, (IRecordWire) te, state);
         return super.removedByPlayer(state, world, pos, player, willHarvest);
     }
 

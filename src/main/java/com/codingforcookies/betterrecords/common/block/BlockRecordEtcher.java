@@ -34,7 +34,7 @@ public class BlockRecordEtcher extends BetterBlock {
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state){
         super.onBlockAdded(world, pos, state);
-        //world.markBlockForUpdate(pos);
+        world.notifyBlockUpdate(pos, state, state, 3);
     }
 
     @Override

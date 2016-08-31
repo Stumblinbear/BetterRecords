@@ -54,8 +54,8 @@ public class ItemRecordWire extends BetterItem implements IRecordWireManipulator
 
             if(te2 instanceof IRecordWire) {
                 if(!(te1 instanceof IRecordWireHome && te2 instanceof IRecordWireHome)) {
-                    ConnectionHelper.addConnection(te.getWorld(), (IRecordWire)te1, connection);
-                    ConnectionHelper.addConnection(te.getWorld(), (IRecordWire)te2, connection);
+                    ConnectionHelper.addConnection(te.getWorld(), (IRecordWire)te1, connection, world.getBlockState(te.getPos()));
+                    ConnectionHelper.addConnection(te.getWorld(), (IRecordWire)te2, connection, world.getBlockState(te.getPos()));
                     PacketHandler.sendWireConnectionFromClient(connection);
                     stack.stackSize--;
                 }

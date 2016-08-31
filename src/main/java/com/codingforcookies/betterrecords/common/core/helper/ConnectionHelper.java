@@ -4,6 +4,7 @@ import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.common.item.ModItems;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -69,31 +70,28 @@ public class ConnectionHelper {
         return ret;
     }
 
-    //TODO
-    public static void addConnection(World world, IRecordWire iRecordWire, RecordConnection rec) {
+    public static void addConnection(World world, IRecordWire iRecordWire, RecordConnection rec, IBlockState state) {
         for(int i = 0; i < iRecordWire.getConnections().size(); i++)
             if(iRecordWire.getConnections().get(i).same(rec))
                 return;
 
         iRecordWire.getConnections().add(rec);
-        //world.markBlockForUpdate(new net.minecraft.util.math.BlockPos(((TileEntity)iRecordWire).getPos().getX(), ((TileEntity)iRecordWire).getPos().getY(), ((TileEntity)iRecordWire).getPos().getZ()));
-
+        world.notifyBlockUpdate(((TileEntity)iRecordWire).getPos(), state, state, 3);
         TileEntity te = world.getTileEntity(new BlockPos(rec.x1, rec.y1, rec.z1));
         if(te != null && te instanceof IRecordWireHome && te != iRecordWire) {
             ((IRecordWireHome)te).increaseAmount(iRecordWire);
-            //world.markBlockForUpdate(new BlockPos(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ()));
+            world.notifyBlockUpdate(((TileEntity)iRecordWire).getPos(), state, state, 3);
         }
     }
 
-    public static void removeConnection(World world, IRecordWire iRecordWire, RecordConnection rec) {
+    public static void removeConnection(World world, IRecordWire iRecordWire, RecordConnection rec, IBlockState state) {
         for(int i = 0; i < iRecordWire.getConnections().size(); i++)
             if(iRecordWire.getConnections().get(i).same(rec)) {
                 TileEntity te = world.getTileEntity(new BlockPos(iRecordWire.getConnections().get(i).x1, iRecordWire.getConnections().get(i).y1, iRecordWire.getConnections().get(i).z1));
 
                 if(te != null && te instanceof IRecordWireHome && te != iRecordWire) {
                     ((IRecordWireHome)te).decreaseAmount(iRecordWire);
-                    //world.markBlockForUpdate(new net.minecraft.util.math.BlockPos(te.getPos().getX(), te.getPos().getY(), te.getPos().getZ()));
-
+                    world.notifyBlockUpdate(((TileEntity)iRecordWire).getPos(), state, state, 3);
                     Random rand = new Random();
 
                     float rx = rand.nextFloat() * 0.8F + 0.1F;
@@ -107,7 +105,7 @@ public class ConnectionHelper {
                     entityItem.motionZ = rand.nextGaussian() * 0.05F;
                     world.spawnEntityInWorld(entityItem);
 
-                    removeConnection(world, (IRecordWire)te, rec);
+                    removeConnection(world, (IRecordWire)te, rec, state);
                 }
 
                 iRecordWire.getConnections().remove(i);
@@ -115,18 +113,17 @@ public class ConnectionHelper {
             }
     }
 
-    public static void clearConnections(World world, IRecordWire iRecordWire) {
+    public static void clearConnections(World world, IRecordWire iRecordWire, IBlockState state) {
         while(iRecordWire.getConnections().size() != 0) {
             RecordConnection rec = iRecordWire.getConnections().get(0);
             TileEntity te = world.getTileEntity(new BlockPos(rec.x1, rec.y1, rec.z1));
             if(te != null && te instanceof IRecordWire) {
-                removeConnection(world, iRecordWire, rec);
+                removeConnection(world, iRecordWire, rec, state);
             }else{
                 System.err.println("Warning on clearing connections: Attached block is not a member of IRecordWire! This may cause ghost connections until a relog!");
                 iRecordWire.getConnections().remove(0);
             }
         }
-        //world.markBlockForUpdate(new net.minecraft.util.math.BlockPos(((TileEntity)iRecordWire).getPos().getX(), ((TileEntity)iRecordWire).getPos().getY(), ((TileEntity)iRecordWire).getPos().getZ()));
+        world.notifyBlockUpdate(((TileEntity)iRecordWire).getPos(), state, state, 3);
     }
-    //TODO
 }
