@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.common.block;
 
+import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
@@ -30,14 +31,13 @@ public class BlockStrobeLight extends BetterBlock {
         return new AxisAlignedBB(0.25F, 0F, 0.25F, 0.75F, 0.75F, 0.74F);
     }
 
-    //TODO
-//    @Override
-//    public int getLightValue(IBlockAccess world, BlockPos pos){
-//        TileEntity te = world.getTileEntity(pos);
-//        if(te == null || !(te instanceof IRecordWire) || !(te instanceof IRecordAmplitude)) return 0;
-//        BetterUtils.markBlockDirty(te.getWorld(), te.getPos());
-//        return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
-//    }
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess access, BlockPos pos) {
+        TileEntity te = access.getTileEntity(pos);
+        if(te == null || !(te instanceof IRecordWire) || !(te instanceof IRecordAmplitude)) return 0;
+        BetterUtils.markBlockDirty(te.getWorld(), te.getPos());
+        return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
+    }
 
     @Override
     public void onBlockAdded(World world, BlockPos pos, IBlockState state){

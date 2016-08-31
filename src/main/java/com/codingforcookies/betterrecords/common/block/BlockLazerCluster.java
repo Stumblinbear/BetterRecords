@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockLazerCluster extends BetterBlock {
@@ -23,14 +24,13 @@ public class BlockLazerCluster extends BetterBlock {
         setResistance(4.8F);
     }
 
-    //TODO
-//    @Override
-//    public int getLightValue(IBlockAccess world, net.minecraft.util.math.BlockPos pos){
-//        TileEntity te = world.getTileEntity(pos);
-//        if(te == null || !(te instanceof IRecordWire)) return 0;
-//        BetterUtils.markBlockDirty(te.getWorld(), te.getPos());
-//        return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
-//    }
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess access, BlockPos pos) {
+        TileEntity te = access.getTileEntity(pos);
+        if(te == null || !(te instanceof IRecordWire)) return 0;
+        BetterUtils.markBlockDirty(te.getWorld(), te.getPos());
+        return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
+    }
 
     @Override
     public void onBlockAdded(World world, net.minecraft.util.math.BlockPos pos, IBlockState state){

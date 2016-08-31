@@ -28,14 +28,13 @@ public class BlockLazer extends BetterBlock {
         setResistance(4.3F);
     }
 
-    //TODO
-//    @Override
-//    public int getLightValue(IBlockState state) {
-//        TileEntity te = world.getTileEntity(pos);
-//        if(te == null || !(te instanceof IRecordWire)) return 0;
-//        BetterUtils.markBlockDirty(te.getWorld(), te.getPos());
-//        return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
-//    }
+    @Override
+    public int getLightValue(IBlockState state, IBlockAccess access, BlockPos pos) {
+        TileEntity te = access.getTileEntity(pos);
+        if(te == null || !(te instanceof IRecordWire)) return 0;
+        BetterUtils.markBlockDirty(te.getWorld(), te.getPos());
+        return(((IRecordWire) te).getConnections().size() > 0 ? 5 : 0);
+    }
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess block, BlockPos pos) {
