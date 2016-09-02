@@ -18,7 +18,6 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -109,8 +108,8 @@ public class ClientProxy extends CommonProxy {
     private void registerTESRRender(Block block, TileEntitySpecialRenderer renderer,  Class<? extends TileEntity> te, String name) {
         ClientRegistry.bindTileEntitySpecialRenderer(te, renderer);
         Item item = Item.getItemFromBlock(block);
-        ForgeHooksClient.registerTESRItemStack(item, 0, te);
-        ModelLoader.setCustomModelResourceLocation(item, 0, new net.minecraft.client.renderer.block.model.ModelResourceLocation(BetterRecords.ID + ":" + name, "inventory"));
+        //ForgeHooksClient.registerTESRItemStack(item, 0, te);
+        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(BetterRecords.ID + ":itemblock/" + name, "inventory"));
     }
 
 
