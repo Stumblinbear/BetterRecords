@@ -26,7 +26,6 @@ public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer<TileEnt
             GL11.glPushMatrix();
             {
                 GL11.glTranslatef((float)x + .5F, (float)y + .65F, (float)z + .5F);
-                GL11.glScalef(2F, 2F, 2F);
                 GL11.glRotatef(90F, 1F, 0F, 0F);
                 GL11.glRotatef(te.recordRotation * 57.3F, 0F, 0F, 1F);
                 GL11.glTranslatef(0F, -.35F, 0F);
