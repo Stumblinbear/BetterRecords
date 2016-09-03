@@ -6,14 +6,13 @@ import com.codingforcookies.betterrecords.common.block.tile.TileEntityStrobeLigh
 import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
-public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer {
+public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer<TileEntityStrobeLight> {
 
     @Override
-    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
-        if(!(te instanceof TileEntityStrobeLight)) {
+    public void renderTileEntityAt(TileEntityStrobeLight te, double x, double y, double z, float scale, int destroyStage) {
+        if(te == null) {
             GL11.glPushMatrix();
             {
                 GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
@@ -28,8 +27,6 @@ public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer {
             return;
         }
 
-        TileEntityStrobeLight tileEntityStrobeLight = (TileEntityStrobeLight)te;
-
         GL11.glPushMatrix();
         {
             GL11.glTranslatef((float)x + 0.5F, (float)y + 1.5F, (float)z + 0.5F);
@@ -40,7 +37,7 @@ public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer {
 
             GL11.glTranslatef(0.0F, 1.0F, 0.0F);
 
-            if(tileEntityStrobeLight.bass != 0 && ClientProxy.flashyMode > 0) {
+            if(te.bass != 0 && ClientProxy.flashyMode > 0) {
                 float incr = (float) (2 * Math.PI / 10);
 
                 GL11.glPushMatrix();
@@ -63,13 +60,13 @@ public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer {
 
                             for(int i = 0; i < 10; i++) {
                                 float angle = incr * i;
-                                float xx = (float)Math.cos(angle) * tileEntityStrobeLight.bass;
-                                float yy = (float)Math.sin(angle) * tileEntityStrobeLight.bass;
+                                float xx = (float)Math.cos(angle) * te.bass;
+                                float yy = (float)Math.sin(angle) * te.bass;
 
                                 GL11.glVertex2f(xx, yy);
                             }
 
-                            GL11.glVertex2f(tileEntityStrobeLight.bass, 0F);
+                            GL11.glVertex2f(te.bass, 0F);
                         }
                         GL11.glEnd();
                     }
@@ -85,9 +82,9 @@ public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer {
 
                 if(ClientProxy.flashyMode > 1) {
                     Minecraft mc = Minecraft.getMinecraft();
-                    float dist = (float)Math.sqrt(Math.pow(tileEntityStrobeLight.getPos().getX() - mc.thePlayer.posX, 2) + Math.pow(tileEntityStrobeLight.getPos().getY() - mc.thePlayer.posY, 2) + Math.pow(tileEntityStrobeLight.getPos().getZ() - mc.thePlayer.posZ, 2));
-                    if(dist < 4 * tileEntityStrobeLight.bass) {
-                        float newStrobe = Math.abs(dist - 4F * tileEntityStrobeLight.bass) / 100F;
+                    float dist = (float)Math.sqrt(Math.pow(te.getPos().getX() - mc.thePlayer.posX, 2) + Math.pow(te.getPos().getY() - mc.thePlayer.posY, 2) + Math.pow(te.getPos().getZ() - mc.thePlayer.posZ, 2));
+                    if(dist < 4 * te.bass) {
+                        float newStrobe = Math.abs(dist - 4F * te.bass) / 100F;
                         if(newStrobe > 0F && BetterEventHandler.strobeLinger < newStrobe)
                             BetterEventHandler.strobeLinger = newStrobe;
                     }

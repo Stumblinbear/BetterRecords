@@ -4,18 +4,18 @@ import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazer;
 import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
-public class BlockLazerRenderer extends TileEntitySpecialRenderer {
+public class BlockLazerRenderer extends TileEntitySpecialRenderer<TileEntityLazer> {
 
     @Override
-    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
-        if(!(te instanceof TileEntityLazer)) {
+    public void renderTileEntityAt(TileEntityLazer te, double x, double y, double z, float scale, int destroyStage) {
+        if(te == null) {
             GL11.glPushMatrix();
             {
                 GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
                 GL11.glRotatef(180F, 180F, 0.0F, 1.0F);
+                GL11.glRotatef(180F, 0.0F, 1.0F, 0.0F);
 
                 bindTexture(StaticInfo.modelLazerRes);
                 StaticInfo.modelLazer.render(null, 0, 0, 0, 0.0F, 0.0F, 0.0625F);
@@ -27,33 +27,31 @@ public class BlockLazerRenderer extends TileEntitySpecialRenderer {
             return;
         }
 
-        TileEntityLazer tileEntityLazer = (TileEntityLazer)te;
-
         GL11.glPushMatrix();
         {
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
             GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 
             bindTexture(StaticInfo.modelLazerRes);
-            StaticInfo.modelLazer.render(null, tileEntityLazer.bass != 0 ? 1F : 0F, tileEntityLazer.yaw, tileEntityLazer.pitch, 0.0F, 0.0F, 0.0625F);
+            StaticInfo.modelLazer.render(null, te.bass != 0 ? 1F : 0F, te.yaw, te.pitch, 0.0F, 0.0F, 0.0625F);
 
             GL11.glRotatef(-180F, 0.0F, 0.0F, 1.0F);
             GL11.glTranslatef(0.0F, -.926F, 0.0F);
 
-            if(tileEntityLazer.bass != 0 && ClientProxy.flashyMode > 0) {
+            if(te.bass != 0 && ClientProxy.flashyMode > 0) {
                 GL11.glPushMatrix();
                 {
                     GL11.glDisable(GL11.GL_TEXTURE_2D);
                     GL11.glEnable(GL11.GL_BLEND);
                     GL11.glDisable(GL11.GL_CULL_FACE);
 
-                    GL11.glRotatef(-tileEntityLazer.yaw + 180F, 0F, 1F, 0F);
-                    GL11.glRotatef(-tileEntityLazer.pitch + 90F, 1F, 0F, 0F);
+                    GL11.glRotatef(-te.yaw + 180F, 0F, 1F, 0F);
+                    GL11.glRotatef(-te.pitch + 90F, 1F, 0F, 0F);
 
-                    int length = tileEntityLazer.length;
+                    int length = te.length;
 
-                    float yaw = tileEntityLazer.yaw;
-                    float pitch = tileEntityLazer.pitch;
+                    float yaw = te.yaw;
+                    float pitch = te.pitch;
                     /*float startX = tileEntityLazer.getPos().getX() - 0.5F;
                     float startY = tileEntityLazer.getPos().getY();
                     float startZ = tileEntityLazer.getPos().getZ() + .5F;
@@ -76,10 +74,10 @@ public class BlockLazerRenderer extends TileEntitySpecialRenderer {
                         }
                     }
                     */
-                    float width = tileEntityLazer.bass / 400F;
+                    float width = te.bass / 400F;
                     GL11.glBegin(GL11.GL_QUADS);
                     {
-                        GL11.glColor4f(tileEntityLazer.r, tileEntityLazer.g, tileEntityLazer.b, (ClientProxy.flashyMode == 1 ? .3F : .8F));
+                        GL11.glColor4f(te.r, te.g, te.b, (ClientProxy.flashyMode == 1 ? .3F : .8F));
 
                         GL11.glVertex3f(width, 0F, -width);
                         GL11.glVertex3f(-width, 0F, -width);

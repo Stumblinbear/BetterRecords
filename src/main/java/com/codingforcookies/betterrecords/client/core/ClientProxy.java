@@ -10,14 +10,17 @@ import com.codingforcookies.betterrecords.common.block.ModBlocks;
 import com.codingforcookies.betterrecords.common.block.tile.*;
 import com.codingforcookies.betterrecords.common.core.CommonProxy;
 import com.codingforcookies.betterrecords.common.item.ModItems;
+import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -108,7 +111,8 @@ public class ClientProxy extends CommonProxy {
     private void registerTESRRender(Block block, TileEntitySpecialRenderer renderer,  Class<? extends TileEntity> te, String name) {
         ClientRegistry.bindTileEntitySpecialRenderer(te, renderer);
         Item item = Item.getItemFromBlock(block);
-        //ForgeHooksClient.registerTESRItemStack(item, 0, te);
+        ForgeHooksClient.registerTESRItemStack(item, 0, te);
+        ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(StaticInfo.CARDINAL_DIRECTIONS).build());
         ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(BetterRecords.ID + ":itemblock/" + name, "inventory"));
     }
 

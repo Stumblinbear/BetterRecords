@@ -4,17 +4,14 @@ import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazerCluster;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
-public class BlockLazerClusterRenderer extends TileEntitySpecialRenderer {
+public class BlockLazerClusterRenderer extends TileEntitySpecialRenderer<TileEntityLazerCluster> {
 
     @Override
-    public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
-        if(!(te instanceof TileEntityLazerCluster))
+    public void renderTileEntityAt(TileEntityLazerCluster te, double x, double y, double z, float scale, int destroyStage) {
+        if(te == null)
             return;
-
-        TileEntityLazerCluster tileEntityLazerCluster = (TileEntityLazerCluster)te;
 
         GL11.glPushMatrix();
         {
@@ -23,7 +20,7 @@ public class BlockLazerClusterRenderer extends TileEntitySpecialRenderer {
 
             // DRAW MODEL
 
-            if(tileEntityLazerCluster.bass != 0 && ClientProxy.flashyMode > 0) {
+            if(te.bass != 0 && ClientProxy.flashyMode > 0) {
                 GL11.glPushMatrix();
                 {
                     GL11.glDisable(GL11.GL_LIGHTING);
@@ -31,7 +28,7 @@ public class BlockLazerClusterRenderer extends TileEntitySpecialRenderer {
                     GL11.glEnable(GL11.GL_BLEND);
                     RenderHelper.disableStandardItemLighting();
 
-                    GL11.glLineWidth(tileEntityLazerCluster.bass / 2);
+                    GL11.glLineWidth(te.bass / 2);
 
                     for(float pitch = 0F; pitch < 9F; pitch += 1F) {
                         GL11.glRotatef(200F / 3, 0F, 1F, 0F);
@@ -39,7 +36,7 @@ public class BlockLazerClusterRenderer extends TileEntitySpecialRenderer {
                             GL11.glRotatef(200F / 9, 0F, 0F, 1F);
                             GL11.glBegin(GL11.GL_LINE_STRIP);
                             {
-                                GL11.glColor4f(tileEntityLazerCluster.r, tileEntityLazerCluster.g, tileEntityLazerCluster.b, (ClientProxy.flashyMode == 1 ? .2F : .4F));
+                                GL11.glColor4f(te.r, te.g, te.b, (ClientProxy.flashyMode == 1 ? .2F : .4F));
                                 GL11.glVertex2f(0F, 0F);
 
                                 float xx = (float)Math.cos(pitch * (Math.PI / 180)) * 20F;

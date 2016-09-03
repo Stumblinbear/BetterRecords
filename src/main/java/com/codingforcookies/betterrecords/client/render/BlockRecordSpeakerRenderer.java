@@ -20,8 +20,6 @@ public class BlockRecordSpeakerRenderer extends TileEntitySpecialRenderer {
             GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
             if (te != null)
                 GL11.glRotatef(((TileEntityRecordSpeaker)te).rotation, 0F, 1F, 0F);
-            else
-                GL11.glRotatef(180F, 0F, 1F, 0F);
             switch(size) {
                 case 0:
                     GL11.glTranslatef(.05F, 0F, .05F);
