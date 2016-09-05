@@ -291,7 +291,6 @@ public class BetterEventHandler{
                         }
                     }.start();
                 }
-                if(ClientProxy.flashyMode == -1) Minecraft.getMinecraft().thePlayer.openGui(BetterRecords.instance, 2, Minecraft.getMinecraft().theWorld, 0, 0, 0);
             }
             if(!SoundHandler.nowPlaying.equals("")) if(SoundHandler.nowPlayingEnd < System.currentTimeMillis()){
                 SoundHandler.nowPlaying = "";
@@ -327,6 +326,11 @@ public class BetterEventHandler{
                         }
                     }
                 }
+            }
+        } else { //TickEvent.Phase.END
+            if(Minecraft.getMinecraft().thePlayer != null) {
+                if (ClientProxy.flashyMode == -1)
+                    Minecraft.getMinecraft().thePlayer.openGui(BetterRecords.instance, 2, Minecraft.getMinecraft().theWorld, 0, 0, 0);
             }
         }
     }
