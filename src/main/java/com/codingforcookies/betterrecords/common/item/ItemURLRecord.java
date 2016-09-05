@@ -15,21 +15,21 @@ import java.util.List;
 
 public class ItemURLRecord extends BetterItem implements IRecord, IItemColor {
 
-    public ItemURLRecord(String name){
+    public ItemURLRecord(String name) {
         super(name);
         setMaxStackSize(1);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack itemStack){
+    public String getItemStackDisplayName(ItemStack itemStack) {
         if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("local")) return itemStack.getTagCompound().getString("local");
         else return I18n.translateToLocal(getUnlocalizedName() + ".name");
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> tooltip, boolean advanced){
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List<String> tooltip, boolean advanced) {
         if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("author")) tooltip.add(BetterUtils.getTranslatedString("item.record.by") + ": " + itemStack.getTagCompound().getString("author"));
         if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("size")) tooltip.add(BetterUtils.getTranslatedString("item.record.size") + ": " + itemStack.getTagCompound().getString("size") + "mb");
         if(itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("repeat") && itemStack.getTagCompound().getBoolean("repeat")){
@@ -40,17 +40,17 @@ public class ItemURLRecord extends BetterItem implements IRecord, IItemColor {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public int getColorFromItemstack(ItemStack itemStack, int renderPass){
-        return(renderPass == 0 ? 0xFFFFFF : (itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("color") ? itemStack.getTagCompound().getInteger("color") : 0xFFFFFF));
+    public int getColorFromItemstack(ItemStack itemStack, int tintIndex) {
+        return(tintIndex == 0 ? 0xFFFFFF : (itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("color") ? itemStack.getTagCompound().getInteger("color") : 0xFFFFFF));
     }
 
     @Override
-    public boolean isRecordValid(ItemStack itemStack){
+    public boolean isRecordValid(ItemStack itemStack) {
         return itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("name");
     }
 
     @Override
-    public void onRecordInserted(IRecordWireHome wireHome, ItemStack itemStack){
+    public void onRecordInserted(IRecordWireHome wireHome, ItemStack itemStack) {
         PacketHandler.sendRecordPlayToAllFromServer(wireHome.getTileEntity().getPos().getX(), wireHome.getTileEntity().getPos().getY(), wireHome.getTileEntity().getPos().getZ(), wireHome.getTileEntity().getWorld().provider.getDimension(), wireHome.getSongRadius(), itemStack.getTagCompound().getString("name"), itemStack.getTagCompound().getString("url"), itemStack.getTagCompound().getString("local"), itemStack.getTagCompound().hasKey("repeat") ? itemStack.getTagCompound().getBoolean("repeat") : false, itemStack.getTagCompound().hasKey("shuffle") ? itemStack.getTagCompound().getBoolean("shuffle") : false);
     }
 }
