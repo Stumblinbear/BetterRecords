@@ -6,6 +6,7 @@ import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordPlay
 import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import org.lwjgl.opengl.GL11;
 
@@ -141,14 +142,13 @@ public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer<TileEnt
                 GL11.glTranslatef((float)x + .5F, (float)y + .76F, (float)z + .5F);
                 GL11.glRotatef(90F, 1F, 0F, 0F);
                 GL11.glRotatef(te.recordRotation * 57.3F, 0F, 0F, 1F);
-                GL11.glTranslatef(0F, -.35F, 0F);
                 GL11.glDisable(GL11.GL_LIGHTING);
                 GL11.glDisable(GL11.GL_CULL_FACE);
                 if(Minecraft.getMinecraft().gameSettings.fancyGraphics)
-                    Minecraft.getMinecraft().getRenderManager().doRenderEntity(te.recordEntity, 0, 0, 0, 0, 0, false);
+                    Minecraft.getMinecraft().getRenderItem().renderItem(te.recordEntity.getEntityItem(), ItemCameraTransforms.TransformType.NONE);
                 else{
                     Minecraft.getMinecraft().gameSettings.fancyGraphics = true;
-                    Minecraft.getMinecraft().getRenderManager().doRenderEntity(te.recordEntity, 0, 0, 0, 0, 0, false);
+                    Minecraft.getMinecraft().getRenderItem().renderItem(te.recordEntity.getEntityItem(), ItemCameraTransforms.TransformType.NONE);
                     Minecraft.getMinecraft().gameSettings.fancyGraphics = false;
                 }
                 GL11.glEnable(GL11.GL_CULL_FACE);
