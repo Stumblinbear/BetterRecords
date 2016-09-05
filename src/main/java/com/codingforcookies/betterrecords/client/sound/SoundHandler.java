@@ -163,8 +163,10 @@ public class SoundHandler{
                     playSourceDataLine(snd, x, y, z, dimension, BetterSoundType.RADIO, new BufferedInputStream(urlConn.getInputStream()));
                 }catch(Exception e){
                     e.printStackTrace();
-                    System.err.println("Failed to stream: " + url);
-                    nowPlaying = BetterUtils.getTranslatedString("overlay.nowplaying.error2");
+                    if (Minecraft.getMinecraft().thePlayer != null) {
+                        System.err.println("Failed to stream: " + url);
+                        nowPlaying = BetterUtils.getTranslatedString("overlay.nowplaying.error2");
+                    }
                     nowPlayingEnd = System.currentTimeMillis() + 5000;
                 }
                 soundPlaying.remove(x + "," + y + "," + z + "," + dimension);
@@ -199,17 +201,19 @@ public class SoundHandler{
             }
         }catch(Exception e){
             e.printStackTrace();
-            switch (type){
-                case SONG:
-                    nowPlaying = BetterUtils.getTranslatedString("overlay.nowplaying.error3");
-                    System.err.println("Could not read file: Local: " + snd.local + " File: " + snd.name);
-                    break;
-                case RADIO:
-                    nowPlaying = BetterUtils.getTranslatedString("overlay.nowplaying.error2");
-                    System.err.println("Failed to stream: URL: " + snd.url);
-                    break;
-                default:
-                    break;
+            if (Minecraft.getMinecraft().thePlayer != null) {
+                switch (type) {
+                    case SONG:
+                        nowPlaying = BetterUtils.getTranslatedString("overlay.nowplaying.error3");
+                        System.err.println("Could not read file: Local: " + snd.local + " File: " + snd.name);
+                        break;
+                    case RADIO:
+                        nowPlaying = BetterUtils.getTranslatedString("overlay.nowplaying.error2");
+                        System.err.println("Failed to stream: URL: " + snd.url);
+                        break;
+                    default:
+                        break;
+                }
             }
             nowPlayingEnd = System.currentTimeMillis() + 5000;
         }
