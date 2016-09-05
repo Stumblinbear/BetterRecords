@@ -125,6 +125,7 @@ public class TileEntityRecordPlayer extends BetterTile implements IRecordWire, I
         }
     }
 
+    @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
 
@@ -142,6 +143,7 @@ public class TileEntityRecordPlayer extends BetterTile implements IRecordWire, I
             playRadius = compound.getFloat("playRadius");
     }
 
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
