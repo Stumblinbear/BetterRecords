@@ -1,12 +1,23 @@
 package com.codingforcookies.betterrecords.client.render;
 
+import com.codingforcookies.betterrecords.client.model.ModelLGSpeaker;
+import com.codingforcookies.betterrecords.client.model.ModelMDSpeaker;
+import com.codingforcookies.betterrecords.client.model.ModelSMSpeaker;
+import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordSpeaker;
-import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class BlockRecordSpeakerRenderer extends TileEntitySpecialRenderer {
+
+    private static final ModelSMSpeaker MODEL_SM = new ModelSMSpeaker();
+    private static final ResourceLocation TEXTURE_SM = new ResourceLocation(BetterRecords.ID, "textures/models/smspeaker.png");
+    private static final ModelMDSpeaker MODEL_MD = new ModelMDSpeaker();
+    private static final ResourceLocation TEXTURE_MD = new ResourceLocation(BetterRecords.ID, "textures/models/mdspeaker.png");
+    private static final ModelLGSpeaker MODEL_LG = new ModelLGSpeaker();
+    private static final ResourceLocation TEXTURE_LG = new ResourceLocation(BetterRecords.ID, "textures/models/lgspeaker.png");
 
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {
@@ -23,20 +34,20 @@ public class BlockRecordSpeakerRenderer extends TileEntitySpecialRenderer {
             switch(size) {
                 case 0:
                     GL11.glTranslatef(.05F, 0F, .05F);
-                    bindTexture(StaticInfo.modelSMSpeakerRes);
-                    StaticInfo.modelSMSpeaker.render(null, 0F, 0F, 0F, 0.0F, 0.0F, 0.0625F);
+                    bindTexture(TEXTURE_SM);
+                    MODEL_SM.render(null, 0F, 0F, 0F, 0.0F, 0.0F, 0.0625F);
                     break;
                 case 1:
-                    bindTexture(StaticInfo.modelMDSpeakerRes);
-                    StaticInfo.modelMDSpeaker.render(null, 0F, 0F, 0F, 0.0F, 0.0F, 0.0625F);
+                    bindTexture(TEXTURE_MD);
+                    MODEL_MD.render(null, 0F, 0F, 0F, 0.0F, 0.0F, 0.0625F);
                     break;
                 case 2:
-                    bindTexture(StaticInfo.modelLGSpeakerRes);
-                    StaticInfo.modelLGSpeaker.render(null, 0F, 0F, 0F, 0.0F, 0.0F, 0.0625F);
+                    bindTexture(TEXTURE_LG);
+                    MODEL_LG.render(null, 0F, 0F, 0F, 0.0F, 0.0F, 0.0625F);
                     break;
                 default:
-                    bindTexture(StaticInfo.modelMDSpeakerRes);
-                    StaticInfo.modelMDSpeaker.render(null, 0F, 0F, 0F, 0.0F, 0.0F, 0.0625F);
+                    bindTexture(TEXTURE_MD);
+                    MODEL_MD.render(null, 0F, 0F, 0F, 0.0F, 0.0F, 0.0625F);
                     break;
             }
         }

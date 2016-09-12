@@ -2,8 +2,8 @@ package com.codingforcookies.betterrecords.client.gui;
 
 import com.codingforcookies.betterrecords.api.song.LibrarySong;
 import com.codingforcookies.betterrecords.client.core.ClientProxy;
+import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
-import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import com.google.gson.JsonElement;
@@ -14,6 +14,7 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import org.apache.commons.io.FilenameUtils;
 import org.lwjgl.opengl.GL11;
@@ -29,6 +30,8 @@ import java.util.List;
 import java.util.Map.Entry;
 
 public class GuiRecordEtcher extends GuiContainer {
+
+    private static final ResourceLocation GUI = new ResourceLocation(BetterRecords.ID, "textures/gui/recordetcher.png");
 
     TileEntityRecordEtcher tileEntity;
     GuiTextField nameField;
@@ -315,7 +318,7 @@ public class GuiRecordEtcher extends GuiContainer {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
-        mc.renderEngine.bindTexture(StaticInfo.GUIRecordEtcher);
+        mc.renderEngine.bindTexture(GUI);
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
         drawTexturedModalRect(x + 44, y + 51, 0, (error.equals(BetterUtils.getTranslatedString("gui.recordetcher.ready")) ? 166 : 178), 33, 12);
         int mx = mouseX - x;

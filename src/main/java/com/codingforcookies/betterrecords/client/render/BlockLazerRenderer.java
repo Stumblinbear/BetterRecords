@@ -1,12 +1,17 @@
 package com.codingforcookies.betterrecords.client.render;
 
 import com.codingforcookies.betterrecords.client.core.ClientProxy;
+import com.codingforcookies.betterrecords.client.model.ModelLazer;
+import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazer;
-import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class BlockLazerRenderer extends TileEntitySpecialRenderer<TileEntityLazer> {
+
+    private static final ModelLazer MODEL = new ModelLazer();
+    private static final ResourceLocation TEXTURE = new ResourceLocation(BetterRecords.ID, "textures/models/lazer.png");
 
     @Override
     public void renderTileEntityAt(TileEntityLazer te, double x, double y, double z, float scale, int destroyStage) {
@@ -17,8 +22,8 @@ public class BlockLazerRenderer extends TileEntitySpecialRenderer<TileEntityLaze
                 GL11.glRotatef(180F, 180F, 0.0F, 1.0F);
                 GL11.glRotatef(180F, 0.0F, 1.0F, 0.0F);
 
-                bindTexture(StaticInfo.modelLazerRes);
-                StaticInfo.modelLazer.render(null, 0, 0, 0, 0.0F, 0.0F, 0.0625F);
+                bindTexture(TEXTURE);
+                MODEL.render(null, 0, 0, 0, 0.0F, 0.0F, 0.0625F);
 
                 GL11.glRotatef(-180F, -180F, 0.0F, 1.0F);
                 GL11.glTranslatef(0.0F, -.926F, 0.0F);
@@ -32,8 +37,8 @@ public class BlockLazerRenderer extends TileEntitySpecialRenderer<TileEntityLaze
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
             GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
 
-            bindTexture(StaticInfo.modelLazerRes);
-            StaticInfo.modelLazer.render(null, te.bass != 0 ? 1F : 0F, te.yaw, te.pitch, 0.0F, 0.0F, 0.0625F);
+            bindTexture(TEXTURE);
+            MODEL.render(null, te.bass != 0 ? 1F : 0F, te.yaw, te.pitch, 0.0F, 0.0F, 0.0625F);
 
             GL11.glRotatef(-180F, 0.0F, 0.0F, 1.0F);
             GL11.glTranslatef(0.0F, -.926F, 0.0F);

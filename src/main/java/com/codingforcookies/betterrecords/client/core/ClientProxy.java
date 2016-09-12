@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.client.core;
 
+import com.codingforcookies.betterrecords.api.BetterRecordsAPI;
 import com.codingforcookies.betterrecords.api.song.LibrarySong;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
 import com.codingforcookies.betterrecords.client.core.handler.TESRRenderHandler;
@@ -10,7 +11,6 @@ import com.codingforcookies.betterrecords.common.block.ModBlocks;
 import com.codingforcookies.betterrecords.common.block.tile.*;
 import com.codingforcookies.betterrecords.common.core.CommonProxy;
 import com.codingforcookies.betterrecords.common.item.ModItems;
-import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
@@ -114,7 +114,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(te, renderer);
         Item item = Item.getItemFromBlock(block);
         ForgeHooksClient.registerTESRItemStack(item, 0, te);
-        ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(StaticInfo.CARDINAL_DIRECTIONS).build());
+        ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BetterRecordsAPI.CARDINAL_DIRECTIONS).build());
         ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(BetterRecords.ID + ":itemblock/" + name, "inventory"));
     }
 

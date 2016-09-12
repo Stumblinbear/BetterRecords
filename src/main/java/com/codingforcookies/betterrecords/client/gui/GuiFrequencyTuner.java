@@ -1,13 +1,14 @@
 package com.codingforcookies.betterrecords.client.gui;
 
 import com.codingforcookies.betterrecords.client.sound.IcyURLConnection;
+import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
-import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import org.apache.commons.io.FilenameUtils;
 import org.lwjgl.opengl.GL11;
@@ -17,6 +18,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class GuiFrequencyTuner extends GuiContainer {
+
+    private static final ResourceLocation GUI = new ResourceLocation(BetterRecords.ID, "textures/gui/frequencytuner.png");
 
     TileEntityFrequencyTuner tileEntity;
     GuiTextField nameField;
@@ -107,7 +110,7 @@ public class GuiFrequencyTuner extends GuiContainer {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
-        mc.renderEngine.bindTexture(StaticInfo.GUIFrequencyTuner);
+        mc.renderEngine.bindTexture(GUI);
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
         drawTexturedModalRect(x + 43, y + 51, 0, (error.equals(BetterUtils.getTranslatedString("gui.frequencytuner.ready")) ? 166 : 178), 33, 12);
     }

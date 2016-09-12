@@ -1,8 +1,8 @@
 package com.codingforcookies.betterrecords.common.block;
 
+import com.codingforcookies.betterrecords.api.BetterRecordsAPI;
 import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
-import com.codingforcookies.betterrecords.common.lib.StaticInfo;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -61,22 +61,22 @@ public class BlockFrequencyTuner extends BetterBlock {
 
     @Override
     public BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, StaticInfo.CARDINAL_DIRECTIONS);
+        return new BlockStateContainer(this, BetterRecordsAPI.CARDINAL_DIRECTIONS);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(StaticInfo.CARDINAL_DIRECTIONS).getHorizontalIndex();
+        return state.getValue(BetterRecordsAPI.CARDINAL_DIRECTIONS).getHorizontalIndex();
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(StaticInfo.CARDINAL_DIRECTIONS, EnumFacing.getHorizontal(meta));
+        return getDefaultState().withProperty(BetterRecordsAPI.CARDINAL_DIRECTIONS, EnumFacing.getHorizontal(meta));
     }
 
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-        world.setBlockState(pos, state.withProperty(StaticInfo.CARDINAL_DIRECTIONS, placer.getHorizontalFacing().getOpposite()));
+        world.setBlockState(pos, state.withProperty(BetterRecordsAPI.CARDINAL_DIRECTIONS, placer.getHorizontalFacing().getOpposite()));
     }
 
     @Override
