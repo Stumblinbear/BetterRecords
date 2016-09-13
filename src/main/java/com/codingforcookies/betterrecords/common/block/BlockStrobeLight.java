@@ -2,9 +2,9 @@ package com.codingforcookies.betterrecords.common.block;
 
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityStrobeLight;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.block.material.Material;
@@ -47,10 +47,10 @@ public class BlockStrobeLight extends BetterBlock {
 
     @Override
     public void onBlockPlacedBy(World world, net.minecraft.util.math.BlockPos pos, IBlockState state, EntityLivingBase entityLiving, ItemStack itemStack){
-        if(world.isRemote && !ClientProxy.tutorials.get("strobelight")) {
+        if(world.isRemote && !ConfigHandler.tutorials.get("strobelight")) {
             BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.strobelight");
             BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000;
-            ClientProxy.tutorials.put("strobelight", true);
+            ConfigHandler.tutorials.put("strobelight", true);
         }
     }
 

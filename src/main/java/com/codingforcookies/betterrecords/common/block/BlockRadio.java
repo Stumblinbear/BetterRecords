@@ -3,9 +3,9 @@ package com.codingforcookies.betterrecords.common.block;
 import com.codingforcookies.betterrecords.api.BetterRecordsAPI;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRadio;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.common.item.ModItems;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
@@ -99,10 +99,10 @@ public class BlockRadio extends BetterBlock {
     @Override
     public void onBlockPlacedBy(World world, net.minecraft.util.math.BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack itemStack){
         world.setBlockState(pos, state.withProperty(BetterRecordsAPI.CARDINAL_DIRECTIONS, placer.getHorizontalFacing().getOpposite()));
-        if(world.isRemote && !ClientProxy.tutorials.get("radio")) {
+        if(world.isRemote && !ConfigHandler.tutorials.get("radio")) {
             BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.radio");
             BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000;
-            ClientProxy.tutorials.put("radio", true);
+            ConfigHandler.tutorials.put("radio", true);
         }
     }
 

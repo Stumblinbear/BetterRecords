@@ -4,9 +4,9 @@ import com.codingforcookies.betterrecords.api.BetterRecordsAPI;
 import com.codingforcookies.betterrecords.api.record.IRecord;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordPlayer;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.common.item.ModItems;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
@@ -109,10 +109,10 @@ public class BlockRecordPlayer extends BetterBlock {
     @Override
     public void onBlockPlacedBy(World world, net.minecraft.util.math.BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         world.setBlockState(pos, state.withProperty(BetterRecordsAPI.CARDINAL_DIRECTIONS, placer.getHorizontalFacing().getOpposite()));
-        if(world.isRemote && !ClientProxy.tutorials.get("recordplayer")){
+        if(world.isRemote && !ConfigHandler.tutorials.get("recordplayer")){
             BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.recordplayer");
             BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000;
-            ClientProxy.tutorials.put("recordplayer", true);
+            ConfigHandler.tutorials.put("recordplayer", true);
         }
     }
 

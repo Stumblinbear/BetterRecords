@@ -3,7 +3,7 @@ package com.codingforcookies.betterrecords.client.sound;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import com.codingforcookies.betterrecords.common.util.ClasspathInjector;
 import net.minecraft.client.Minecraft;
@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.codingforcookies.betterrecords.common.core.handler.ConfigHandler.streamRadio;
 import static javax.sound.sampled.AudioFormat.Encoding.PCM_SIGNED;
 import static javax.sound.sampled.AudioSystem.getAudioInputStream;
 
@@ -28,9 +29,6 @@ public class SoundHandler{
     public static File soundLocation;
     public static HashMap<String, File> soundList;
     public static HashMap<String, SoundManager> soundPlaying;
-    public static boolean downloadSongs = true;
-    public static int streamBuffer = 256;
-    public static boolean streamRadio = true;
     public static String nowPlaying = "";
     public static long nowPlayingEnd = 0;
     public static int nowPlayingInt = 0;
@@ -101,7 +99,7 @@ public class SoundHandler{
             }else sndMgr = soundPlaying.get(x + "," + y + "," + z + "," + dimension);
             for(int i = songIndex; i < sounds.size(); i++){
                 if(!soundList.containsKey(sounds.get(i).name)) {
-                    if(downloadSongs) {
+                    if(ConfigHandler.downloadSongs) {
                         if(FileDownloader.isDownloading) {
                             System.err.println("Song downloading... Please wait...");
                             nowPlaying = BetterUtils.getTranslatedString("overlay.nowplaying.error1");
@@ -149,7 +147,7 @@ public class SoundHandler{
     }
 
     public static void playSoundFromStream(final int x, final int y, final int z, final int dimension, final float playRadius, final String localName, final String url){
-        if(!streamRadio) return;
+        if(!ConfigHandler.streamRadio) return;
         soundPlaying.put(x + "," + y + "," + z + "," + dimension, new SoundManager(new Sound(x, y, z, dimension, playRadius).setInfo("", url, localName), false, false));
         new Thread(new Runnable(){
 
@@ -226,7 +224,7 @@ public class SoundHandler{
     }
 
     private static void stream(AudioInputStream in, SourceDataLine line, int x, int y, int z, int dimension, BetterSoundType soundType) throws IOException{
-        final byte[] buffer = new byte[streamBuffer];
+        final byte[] buffer = new byte[ConfigHandler.streamBuffer];
         for(int n = 0; n != -1; n = in.read(buffer, 0, buffer.length)){
             while(Minecraft.getMinecraft().isSingleplayer() && Minecraft.getMinecraft().currentScreen != null && Minecraft.getMinecraft().currentScreen.doesGuiPauseGame()){
                 try{
@@ -278,8 +276,8 @@ public class SoundHandler{
             avg = avg / toReturn.length;
             if(control) {
                 if(avg < 0F) avg = Math.abs(avg);
-                if(avg > 20F) return(ClientProxy.flashyMode < 3 ? 10F : 20F);
-                else return (int) (avg * (ClientProxy.flashyMode < 3 ? 1F : 2F));
+                if(avg > 20F) return(ConfigHandler.flashyMode < 3 ? 10F : 20F);
+                else return (int) (avg * (ConfigHandler.flashyMode < 3 ? 1F : 2F));
             }
             return avg;
         }

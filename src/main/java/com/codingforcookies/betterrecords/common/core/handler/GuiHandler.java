@@ -45,8 +45,6 @@ public class GuiHandler implements IGuiHandler {
                 break;
             case 2:
                 return new GuiBetterDisclaimer();
-            case 3:
-                return new GuiBetterConfig();
         }
            return null;
     }

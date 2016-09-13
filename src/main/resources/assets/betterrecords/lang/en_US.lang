@@ -3,9 +3,6 @@ msg.newversion.txt=A new version of BetterRecords is available!
 msg.lazerlength.increase=Lazer length has increased to
 msg.lazerlength.decrease=Lazer length has decreased to
 
-key.betterconfig.category=Better Records Config
-key.betterconfig.desc=Open Configuration GUI
-
 itemGroup.betterrecords=Better Records
 
 item.betterrecords:urlrecord.name=Blank Record
@@ -56,36 +53,10 @@ gui.frequencytuner.error1=No crystal to tune
 gui.frequencytuner.error2=Crystal already tuned
 gui.frequencytuner.error3=Invalid Icy Stream URL!
 
-gui.config.title=Better Records Config
-
-gui.config.on=ON
-gui.config.off=OFF
-gui.config.inf=Inf
 gui.config.flashymode.none=None
 gui.config.flashymode.low=Low
 gui.config.flashymode.norm=Norm
 gui.config.flashymode.rave=RAVE
-
-gui.config.downloadsongs=Download Songs
-gui.config.streamradio=Stream Radio
-gui.config.maxdownload=Max Download(MB)
-gui.config.playondownload=Play on Download
-gui.config.playondownload.line1=Play song while downloading!
-gui.config.playondownload.line2=WARNING!!!
-gui.config.playondownload.line3=This requires a relatively
-gui.config.playondownload.line4=fast download speed.
-gui.config.streambuffer=Stream Buffer
-gui.config.streambuffer.line1=Size of the stream buffer
-gui.config.streambuffer.line2=This increases the accuracy
-gui.config.streambuffer.line3=of amplitude based objects,
-gui.config.streambuffer.line4=(i.e. Strobe Lights & Lazers)
-gui.config.streambuffer.line5=speed of pausing songs,
-gui.config.streambuffer.line6=and time taken before a song
-gui.config.streambuffer.line7=is stopped once the record
-gui.config.streambuffer.line8=player is broken.
-gui.config.streambuffer.line9=But, lower values require
-gui.config.streambuffer.line10=better processors.
-gui.config.flashymode=Flashy Mode
 
 gui.disclaimer.title=Better Records Disclaimer
 gui.disclaimer.warning=WARNING: Parts of this mod make use of flashing lights and images. Consult a parent or guardian before continuing. I am not responsible for anything that may occur while using this mod.

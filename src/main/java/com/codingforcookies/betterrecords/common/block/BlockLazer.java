@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.common.block;
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazer;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.block.material.Material;
@@ -54,10 +54,10 @@ public class BlockLazer extends BetterBlock {
             ((TileEntityLazer) te).pitch = entityLiving.rotationPitch;
             ((TileEntityLazer) te).yaw = entityLiving.rotationYaw;
         }
-        if(world.isRemote && !ClientProxy.tutorials.get("lazer")){
+        if(world.isRemote && !ConfigHandler.tutorials.get("lazer")){
             BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.lazer");
             BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000;
-            ClientProxy.tutorials.put("lazer", true);
+            ConfigHandler.tutorials.put("lazer", true);
         }
     }
 

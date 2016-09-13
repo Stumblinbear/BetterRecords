@@ -1,10 +1,10 @@
 package com.codingforcookies.betterrecords.client.render;
 
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
 import com.codingforcookies.betterrecords.client.model.ModelStrobeLight;
 import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityStrobeLight;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -42,7 +42,7 @@ public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer<TileEnti
 
             GL11.glTranslatef(0.0F, 1.0F, 0.0F);
 
-            if(te.bass != 0 && ClientProxy.flashyMode > 0) {
+            if(te.bass != 0 && ConfigHandler.flashyMode > 0) {
                 float incr = (float) (2 * Math.PI / 10);
 
                 GL11.glPushMatrix();
@@ -60,7 +60,7 @@ public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer<TileEnti
                         GL11.glRotatef(20F, 0F, 0F, 1F);
                         GL11.glBegin(GL11.GL_TRIANGLE_FAN);
                         {
-                            GL11.glColor4f(1F, 1F, 1F, trans / (ClientProxy.flashyMode == 1 ? 3F : 1F));
+                            GL11.glColor4f(1F, 1F, 1F, trans / (ConfigHandler.flashyMode == 1 ? 3F : 1F));
                             GL11.glVertex2f(0F, 0F);
 
                             for(int i = 0; i < 10; i++) {
@@ -85,7 +85,7 @@ public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer<TileEnti
 
                 GL11.glColor4f(1F, 1F, 1F, 1F);
 
-                if(ClientProxy.flashyMode > 1) {
+                if(ConfigHandler.flashyMode > 1) {
                     Minecraft mc = Minecraft.getMinecraft();
                     float dist = (float)Math.sqrt(Math.pow(te.getPos().getX() - mc.thePlayer.posX, 2) + Math.pow(te.getPos().getY() - mc.thePlayer.posY, 2) + Math.pow(te.getPos().getZ() - mc.thePlayer.posZ, 2));
                     if(dist < 4 * te.bass) {

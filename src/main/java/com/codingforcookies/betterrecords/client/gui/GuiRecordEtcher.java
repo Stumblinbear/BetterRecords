@@ -4,6 +4,7 @@ import com.codingforcookies.betterrecords.api.song.LibrarySong;
 import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import com.google.gson.JsonElement;
@@ -65,7 +66,7 @@ public class GuiRecordEtcher extends GuiContainer {
 
                 public void run(){
                     try{
-                        HttpURLConnection request = (HttpURLConnection) new URL(ClientProxy.defaultLibraryURL).openConnection();
+                        HttpURLConnection request = (HttpURLConnection) new URL(ConfigHandler.defaultLibraryURL).openConnection();
                         request.connect();
                         if(request.getResponseCode() == 200){
                             JsonParser jp = new JsonParser();
@@ -270,8 +271,8 @@ public class GuiRecordEtcher extends GuiContainer {
                         ((HttpURLConnection) connection).setRequestMethod("HEAD");
                         connection.connect();
                         if(((HttpURLConnection) connection).getResponseCode() == 200){
-                            if(connection.getContentLength() / 1024 / 1024 > (ClientProxy.downloadMax != 100 ? ClientProxy.downloadMax : 102400)){
-                                error = BetterUtils.getTranslatedString("gui.recordetcher.error3").replace("<size>", "" + ClientProxy.downloadMax);
+                            if(connection.getContentLength() / 1024 / 1024 > (ConfigHandler.downloadMax != 100 ? ConfigHandler.downloadMax : 102400)){
+                                error = BetterUtils.getTranslatedString("gui.recordetcher.error3").replace("<size>", "" + ConfigHandler.downloadMax);
                             }
                         }else error = BetterUtils.getTranslatedString("gui.error4");
                     }else{

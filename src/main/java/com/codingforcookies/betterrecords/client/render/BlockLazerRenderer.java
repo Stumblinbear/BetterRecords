@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.client.render;
 
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.model.ModelLazer;
 import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazer;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -43,7 +43,7 @@ public class BlockLazerRenderer extends TileEntitySpecialRenderer<TileEntityLaze
             GL11.glRotatef(-180F, 0.0F, 0.0F, 1.0F);
             GL11.glTranslatef(0.0F, -.926F, 0.0F);
 
-            if(te.bass != 0 && ClientProxy.flashyMode > 0) {
+            if(te.bass != 0 && ConfigHandler.flashyMode > 0) {
                 GL11.glPushMatrix();
                 {
                     GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -82,7 +82,7 @@ public class BlockLazerRenderer extends TileEntitySpecialRenderer<TileEntityLaze
                     float width = te.bass / 400F;
                     GL11.glBegin(GL11.GL_QUADS);
                     {
-                        GL11.glColor4f(te.r, te.g, te.b, (ClientProxy.flashyMode == 1 ? .3F : .8F));
+                        GL11.glColor4f(te.r, te.g, te.b, (ConfigHandler.flashyMode == 1 ? .3F : .8F));
 
                         GL11.glVertex3f(width, 0F, -width);
                         GL11.glVertex3f(-width, 0F, -width);

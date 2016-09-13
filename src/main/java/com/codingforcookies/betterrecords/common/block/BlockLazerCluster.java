@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.common.block;
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazerCluster;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.block.material.Material;
@@ -40,10 +40,10 @@ public class BlockLazerCluster extends BetterBlock {
 
     @Override
     public void onBlockPlacedBy(World world, net.minecraft.util.math.BlockPos pos, IBlockState state, EntityLivingBase entityLiving, ItemStack itemStack){
-        if(world.isRemote && !ClientProxy.tutorials.get("lazercluster")) {
+        if(world.isRemote && !ConfigHandler.tutorials.get("lazercluster")) {
             BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.lazercluster");
             BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000;
-            ClientProxy.tutorials.put("lazercluster", true);
+            ConfigHandler.tutorials.put("lazercluster", true);
         }
     }
 

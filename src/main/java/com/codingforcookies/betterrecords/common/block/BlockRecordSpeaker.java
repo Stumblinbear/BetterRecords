@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.common.block;
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordSpeaker;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.block.material.Material;
@@ -59,10 +59,10 @@ public class BlockRecordSpeaker extends BetterBlock {
         if(tileEntity == null || !(tileEntity instanceof TileEntityRecordSpeaker)) return;
         ((TileEntityRecordSpeaker) tileEntity).rotation = placer.rotationYaw;
         ((TileEntityRecordSpeaker) tileEntity).type = meta;
-        if(world.isRemote && !ClientProxy.tutorials.get("speaker")) {
+        if(world.isRemote && !ConfigHandler.tutorials.get("speaker")) {
             BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.speaker");
             BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000;
-            ClientProxy.tutorials.put("speaker", true);
+            ConfigHandler.tutorials.put("speaker", true);
         }
     }
 

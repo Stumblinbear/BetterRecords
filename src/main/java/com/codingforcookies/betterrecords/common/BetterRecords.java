@@ -1,6 +1,7 @@
 package com.codingforcookies.betterrecords.common;
 
 import com.codingforcookies.betterrecords.common.core.CommonProxy;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.handler.GuiHandler;
 import com.codingforcookies.betterrecords.common.item.ModItems;
 import com.codingforcookies.betterrecords.common.packets.ChannelHandler;
@@ -42,6 +43,7 @@ public class BetterRecords {
 
     @EventHandler
     public void preInit(final FMLPreInitializationEvent event) {
+        ConfigHandler.loadConfig(event.getSuggestedConfigurationFile());
         proxy.preInit(event);
     }
 

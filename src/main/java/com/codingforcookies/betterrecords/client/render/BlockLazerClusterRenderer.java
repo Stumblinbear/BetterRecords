@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.client.render;
 
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.model.ModelLazerCluster;
 import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazerCluster;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
@@ -45,7 +45,7 @@ public class BlockLazerClusterRenderer extends TileEntitySpecialRenderer<TileEnt
             if(te.r != 0.0F && te.g != 0.0F && te.b != 0.0F) {
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
                 GL11.glEnable(GL11.GL_BLEND);
-                GL11.glColor4f(te.r, te.g, te.b, (ClientProxy.flashyMode == 1 ? .2F : .4F));
+                GL11.glColor4f(te.r, te.g, te.b, (ConfigHandler.flashyMode == 1 ? .2F : .4F));
             }
 
             MODEL.renderEmitor(null, 0F, 0F, 0F, 0.0F, 0.0F, 0.0625F);
@@ -59,7 +59,7 @@ public class BlockLazerClusterRenderer extends TileEntitySpecialRenderer<TileEnt
 
             GL11.glTranslatef(0.0F, 1.0F, 0.0F);
 
-            if(te.bass != 0 && ClientProxy.flashyMode > 0) {
+            if(te.bass != 0 && ConfigHandler.flashyMode > 0) {
                 GL11.glPushMatrix();
                 {
                     GL11.glDisable(GL11.GL_LIGHTING);
@@ -75,7 +75,7 @@ public class BlockLazerClusterRenderer extends TileEntitySpecialRenderer<TileEnt
                             GL11.glRotatef(200F / 9, 0F, 0F, 1F);
                             GL11.glBegin(GL11.GL_LINE_STRIP);
                             {
-                                GL11.glColor4f(te.r, te.g, te.b, (ClientProxy.flashyMode == 1 ? .2F : .4F));
+                                GL11.glColor4f(te.r, te.g, te.b, (ConfigHandler.flashyMode == 1 ? .2F : .4F));
                                 GL11.glVertex2f(0F, 0F);
 
                                 float xx = (float)Math.cos(pitch * (Math.PI / 180)) * 20F;

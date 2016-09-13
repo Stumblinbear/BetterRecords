@@ -1,6 +1,6 @@
 package com.codingforcookies.betterrecords.client.gui;
 
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -17,12 +17,12 @@ public class GuiBetterDisclaimer extends GuiScreen {
         super.mouseClicked(mouseX, mouseY, mouseButton);
         int x = width / 2 - 100;
         int y = height / 2 - 35;
-        if(mouseX > x + 5 && mouseX < x + 45 && mouseY > y + 50 && mouseY < y + 65) ClientProxy.flashyMode = 0;
-        else if(mouseX > x + 50 && mouseX < x + 90 && mouseY > y + 50 && mouseY < y + 65) ClientProxy.flashyMode = 1;
-        else if(mouseX > x + 95 && mouseX < x + 150 && mouseY > y + 50 && mouseY < y + 65) ClientProxy.flashyMode = 2;
-        else if(mouseX > x + 155 && mouseX < x + 195 && mouseY > y + 50 && mouseY < y + 65) ClientProxy.flashyMode = 3;
-        if(ClientProxy.flashyMode != -1) {
-            ClientProxy.saveConfig();
+        if(mouseX > x + 5 && mouseX < x + 45 && mouseY > y + 50 && mouseY < y + 65) ConfigHandler.flashyMode = 0;
+        else if(mouseX > x + 50 && mouseX < x + 90 && mouseY > y + 50 && mouseY < y + 65) ConfigHandler.flashyMode = 1;
+        else if(mouseX > x + 95 && mouseX < x + 150 && mouseY > y + 50 && mouseY < y + 65) ConfigHandler.flashyMode = 2;
+        else if(mouseX > x + 155 && mouseX < x + 195 && mouseY > y + 50 && mouseY < y + 65) ConfigHandler.flashyMode = 3;
+        if(ConfigHandler.flashyMode != -1) {
+            ConfigHandler.updateConfig();
             Minecraft.getMinecraft().displayGuiScreen(null);
         }
     }

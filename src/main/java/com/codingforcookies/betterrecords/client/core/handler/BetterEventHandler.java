@@ -7,6 +7,7 @@ import com.codingforcookies.betterrecords.client.sound.FileDownloader;
 import com.codingforcookies.betterrecords.client.sound.SoundHandler;
 import com.codingforcookies.betterrecords.client.sound.SoundManager;
 import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.item.ItemRecordWire;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import com.codingforcookies.betterrecords.common.util.CurseModInfo;
@@ -26,7 +27,6 @@ import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.opengl.GL11;
 
@@ -41,11 +41,6 @@ public class BetterEventHandler{
     public static String tutorialText = "";
     public static long tutorialTime = 0;
     public static float strobeLinger = 0F;
-
-    @SubscribeEvent
-    public void onKeyInput(KeyInputEvent event){
-        if(ClientProxy.keyConfig.isPressed()) Minecraft.getMinecraft().thePlayer.openGui(BetterRecords.instance, 3, Minecraft.getMinecraft().theWorld, 0, 0, 0);
-    }
 
     @SubscribeEvent
     public void onDrawBlockHighlight(DrawBlockHighlightEvent event){
@@ -100,7 +95,7 @@ public class BetterEventHandler{
                         GL11.glVertex3f(0F, 3F, 0F);
                     }
                     GL11.glEnd();
-                    if(ClientProxy.devMode && ItemRecordWire.connection.fromHome){
+                    if(ConfigHandler.devMode && ItemRecordWire.connection.fromHome){
                         if(SoundHandler.soundPlaying.containsKey(ItemRecordWire.connection.x1 + "," + ItemRecordWire.connection.y1 + "," + ItemRecordWire.connection.z1 + "," + mc.theWorld.provider.getDimension())){
                             float radius = SoundHandler.soundPlaying.get(ItemRecordWire.connection.x1 + "," + ItemRecordWire.connection.y1 + "," + ItemRecordWire.connection.z1 + "," + mc.theWorld.provider.getDimension()).getCurrentSong().playRadius;
                             GL11.glDisable(GL11.GL_CULL_FACE);
@@ -186,7 +181,7 @@ public class BetterEventHandler{
                     GL11.glEnable(GL11.GL_TEXTURE_2D);
                 }
                 GL11.glPopMatrix();
-                strobeLinger -= (ClientProxy.flashyMode < 3 ? 0.01F : 0.2F);
+                strobeLinger -= (ConfigHandler.flashyMode < 3 ? 0.01F : 0.2F);
             }
             if(!tutorialText.equals("")){
                 if(tutorialTime > System.currentTimeMillis()){
@@ -271,7 +266,7 @@ public class BetterEventHandler{
     public void onClientTick(TickEvent.ClientTickEvent event){
         if(event.phase == TickEvent.Phase.START){
             if(Minecraft.getMinecraft().thePlayer != null){
-                if(!ClientProxy.devMode && ClientProxy.checkForUpdates && !ClientProxy.hasCheckedForUpdates){
+                if(!ConfigHandler.devMode && ClientProxy.checkForUpdates && !ClientProxy.hasCheckedForUpdates){
                     ClientProxy.hasCheckedForUpdates = true;
                     new Thread(){
                         public void run(){
@@ -331,7 +326,7 @@ public class BetterEventHandler{
             }
         } else { //TickEvent.Phase.END
             if(Minecraft.getMinecraft().thePlayer != null) {
-                if (ClientProxy.flashyMode == -1)
+                if (ConfigHandler.flashyMode == -1)
                     Minecraft.getMinecraft().thePlayer.openGui(BetterRecords.instance, 2, Minecraft.getMinecraft().theWorld, 0, 0, 0);
             }
         }
