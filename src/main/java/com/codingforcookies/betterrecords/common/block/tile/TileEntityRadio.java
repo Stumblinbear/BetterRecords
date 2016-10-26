@@ -1,69 +1,33 @@
 package com.codingforcookies.betterrecords.common.block.tile;
 
-import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
-import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ITickable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+public class TileEntityRadio extends SimpleRecordWireHome implements IRecordWire {
 
-public class TileEntityRadio extends BetterTile implements IRecordWire, IRecordWireHome, ITickable {
-    public ArrayList<Float> formTreble = new ArrayList<Float>();
-    public synchronized void addTreble(float form) { formTreble.add(form); }
-    public ArrayList<Float> formBass = new ArrayList<Float>();
-    public synchronized void addBass(float form) { formBass.add(form); }
-
-    public ArrayList<RecordConnection> connections = null;
-    public ArrayList<RecordConnection> getConnections() { return connections; }
-
-    public HashMap<String, Integer> wireSystemInfo;
-    private float playRadius = 0F;
-
-    public void increaseAmount(IRecordWire wireComponent) {
-        if(wireSystemInfo.containsKey(wireComponent.getName())) {
-            wireSystemInfo.put(wireComponent.getName(), wireSystemInfo.get(wireComponent.getName()) + 1);
-        }else
-            wireSystemInfo.put(wireComponent.getName(), 1);
-        playRadius += wireComponent.getSongRadiusIncrease();
+    @Override
+    public String getName() {
+        return "Radio";
     }
 
-    public void decreaseAmount(IRecordWire wireComponent) {
-        if(wireSystemInfo.containsKey(wireComponent.getName())) {
-            wireSystemInfo.put(wireComponent.getName(), wireSystemInfo.get(wireComponent.getName()) - 1);
-            if(wireSystemInfo.get(wireComponent.getName()) <= 0)
-                wireSystemInfo.remove(wireComponent.getName());
-            playRadius -= wireComponent.getSongRadiusIncrease();
-        }
+    @Override
+    public ItemStack getItemStack() {
+        return crystal;
     }
 
-    public float getSongRadius() {
-        return getSongRadiusIncrease() + playRadius;
+    @Override
+    public float getSongRadiusIncrease() {
+        return 30F;
     }
-
-    public TileEntity getTileEntity() { return this; }
-    public ItemStack getItemStack() { return crystal; }
-
-    public String getName() { return "Radio"; }
-    public float getSongRadiusIncrease() { return 30F; }
-    public boolean canConnect() { return true; }
 
     public ItemStack crystal = null;
     public float crystalFloaty = 0F;
 
     public boolean opening = false;
     public float openAmount = 0F;
-
-    public TileEntityRadio() {
-        connections = new ArrayList<RecordConnection>();
-        wireSystemInfo = new HashMap<String, Integer>();
-    }
 
     public void setCrystal(ItemStack itemStack) {
         if(itemStack == null) {
@@ -75,42 +39,33 @@ public class TileEntityRadio extends BetterTile implements IRecordWire, IRecordW
         crystal.stackSize = 1;
     }
 
-    @SideOnly(Side.SERVER)
-    public boolean canUpdate() {
-        return false;
+    @Override
+    public void update() {
+        if (opening) {
+            if (openAmount < 0.268F) {
+                openAmount += 0.04F;
+            }
+        } else if (openAmount > 0F) {
+            openAmount -= 0.04F;
+        }
+
+        if (openAmount > 0.268F) {
+            openAmount = 0.268F;
+        } else if (openAmount < 0F) {
+            openAmount = 0F;
+        }
+
+        if (crystal != null) {
+            crystalFloaty += 0.86F;
+        }
+
+        super.update();
     }
 
     @Override
-    public void update() {
-        if(opening) {
-            if(openAmount < 0.268F)
-                openAmount += 0.04F;
-        }else
-            if(openAmount > 0F)
-                openAmount -= 0.04F;
-
-        if(openAmount > 0.268F)
-            openAmount = 0.268F;
-        else if(openAmount < 0F)
-            openAmount = 0F;
-
-        if(crystal != null)
-            crystalFloaty += 0.86F;
-
-        if(worldObj.isRemote) {
-            while(formTreble.size() > 2500)
-                for(int i = 0; i < 25; i++) {
-                    formTreble.remove(0);
-                    formBass.remove(0);
-                }
-        }
-    }
-
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
 
-        //if(compound.hasKey("rotation"))
-        //    blockMetadata = compound.getInteger("rotation");
         if(compound.hasKey("crystal"))
             setCrystal(ItemStack.loadItemStackFromNBT(compound.getCompoundTag("crystal")));
         if(compound.hasKey("opening"))
@@ -123,6 +78,7 @@ public class TileEntityRadio extends BetterTile implements IRecordWire, IRecordW
             playRadius = compound.getFloat("playRadius");
     }
 
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
