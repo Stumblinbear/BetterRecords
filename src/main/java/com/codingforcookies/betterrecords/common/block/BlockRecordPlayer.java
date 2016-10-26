@@ -153,17 +153,6 @@ public class BlockRecordPlayer extends BetterBlock {
         }
     }
 
-
-    @Override
-    public boolean hasComparatorInputOverride(IBlockState state){
-        return true;
-    }
-
-    @Override
-    public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos){
-        return 5;
-    }
-
     @Override
     public TileEntity createNewTileEntity(World var1, int var2){
         return new TileEntityRecordPlayer();
