@@ -12,23 +12,24 @@ import net.minecraftforge.oredict.RecipeSorter;
 public final class ModCrafingRecipes {
 
     public static void init() {
-        GameRegistry.addRecipe(new RecipeRecord());
+
         RecipeSorter.register("bettrecords:urlrecord", RecipeRecord.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+        GameRegistry.addRecipe(new RecipeRecord());
 
-        GameRegistry.addRecipe(new RecipeMultiRecord());
         RecipeSorter.register("betterrecords:urlmultirecord", RecipeMultiRecord.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+        GameRegistry.addRecipe(new RecipeMultiRecord());
 
+        RecipeSorter.register("betterrecords:urlrecordrepeatable", RecipeRecordRepeatable.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
         GameRegistry.addRecipe(new RecipeRecordRepeatable());
-        RecipeSorter.register("betterrecords:urlrecord", RecipeRecordRepeatable.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
 
+        RecipeSorter.register("betterrecords:urlrecordshuffle", RecipeRecordShuffle.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
         GameRegistry.addRecipe(new RecipeRecordShuffle());
-        RecipeSorter.register("betterrecords:urlrecord", RecipeRecordShuffle.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
 
-        GameRegistry.addRecipe(new RecipeColoredFreqCrystal());
         RecipeSorter.register("betterrecords:freqcrystal", RecipeColoredFreqCrystal.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+        GameRegistry.addRecipe(new RecipeColoredFreqCrystal());
 
-        GameRegistry.addRecipe(new RecipeColoredRecord());
         RecipeSorter.register("betterrecords:urlrecord", RecipeColoredRecord.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+        GameRegistry.addRecipe(new RecipeColoredRecord());
 
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.itemFreqCrystal), "RQR", "QDQ", "RQR", 'R', Items.REDSTONE, 'Q', Items.QUARTZ, 'D', Items.DIAMOND);
 
