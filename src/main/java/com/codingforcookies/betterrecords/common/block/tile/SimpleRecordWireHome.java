@@ -3,6 +3,7 @@ package com.codingforcookies.betterrecords.common.block.tile;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
+import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import net.minecraft.util.ITickable;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
@@ -39,10 +40,11 @@ public abstract class SimpleRecordWireHome extends BetterTile implements IRecord
 
     @Override
     public void increaseAmount(IRecordWire wireComponent) {
-        if(wireSystemInfo.containsKey(wireComponent.getName())) {
+        if (wireSystemInfo.containsKey(wireComponent.getName())) {
             wireSystemInfo.put(wireComponent.getName(), wireSystemInfo.get(wireComponent.getName()) + 1);
-        }else
+        } else {
             wireSystemInfo.put(wireComponent.getName(), 1);
+        }
         playRadius += wireComponent.getSongRadiusIncrease();
     }
 
@@ -50,8 +52,9 @@ public abstract class SimpleRecordWireHome extends BetterTile implements IRecord
     public void decreaseAmount(IRecordWire wireComponent) {
         if(wireSystemInfo.containsKey(wireComponent.getName())) {
             wireSystemInfo.put(wireComponent.getName(), wireSystemInfo.get(wireComponent.getName()) - 1);
-            if(wireSystemInfo.get(wireComponent.getName()) <= 0)
+            if(wireSystemInfo.get(wireComponent.getName()) <= 0) {
                 wireSystemInfo.remove(wireComponent.getName());
+            }
             playRadius -= wireComponent.getSongRadiusIncrease();
         }
     }
@@ -71,7 +74,9 @@ public abstract class SimpleRecordWireHome extends BetterTile implements IRecord
 
     @Override
     public float getSongRadius() {
-        return getSongRadiusIncrease() + playRadius;
+        float radius = getSongRadiusIncrease() + playRadius;
+        int maxRadius = ConfigHandler.maxSpeakerRadius;
+        return (radius <= maxRadius || maxRadius == -1) ? radius : maxRadius;
     }
 
     @Override
