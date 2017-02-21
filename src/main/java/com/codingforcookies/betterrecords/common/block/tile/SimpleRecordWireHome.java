@@ -61,7 +61,7 @@ public abstract class SimpleRecordWireHome extends BetterTile implements IRecord
 
     @Override
     public void update() {
-        if(worldObj.isRemote) {
+        if(world.isRemote) {
             while (formTreble.size() > 2500)
                 for (int i = 0; i < 25; i++) {
                     formTreble.remove(0);

@@ -47,9 +47,9 @@ public class BetterEventHandler{
         if(!event.getTarget().typeOfHit.equals(RayTraceResult.Type.BLOCK)) return;
         Minecraft mc = Minecraft.getMinecraft();
         if(ItemRecordWire.connection != null){
-            float dx = (float) (mc.thePlayer.prevPosX + (mc.thePlayer.posX - mc.thePlayer.prevPosX) * event.getPartialTicks());
-            float dy = (float) (mc.thePlayer.prevPosY + (mc.thePlayer.posY - mc.thePlayer.prevPosY) * event.getPartialTicks());
-            float dz = (float) (mc.thePlayer.prevPosZ + (mc.thePlayer.posZ - mc.thePlayer.prevPosZ) * event.getPartialTicks());
+            float dx = (float) (mc.player.prevPosX + (mc.player.posX - mc.player.prevPosX) * event.getPartialTicks());
+            float dy = (float) (mc.player.prevPosY + (mc.player.posY - mc.player.prevPosY) * event.getPartialTicks());
+            float dz = (float) (mc.player.prevPosZ + (mc.player.posZ - mc.player.prevPosZ) * event.getPartialTicks());
             float x1 = -(float) (event.getTarget().getBlockPos().getX() - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.x1 : ItemRecordWire.connection.x2));
             float y1 = -(float) (event.getTarget().getBlockPos().getY() - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.y1 : ItemRecordWire.connection.y2));
             float z1 = -(float) (event.getTarget().getBlockPos().getZ() - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.z1 : ItemRecordWire.connection.z2));
@@ -58,11 +58,11 @@ public class BetterEventHandler{
             GL11.glLineWidth(2F);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
             GL11.glDepthMask(false);
-            Block j = mc.theWorld.getBlockState(new BlockPos(event.getTarget().getBlockPos().getX(), event.getTarget().getBlockPos().getY(), event.getTarget().getBlockPos().getZ())).getBlock();
+            Block j = mc.world.getBlockState(new BlockPos(event.getTarget().getBlockPos().getX(), event.getTarget().getBlockPos().getY(), event.getTarget().getBlockPos().getZ())).getBlock();
             //TODO
-            //j.setBlockBoundsBasedOnState(mc.theWorld, new BlockPos(event.getTarget().getBlockPos().getX(), event.getTarget().getBlockPos().getY(), event.getTarget().getBlockPos().getZ()));
-            TileEntity t = mc.theWorld.getTileEntity(new BlockPos(event.getTarget().getBlockPos().getX(), event.getTarget().getBlockPos().getY(), event.getTarget().getBlockPos().getZ()));
-            //RenderGlobal.drawOutlinedBoundingBox(j.getSelectedBoundingBoxFromPool(mc.theWorld, event.getTarget().blockX, event.getTarget().blockY, event.getTarget().blockZ).expand(0.002D, 0.002D, 0.002D).getOffsetBoundingBox(-dx, -dy, -dz), ((t instanceof IRecordWire ? (ItemRecordWire.connection.fromHome ? t instanceof IRecordWireHome : !(t instanceof IRecordWireHome)) : false) || Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2) + Math.pow(z1, 2)) > 7) ? 0xFF0000 : (t instanceof IRecordWire ? 0x00FF00 : 0xFFFF00));
+            //j.setBlockBoundsBasedOnState(mc.world, new BlockPos(event.getTarget().getBlockPos().getX(), event.getTarget().getBlockPos().getY(), event.getTarget().getBlockPos().getZ()));
+            TileEntity t = mc.world.getTileEntity(new BlockPos(event.getTarget().getBlockPos().getX(), event.getTarget().getBlockPos().getY(), event.getTarget().getBlockPos().getZ()));
+            //RenderGlobal.drawOutlinedBoundingBox(j.getSelectedBoundingBoxFromPool(mc.world, event.getTarget().blockX, event.getTarget().blockY, event.getTarget().blockZ).expand(0.002D, 0.002D, 0.002D).getOffsetBoundingBox(-dx, -dy, -dz), ((t instanceof IRecordWire ? (ItemRecordWire.connection.fromHome ? t instanceof IRecordWireHome : !(t instanceof IRecordWireHome)) : false) || Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2) + Math.pow(z1, 2)) > 7) ? 0xFF0000 : (t instanceof IRecordWire ? 0x00FF00 : 0xFFFF00));
             GL11.glDepthMask(true);
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glDisable(GL11.GL_BLEND);
@@ -74,15 +74,15 @@ public class BetterEventHandler{
     public void onRenderEvent(RenderWorldLastEvent event){
         Minecraft mc = Minecraft.getMinecraft();
         if(ItemRecordWire.connection != null){
-            if(mc.thePlayer.getHeldItemMainhand() == null || !(mc.thePlayer.getHeldItemMainhand().getItem() instanceof ItemRecordWire)){
+            if(mc.player.getHeldItemMainhand() == null || !(mc.player.getHeldItemMainhand().getItem() instanceof ItemRecordWire)){
                 ItemRecordWire.connection = null;
             }else{
                 GL11.glPushMatrix();
                 {
                     GL11.glDisable(GL11.GL_TEXTURE_2D);
-                    float dx = (float) (mc.thePlayer.prevPosX + (mc.thePlayer.posX - mc.thePlayer.prevPosX) * event.getPartialTicks());
-                    float dy = (float) (mc.thePlayer.prevPosY + (mc.thePlayer.posY - mc.thePlayer.prevPosY) * event.getPartialTicks());
-                    float dz = (float) (mc.thePlayer.prevPosZ + (mc.thePlayer.posZ - mc.thePlayer.prevPosZ) * event.getPartialTicks());
+                    float dx = (float) (mc.player.prevPosX + (mc.player.posX - mc.player.prevPosX) * event.getPartialTicks());
+                    float dy = (float) (mc.player.prevPosY + (mc.player.posY - mc.player.prevPosY) * event.getPartialTicks());
+                    float dz = (float) (mc.player.prevPosZ + (mc.player.posZ - mc.player.prevPosZ) * event.getPartialTicks());
                     float x1 = -(dx - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.x1 : ItemRecordWire.connection.x2));
                     float y1 = -(dy - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.y1 : ItemRecordWire.connection.y2));
                     float z1 = -(dz - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.z1 : ItemRecordWire.connection.z2));
@@ -96,8 +96,8 @@ public class BetterEventHandler{
                     }
                     GL11.glEnd();
                     if(ConfigHandler.devMode && ItemRecordWire.connection.fromHome){
-                        if(SoundHandler.soundPlaying.containsKey(ItemRecordWire.connection.x1 + "," + ItemRecordWire.connection.y1 + "," + ItemRecordWire.connection.z1 + "," + mc.theWorld.provider.getDimension())){
-                            float radius = SoundHandler.soundPlaying.get(ItemRecordWire.connection.x1 + "," + ItemRecordWire.connection.y1 + "," + ItemRecordWire.connection.z1 + "," + mc.theWorld.provider.getDimension()).getCurrentSong().playRadius;
+                        if(SoundHandler.soundPlaying.containsKey(ItemRecordWire.connection.x1 + "," + ItemRecordWire.connection.y1 + "," + ItemRecordWire.connection.z1 + "," + mc.world.provider.getDimension())){
+                            float radius = SoundHandler.soundPlaying.get(ItemRecordWire.connection.x1 + "," + ItemRecordWire.connection.y1 + "," + ItemRecordWire.connection.z1 + "," + mc.world.provider.getDimension()).getCurrentSong().playRadius;
                             GL11.glDisable(GL11.GL_CULL_FACE);
                             GL11.glEnable(GL11.GL_BLEND);
                             GL11.glColor4f(.1F, .1F, 1F, .2F);
@@ -265,7 +265,7 @@ public class BetterEventHandler{
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event){
         if(event.phase == TickEvent.Phase.START){
-            if(Minecraft.getMinecraft().thePlayer != null){
+            if(Minecraft.getMinecraft().player != null){
                 if(!ConfigHandler.devMode && ClientProxy.checkForUpdates && !ClientProxy.hasCheckedForUpdates){
                     ClientProxy.hasCheckedForUpdates = true;
                     new Thread(){
@@ -275,8 +275,8 @@ public class BetterEventHandler{
                                 String latestVersion = CurseModInfo.fromURL(url).getNewestVersion(MinecraftForge.MC_VERSION).getModVersion();
                                 String modVersion = BetterRecords.VERSION;
                                 if (!latestVersion.trim().equals(BetterRecords.VERSION)) {
-                                    Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentTranslation("msg.newversion.txt"));
-                                    Minecraft.getMinecraft().thePlayer.addChatMessage(new TextComponentString("       " + BetterUtils.getTranslatedString("overlay.curversion") + ": " + latestVersion));
+                                    Minecraft.getMinecraft().player.sendChatMessage(new TextComponentTranslation("msg.newversion.txt").toString());
+                                    Minecraft.getMinecraft().player.sendChatMessage(new TextComponentString("       " + BetterUtils.getTranslatedString("overlay.curversion") + ": " + latestVersion).toString());
                                 }
                             } catch (MalformedURLException e) {
                                 e.printStackTrace();
@@ -291,8 +291,8 @@ public class BetterEventHandler{
                 SoundHandler.nowPlaying = "";
             }else SoundHandler.nowPlayingInt += 3;
             if(SoundHandler.soundPlaying.size() > 0){
-                EntityPlayer player = Minecraft.getMinecraft().thePlayer;
-                World world = Minecraft.getMinecraft().theWorld;
+                EntityPlayer player = Minecraft.getMinecraft().player;
+                World world = Minecraft.getMinecraft().world;
                 if(world == null || player == null){
                     SoundHandler.soundPlaying.clear();
                     SoundHandler.nowPlaying = "";
@@ -303,7 +303,7 @@ public class BetterEventHandler{
                     if(entry.getValue().getCurrentSong().dimension == 1234) entry.getValue().getCurrentSong().volume.setValue(-20F);
                     else if(entry.getValue().getCurrentSong().dimension != world.provider.getDimension()) entry.getValue().getCurrentSong().volume.setValue(-80F);
                     else{
-                        TileEntity tileEntity = Minecraft.getMinecraft().theWorld.getTileEntity(new BlockPos(entry.getValue().getCurrentSong().x, entry.getValue().getCurrentSong().y, entry.getValue().getCurrentSong().z));
+                        TileEntity tileEntity = Minecraft.getMinecraft().world.getTileEntity(new BlockPos(entry.getValue().getCurrentSong().x, entry.getValue().getCurrentSong().y, entry.getValue().getCurrentSong().z));
                         if(tileEntity != null && tileEntity instanceof IRecordWireHome) entry.getValue().getCurrentSong().playRadius = ((IRecordWireHome) tileEntity).getSongRadius();
                         float dist = (float) Math.abs(Math.sqrt(Math.pow(player.posX - entry.getValue().getCurrentSong().x, 2) + Math.pow(player.posY - entry.getValue().getCurrentSong().y, 2) + Math.pow(player.posZ - entry.getValue().getCurrentSong().z, 2)));
                         IRecordWireHome wireHome = (IRecordWireHome) tileEntity;
@@ -325,9 +325,9 @@ public class BetterEventHandler{
                 }
             }
         } else { //TickEvent.Phase.END
-            if(Minecraft.getMinecraft().thePlayer != null) {
+            if(Minecraft.getMinecraft().player != null) {
                 if (ConfigHandler.flashyMode == -1)
-                    Minecraft.getMinecraft().thePlayer.openGui(BetterRecords.instance, 2, Minecraft.getMinecraft().theWorld, 0, 0, 0);
+                    Minecraft.getMinecraft().player.openGui(BetterRecords.instance, 2, Minecraft.getMinecraft().world, 0, 0, 0);
             }
         }
     }

@@ -35,8 +35,8 @@ public class PacketRecordPlayerOpen implements IPacket {
     }
 
     public void executeClient(EntityPlayer player) {
-        if(player.worldObj.provider.getDimension() == dimension) {
-            TileEntity te = player.worldObj.getTileEntity(new net.minecraft.util.math.BlockPos(x, y, z));
+        if(player.world.provider.getDimension() == dimension) {
+            TileEntity te = player.world.getTileEntity(new net.minecraft.util.math.BlockPos(x, y, z));
             if(te == null || !(te instanceof TileEntityRecordPlayer))
                 return;
 

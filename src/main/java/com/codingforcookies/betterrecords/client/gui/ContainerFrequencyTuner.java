@@ -24,7 +24,7 @@ public class ContainerFrequencyTuner extends Container {
     }
 
     public boolean canInteractWith(EntityPlayer player) {
-        return tileEntity.isUseableByPlayer(player);
+        return tileEntity.isUsableByPlayer(player);
     }
 
     public ItemStack transferStackInSlot(EntityPlayer player, int slot) {

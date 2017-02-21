@@ -161,7 +161,7 @@ public class SoundHandler{
                     playSourceDataLine(snd, x, y, z, dimension, BetterSoundType.RADIO, new BufferedInputStream(urlConn.getInputStream()));
                 }catch(Exception e){
                     e.printStackTrace();
-                    if (Minecraft.getMinecraft().thePlayer != null) {
+                    if (Minecraft.getMinecraft().player != null) {
                         System.err.println("Failed to stream: " + url);
                         nowPlaying = BetterUtils.getTranslatedString("overlay.nowplaying.error2");
                     }
@@ -199,7 +199,7 @@ public class SoundHandler{
             }
         }catch(Exception e){
             e.printStackTrace();
-            if (Minecraft.getMinecraft().thePlayer != null) {
+            if (Minecraft.getMinecraft().player != null) {
                 switch (type) {
                     case SONG:
                         nowPlaying = BetterUtils.getTranslatedString("overlay.nowplaying.error3");
@@ -241,16 +241,16 @@ public class SoundHandler{
     }
 
     private static void updateAmplitude(byte[] buffer, int x, int y, int z, int dimension){
-        if (Minecraft.getMinecraft().theWorld.provider.getDimension() != dimension) return;
+        if (Minecraft.getMinecraft().world.provider.getDimension() != dimension) return;
         float unscaledTreble = -1F;
         float unscaledBass = -1F;
-        TileEntity tileEntity = Minecraft.getMinecraft().theWorld.getTileEntity(new BlockPos(x, y, z));
+        TileEntity tileEntity = Minecraft.getMinecraft().world.getTileEntity(new BlockPos(x, y, z));
         if(tileEntity != null && tileEntity instanceof IRecordWireHome) {
             ((IRecordWireHome) tileEntity).addTreble(getUnscaledWaveform(buffer, true, false));
             ((IRecordWireHome) tileEntity).addBass(getUnscaledWaveform(buffer, false, false));
             for(RecordConnection con : ((IRecordWireHome) tileEntity).getConnections()){
                 if(buffer == null) return;
-                TileEntity tileEntityCon = Minecraft.getMinecraft().theWorld.getTileEntity(new net.minecraft.util.math.BlockPos(con.x2, con.y2, con.z2));
+                TileEntity tileEntityCon = Minecraft.getMinecraft().world.getTileEntity(new net.minecraft.util.math.BlockPos(con.x2, con.y2, con.z2));
                 if(tileEntityCon != null && tileEntityCon instanceof IRecordAmplitude) {
                     if(unscaledTreble == -1F || unscaledBass == 11F) {
                         unscaledTreble = getUnscaledWaveform(buffer, true, true);

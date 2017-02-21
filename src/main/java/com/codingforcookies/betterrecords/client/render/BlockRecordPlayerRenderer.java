@@ -34,7 +34,7 @@ public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer<TileEnt
             return;
         }
 
-        if(Minecraft.getMinecraft().thePlayer.getHeldItemMainhand() != null && Minecraft.getMinecraft().thePlayer.getHeldItemMainhand().getItem() instanceof IRecordWireManipulator) {
+        if(Minecraft.getMinecraft().player.getHeldItemMainhand() != null && Minecraft.getMinecraft().player.getHeldItemMainhand().getItem() instanceof IRecordWireManipulator) {
             GL11.glPushMatrix();
             {
                 GL11.glTranslatef((float)x + .5F, (float)y + .5F, (float)z + .5F);

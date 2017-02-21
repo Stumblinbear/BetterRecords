@@ -59,9 +59,9 @@ public class GuiRecordEtcher extends GuiContainer {
         nameField = new GuiTextField(1, this.fontRendererObj, 44, 20, 124, 10);
         urlField = new GuiTextField(2, this.fontRendererObj, 44, 35, 124, 10);
         urlField.setMaxStringLength(256);
-        if(ClientProxy.defaultLibrary.size() == 0 || (ClientProxy.lastCheckType == 0 || ClientProxy.lastCheckType != (Minecraft.getMinecraft().theWorld.isRemote ? 1 : 2))){
+        if(ClientProxy.defaultLibrary.size() == 0 || (ClientProxy.lastCheckType == 0 || ClientProxy.lastCheckType != (Minecraft.getMinecraft().world.isRemote ? 1 : 2))){
             System.out.println("Loading default library...");
-            ClientProxy.lastCheckType = Minecraft.getMinecraft().theWorld.isRemote ? 1 : 2;
+            ClientProxy.lastCheckType = Minecraft.getMinecraft().world.isRemote ? 1 : 2;
             new Thread(new Runnable(){
 
                 public void run(){
@@ -185,14 +185,14 @@ public class GuiRecordEtcher extends GuiContainer {
                     }
                     if(!exists){
                         JsonObject elmnt = new JsonObject();
-                        elmnt.addProperty("author", Minecraft.getMinecraft().thePlayer.getName());
+                        elmnt.addProperty("author", Minecraft.getMinecraft().player.getName());
                         elmnt.addProperty("name", superName);
                         elmnt.addProperty("url", urlField.getText());
                         elmnt.addProperty("color", "#FFFFFF");
                         if(rootObj == null) loadLocalLibrary();
                         if(rootObj != null){
                             rootObj.add(superLocal, elmnt);
-                            ClientProxy.defaultLibrary.add(0, new LibrarySong(superLocal, Minecraft.getMinecraft().thePlayer.getName(), superName, urlField.getText(), Integer.parseInt("FFFFFF", 16)));
+                            ClientProxy.defaultLibrary.add(0, new LibrarySong(superLocal, Minecraft.getMinecraft().player.getName(), superName, urlField.getText(), Integer.parseInt("FFFFFF", 16)));
                             if(!ClientProxy.localLibrary.exists()){
                                 if(ClientProxy.localLibrary.getParentFile().mkdirs()) try{
                                     ClientProxy.localLibrary.createNewFile();
@@ -276,7 +276,7 @@ public class GuiRecordEtcher extends GuiContainer {
                             }
                         }else error = BetterUtils.getTranslatedString("gui.error4");
                     }else{
-                        if(Minecraft.getMinecraft().theWorld.isRemote){
+                        if(Minecraft.getMinecraft().world.isRemote){
                             connection.connect();
                             if(connection.getContentLength() == 0) error = BetterUtils.getTranslatedString("gui.recordetcher.error4");
                         }else error = BetterUtils.getTranslatedString("gui.recordetcher.error5");

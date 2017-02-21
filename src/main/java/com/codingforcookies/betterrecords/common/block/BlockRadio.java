@@ -135,7 +135,7 @@ public class BlockRadio extends BetterBlock {
             entityItem.motionX = rand.nextGaussian() * 0.05F;
             entityItem.motionY = rand.nextGaussian() * 0.05F + 0.2F;
             entityItem.motionZ = rand.nextGaussian() * 0.05F;
-            world.spawnEntityInWorld(entityItem);
+            world.spawnEntity(entityItem);
             item.stackSize = 0;
             tileEntityRadio.crystal = null;
             PacketHandler.sendSoundStopToAllFromServer(tileEntityRadio.getPos().getX(), tileEntityRadio.getPos().getY(), tileEntityRadio.getPos().getZ(), world.provider.getDimension());

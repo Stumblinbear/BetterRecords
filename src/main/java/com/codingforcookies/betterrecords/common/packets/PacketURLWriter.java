@@ -62,7 +62,7 @@ public class PacketURLWriter implements IPacket {
     public void executeClient(EntityPlayer player) { }
 
     public void executeServer(EntityPlayer player) {
-        TileEntity te = player.worldObj.getTileEntity(new net.minecraft.util.math.BlockPos(x, y, z));
+        TileEntity te = player.world.getTileEntity(new net.minecraft.util.math.BlockPos(x, y, z));
         if(te == null || !(te instanceof TileEntityRecordEtcher || te instanceof TileEntityFrequencyTuner))
             return;
 
@@ -80,8 +80,8 @@ public class PacketURLWriter implements IPacket {
                     itemStack.getTagCompound().setInteger("color", color);
                     itemStack.getTagCompound().setString("author", author);
                 }
-                IBlockState state = player.worldObj.getBlockState(te.getPos());
-                player.worldObj.notifyBlockUpdate(te.getPos(), state, state, 3);
+                IBlockState state = player.world.getBlockState(te.getPos());
+                player.world.notifyBlockUpdate(te.getPos(), state, state, 3);
             }
         }else if(te instanceof TileEntityFrequencyTuner) {
             TileEntityFrequencyTuner tileEntityFrequencyTuner = (TileEntityFrequencyTuner)te;
@@ -93,8 +93,8 @@ public class PacketURLWriter implements IPacket {
                 itemStack.getTagCompound().setString("local", localName);
                 if(color != -999)
                     itemStack.getTagCompound().setInteger("color", color);
-                IBlockState state = player.worldObj.getBlockState(te.getPos());
-                player.worldObj.notifyBlockUpdate(te.getPos(), state, state, 3);
+                IBlockState state = player.world.getBlockState(te.getPos());
+                player.world.notifyBlockUpdate(te.getPos(), state, state, 3);
             }
         }
     }

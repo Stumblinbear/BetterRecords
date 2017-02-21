@@ -42,7 +42,7 @@ public class TileEntityRecordPlayer extends SimpleRecordWireHome implements IRec
 
         record = itemStack.copy();
         record.stackSize = 1;
-        recordEntity = new EntityItem(worldObj, pos.getX(), pos.getY(), pos.getZ(), record);
+        recordEntity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), record);
         recordEntity.hoverStart = 0;
         recordEntity.rotationPitch = 0F;
         recordEntity.rotationYaw = 0F;

@@ -108,7 +108,7 @@ public class BlockFrequencyTuner extends BetterBlock {
             entityItem.motionX = rand.nextGaussian() * 0.05F;
             entityItem.motionY = rand.nextGaussian() * 0.05F + 0.2F;
             entityItem.motionZ = rand.nextGaussian() * 0.05F;
-            world.spawnEntityInWorld(entityItem);
+            world.spawnEntity(entityItem);
             item.stackSize = 0;
 
             tileEntityFrequencyTuner.crystal = null;

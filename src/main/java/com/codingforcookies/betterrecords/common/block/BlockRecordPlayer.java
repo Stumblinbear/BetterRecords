@@ -146,7 +146,7 @@ public class BlockRecordPlayer extends BetterBlock {
             entityItem.motionX = rand.nextGaussian() * 0.05F;
             entityItem.motionY = rand.nextGaussian() * 0.05F + 0.2F;
             entityItem.motionZ = rand.nextGaussian() * 0.05F;
-            world.spawnEntityInWorld(entityItem);
+            world.spawnEntity(entityItem);
             item.stackSize = 0;
             tileEntityRecordPlayer.record = null;
             PacketHandler.sendSoundStopToAllFromServer(tileEntityRecordPlayer.getPos().getX(), tileEntityRecordPlayer.getPos().getY(), tileEntityRecordPlayer.getPos().getZ(), world.provider.getDimension());

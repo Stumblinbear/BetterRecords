@@ -30,12 +30,13 @@ public class PacketWireConnection implements IPacket {
     public void executeClient(EntityPlayer player) { }
 
     public void executeServer(EntityPlayer player) {
-        TileEntity te1 = player.worldObj.getTileEntity(new net.minecraft.util.math.BlockPos(connection.x1, connection.y1, connection.z1));
-        TileEntity te2 = player.worldObj.getTileEntity(new BlockPos(connection.x2, connection.y2, connection.z2));
+        TileEntity te1 = player.world.getTileEntity(new net.minecraft.util.math.BlockPos(connection.x1, connection.y1, connection.z1));
+        TileEntity te2 = player.world.getTileEntity(new BlockPos(connection.x2, connection.y2, connection.z2));
         if(te1 instanceof IRecordWire && te2 instanceof IRecordWire) {
             if(!(te1 instanceof IRecordWireHome && te2 instanceof IRecordWireHome)) {
-                ConnectionHelper.addConnection(player.worldObj, (IRecordWire)te1, connection, player.worldObj.getBlockState(te1.getPos()));
-                ConnectionHelper.addConnection(player.worldObj, (IRecordWire)te2, connection, player.worldObj.getBlockState(te2.getPos()));
+                ConnectionHelper.addConnection(player.world, (IRecordWire)te1, connection, player.world.getBlockState(te1.getPos()));
+                ConnectionHelper.addConnection(player.world, (IRecordWire)te1, connection, player.world.getBlockState(te1.getPos()));
+                ConnectionHelper.addConnection(player.world, (IRecordWire)te2, connection, player.world.getBlockState(te2.getPos()));
             }
         }
     }

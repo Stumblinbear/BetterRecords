@@ -85,7 +85,7 @@ public class BlockLazer extends BetterBlock {
             }
         }
         if(tileEntityLazer.length != length && !world.isRemote){
-            player.addChatMessage(new TextComponentTranslation("msg.lazerlength." + (tileEntityLazer.length > length ? "increase" : "decrease")).appendText(" " + tileEntityLazer.length));
+            player.sendMessage(new TextComponentTranslation("msg.lazerlength." + (tileEntityLazer.length > length ? "increase" : "decrease")).appendText(" " + tileEntityLazer.length));
         }
         return true;
     }

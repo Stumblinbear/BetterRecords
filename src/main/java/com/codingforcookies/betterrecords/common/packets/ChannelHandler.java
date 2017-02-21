@@ -41,6 +41,6 @@ public class ChannelHandler extends FMLIndexedMessageToMessageCodec<IPacket> {
 
     @SideOnly(Side.CLIENT)
     private EntityPlayer getClientPlayer() {
-        return Minecraft.getMinecraft().thePlayer;
+        return Minecraft.getMinecraft().player;
     }
 }

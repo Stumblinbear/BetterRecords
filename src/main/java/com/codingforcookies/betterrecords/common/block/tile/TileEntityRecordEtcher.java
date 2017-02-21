@@ -33,7 +33,7 @@ public class TileEntityRecordEtcher extends BetterTile implements IInventory, IT
 
         record = itemStack.copy();
         record.stackSize = 1;
-        recordEntity = new EntityItem(worldObj, pos.getX(), pos.getY(), pos.getZ(), record);
+        recordEntity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), record);
         recordEntity.hoverStart = 0;
         recordRotation = 0F;
     }
@@ -146,8 +146,8 @@ public class TileEntityRecordEtcher extends BetterTile implements IInventory, IT
     }
 
     @Override
-    public boolean isUseableByPlayer(EntityPlayer player) {
-        return worldObj.getTileEntity(pos) == this && player.getDistanceSq(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 64;
+    public boolean isUsableByPlayer(EntityPlayer player) {
+        return world.getTileEntity(pos) == this && player.getDistanceSq(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) < 64;
     }
 
     @Override

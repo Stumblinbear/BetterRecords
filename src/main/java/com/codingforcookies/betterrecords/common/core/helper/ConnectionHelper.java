@@ -104,7 +104,7 @@ public class ConnectionHelper {
                     entityItem.motionX = rand.nextGaussian() * 0.05F;
                     entityItem.motionY = rand.nextGaussian() * 0.05F + 0.2F;
                     entityItem.motionZ = rand.nextGaussian() * 0.05F;
-                    world.spawnEntityInWorld(entityItem);
+                    world.spawnEntity(entityItem);
 
                     removeConnection(world, (IRecordWire)te, rec);
                 }
