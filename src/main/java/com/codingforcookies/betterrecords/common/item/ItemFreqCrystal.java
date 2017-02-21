@@ -1,6 +1,5 @@
 package com.codingforcookies.betterrecords.common.item;
 
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
@@ -11,7 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFreqCrystal extends BetterItem implements IItemColor {
+public class ItemFreqCrystal extends BetterItem {
 
     public ItemFreqCrystal(String name) {
         super(name);
@@ -30,11 +29,5 @@ public class ItemFreqCrystal extends BetterItem implements IItemColor {
             return itemStack.getTagCompound().getString("local");
         else
             return I18n.translateToLocal(getUnlocalizedName() + ".name");
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemstack(ItemStack itemStack, int renderPass) {
-        return (itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("color") ? itemStack.getTagCompound().getInteger("color") : 0xFFFFFF);
     }
 }

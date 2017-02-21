@@ -4,7 +4,6 @@ import com.codingforcookies.betterrecords.api.record.IRecord;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
@@ -13,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemURLRecord extends BetterItem implements IRecord, IItemColor {
+public class ItemURLRecord extends BetterItem implements IRecord {
 
     public ItemURLRecord(String name) {
         super(name);
@@ -36,12 +35,6 @@ public class ItemURLRecord extends BetterItem implements IRecord, IItemColor {
             tooltip.add("");
             tooltip.add("\247e" + BetterUtils.getTranslatedString("item.record.repeatenabled"));
         }
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemstack(ItemStack itemStack, int tintIndex) {
-        return(tintIndex == 0 ? 0xFFFFFF : (itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("color") ? itemStack.getTagCompound().getInteger("color") : 0xFFFFFF));
     }
 
     @Override

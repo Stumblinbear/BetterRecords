@@ -19,13 +19,14 @@ import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import java.io.BufferedWriter;
@@ -123,9 +124,20 @@ public class ClientProxy extends CommonProxy {
         renderItem.getItemModelMesher().register(ModItems.itemRecordCutters, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "recordwirecutters", "inventory"));
         renderItem.getItemModelMesher().register(ModItems.itemURLMultiRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlmultirecord", "inventory"));
         renderItem.getItemModelMesher().register(ModItems.itemURLRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlrecord", "inventory"));
+    }
 
-        FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler((IItemColor) ModItems.itemURLRecord, ModItems.itemURLRecord);
-        FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler((IItemColor) ModItems.itemURLMultiRecord, ModItems.itemURLMultiRecord);
-        FMLClientHandler.instance().getClient().getItemColors().registerItemColorHandler((IItemColor) ModItems.itemFreqCrystal, ModItems.itemFreqCrystal);
+    @Override
+    public void postInit(FMLPostInitializationEvent event) {
+
+        IItemColor color = new IItemColor() {
+            @Override
+            public int getColorFromItemstack(ItemStack itemStack, int tintIndex) {
+                return (itemStack.getTagCompound() != null && itemStack.getTagCompound().hasKey("color") ? itemStack.getTagCompound().getInteger("color") : 0xFFFFFF);
+            }
+        };
+
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(color, ModItems.itemURLRecord);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(color, ModItems.itemURLMultiRecord);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(color, ModItems.itemFreqCrystal);
     }
 }
