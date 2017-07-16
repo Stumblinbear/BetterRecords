@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.util.ResourceLocation
 
-class RenderTileRecordEtcher : TileEntitySpecialRenderer<TileRecordEtcher>() {
+class RenderRecordEtcher : TileEntitySpecialRenderer<TileRecordEtcher>() {
 
     val MODEL = ModelRecordEtcher()
     val TEXTURE = ResourceLocation(ID, "textures/models/recordetcher.png")
