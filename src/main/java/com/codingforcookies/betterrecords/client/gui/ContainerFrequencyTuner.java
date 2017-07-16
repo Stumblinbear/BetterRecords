@@ -1,6 +1,6 @@
 package com.codingforcookies.betterrecords.client.gui;
 
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
+import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -8,9 +8,9 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerFrequencyTuner extends Container {
-    protected TileEntityFrequencyTuner tileEntity;
+    protected TileFrequencyTuner tileEntity;
 
-    public ContainerFrequencyTuner(InventoryPlayer inventoryPlayer, TileEntityFrequencyTuner te) {
+    public ContainerFrequencyTuner(InventoryPlayer inventoryPlayer, TileFrequencyTuner te) {
         tileEntity = te;
 
         addSlotToContainer(new SlotValid(tileEntity, 0, 17, 50));

@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.common.block.tile;
+package com.codingforcookies.betterrecords.block.tile;
 
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;

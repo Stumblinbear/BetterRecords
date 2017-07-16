@@ -1,6 +1,6 @@
-package com.codingforcookies.betterrecords.common.block;
+package com.codingforcookies.betterrecords.block;
 
-import com.codingforcookies.betterrecords.common.block.tile.*;
+import com.codingforcookies.betterrecords.block.tile.*;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -26,9 +26,9 @@ public final class ModBlocks {
         blockFrequencyTuner = new BlockFrequencyTuner("frequencytuner");
         blockRadio = new BlockRadio("radio");
 
-        blockSMSpeaker = new BlockRecordSpeaker("speaker.sm", 0);
-        blockMDSpeaker = new BlockRecordSpeaker("speaker.md", 1);
-        blockLGSpeaker = new BlockRecordSpeaker("speaker.lg", 2);
+        blockSMSpeaker = new BlockSpeaker("speaker.sm", 0);
+        blockMDSpeaker = new BlockSpeaker("speaker.md", 1);
+        blockLGSpeaker = new BlockSpeaker("speaker.lg", 2);
 
         blockStrobeLight = new BlockStrobeLight("strobelight");
         blockLazer = new BlockLazer("lazer");
@@ -38,14 +38,14 @@ public final class ModBlocks {
     }
 
     private static void initTileEntities() {
-        registerTile(TileEntityRecordEtcher.class, "recordetcher");
-        registerTile(TileEntityRecordPlayer.class, "recordplayer");
-        registerTile(TileEntityFrequencyTuner.class, "frequencytuner");
-        registerTile(TileEntityRadio.class, "radio");
-        registerTile(TileEntityRecordSpeaker.class, "speaker");
-        registerTile(TileEntityStrobeLight.class, "strobelight");
-        registerTile(TileEntityLazer.class, "lazer");
-        registerTile(TileEntityLazerCluster.class, "lazercluster");
+        registerTile(TileRecordEtcher.class, "recordetcher");
+        registerTile(TileRecordPlayer.class, "recordplayer");
+        registerTile(TileFrequencyTuner.class, "frequencytuner");
+        registerTile(TileRadio.class, "radio");
+        registerTile(TileSpeaker.class, "speaker");
+        registerTile(TileStrobeLight.class, "strobelight");
+        registerTile(TileLazer.class, "lazer");
+        registerTile(TileLazerCluster.class, "lazercluster");
     }
 
     private static void registerTile(Class<? extends TileEntity> class_, String key) {

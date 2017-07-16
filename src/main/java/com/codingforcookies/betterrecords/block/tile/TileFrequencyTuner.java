@@ -1,7 +1,6 @@
-package com.codingforcookies.betterrecords.common.block.tile;
+package com.codingforcookies.betterrecords.block.tile;
 
 import com.codingforcookies.betterrecords.common.item.ModItems;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -12,30 +11,17 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityRecordEtcher extends BetterTile implements IInventory, ITickable {
-    public ItemStack record = null;
-    public EntityItem recordEntity;
+public class TileFrequencyTuner extends BetterTile implements IInventory, ITickable {
+    public ItemStack crystal = null;
+    public float crystalFloaty = 0F;
 
-    public float recordRotation = 0F;
-
-    public float needleLocation = 0F;
-    public boolean needleOut = true;
-
-    public TileEntityRecordEtcher() { }
+    public TileFrequencyTuner() { }
 
     public void setRecord(ItemStack itemStack) {
-        if(itemStack == null) {
-            record = null;
-            recordEntity = null;
-            recordRotation = 0F;
-            return;
-        }
-
-        record = itemStack.copy();
-        record.stackSize = 1;
-        recordEntity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), record);
-        recordEntity.hoverStart = 0;
-        recordRotation = 0F;
+        if(itemStack != null)
+            crystal = itemStack.copy();
+        else
+            crystal = null;
     }
 
     @SideOnly(Side.SERVER)
@@ -43,41 +29,29 @@ public class TileEntityRecordEtcher extends BetterTile implements IInventory, IT
         return false;
     }
 
-    @Override
+    @SideOnly(Side.CLIENT)
     public void update() {
-        if(record != null) {
-            recordRotation += 0.08F;
-            if(needleOut)
-                if(needleLocation < .3F)
-                    needleLocation += 0.001F;
-                else
-                    needleOut = false;
-            else
-                if(needleLocation > 0F)
-                    needleLocation -= 0.001F;
-                else
-                    needleOut = true;
-        }else
-            if(needleLocation > 0F)
-                needleLocation -= 0.005F;
-            else
-                needleLocation = 0F;
+        if(crystal != null)
+            crystalFloaty += 0.86F;
     }
 
+    @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
 
         //if(compound.hasKey("rotation"))
         //    blockMetadata = compound.getInteger("rotation");
-        if(compound.hasKey("record"))
-            setRecord(ItemStack.loadItemStackFromNBT(compound.getCompoundTag("record")));
+
+        if(compound.hasKey("crystal"))
+            setRecord(ItemStack.loadItemStackFromNBT(compound.getCompoundTag("crystal")));
     }
 
+    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
         compound.setInteger("rotation", getBlockMetadata());
-        compound.setTag("record", getStackTagCompound(record));
+        compound.setTag("crystal", getStackTagCompound(crystal));
 
         return compound;
     }
@@ -89,14 +63,17 @@ public class TileEntityRecordEtcher extends BetterTile implements IInventory, IT
         return tag;
     }
 
+    @Override
     public int getSizeInventory() {
         return 1;
     }
 
+    @Override
     public ItemStack getStackInSlot(int slot) {
-        return record;
+        return crystal;
     }
 
+    @Override
     public ItemStack decrStackSize(int slot, int amt) {
         ItemStack stack = getStackInSlot(slot);
         if(stack != null)
@@ -121,23 +98,24 @@ public class TileEntityRecordEtcher extends BetterTile implements IInventory, IT
         return stack;
     }
 
+    @Override
     public void setInventorySlotContents(int slot, ItemStack itemStack) {
         setRecord(itemStack);
     }
 
     @Override
     public ITextComponent getDisplayName() {
-        return new TextComponentString("Record Etcher");
-    }
-
-    @Override
-    public String getName() {
-        return "Record Etcher";
+        return new TextComponentString("Frequency Tuner");
     }
 
     @Override
     public boolean hasCustomName() {
         return true;
+    }
+
+    @Override
+    public String getName() {
+        return "Frequency Tuner";
     }
 
     @Override
@@ -158,7 +136,7 @@ public class TileEntityRecordEtcher extends BetterTile implements IInventory, IT
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
-        return itemStack.getItem() == ModItems.itemURLRecord && (!itemStack.hasTagCompound() || !itemStack.getTagCompound().hasKey("url"));
+        return itemStack.getItem() == ModItems.itemFreqCrystal && (!itemStack.hasTagCompound() || !itemStack.getTagCompound().hasKey("url"));
     }
 
     @Override

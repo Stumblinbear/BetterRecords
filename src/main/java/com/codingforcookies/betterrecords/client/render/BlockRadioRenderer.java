@@ -4,7 +4,7 @@ import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
 import com.codingforcookies.betterrecords.client.model.ModelRadio;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRadio;
+import com.codingforcookies.betterrecords.block.tile.TileRadio;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -13,13 +13,13 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Map.Entry;
 
-public class BlockRadioRenderer extends TileEntitySpecialRenderer<TileEntityRadio> {
+public class BlockRadioRenderer extends TileEntitySpecialRenderer<TileRadio> {
 
     private static final ModelRadio MODEL = new ModelRadio();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/radio.png");
 
     @Override
-    public void renderTileEntityAt(TileEntityRadio te, double x, double y, double z, float scale, int destroyStage) {
+    public void renderTileEntityAt(TileRadio te, double x, double y, double z, float scale, int destroyStage) {
         if(te == null) {
             GL11.glPushMatrix();
             {

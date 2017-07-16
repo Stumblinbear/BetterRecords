@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.common.block.tile;
+package com.codingforcookies.betterrecords.block.tile;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;

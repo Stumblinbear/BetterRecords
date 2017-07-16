@@ -4,7 +4,7 @@ import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
 import com.codingforcookies.betterrecords.client.model.ModelRecordPlayer;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordPlayer;
+import com.codingforcookies.betterrecords.block.tile.TileRecordPlayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -14,13 +14,13 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Map.Entry;
 
-public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer<TileEntityRecordPlayer> {
+public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer<TileRecordPlayer> {
 
     private static final ModelRecordPlayer MODEL = new ModelRecordPlayer();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/recordplayer.png");
 
     @Override
-    public void renderTileEntityAt(TileEntityRecordPlayer te, double x, double y, double z, float scale, int destroyStage) {
+    public void renderTileEntityAt(TileRecordPlayer te, double x, double y, double z, float scale, int destroyStage) {
         if(te == null) {
             GL11.glPushMatrix();
             {

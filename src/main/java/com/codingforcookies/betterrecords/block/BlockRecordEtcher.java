@@ -1,7 +1,7 @@
-package com.codingforcookies.betterrecords.common.block;
+package com.codingforcookies.betterrecords.block;
 
 import com.codingforcookies.betterrecords.BetterRecords;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
+import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
@@ -39,7 +39,7 @@ public class BlockRecordEtcher extends BetterBlock {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ){
-        if(!(world.getTileEntity(pos) instanceof TileEntityRecordEtcher))
+        if(!(world.getTileEntity(pos) instanceof TileRecordEtcher))
             return false;
 
         player.openGui(BetterRecords.INSTANCE, 0, world, pos.getX(), pos.getY(), pos.getZ());
@@ -54,11 +54,11 @@ public class BlockRecordEtcher extends BetterBlock {
 
     private void dropItem(World world, net.minecraft.util.math.BlockPos pos) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if(tileEntity == null || !(tileEntity instanceof TileEntityRecordEtcher))
+        if(tileEntity == null || !(tileEntity instanceof TileRecordEtcher))
             return;
 
-        TileEntityRecordEtcher tileEntityRecordEtcher = (TileEntityRecordEtcher)tileEntity;
-        ItemStack item = tileEntityRecordEtcher.record;
+        TileRecordEtcher tileRecordEtcher = (TileRecordEtcher)tileEntity;
+        ItemStack item = tileRecordEtcher.record;
 
         if(item != null) {
             Random rand = new Random();
@@ -78,12 +78,12 @@ public class BlockRecordEtcher extends BetterBlock {
             world.spawnEntity(entityItem);
             item.stackSize = 0;
 
-            tileEntityRecordEtcher.record = null;
+            tileRecordEtcher.record = null;
         }
     }
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileEntityRecordEtcher();
+        return new TileRecordEtcher();
     }
 }

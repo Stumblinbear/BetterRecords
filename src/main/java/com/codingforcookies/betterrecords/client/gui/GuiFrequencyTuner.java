@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.client.gui;
 
 import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.client.sound.IcyURLConnection;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
+import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.client.gui.GuiTextField;
@@ -21,14 +21,14 @@ public class GuiFrequencyTuner extends GuiContainer {
 
     private static final ResourceLocation GUI = new ResourceLocation(ConstantsKt.ID, "textures/gui/frequencytuner.png");
 
-    TileEntityFrequencyTuner tileEntity;
+    TileFrequencyTuner tileEntity;
     GuiTextField nameField;
     GuiTextField urlField;
     String error = "";
     long checkURLTime = 0;
     boolean checkedURL = false;
 
-    public GuiFrequencyTuner(InventoryPlayer inventoryPlayer, TileEntityFrequencyTuner tileEntity){
+    public GuiFrequencyTuner(InventoryPlayer inventoryPlayer, TileFrequencyTuner tileEntity){
         super(new ContainerFrequencyTuner(inventoryPlayer, tileEntity));
         this.tileEntity = tileEntity;
     }

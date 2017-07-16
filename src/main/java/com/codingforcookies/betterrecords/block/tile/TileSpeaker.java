@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.common.block.tile;
+package com.codingforcookies.betterrecords.block.tile;
 
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.ArrayList;
 
-public class TileEntityRecordSpeaker extends BetterTile implements IRecordWire {
+public class TileSpeaker extends BetterTile implements IRecordWire {
     public ArrayList<RecordConnection> connections = null;
     public ArrayList<RecordConnection> getConnections() { return connections; }
 
@@ -20,7 +20,7 @@ public class TileEntityRecordSpeaker extends BetterTile implements IRecordWire {
     public int type = -1;
     public float rotation = 0F;
 
-    public TileEntityRecordSpeaker() {
+    public TileSpeaker() {
         connections = new ArrayList<RecordConnection>();
     }
 

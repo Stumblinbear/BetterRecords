@@ -1,11 +1,11 @@
-package com.codingforcookies.betterrecords.common.block;
+package com.codingforcookies.betterrecords.block;
 
 import com.codingforcookies.betterrecords.api.BetterRecordsAPI;
 import com.codingforcookies.betterrecords.api.record.IRecord;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordPlayer;
+import com.codingforcookies.betterrecords.block.tile.TileRecordPlayer;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.common.item.ModItems;
@@ -53,21 +53,21 @@ public class BlockRecordPlayer extends BetterBlock {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         if(heldItem != null && heldItem.getItem() instanceof IRecordWireManipulator) return false;
         TileEntity tileEntity = world.getTileEntity(pos);
-        if(tileEntity == null || !(tileEntity instanceof TileEntityRecordPlayer)) return false;
-        TileEntityRecordPlayer tileEntityRecordPlayer = (TileEntityRecordPlayer) tileEntity;
+        if(tileEntity == null || !(tileEntity instanceof TileRecordPlayer)) return false;
+        TileRecordPlayer tileRecordPlayer = (TileRecordPlayer) tileEntity;
         if(player.isSneaking()){
             if(world.getBlockState(pos.add(0,1,0)).getBlock() == Blocks.AIR){
                 if (!world.isRemote) {
-                    tileEntityRecordPlayer.opening = !tileEntityRecordPlayer.opening;
+                    tileRecordPlayer.opening = !tileRecordPlayer.opening;
                 }
                 world.notifyBlockUpdate(pos, state, state, 3);
-                if(tileEntityRecordPlayer.opening) world.playSound(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), SoundEvent.REGISTRY.getObject(new ResourceLocation("block.chest.open")), SoundCategory.NEUTRAL, 0.2F, world.rand.nextFloat() * 0.2F + 3F, false);
+                if(tileRecordPlayer.opening) world.playSound(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), SoundEvent.REGISTRY.getObject(new ResourceLocation("block.chest.open")), SoundCategory.NEUTRAL, 0.2F, world.rand.nextFloat() * 0.2F + 3F, false);
                 else world.playSound(pos.getX(), (double) pos.getY() + 0.5D, pos.getZ(), SoundEvent.REGISTRY.getObject(new ResourceLocation("block.chest.open")), SoundCategory.NEUTRAL, 0.2F, world.rand.nextFloat() * 0.2F + 3F, false);
             }
-        }else if(tileEntityRecordPlayer.opening){
-            if(tileEntityRecordPlayer.record != null){
+        }else if(tileRecordPlayer.opening){
+            if(tileRecordPlayer.record != null){
                 if(!world.isRemote) dropItem(world, pos);
-                tileEntityRecordPlayer.setRecord(null);
+                tileRecordPlayer.setRecord(null);
                 world.notifyBlockUpdate(pos, state, state, 3);
             }else if(heldItem != null && (heldItem.getItem() == Items.DIAMOND || (heldItem.getItem() instanceof IRecord && ((IRecord) heldItem.getItem()).isRecordValid(heldItem)))){
                 if(heldItem.getItem() == Items.DIAMOND){
@@ -77,13 +77,13 @@ public class BlockRecordPlayer extends BetterBlock {
                     itemStack.getTagCompound().setString("url", "http://files.enjin.com/788858/SBear'sMods/Songs/easteregg.ogg");
                     itemStack.getTagCompound().setString("local", "Darude - Sandstorm");
                     itemStack.getTagCompound().setInteger("color", 0x53EAD7);
-                    tileEntityRecordPlayer.setRecord(itemStack);
+                    tileRecordPlayer.setRecord(itemStack);
                     world.notifyBlockUpdate(pos, state, state, 3);
                     heldItem.stackSize--;
                 }else{
-                    tileEntityRecordPlayer.setRecord(heldItem);
+                    tileRecordPlayer.setRecord(heldItem);
                     world.notifyBlockUpdate(pos, state, state, 3);
-                    if (!world.isRemote) ((IRecord) heldItem.getItem()).onRecordInserted(tileEntityRecordPlayer, heldItem);
+                    if (!world.isRemote) ((IRecord) heldItem.getItem()).onRecordInserted(tileRecordPlayer, heldItem);
                     heldItem.stackSize--;
                 }
             }
@@ -133,9 +133,9 @@ public class BlockRecordPlayer extends BetterBlock {
 
     private void dropItem(World world, BlockPos pos){
         TileEntity tileEntity = world.getTileEntity(pos);
-        if(tileEntity == null || !(tileEntity instanceof TileEntityRecordPlayer)) return;
-        TileEntityRecordPlayer tileEntityRecordPlayer = (TileEntityRecordPlayer) tileEntity;
-        ItemStack item = tileEntityRecordPlayer.record;
+        if(tileEntity == null || !(tileEntity instanceof TileRecordPlayer)) return;
+        TileRecordPlayer tileRecordPlayer = (TileRecordPlayer) tileEntity;
+        ItemStack item = tileRecordPlayer.record;
         if(item != null){
             Random rand = new Random();
             float rx = rand.nextFloat() * 0.8F + 0.1F;
@@ -148,13 +148,13 @@ public class BlockRecordPlayer extends BetterBlock {
             entityItem.motionZ = rand.nextGaussian() * 0.05F;
             world.spawnEntity(entityItem);
             item.stackSize = 0;
-            tileEntityRecordPlayer.record = null;
-            PacketHandler.sendSoundStopToAllFromServer(tileEntityRecordPlayer.getPos().getX(), tileEntityRecordPlayer.getPos().getY(), tileEntityRecordPlayer.getPos().getZ(), world.provider.getDimension());
+            tileRecordPlayer.record = null;
+            PacketHandler.sendSoundStopToAllFromServer(tileRecordPlayer.getPos().getX(), tileRecordPlayer.getPos().getY(), tileRecordPlayer.getPos().getZ(), world.provider.getDimension());
         }
     }
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2){
-        return new TileEntityRecordPlayer();
+        return new TileRecordPlayer();
     }
 }

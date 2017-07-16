@@ -7,8 +7,8 @@ import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.client.core.handler.TESRRenderHandler;
 import com.codingforcookies.betterrecords.client.render.*;
 import com.codingforcookies.betterrecords.client.sound.SoundHandler;
-import com.codingforcookies.betterrecords.common.block.ModBlocks;
-import com.codingforcookies.betterrecords.common.block.tile.*;
+import com.codingforcookies.betterrecords.block.ModBlocks;
+import com.codingforcookies.betterrecords.block.tile.*;
 import com.codingforcookies.betterrecords.common.core.CommonProxy;
 import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.block.Block;
@@ -69,16 +69,16 @@ public class ClientProxy extends CommonProxy {
         encodings.add("audio/x-wav");
 
         // Temporary way to render TESR's in the inventory. Should be changed once the JSON format supports animations
-        registerTESRRender(ModBlocks.blockRecordEtcher, new BlockRecordEtcherRenderer(), TileEntityRecordEtcher.class, "recordetcher");
-        registerTESRRender(ModBlocks.blockRecordPlayer, new BlockRecordPlayerRenderer(), TileEntityRecordPlayer.class, "recordplayer");
-        registerTESRRender(ModBlocks.blockFrequencyTuner, new BlockFrequencyTunerRenderer(), TileEntityFrequencyTuner.class, "frequencytuner");
-        registerTESRRender(ModBlocks.blockRadio, new BlockRadioRenderer(), TileEntityRadio.class, "radio");
-        registerTESRRender(ModBlocks.blockSMSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "speaker.sm");
-        registerTESRRender(ModBlocks.blockMDSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "speaker.md");
-        registerTESRRender(ModBlocks.blockLGSpeaker, new BlockRecordSpeakerRenderer(), TileEntityRecordSpeaker.class, "speaker.lg");
-        registerTESRRender(ModBlocks.blockStrobeLight, new BlockStrobeLightRenderer(), TileEntityStrobeLight.class, "strobelight");
-        registerTESRRender(ModBlocks.blockLazer, new BlockLazerRenderer(), TileEntityLazer.class, "lazer");
-        registerTESRRender(ModBlocks.blockLazerCluster, new BlockLazerClusterRenderer(), TileEntityLazerCluster.class, "lazercluster");
+        registerTESRRender(ModBlocks.blockRecordEtcher, new BlockRecordEtcherRenderer(), TileRecordEtcher.class, "recordetcher");
+        registerTESRRender(ModBlocks.blockRecordPlayer, new BlockRecordPlayerRenderer(), TileRecordPlayer.class, "recordplayer");
+        registerTESRRender(ModBlocks.blockFrequencyTuner, new BlockFrequencyTunerRenderer(), TileFrequencyTuner.class, "frequencytuner");
+        registerTESRRender(ModBlocks.blockRadio, new BlockRadioRenderer(), TileRadio.class, "radio");
+        registerTESRRender(ModBlocks.blockSMSpeaker, new BlockRecordSpeakerRenderer(), TileSpeaker.class, "speaker.sm");
+        registerTESRRender(ModBlocks.blockMDSpeaker, new BlockRecordSpeakerRenderer(), TileSpeaker.class, "speaker.md");
+        registerTESRRender(ModBlocks.blockLGSpeaker, new BlockRecordSpeakerRenderer(), TileSpeaker.class, "speaker.lg");
+        registerTESRRender(ModBlocks.blockStrobeLight, new BlockStrobeLightRenderer(), TileStrobeLight.class, "strobelight");
+        registerTESRRender(ModBlocks.blockLazer, new BlockLazerRenderer(), TileLazer.class, "lazer");
+        registerTESRRender(ModBlocks.blockLazerCluster, new BlockLazerClusterRenderer(), TileLazerCluster.class, "lazercluster");
         MinecraftForge.EVENT_BUS.register(new TESRRenderHandler());
 
 

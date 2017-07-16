@@ -1,81 +1,61 @@
-package com.codingforcookies.betterrecords.common.block.tile;
+package com.codingforcookies.betterrecords.block.tile;
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityRecordPlayer extends SimpleRecordWireHome implements IRecordWire {
+public class TileRadio extends SimpleRecordWireHome implements IRecordWire {
 
     @Override
     public String getName() {
-        return "Record Player";
+        return "Radio";
     }
 
     @Override
     public ItemStack getItemStack() {
-        return record;
+        return crystal;
     }
 
     @Override
     public float getSongRadiusIncrease() {
-        return 40F;
+        return 30F;
     }
 
-    public ItemStack record = null;
-    public EntityItem recordEntity;
+    public ItemStack crystal = null;
+    public float crystalFloaty = 0F;
 
     public boolean opening = false;
     public float openAmount = 0F;
 
-    public float needleLocation = 0F;
-    public float recordRotation = 0F;
-
-    public void setRecord(ItemStack itemStack) {
+    public void setCrystal(ItemStack itemStack) {
         if(itemStack == null) {
-            record = null;
-            recordEntity = null;
-            recordRotation = 0F;
+            crystal = null;
             return;
         }
 
-        record = itemStack.copy();
-        record.stackSize = 1;
-        recordEntity = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), record);
-        recordEntity.hoverStart = 0;
-        recordEntity.rotationPitch = 0F;
-        recordEntity.rotationYaw = 0F;
-        recordRotation = 0F;
+        crystal = itemStack.copy();
+        crystal.stackSize = 1;
     }
 
     @Override
     public void update() {
         if (opening) {
-            if (openAmount > -0.8F) {
-                openAmount -= 0.08F;
+            if (openAmount < 0.268F) {
+                openAmount += 0.04F;
             }
-        } else if (openAmount < 0F) {
-            openAmount += 0.12F;
+        } else if (openAmount > 0F) {
+            openAmount -= 0.04F;
         }
 
-        if (openAmount < -0.8F) {
-            openAmount = -0.8F;
-        } else if (openAmount > 0F) {
+        if (openAmount > 0.268F) {
+            openAmount = 0.268F;
+        } else if (openAmount < 0F) {
             openAmount = 0F;
         }
 
-        if (record != null) {
-            recordRotation += 0.08F;
-            if (needleLocation < .3F) {
-                needleLocation += 0.01F;
-            } else {
-                needleLocation = .3F;
-            }
-        } else if (needleLocation > 0F) {
-            needleLocation -= 0.01F;
-        } else {
-            needleLocation = 0F;
+        if (crystal != null) {
+            crystalFloaty += 0.86F;
         }
 
         super.update();
@@ -85,8 +65,8 @@ public class TileEntityRecordPlayer extends SimpleRecordWireHome implements IRec
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
 
-        if(compound.hasKey("record"))
-            setRecord(ItemStack.loadItemStackFromNBT(compound.getCompoundTag("record")));
+        if(compound.hasKey("crystal"))
+            setCrystal(ItemStack.loadItemStackFromNBT(compound.getCompoundTag("crystal")));
         if(compound.hasKey("opening"))
             opening = compound.getBoolean("opening");
         if(compound.hasKey("connections"))
@@ -102,7 +82,7 @@ public class TileEntityRecordPlayer extends SimpleRecordWireHome implements IRec
         super.writeToNBT(compound);
 
         compound.setFloat("rotation", getBlockMetadata());
-        compound.setTag("record", getStackTagCompound(record));
+        compound.setTag("crystal", getStackTagCompound(crystal));
         compound.setBoolean("opening", opening);
         compound.setString("connections", ConnectionHelper.serializeConnections(connections));
         compound.setString("wireSystemInfo", ConnectionHelper.serializeWireSystemInfo(wireSystemInfo));

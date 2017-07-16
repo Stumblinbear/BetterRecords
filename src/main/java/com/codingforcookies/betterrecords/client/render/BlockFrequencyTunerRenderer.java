@@ -2,18 +2,18 @@ package com.codingforcookies.betterrecords.client.render;
 
 import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.client.model.ModelFrequencyTuner;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
+import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class BlockFrequencyTunerRenderer extends TileEntitySpecialRenderer<TileEntityFrequencyTuner> {
+public class BlockFrequencyTunerRenderer extends TileEntitySpecialRenderer<TileFrequencyTuner> {
 
     private static final ModelFrequencyTuner MODEL = new ModelFrequencyTuner();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/frequencytuner.png");
 
     @Override
-    public void renderTileEntityAt(TileEntityFrequencyTuner te, double x, double y, double z, float scale, int destroyStage) {
+    public void renderTileEntityAt(TileFrequencyTuner te, double x, double y, double z, float scale, int destroyStage) {
         if(te == null) {
             GL11.glPushMatrix();
             {

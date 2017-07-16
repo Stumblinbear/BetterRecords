@@ -1,8 +1,8 @@
-package com.codingforcookies.betterrecords.common.block;
+package com.codingforcookies.betterrecords.block;
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordSpeaker;
+import com.codingforcookies.betterrecords.block.tile.TileSpeaker;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
@@ -17,12 +17,12 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockRecordSpeaker extends BetterBlock {
+public class BlockSpeaker extends BetterBlock {
 
     public static String[] speakers = new String[]{"sm", "md", "lg"};
     public int meta = 0;
 
-    public BlockRecordSpeaker(String name, int meta){
+    public BlockSpeaker(String name, int meta){
         super(Material.WOOD, name);
         this.meta = meta;
 
@@ -56,9 +56,9 @@ public class BlockRecordSpeaker extends BetterBlock {
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if(tileEntity == null || !(tileEntity instanceof TileEntityRecordSpeaker)) return;
-        ((TileEntityRecordSpeaker) tileEntity).rotation = placer.rotationYaw;
-        ((TileEntityRecordSpeaker) tileEntity).type = meta;
+        if(tileEntity == null || !(tileEntity instanceof TileSpeaker)) return;
+        ((TileSpeaker) tileEntity).rotation = placer.rotationYaw;
+        ((TileSpeaker) tileEntity).type = meta;
         if(world.isRemote && !ConfigHandler.tutorials.get("speaker")) {
             BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.speaker");
             BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000;
@@ -76,6 +76,6 @@ public class BlockRecordSpeaker extends BetterBlock {
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2){
-        return new TileEntityRecordSpeaker();
+        return new TileSpeaker();
     }
 }

@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.common.block.tile;
+package com.codingforcookies.betterrecords.block.tile;
 
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TileEntityLazerCluster extends BetterTile implements IRecordWire, IRecordAmplitude, ITickable {
+public class TileLazerCluster extends BetterTile implements IRecordWire, IRecordAmplitude, ITickable {
     public ArrayList<RecordConnection> connections = null;
     public ArrayList<RecordConnection> getConnections() { return connections; }
 
@@ -53,7 +53,7 @@ public class TileEntityLazerCluster extends BetterTile implements IRecordWire, I
     public String getName() { return "Lazer Cluster"; }
     public float getSongRadiusIncrease() { return 0F; }
 
-    public TileEntityLazerCluster() {
+    public TileLazerCluster() {
         connections = new ArrayList<RecordConnection>();
     }
 

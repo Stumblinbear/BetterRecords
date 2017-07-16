@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords.common.packets;
 
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
+import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner;
+import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -63,12 +63,12 @@ public class PacketURLWriter implements IPacket {
 
     public void executeServer(EntityPlayer player) {
         TileEntity te = player.world.getTileEntity(new net.minecraft.util.math.BlockPos(x, y, z));
-        if(te == null || !(te instanceof TileEntityRecordEtcher || te instanceof TileEntityFrequencyTuner))
+        if(te == null || !(te instanceof TileRecordEtcher || te instanceof TileFrequencyTuner))
             return;
 
-        if(te instanceof TileEntityRecordEtcher) {
-            TileEntityRecordEtcher tileEntityRecordEtcher = (TileEntityRecordEtcher)te;
-            ItemStack itemStack = tileEntityRecordEtcher.record;
+        if(te instanceof TileRecordEtcher) {
+            TileRecordEtcher tileRecordEtcher = (TileRecordEtcher)te;
+            ItemStack itemStack = tileRecordEtcher.record;
             if(itemStack != null) {
                 if(itemStack.getTagCompound() == null)
                     itemStack.setTagCompound(new NBTTagCompound());
@@ -83,8 +83,8 @@ public class PacketURLWriter implements IPacket {
                 IBlockState state = player.world.getBlockState(te.getPos());
                 player.world.notifyBlockUpdate(te.getPos(), state, state, 3);
             }
-        }else if(te instanceof TileEntityFrequencyTuner) {
-            TileEntityFrequencyTuner tileEntityFrequencyTuner = (TileEntityFrequencyTuner)te;
+        }else if(te instanceof TileFrequencyTuner) {
+            TileFrequencyTuner tileEntityFrequencyTuner = (TileFrequencyTuner)te;
             ItemStack itemStack = tileEntityFrequencyTuner.crystal;
             if(itemStack != null) {
                 if(itemStack.getTagCompound() == null)

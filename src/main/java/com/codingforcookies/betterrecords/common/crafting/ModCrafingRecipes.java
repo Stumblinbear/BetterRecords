@@ -1,6 +1,6 @@
 package com.codingforcookies.betterrecords.common.crafting;
 
-import com.codingforcookies.betterrecords.common.block.ModBlocks;
+import com.codingforcookies.betterrecords.block.ModBlocks;
 import com.codingforcookies.betterrecords.common.crafting.recipe.*;
 import com.codingforcookies.betterrecords.common.item.ModItems;
 import net.minecraft.init.Blocks;

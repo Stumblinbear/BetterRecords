@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.common.block.tile;
+package com.codingforcookies.betterrecords.block.tile;
 
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
@@ -9,7 +9,7 @@ import net.minecraft.util.ITickable;
 
 import java.util.ArrayList;
 
-public class TileEntityStrobeLight extends BetterTile implements IRecordWire, IRecordAmplitude, ITickable {
+public class TileStrobeLight extends BetterTile implements IRecordWire, IRecordAmplitude, ITickable {
     public ArrayList<RecordConnection> connections = null;
     public ArrayList<RecordConnection> getConnections() { return connections; }
 
@@ -26,7 +26,7 @@ public class TileEntityStrobeLight extends BetterTile implements IRecordWire, IR
     public String getName() { return "Strobe Light"; }
     public float getSongRadiusIncrease() { return 0F; }
 
-    public TileEntityStrobeLight() {
+    public TileStrobeLight() {
         connections = new ArrayList<RecordConnection>();
     }
 

@@ -2,20 +2,20 @@ package com.codingforcookies.betterrecords.client.render;
 
 import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.client.model.ModelRecordEtcher;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
+import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer<TileEntityRecordEtcher> {
+public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer<TileRecordEtcher> {
 
     private static final ModelRecordEtcher MODEL = new ModelRecordEtcher();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/recordetcher.png");
 
     @Override
-    public void renderTileEntityAt(TileEntityRecordEtcher te, double x, double y, double z, float scale, int destroyStage) {
+    public void renderTileEntityAt(TileRecordEtcher te, double x, double y, double z, float scale, int destroyStage) {
         if(te == null) {
             GL11.glPushMatrix();
             {

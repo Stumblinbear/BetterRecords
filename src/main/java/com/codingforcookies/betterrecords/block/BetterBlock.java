@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.common.block;
+package com.codingforcookies.betterrecords.block;
 
 import com.codingforcookies.betterrecords.BetterRecords;
 import net.minecraft.block.Block;

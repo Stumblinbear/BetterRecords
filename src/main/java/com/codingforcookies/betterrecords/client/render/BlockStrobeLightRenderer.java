@@ -3,20 +3,20 @@ package com.codingforcookies.betterrecords.client.render;
 import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
 import com.codingforcookies.betterrecords.client.model.ModelStrobeLight;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityStrobeLight;
+import com.codingforcookies.betterrecords.block.tile.TileStrobeLight;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer<TileEntityStrobeLight> {
+public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer<TileStrobeLight> {
 
     private static final ModelStrobeLight MODEL = new ModelStrobeLight();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/strobelight.png");
 
     @Override
-    public void renderTileEntityAt(TileEntityStrobeLight te, double x, double y, double z, float scale, int destroyStage) {
+    public void renderTileEntityAt(TileStrobeLight te, double x, double y, double z, float scale, int destroyStage) {
         if(te == null) {
             GL11.glPushMatrix();
             {

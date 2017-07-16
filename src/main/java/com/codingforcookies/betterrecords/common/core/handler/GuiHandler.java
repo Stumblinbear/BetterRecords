@@ -1,8 +1,8 @@
 package com.codingforcookies.betterrecords.common.core.handler;
 
 import com.codingforcookies.betterrecords.client.gui.*;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
+import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner;
+import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -17,13 +17,13 @@ public class GuiHandler implements IGuiHandler {
         switch(id) {
             case 0:
                 tileEntity = world.getTileEntity(new net.minecraft.util.math.BlockPos(x, y, z));
-                if(tileEntity instanceof TileEntityRecordEtcher)
-                        return new ContainerRecordEtcher(player.inventory, (TileEntityRecordEtcher)tileEntity);
+                if(tileEntity instanceof TileRecordEtcher)
+                        return new ContainerRecordEtcher(player.inventory, (TileRecordEtcher)tileEntity);
                 break;
             case 1:
                 tileEntity = world.getTileEntity(new net.minecraft.util.math.BlockPos(x, y, z));
-                if(tileEntity instanceof TileEntityFrequencyTuner)
-                    return new ContainerFrequencyTuner(player.inventory, (TileEntityFrequencyTuner)tileEntity);
+                if(tileEntity instanceof TileFrequencyTuner)
+                    return new ContainerFrequencyTuner(player.inventory, (TileFrequencyTuner)tileEntity);
                 break;
         }
         return null;
@@ -35,13 +35,13 @@ public class GuiHandler implements IGuiHandler {
         switch(id) {
             case 0:
                 tileEntity = world.getTileEntity(new BlockPos(x, y, z));
-                if(tileEntity instanceof TileEntityRecordEtcher)
-                    return new GuiRecordEtcher(player.inventory, (TileEntityRecordEtcher)tileEntity);
+                if(tileEntity instanceof TileRecordEtcher)
+                    return new GuiRecordEtcher(player.inventory, (TileRecordEtcher)tileEntity);
                 break;
             case 1:
                 tileEntity = world.getTileEntity(new net.minecraft.util.math.BlockPos(x, y, z));
-                if(tileEntity instanceof TileEntityFrequencyTuner)
-                    return new GuiFrequencyTuner(player.inventory, (TileEntityFrequencyTuner)tileEntity);
+                if(tileEntity instanceof TileFrequencyTuner)
+                    return new GuiFrequencyTuner(player.inventory, (TileFrequencyTuner)tileEntity);
                 break;
             case 2:
                 return new GuiBetterDisclaimer();

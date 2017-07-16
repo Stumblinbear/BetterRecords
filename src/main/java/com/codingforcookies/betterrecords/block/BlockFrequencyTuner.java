@@ -1,8 +1,8 @@
-package com.codingforcookies.betterrecords.common.block;
+package com.codingforcookies.betterrecords.block;
 
 import com.codingforcookies.betterrecords.api.BetterRecordsAPI;
 import com.codingforcookies.betterrecords.BetterRecords;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
+import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -52,7 +52,7 @@ public class BlockFrequencyTuner extends BetterBlock {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
-        if(!(world.getTileEntity(pos) instanceof TileEntityFrequencyTuner))
+        if(!(world.getTileEntity(pos) instanceof TileFrequencyTuner))
             return false;
 
         player.openGui(BetterRecords.INSTANCE, 1, world, pos.getX(), pos.getY(), pos.getZ());
@@ -87,10 +87,10 @@ public class BlockFrequencyTuner extends BetterBlock {
 
     private void dropItem(World world, BlockPos pos) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if(tileEntity == null || !(tileEntity instanceof TileEntityFrequencyTuner))
+        if(tileEntity == null || !(tileEntity instanceof TileFrequencyTuner))
             return;
 
-        TileEntityFrequencyTuner tileEntityFrequencyTuner = (TileEntityFrequencyTuner)tileEntity;
+        TileFrequencyTuner tileEntityFrequencyTuner = (TileFrequencyTuner)tileEntity;
         ItemStack item = tileEntityFrequencyTuner.crystal;
 
         if(item != null) {
@@ -117,6 +117,6 @@ public class BlockFrequencyTuner extends BetterBlock {
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2) {
-        return new TileEntityFrequencyTuner();
+        return new TileFrequencyTuner();
     }
 }

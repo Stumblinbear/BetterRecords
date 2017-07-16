@@ -3,7 +3,7 @@ package com.codingforcookies.betterrecords.client.gui;
 import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.song.LibrarySong;
 import com.codingforcookies.betterrecords.client.core.ClientProxy;
-import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
+import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
@@ -34,7 +34,7 @@ public class GuiRecordEtcher extends GuiContainer {
 
     private static final ResourceLocation GUI = new ResourceLocation(ConstantsKt.ID, "textures/gui/recordetcher.png");
 
-    TileEntityRecordEtcher tileEntity;
+    TileRecordEtcher tileEntity;
     GuiTextField nameField;
     GuiTextField urlField;
     String error = "";
@@ -47,7 +47,7 @@ public class GuiRecordEtcher extends GuiContainer {
     private JsonElement root = null;
     private JsonObject rootObj = null;
 
-    public GuiRecordEtcher(InventoryPlayer inventoryPlayer, TileEntityRecordEtcher tileEntity) {
+    public GuiRecordEtcher(InventoryPlayer inventoryPlayer, TileRecordEtcher tileEntity) {
         super(new ContainerRecordEtcher(inventoryPlayer, tileEntity));
         this.tileEntity = tileEntity;
         xSize = 256;
