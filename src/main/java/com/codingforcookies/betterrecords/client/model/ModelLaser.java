@@ -5,13 +5,13 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
-public class ModelLazer extends ModelBase {
+public class ModelLaser extends ModelBase {
     ModelRenderer Stand;
     ModelRenderer Front;
     ModelRenderer Base;
     ModelRenderer Box;
 
-    public ModelLazer() {
+    public ModelLaser() {
         textureWidth = 64;
         textureHeight = 32;
 

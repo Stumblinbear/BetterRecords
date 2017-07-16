@@ -4,12 +4,12 @@ import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelLazerCluster extends ModelBase {
+public class ModelLaserCluster extends ModelBase {
     ModelRenderer Base;
     ModelRenderer Emitor;
     ModelRenderer Case;
 
-    public ModelLazerCluster(){
+    public ModelLaserCluster(){
         textureWidth = 64;
         textureHeight = 64;
 

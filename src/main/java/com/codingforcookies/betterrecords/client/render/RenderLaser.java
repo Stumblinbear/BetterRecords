@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords.client.render;
 
 import com.codingforcookies.betterrecords.ConstantsKt;
-import com.codingforcookies.betterrecords.client.model.ModelLazer;
+import com.codingforcookies.betterrecords.client.model.ModelLaser;
 import com.codingforcookies.betterrecords.block.tile.TileLaser;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 public class RenderLaser extends TileEntitySpecialRenderer<TileLaser> {
 
-    private static final ModelLazer MODEL = new ModelLazer();
+    private static final ModelLaser MODEL = new ModelLaser();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/laser.png");
 
     @Override
