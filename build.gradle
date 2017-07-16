@@ -8,21 +8,27 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.2-SNAPSHOT'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
 repositories {
-   flatDir {
-       dirs 'libs'
-   }
+    jcenter()
+    maven {
+        url 'http://maven.shadowfacts.net/'
+    }
+    flatDir {
+        dirs 'libs'
+    }
 }
 
+apply plugin: 'kotlin'
 apply plugin: 'net.minecraftforge.gradle.forge'
 
+targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_1_8
 
 version = "$minecraft_version-$mod_version"
-group = "com.codingforcookies.betterrecords"
-archivesBaseName = "betterrecords"
 
 minecraft {
     version = "$minecraft_version-$forge_version"
@@ -34,12 +40,13 @@ minecraft {
 }
 
 dependencies {
-   compile name: 'mp3plugin'
-   compile name: 'mp3spi1.9.5'
-   compile name: 'tritonus-share-0.3.7-2'
-   compile name: 'vorbisspi-1.0.3-1'
-}
+    compile group: 'net.shadowfacts', name: 'Forgelin', 'version': '1.5.0'
 
+    compile name: 'mp3plugin'
+    compile name: 'mp3spi1.9.5'
+    compile name: 'tritonus-share-0.3.7-2'
+    compile name: 'vorbisspi-1.0.3-1'
+}
 
 processResources {
     inputs.property "version", project.version
