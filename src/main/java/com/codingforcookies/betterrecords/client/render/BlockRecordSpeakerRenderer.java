@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.client.render;
 
+import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.client.model.ModelLGSpeaker;
 import com.codingforcookies.betterrecords.client.model.ModelMDSpeaker;
 import com.codingforcookies.betterrecords.client.model.ModelSMSpeaker;
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordSpeaker;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -13,11 +13,11 @@ import org.lwjgl.opengl.GL11;
 public class BlockRecordSpeakerRenderer extends TileEntitySpecialRenderer {
 
     private static final ModelSMSpeaker MODEL_SM = new ModelSMSpeaker();
-    private static final ResourceLocation TEXTURE_SM = new ResourceLocation(BetterRecords.ID, "textures/models/smspeaker.png");
+    private static final ResourceLocation TEXTURE_SM = new ResourceLocation(ConstantsKt.ID, "textures/models/smspeaker.png");
     private static final ModelMDSpeaker MODEL_MD = new ModelMDSpeaker();
-    private static final ResourceLocation TEXTURE_MD = new ResourceLocation(BetterRecords.ID, "textures/models/mdspeaker.png");
+    private static final ResourceLocation TEXTURE_MD = new ResourceLocation(ConstantsKt.ID, "textures/models/mdspeaker.png");
     private static final ModelLGSpeaker MODEL_LG = new ModelLGSpeaker();
-    private static final ResourceLocation TEXTURE_LG = new ResourceLocation(BetterRecords.ID, "textures/models/lgspeaker.png");
+    private static final ResourceLocation TEXTURE_LG = new ResourceLocation(ConstantsKt.ID, "textures/models/lgspeaker.png");
 
     @Override
     public void renderTileEntityAt(TileEntity te, double x, double y, double z, float scale, int destroyStage) {

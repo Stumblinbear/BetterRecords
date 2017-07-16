@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.client.render;
 
+import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
 import com.codingforcookies.betterrecords.client.model.ModelRadio;
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRadio;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -16,7 +16,7 @@ import java.util.Map.Entry;
 public class BlockRadioRenderer extends TileEntitySpecialRenderer<TileEntityRadio> {
 
     private static final ModelRadio MODEL = new ModelRadio();
-    private static final ResourceLocation TEXTURE = new ResourceLocation(BetterRecords.ID, "textures/models/radio.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/radio.png");
 
     @Override
     public void renderTileEntityAt(TileEntityRadio te, double x, double y, double z, float scale, int destroyStage) {

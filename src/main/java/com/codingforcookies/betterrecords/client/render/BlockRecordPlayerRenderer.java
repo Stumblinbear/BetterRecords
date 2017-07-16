@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.client.render;
 
+import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator;
 import com.codingforcookies.betterrecords.client.model.ModelRecordPlayer;
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordPlayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -17,7 +17,7 @@ import java.util.Map.Entry;
 public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer<TileEntityRecordPlayer> {
 
     private static final ModelRecordPlayer MODEL = new ModelRecordPlayer();
-    private static final ResourceLocation TEXTURE = new ResourceLocation(BetterRecords.ID, "textures/models/recordplayer.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/recordplayer.png");
 
     @Override
     public void renderTileEntityAt(TileEntityRecordPlayer te, double x, double y, double z, float scale, int destroyStage) {

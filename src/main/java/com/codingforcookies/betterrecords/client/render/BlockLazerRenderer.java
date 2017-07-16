@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords.client.render;
 
+import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.client.model.ModelLazer;
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityLazer;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 public class BlockLazerRenderer extends TileEntitySpecialRenderer<TileEntityLazer> {
 
     private static final ModelLazer MODEL = new ModelLazer();
-    private static final ResourceLocation TEXTURE = new ResourceLocation(BetterRecords.ID, "textures/models/lazer.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/lazer.png");
 
     @Override
     public void renderTileEntityAt(TileEntityLazer te, double x, double y, double z, float scale, int destroyStage) {

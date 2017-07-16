@@ -1,13 +1,13 @@
 package com.codingforcookies.betterrecords.common.item;
 
-import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.BetterRecords;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BetterItem extends Item {
 
     public BetterItem(String name) {
-        setCreativeTab(BetterRecords.recordsTab);
+        setCreativeTab(BetterRecords.INSTANCE.getCreativeTab());
         setUnlocalizedName(name);
     }
 

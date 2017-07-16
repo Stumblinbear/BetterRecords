@@ -1,12 +1,12 @@
 package com.codingforcookies.betterrecords.client.core;
 
+import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.BetterRecordsAPI;
 import com.codingforcookies.betterrecords.api.song.LibrarySong;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
 import com.codingforcookies.betterrecords.client.core.handler.TESRRenderHandler;
 import com.codingforcookies.betterrecords.client.render.*;
 import com.codingforcookies.betterrecords.client.sound.SoundHandler;
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.ModBlocks;
 import com.codingforcookies.betterrecords.common.block.tile.*;
 import com.codingforcookies.betterrecords.common.core.CommonProxy;
@@ -90,7 +90,7 @@ public class ClientProxy extends CommonProxy {
         Item item = Item.getItemFromBlock(block);
         ForgeHooksClient.registerTESRItemStack(item, 0, te);
         ModelLoader.setCustomStateMapper(block, new StateMap.Builder().ignore(BetterRecordsAPI.CARDINAL_DIRECTIONS).build());
-        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(BetterRecords.ID + ":itemblock/" + name, "inventory"));
+        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(ConstantsKt.ID + ":itemblock/" + name, "inventory"));
     }
 
 
@@ -119,15 +119,16 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new BetterEventHandler());
 
         RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-        renderItem.getItemModelMesher().register(ModItems.itemFreqCrystal, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "freqcrystal", "inventory"));
-        renderItem.getItemModelMesher().register(ModItems.itemRecordWire, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "recordwire", "inventory"));
-        renderItem.getItemModelMesher().register(ModItems.itemRecordCutters, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "recordwirecutters", "inventory"));
-        renderItem.getItemModelMesher().register(ModItems.itemURLMultiRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlmultirecord", "inventory"));
-        renderItem.getItemModelMesher().register(ModItems.itemURLRecord, 0, new ModelResourceLocation(BetterRecords.ID + ":" + "urlrecord", "inventory"));
+        renderItem.getItemModelMesher().register(ModItems.itemFreqCrystal, 0, new ModelResourceLocation(ConstantsKt.ID + ":" + "freqcrystal", "inventory"));
+        renderItem.getItemModelMesher().register(ModItems.itemRecordWire, 0, new ModelResourceLocation(ConstantsKt.ID + ":" + "recordwire", "inventory"));
+        renderItem.getItemModelMesher().register(ModItems.itemRecordCutters, 0, new ModelResourceLocation(ConstantsKt.ID + ":" + "recordwirecutters", "inventory"));
+        renderItem.getItemModelMesher().register(ModItems.itemURLMultiRecord, 0, new ModelResourceLocation(ConstantsKt.ID + ":" + "urlmultirecord", "inventory"));
+        renderItem.getItemModelMesher().register(ModItems.itemURLRecord, 0, new ModelResourceLocation(ConstantsKt.ID + ":" + "urlrecord", "inventory"));
     }
 
     @Override
     public void postInit(FMLPostInitializationEvent event) {
+        super.postInit(event);
 
         IItemColor color = new IItemColor() {
             @Override

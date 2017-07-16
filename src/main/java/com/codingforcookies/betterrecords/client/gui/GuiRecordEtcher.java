@@ -1,8 +1,8 @@
 package com.codingforcookies.betterrecords.client.gui;
 
+import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.song.LibrarySong;
 import com.codingforcookies.betterrecords.client.core.ClientProxy;
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
@@ -32,7 +32,7 @@ import java.util.Map.Entry;
 
 public class GuiRecordEtcher extends GuiContainer {
 
-    private static final ResourceLocation GUI = new ResourceLocation(BetterRecords.ID, "textures/gui/recordetcher.png");
+    private static final ResourceLocation GUI = new ResourceLocation(ConstantsKt.ID, "textures/gui/recordetcher.png");
 
     TileEntityRecordEtcher tileEntity;
     GuiTextField nameField;

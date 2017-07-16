@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords.client.gui;
 
+import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.client.sound.IcyURLConnection;
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
@@ -19,7 +19,7 @@ import java.net.URL;
 
 public class GuiFrequencyTuner extends GuiContainer {
 
-    private static final ResourceLocation GUI = new ResourceLocation(BetterRecords.ID, "textures/gui/frequencytuner.png");
+    private static final ResourceLocation GUI = new ResourceLocation(ConstantsKt.ID, "textures/gui/frequencytuner.png");
 
     TileEntityFrequencyTuner tileEntity;
     GuiTextField nameField;

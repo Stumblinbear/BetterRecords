@@ -1,12 +1,13 @@
 package com.codingforcookies.betterrecords.client.core.handler;
 
+import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.sound.FileDownloader;
 import com.codingforcookies.betterrecords.client.sound.SoundHandler;
 import com.codingforcookies.betterrecords.client.sound.SoundManager;
-import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.BetterRecords;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.item.ItemRecordWire;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
@@ -273,8 +274,8 @@ public class BetterEventHandler{
                             try {
                                 URL url = new URL("http://widget.mcf.li/mc-mods/minecraft/222722-better-records.json");
                                 String latestVersion = CurseModInfo.fromURL(url).getNewestVersion(MinecraftForge.MC_VERSION).getModVersion();
-                                String modVersion = BetterRecords.VERSION;
-                                if (!latestVersion.trim().equals(BetterRecords.VERSION)) {
+                                String modVersion = ConstantsKt.VERSION;
+                                if (!latestVersion.trim().equals(ConstantsKt.VERSION)) {
                                     Minecraft.getMinecraft().player.sendChatMessage(new TextComponentTranslation("msg.newversion.txt").toString());
                                     Minecraft.getMinecraft().player.sendChatMessage(new TextComponentString("       " + BetterUtils.getTranslatedString("overlay.curversion") + ": " + latestVersion).toString());
                                 }
@@ -327,7 +328,7 @@ public class BetterEventHandler{
         } else { //TickEvent.Phase.END
             if(Minecraft.getMinecraft().player != null) {
                 if (ConfigHandler.flashyMode == -1)
-                    Minecraft.getMinecraft().player.openGui(BetterRecords.instance, 2, Minecraft.getMinecraft().world, 0, 0, 0);
+                    Minecraft.getMinecraft().player.openGui(BetterRecords.INSTANCE, 2, Minecraft.getMinecraft().world, 0, 0, 0);
             }
         }
     }

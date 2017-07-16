@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords.common.block;
 
 import com.codingforcookies.betterrecords.api.BetterRecordsAPI;
-import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityFrequencyTuner;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -55,7 +55,7 @@ public class BlockFrequencyTuner extends BetterBlock {
         if(!(world.getTileEntity(pos) instanceof TileEntityFrequencyTuner))
             return false;
 
-        player.openGui(BetterRecords.instance, 1, world, pos.getX(), pos.getY(), pos.getZ());
+        player.openGui(BetterRecords.INSTANCE, 1, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 

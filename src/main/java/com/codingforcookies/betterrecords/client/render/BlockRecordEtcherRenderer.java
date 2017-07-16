@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords.client.render;
 
+import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.client.model.ModelRecordEtcher;
-import com.codingforcookies.betterrecords.common.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer<TileEntityRecordEtcher> {
 
     private static final ModelRecordEtcher MODEL = new ModelRecordEtcher();
-    private static final ResourceLocation TEXTURE = new ResourceLocation(BetterRecords.ID, "textures/models/recordetcher.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/recordetcher.png");
 
     @Override
     public void renderTileEntityAt(TileEntityRecordEtcher te, double x, double y, double z, float scale, int destroyStage) {

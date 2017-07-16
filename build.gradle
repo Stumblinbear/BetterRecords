@@ -35,7 +35,7 @@ minecraft {
     mappings = "$forge_mappings"
     runDir = "run"
 
-    replaceIn "BetterRecords.java"
+    replaceIn "Constants.kt"
     replace "@VERSION@", project.version
 }
 

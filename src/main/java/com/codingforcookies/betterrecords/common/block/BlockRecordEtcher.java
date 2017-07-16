@@ -1,6 +1,6 @@
 package com.codingforcookies.betterrecords.common.block;
 
-import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.BetterRecords;
 import com.codingforcookies.betterrecords.common.block.tile.TileEntityRecordEtcher;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -42,7 +42,7 @@ public class BlockRecordEtcher extends BetterBlock {
         if(!(world.getTileEntity(pos) instanceof TileEntityRecordEtcher))
             return false;
 
-        player.openGui(BetterRecords.instance, 0, world, pos.getX(), pos.getY(), pos.getZ());
+        player.openGui(BetterRecords.INSTANCE, 0, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
     }
 

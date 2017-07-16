@@ -1,6 +1,6 @@
 package com.codingforcookies.betterrecords.common.block;
 
-import com.codingforcookies.betterrecords.common.BetterRecords;
+import com.codingforcookies.betterrecords.BetterRecords;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,7 +19,7 @@ public abstract class BetterBlock<T extends TileEntity> extends BlockContainer {
     public BetterBlock(Material material, String name) {
         super(material);
         setUnlocalizedName(name);
-        this.setCreativeTab(BetterRecords.recordsTab);
+        this.setCreativeTab(BetterRecords.INSTANCE.getCreativeTab());
     }
 
     @Override
