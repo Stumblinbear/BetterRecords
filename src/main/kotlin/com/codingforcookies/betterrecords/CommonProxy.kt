@@ -17,7 +17,7 @@ open class CommonProxy {
     open fun preInit(event: FMLPreInitializationEvent) {
         ConfigHandler.loadConfig(event.suggestedConfigurationFile)
 
-        ModBlocks.init()
+        ModBlocks
         ModItems
     }
 

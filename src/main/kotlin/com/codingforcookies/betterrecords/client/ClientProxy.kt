@@ -2,6 +2,7 @@ package com.codingforcookies.betterrecords.client
 
 import com.codingforcookies.betterrecords.CommonProxy
 import com.codingforcookies.betterrecords.api.song.LibrarySong
+import com.codingforcookies.betterrecords.block.ModBlock
 import com.codingforcookies.betterrecords.block.tile.*
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.client.render.*
@@ -53,9 +54,9 @@ class ClientProxy : CommonProxy() {
         ClientRegistry.bindTileEntitySpecialRenderer(TileRecordPlayer::class.java, RenderRecordPlayer())
         ClientRegistry.bindTileEntitySpecialRenderer(TileSpeaker::class.java, RenderSpeaker())
 
-        //Block.REGISTRY
-        //        .filterIsInstance<ModBlock>()
-        //        .forEach(ModBlock::RegisterTESR)
+        Block.REGISTRY
+                .filterIsInstance<ModBlock>()
+                .forEach(ModBlock::registerTESR)
 
         SoundHandler.initalize()
     }

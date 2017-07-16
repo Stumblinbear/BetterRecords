@@ -3,7 +3,7 @@
   "defaults": {
     "model": "betterrecords:dummy",
     "textures": {
-      "particle": "betterrecords:models/smspeaker"
+      "particle": "betterrecords:blocks/breaktexture"
     }
   },
   "variants": {

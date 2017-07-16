@@ -37,17 +37,16 @@ public final class ModCrafingRecipes {
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.INSTANCE.getItemWire(), 4), "WIW", "WIW", "WIW", 'I', Items.IRON_INGOT, 'W', new ItemStack(Blocks.WOOL, 1, 15));
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.INSTANCE.getItemWireCutters()), "I I", " I ", "WIW", 'I', Items.IRON_INGOT, 'W', new ItemStack(Blocks.WOOL, 1, 15));
 
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockRecordEtcher), "HIH", "PQP", "PPP", 'H', Blocks.WOODEN_SLAB, 'I', Items.IRON_INGOT, 'P', Blocks.PLANKS, 'Q', Items.QUARTZ);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockRecordPlayer), "GGG", "PDP", "PPP", 'G', Blocks.GLASS_PANE, 'P', Blocks.PLANKS, 'D', Blocks.DIAMOND_BLOCK);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockFrequencyTuner), "SHH", "PQP", "PIP", 'H', Blocks.WOODEN_SLAB, 'I', Items.IRON_INGOT, 'S', Items.STICK, 'P', Blocks.PLANKS, 'Q', ModItems.INSTANCE.getItemFrequencyCrystal());
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockRadio), "HIH", "PQP", "PHP", 'H', Blocks.WOODEN_SLAB, 'I', Items.IRON_INGOT, 'P', Blocks.PLANKS, 'Q', ModItems.INSTANCE.getItemFrequencyCrystal());
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.INSTANCE.getBlockRecordEtcher()), "HIH", "PQP", "PPP", 'H', Blocks.WOODEN_SLAB, 'I', Items.IRON_INGOT, 'P', Blocks.PLANKS, 'Q', Items.QUARTZ);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.INSTANCE.getBlockRecordPlayer()), "GGG", "PDP", "PPP", 'G', Blocks.GLASS_PANE, 'P', Blocks.PLANKS, 'D', Blocks.DIAMOND_BLOCK);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.INSTANCE.getBlockFrequencyTuner()), "SHH", "PQP", "PIP", 'H', Blocks.WOODEN_SLAB, 'I', Items.IRON_INGOT, 'S', Items.STICK, 'P', Blocks.PLANKS, 'Q', ModItems.INSTANCE.getItemFrequencyCrystal());
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.INSTANCE.getBlockRadio()), "HIH", "PQP", "PHP", 'H', Blocks.WOODEN_SLAB, 'I', Items.IRON_INGOT, 'P', Blocks.PLANKS, 'Q', ModItems.INSTANCE.getItemFrequencyCrystal());
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.INSTANCE.getBlockSpeakerSM()), "LLW", "QDW", "LLW", 'L', Blocks.LOG, 'W', new ItemStack(Blocks.WOOL, 1, 15), 'D', Items.DIAMOND, 'Q', Items.QUARTZ);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.INSTANCE.getBlockSpeakerMD()), "LLW", "ESW", "LLW", 'L', Blocks.LOG, 'W', new ItemStack(Blocks.WOOL, 1, 15), 'S', ModBlocks.INSTANCE.getBlockSpeakerSM(), 'E', Items.ENDER_EYE);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.INSTANCE.getBlockSpeakerLG()), "LLW", "CMW", "LLW", 'L', Blocks.LOG, 'W', new ItemStack(Blocks.WOOL, 1, 15), 'M', ModBlocks.INSTANCE.getBlockSpeakerMD(), 'C', Items.COMPARATOR);
 
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockSMSpeaker), "LLW", "QDW", "LLW", 'L', Blocks.LOG, 'W', new ItemStack(Blocks.WOOL, 1, 15), 'D', Items.DIAMOND, 'Q', Items.QUARTZ);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockMDSpeaker), "LLW", "ESW", "LLW", 'L', Blocks.LOG, 'W', new ItemStack(Blocks.WOOL, 1, 15), 'S', ModBlocks.blockSMSpeaker, 'E', Items.ENDER_EYE);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockLGSpeaker), "LLW", "CMW", "LLW", 'L', Blocks.LOG, 'W', new ItemStack(Blocks.WOOL, 1, 15), 'M', ModBlocks.blockMDSpeaker, 'C', Items.COMPARATOR);
-
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockStrobeLight), "GGG", "GRG", "CTC", 'G', Blocks.GLASS, 'C', Items.COMPARATOR, 'R', Blocks.REDSTONE_LAMP, 'T', Blocks.REDSTONE_TORCH);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockLazer), "LLL", "LQG", "HLH", 'L', Blocks.LOG, 'H', Blocks.WOODEN_SLAB, 'G', Blocks.GLASS, 'Q', Items.QUARTZ);
-        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.blockLazerCluster), "LLL", "LRL", "LLL", 'L', ModBlocks.blockLazer, 'R', Items.REDSTONE);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.INSTANCE.getBlockStrobeLight()), "GGG", "GRG", "CTC", 'G', Blocks.GLASS, 'C', Items.COMPARATOR, 'R', Blocks.REDSTONE_LAMP, 'T', Blocks.REDSTONE_TORCH);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.INSTANCE.getBlockLaser()), "LLL", "LQG", "HLH", 'L', Blocks.LOG, 'H', Blocks.WOODEN_SLAB, 'G', Blocks.GLASS, 'Q', Items.QUARTZ);
+        GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.INSTANCE.getBlockLaserCluster()), "LLL", "LRL", "LLL", 'L', ModBlocks.INSTANCE.getBlockLaser(), 'R', Items.REDSTONE);
     }
 }

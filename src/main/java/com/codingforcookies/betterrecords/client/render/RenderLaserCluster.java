@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderLaserCluster extends TileEntitySpecialRenderer<TileLaserCluster> {
 
     private static final ModelLazerCluster MODEL = new ModelLazerCluster();
-    private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/lazercluster.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/lasercluster.png");
 
     @Override
     public void renderTileEntityAt(TileLaserCluster te, double x, double y, double z, float scale, int unknown) {

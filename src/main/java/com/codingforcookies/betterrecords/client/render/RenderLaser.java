@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 public class RenderLaser extends TileEntitySpecialRenderer<TileLaser> {
 
     private static final ModelLazer MODEL = new ModelLazer();
-    private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/lazer.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/laser.png");
 
     @Override
     public void renderTileEntityAt(TileLaser te, double x, double y, double z, float scale, int destroyStage) {
