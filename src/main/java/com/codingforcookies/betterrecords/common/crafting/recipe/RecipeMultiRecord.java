@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords.common.crafting.recipe;
 
-import com.codingforcookies.betterrecords.common.item.ItemURLRecord;
-import com.codingforcookies.betterrecords.common.item.ModItems;
+import com.codingforcookies.betterrecords.item.ItemRecord;
+import com.codingforcookies.betterrecords.item.ModItems;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -20,7 +20,7 @@ public class RecipeMultiRecord implements IRecipe {
         for(int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
             ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
             if(itemstack != null)
-                if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null && itemstack.getTagCompound().hasKey("name"))
+                if(itemstack.getItem() instanceof ItemRecord && itemstack.getTagCompound() != null && itemstack.getTagCompound().hasKey("name"))
                     records.add(itemstack);
                 else
                     return false;
@@ -36,7 +36,7 @@ public class RecipeMultiRecord implements IRecipe {
         for(int k = 0; k < inventoryCrafting.getSizeInventory(); ++k) {
             ItemStack itemstack = inventoryCrafting.getStackInSlot(k);
             if(itemstack != null) {
-                if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null && itemstack.getTagCompound().hasKey("name"))
+                if(itemstack.getItem() instanceof ItemRecord && itemstack.getTagCompound() != null && itemstack.getTagCompound().hasKey("name"))
                     records.add(itemstack);
                 else
                     return null;

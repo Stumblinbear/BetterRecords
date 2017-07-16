@@ -8,7 +8,7 @@ import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.block.tile.TileRecordPlayer;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
-import com.codingforcookies.betterrecords.common.item.ModItems;
+import com.codingforcookies.betterrecords.item.ModItems;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.block.material.Material;

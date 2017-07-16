@@ -1,6 +1,6 @@
 package com.codingforcookies.betterrecords.common.crafting.recipe;
 
-import com.codingforcookies.betterrecords.common.item.ItemURLRecord;
+import com.codingforcookies.betterrecords.item.ItemRecord;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -18,7 +18,7 @@ public class RecipeRecordRepeatable implements IRecipe {
         for(int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
             ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
             if(itemstack != null) {
-                if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null)
+                if(itemstack.getItem() instanceof ItemRecord && itemstack.getTagCompound() != null)
                     if(record != null)
                         return false;
                     else
@@ -44,7 +44,7 @@ public class RecipeRecordRepeatable implements IRecipe {
         for(int i = 0; i < inventoryCrafting.getSizeInventory(); i++) {
             ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
             if(itemstack != null) {
-                if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null)
+                if(itemstack.getItem() instanceof ItemRecord && itemstack.getTagCompound() != null)
                     if(record != null)
                         return null;
                     else

@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords.common.crafting.recipe;
 
-import com.codingforcookies.betterrecords.common.item.ItemURLMultiRecord;
-import com.codingforcookies.betterrecords.common.item.ItemURLRecord;
+import com.codingforcookies.betterrecords.item.ItemMultiRecord;
+import com.codingforcookies.betterrecords.item.ItemRecord;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
@@ -19,7 +19,7 @@ public class RecipeRecordShuffle implements IRecipe {
         for(int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
             ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
             if(itemstack != null) {
-                if(itemstack.getItem() instanceof ItemURLMultiRecord && itemstack.getTagCompound() != null) if(record != null) return false;
+                if(itemstack.getItem() instanceof ItemMultiRecord && itemstack.getTagCompound() != null) if(record != null) return false;
                 else record = itemstack;
                 else if(itemstack.getItem() == Item.getItemFromBlock(Blocks.REDSTONE_TORCH)) if(shuffle) return false;
                 else shuffle = true;
@@ -36,7 +36,7 @@ public class RecipeRecordShuffle implements IRecipe {
         for(int i = 0; i < inventoryCrafting.getSizeInventory(); i++){
             ItemStack itemstack = inventoryCrafting.getStackInSlot(i);
             if(itemstack != null) {
-                if(itemstack.getItem() instanceof ItemURLRecord && itemstack.getTagCompound() != null) if(record != null) return null;
+                if(itemstack.getItem() instanceof ItemRecord && itemstack.getTagCompound() != null) if(record != null) return null;
                 else record = itemstack;
                 else if(itemstack.getItem() == Item.getItemFromBlock(Blocks.REDSTONE_TORCH)) if(shuffle) return null;
                 else shuffle = true;

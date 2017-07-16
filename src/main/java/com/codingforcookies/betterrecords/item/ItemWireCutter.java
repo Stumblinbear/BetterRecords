@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.common.item;
+package com.codingforcookies.betterrecords.item;
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
@@ -13,9 +13,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
-public class ItemRecordWireCutter extends BetterItem implements IRecordWireManipulator {
+public class ItemWireCutter extends BetterItem implements IRecordWireManipulator {
 
-    public ItemRecordWireCutter(String name) {
+    public ItemWireCutter(String name) {
         super(name);
         setMaxStackSize(1);
     }

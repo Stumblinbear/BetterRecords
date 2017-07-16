@@ -9,7 +9,7 @@ import com.codingforcookies.betterrecords.client.sound.SoundHandler;
 import com.codingforcookies.betterrecords.client.sound.SoundManager;
 import com.codingforcookies.betterrecords.BetterRecords;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
-import com.codingforcookies.betterrecords.common.item.ItemRecordWire;
+import com.codingforcookies.betterrecords.item.ItemWire;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import com.codingforcookies.betterrecords.common.util.CurseModInfo;
 import net.minecraft.block.Block;
@@ -47,13 +47,13 @@ public class BetterEventHandler{
     public void onDrawBlockHighlight(DrawBlockHighlightEvent event){
         if(!event.getTarget().typeOfHit.equals(RayTraceResult.Type.BLOCK)) return;
         Minecraft mc = Minecraft.getMinecraft();
-        if(ItemRecordWire.connection != null){
+        if(ItemWire.connection != null){
             float dx = (float) (mc.player.prevPosX + (mc.player.posX - mc.player.prevPosX) * event.getPartialTicks());
             float dy = (float) (mc.player.prevPosY + (mc.player.posY - mc.player.prevPosY) * event.getPartialTicks());
             float dz = (float) (mc.player.prevPosZ + (mc.player.posZ - mc.player.prevPosZ) * event.getPartialTicks());
-            float x1 = -(float) (event.getTarget().getBlockPos().getX() - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.x1 : ItemRecordWire.connection.x2));
-            float y1 = -(float) (event.getTarget().getBlockPos().getY() - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.y1 : ItemRecordWire.connection.y2));
-            float z1 = -(float) (event.getTarget().getBlockPos().getZ() - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.z1 : ItemRecordWire.connection.z2));
+            float x1 = -(float) (event.getTarget().getBlockPos().getX() - (ItemWire.connection.fromHome ? ItemWire.connection.x1 : ItemWire.connection.x2));
+            float y1 = -(float) (event.getTarget().getBlockPos().getY() - (ItemWire.connection.fromHome ? ItemWire.connection.y1 : ItemWire.connection.y2));
+            float z1 = -(float) (event.getTarget().getBlockPos().getZ() - (ItemWire.connection.fromHome ? ItemWire.connection.z1 : ItemWire.connection.z2));
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glLineWidth(2F);
@@ -63,7 +63,7 @@ public class BetterEventHandler{
             //TODO
             //j.setBlockBoundsBasedOnState(mc.world, new BlockPos(event.getTarget().getBlockPos().getX(), event.getTarget().getBlockPos().getY(), event.getTarget().getBlockPos().getZ()));
             TileEntity t = mc.world.getTileEntity(new BlockPos(event.getTarget().getBlockPos().getX(), event.getTarget().getBlockPos().getY(), event.getTarget().getBlockPos().getZ()));
-            //RenderGlobal.drawOutlinedBoundingBox(j.getSelectedBoundingBoxFromPool(mc.world, event.getTarget().blockX, event.getTarget().blockY, event.getTarget().blockZ).expand(0.002D, 0.002D, 0.002D).getOffsetBoundingBox(-dx, -dy, -dz), ((t instanceof IRecordWire ? (ItemRecordWire.connection.fromHome ? t instanceof IRecordWireHome : !(t instanceof IRecordWireHome)) : false) || Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2) + Math.pow(z1, 2)) > 7) ? 0xFF0000 : (t instanceof IRecordWire ? 0x00FF00 : 0xFFFF00));
+            //RenderGlobal.drawOutlinedBoundingBox(j.getSelectedBoundingBoxFromPool(mc.world, event.getTarget().blockX, event.getTarget().blockY, event.getTarget().blockZ).expand(0.002D, 0.002D, 0.002D).getOffsetBoundingBox(-dx, -dy, -dz), ((t instanceof IRecordWire ? (ItemWire.connection.fromHome ? t instanceof IRecordWireHome : !(t instanceof IRecordWireHome)) : false) || Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2) + Math.pow(z1, 2)) > 7) ? 0xFF0000 : (t instanceof IRecordWire ? 0x00FF00 : 0xFFFF00));
             GL11.glDepthMask(true);
             GL11.glEnable(GL11.GL_TEXTURE_2D);
             GL11.glDisable(GL11.GL_BLEND);
@@ -74,9 +74,9 @@ public class BetterEventHandler{
     @SubscribeEvent
     public void onRenderEvent(RenderWorldLastEvent event){
         Minecraft mc = Minecraft.getMinecraft();
-        if(ItemRecordWire.connection != null){
-            if(mc.player.getHeldItemMainhand() == null || !(mc.player.getHeldItemMainhand().getItem() instanceof ItemRecordWire)){
-                ItemRecordWire.connection = null;
+        if(ItemWire.connection != null){
+            if(mc.player.getHeldItemMainhand() == null || !(mc.player.getHeldItemMainhand().getItem() instanceof ItemWire)){
+                ItemWire.connection = null;
             }else{
                 GL11.glPushMatrix();
                 {
@@ -84,9 +84,9 @@ public class BetterEventHandler{
                     float dx = (float) (mc.player.prevPosX + (mc.player.posX - mc.player.prevPosX) * event.getPartialTicks());
                     float dy = (float) (mc.player.prevPosY + (mc.player.posY - mc.player.prevPosY) * event.getPartialTicks());
                     float dz = (float) (mc.player.prevPosZ + (mc.player.posZ - mc.player.prevPosZ) * event.getPartialTicks());
-                    float x1 = -(dx - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.x1 : ItemRecordWire.connection.x2));
-                    float y1 = -(dy - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.y1 : ItemRecordWire.connection.y2));
-                    float z1 = -(dz - (ItemRecordWire.connection.fromHome ? ItemRecordWire.connection.z1 : ItemRecordWire.connection.z2));
+                    float x1 = -(dx - (ItemWire.connection.fromHome ? ItemWire.connection.x1 : ItemWire.connection.x2));
+                    float y1 = -(dy - (ItemWire.connection.fromHome ? ItemWire.connection.y1 : ItemWire.connection.y2));
+                    float z1 = -(dz - (ItemWire.connection.fromHome ? ItemWire.connection.z1 : ItemWire.connection.z2));
                     GL11.glTranslatef(x1 + .5F, y1 + .5F, z1 + .5F);
                     GL11.glLineWidth(2F);
                     GL11.glColor3f(0F, 0F, 0F);
@@ -96,9 +96,9 @@ public class BetterEventHandler{
                         GL11.glVertex3f(0F, 3F, 0F);
                     }
                     GL11.glEnd();
-                    if(ConfigHandler.devMode && ItemRecordWire.connection.fromHome){
-                        if(SoundHandler.soundPlaying.containsKey(ItemRecordWire.connection.x1 + "," + ItemRecordWire.connection.y1 + "," + ItemRecordWire.connection.z1 + "," + mc.world.provider.getDimension())){
-                            float radius = SoundHandler.soundPlaying.get(ItemRecordWire.connection.x1 + "," + ItemRecordWire.connection.y1 + "," + ItemRecordWire.connection.z1 + "," + mc.world.provider.getDimension()).getCurrentSong().playRadius;
+                    if(ConfigHandler.devMode && ItemWire.connection.fromHome){
+                        if(SoundHandler.soundPlaying.containsKey(ItemWire.connection.x1 + "," + ItemWire.connection.y1 + "," + ItemWire.connection.z1 + "," + mc.world.provider.getDimension())){
+                            float radius = SoundHandler.soundPlaying.get(ItemWire.connection.x1 + "," + ItemWire.connection.y1 + "," + ItemWire.connection.z1 + "," + mc.world.provider.getDimension()).getCurrentSong().playRadius;
                             GL11.glDisable(GL11.GL_CULL_FACE);
                             GL11.glEnable(GL11.GL_BLEND);
                             GL11.glColor4f(.1F, .1F, 1F, .2F);

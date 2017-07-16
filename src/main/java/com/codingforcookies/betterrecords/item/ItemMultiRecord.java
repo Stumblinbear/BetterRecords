@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.common.item;
+package com.codingforcookies.betterrecords.item;
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
@@ -12,9 +12,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemURLMultiRecord extends ItemURLRecord {
+public class ItemMultiRecord extends ItemRecord {
 
-    public ItemURLMultiRecord(String name) {
+    public ItemMultiRecord(String name) {
         super(name);
     }
 

@@ -3,7 +3,7 @@ package com.codingforcookies.betterrecords.common.core.helper;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
-import com.codingforcookies.betterrecords.common.item.ModItems;
+import com.codingforcookies.betterrecords.item.ModItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;

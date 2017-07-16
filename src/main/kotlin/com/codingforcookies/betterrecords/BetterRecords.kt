@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords
 
 import com.codingforcookies.betterrecords.common.core.CommonProxy
-import com.codingforcookies.betterrecords.common.item.ModItems
+import com.codingforcookies.betterrecords.item.ModItems
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.SidedProxy

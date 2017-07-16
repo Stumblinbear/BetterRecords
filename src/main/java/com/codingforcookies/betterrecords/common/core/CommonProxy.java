@@ -5,7 +5,7 @@ import com.codingforcookies.betterrecords.block.ModBlocks;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.handler.GuiHandler;
 import com.codingforcookies.betterrecords.common.crafting.ModCrafingRecipes;
-import com.codingforcookies.betterrecords.common.item.ModItems;
+import com.codingforcookies.betterrecords.item.ModItems;
 import com.codingforcookies.betterrecords.common.packets.ChannelHandler;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

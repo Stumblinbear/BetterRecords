@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.common.item;
+package com.codingforcookies.betterrecords.item;
 
 import com.codingforcookies.betterrecords.api.record.IRecord;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
@@ -12,9 +12,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemURLRecord extends BetterItem implements IRecord {
+public class ItemRecord extends BetterItem implements IRecord {
 
-    public ItemURLRecord(String name) {
+    public ItemRecord(String name) {
         super(name);
         setMaxStackSize(1);
     }

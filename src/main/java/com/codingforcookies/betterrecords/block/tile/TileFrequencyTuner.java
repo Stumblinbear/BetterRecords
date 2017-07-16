@@ -1,6 +1,6 @@
 package com.codingforcookies.betterrecords.block.tile;
 
-import com.codingforcookies.betterrecords.common.item.ModItems;
+import com.codingforcookies.betterrecords.item.ModItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

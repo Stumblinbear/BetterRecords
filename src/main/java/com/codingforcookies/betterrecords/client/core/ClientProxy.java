@@ -10,7 +10,7 @@ import com.codingforcookies.betterrecords.client.sound.SoundHandler;
 import com.codingforcookies.betterrecords.block.ModBlocks;
 import com.codingforcookies.betterrecords.block.tile.*;
 import com.codingforcookies.betterrecords.common.core.CommonProxy;
-import com.codingforcookies.betterrecords.common.item.ModItems;
+import com.codingforcookies.betterrecords.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;

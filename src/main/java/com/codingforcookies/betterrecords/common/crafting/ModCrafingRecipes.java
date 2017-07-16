@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.common.crafting;
 
 import com.codingforcookies.betterrecords.block.ModBlocks;
 import com.codingforcookies.betterrecords.common.crafting.recipe.*;
-import com.codingforcookies.betterrecords.common.item.ModItems;
+import com.codingforcookies.betterrecords.item.ModItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

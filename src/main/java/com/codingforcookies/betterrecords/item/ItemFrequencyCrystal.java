@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.common.item;
+package com.codingforcookies.betterrecords.item;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -10,9 +10,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFreqCrystal extends BetterItem {
+public class ItemFrequencyCrystal extends BetterItem {
 
-    public ItemFreqCrystal(String name) {
+    public ItemFrequencyCrystal(String name) {
         super(name);
         setMaxStackSize(1);
     }

@@ -1,6 +1,6 @@
 package com.codingforcookies.betterrecords.common.crafting.recipe;
 
-import com.codingforcookies.betterrecords.common.item.ItemURLRecord;
+import com.codingforcookies.betterrecords.item.ItemRecord;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
@@ -23,7 +23,7 @@ public class RecipeColoredRecord implements IRecipe {
         for(int i = 0; i < inventoryCrafting.getSizeInventory(); ++i) {
             ItemStack itemstack1 = inventoryCrafting.getStackInSlot(i);
             if(itemstack1 != null) {
-                if(itemstack1.getItem() instanceof ItemURLRecord) {
+                if(itemstack1.getItem() instanceof ItemRecord) {
                     if(itemToColor != null)
                         return false;
                     itemToColor = itemstack1;
@@ -41,7 +41,7 @@ public class RecipeColoredRecord implements IRecipe {
     @Override
     public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
         ItemStack itemToColor = null;
-        ItemURLRecord itemRecord = null;
+        ItemRecord itemRecord = null;
         int[] aint = new int[3];
         int i = 0;
         int j = 0;
@@ -54,11 +54,11 @@ public class RecipeColoredRecord implements IRecipe {
         for(k = 0; k < inventoryCrafting.getSizeInventory(); ++k) {
             ItemStack itemstack1 = inventoryCrafting.getStackInSlot(k);
             if(itemstack1 != null) {
-                if(itemstack1.getItem() instanceof ItemURLRecord) {
+                if(itemstack1.getItem() instanceof ItemRecord) {
                     if(itemToColor != null)
                         return null;
 
-                    itemRecord = (ItemURLRecord)itemstack1.getItem();
+                    itemRecord = (ItemRecord)itemstack1.getItem();
 
                     itemToColor = itemstack1.copy();
                     itemToColor.stackSize = 1;
