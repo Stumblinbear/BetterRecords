@@ -37,7 +37,7 @@ public class RecipeRecord implements IRecipe {
 
     @Override
     public ItemStack getCraftingResult(InventoryCrafting inventoryCrafting) {
-        return new ItemStack(ModItems.itemURLRecord);
+        return new ItemStack(ModItems.INSTANCE.getItemRecord());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class RecipeRecord implements IRecipe {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return new ItemStack(ModItems.itemURLRecord);
+        return new ItemStack(ModItems.INSTANCE.getItemRecord());
     }
 
     @Override

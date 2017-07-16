@@ -8,9 +8,9 @@ import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.block.tile.TileRecordPlayer;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
-import com.codingforcookies.betterrecords.item.ModItems;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import com.codingforcookies.betterrecords.item.ModItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -71,7 +71,7 @@ public class BlockRecordPlayer extends BetterBlock {
                 world.notifyBlockUpdate(pos, state, state, 3);
             }else if(heldItem != null && (heldItem.getItem() == Items.DIAMOND || (heldItem.getItem() instanceof IRecord && ((IRecord) heldItem.getItem()).isRecordValid(heldItem)))){
                 if(heldItem.getItem() == Items.DIAMOND){
-                    ItemStack itemStack = new ItemStack(ModItems.itemURLRecord);
+                    ItemStack itemStack = new ItemStack(ModItems.INSTANCE.getItemRecord());
                     itemStack.setTagCompound(new NBTTagCompound());
                     itemStack.getTagCompound().setString("name", "easteregg.ogg");
                     itemStack.getTagCompound().setString("url", "http://files.enjin.com/788858/SBear'sMods/Songs/easteregg.ogg");

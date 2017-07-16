@@ -1,6 +1,5 @@
 package com.codingforcookies.betterrecords
 
-import com.codingforcookies.betterrecords.common.core.CommonProxy
 import com.codingforcookies.betterrecords.item.ModItems
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraftforge.fml.common.Mod
@@ -16,7 +15,7 @@ object BetterRecords {
     lateinit var proxy: CommonProxy
 
     val creativeTab = object : CreativeTabs(ID) {
-        override fun getTabIconItem() = ModItems.itemURLRecord
+        override fun getTabIconItem() = ModItems.itemRecord
     }
 
     @Mod.EventHandler fun preInit(event: FMLPreInitializationEvent) = proxy.preInit(event)

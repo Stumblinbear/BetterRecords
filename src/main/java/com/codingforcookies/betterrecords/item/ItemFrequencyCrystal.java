@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemFrequencyCrystal extends BetterItem {
+public class ItemFrequencyCrystal extends ModItem {
 
     public ItemFrequencyCrystal(String name) {
         super(name);

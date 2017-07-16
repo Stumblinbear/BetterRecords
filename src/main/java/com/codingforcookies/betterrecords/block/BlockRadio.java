@@ -7,9 +7,9 @@ import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.block.tile.TileRadio;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
-import com.codingforcookies.betterrecords.item.ModItems;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import com.codingforcookies.betterrecords.item.ModItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -71,7 +71,7 @@ public class BlockRadio extends BetterBlock {
                 if(!world.isRemote) dropItem(world, pos);
                 tileRadio.setCrystal(null);
                 world.notifyBlockUpdate(pos, state, state, 3);
-            }else if(heldItem != null && (heldItem.getItem() == ModItems.itemFreqCrystal && heldItem.getTagCompound() != null && heldItem.getTagCompound().hasKey("url"))) {
+            }else if(heldItem != null && (heldItem.getItem() == ModItems.INSTANCE.getItemFrequencyCrystal() && heldItem.getTagCompound() != null && heldItem.getTagCompound().hasKey("url"))) {
                 tileRadio.setCrystal(heldItem);
                 world.notifyBlockUpdate(pos, state, state, 3);
                 heldItem.stackSize--;

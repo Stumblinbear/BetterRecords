@@ -5,12 +5,12 @@ msg.lazerlength.decrease=Lazer length has decreased to
 
 itemGroup.betterrecords=Better Records
 
-item.betterrecords:urlrecord.name=Blank Record
-item.betterrecords:urlmultirecord.name=Multi Record
-item.betterrecords:freqcrystal.name=Frequency Crystal
+item.betterrecords.record.name=Blank Record
+item.betterrecords.multirecord.name=Multi Record
+item.betterrecords.frequencycrystal.name=Frequency Crystal
 
-item.betterrecords:recordwire.name=Speaker Wire
-item.betterrecords:recordwirecutters.name=Wire Cutters
+item.betterrecords.wire.name=Speaker Wire
+item.betterrecords.wirecutters.name=Wire Cutters
 
 tile.betterrecords:recordetcher.name=Record Etcher
 tile.betterrecords:recordplayer.name=Record Player

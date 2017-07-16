@@ -136,7 +136,7 @@ public class TileFrequencyTuner extends BetterTile implements IInventory, ITicka
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
-        return itemStack.getItem() == ModItems.itemFreqCrystal && (!itemStack.hasTagCompound() || !itemStack.getTagCompound().hasKey("url"));
+        return itemStack.getItem() == ModItems.INSTANCE.getItemFrequencyCrystal() && (!itemStack.hasTagCompound() || !itemStack.getTagCompound().hasKey("url"));
     }
 
     @Override

@@ -158,7 +158,7 @@ public class TileRecordEtcher extends BetterTile implements IInventory, ITickabl
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemStack) {
-        return itemStack.getItem() == ModItems.itemURLRecord && (!itemStack.hasTagCompound() || !itemStack.getTagCompound().hasKey("url"));
+        return itemStack.getItem() == ModItems.INSTANCE.getItemRecord() && (!itemStack.hasTagCompound() || !itemStack.getTagCompound().hasKey("url"));
     }
 
     @Override

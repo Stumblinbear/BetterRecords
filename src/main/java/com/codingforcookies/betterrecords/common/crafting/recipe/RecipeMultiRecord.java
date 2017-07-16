@@ -46,7 +46,7 @@ public class RecipeMultiRecord implements IRecipe {
         if(records.isEmpty() || records.size() == 1)
             return null;
         else{
-            ItemStack itemMultiRecord = new ItemStack(ModItems.itemURLMultiRecord);
+            ItemStack itemMultiRecord = new ItemStack(ModItems.INSTANCE.getItemMultiRecord());
             itemMultiRecord.setTagCompound(new NBTTagCompound());
 
             NBTTagList songs = new NBTTagList();
@@ -71,7 +71,7 @@ public class RecipeMultiRecord implements IRecipe {
 
     @Override
     public ItemStack getRecipeOutput() {
-        return new ItemStack(ModItems.itemURLRecord);
+        return new ItemStack(ModItems.INSTANCE.getItemRecord());
     }
 
     @Override

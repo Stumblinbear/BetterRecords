@@ -12,7 +12,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemRecord extends BetterItem implements IRecord {
+public class ItemRecord extends ModItem implements IRecord {
 
     public ItemRecord(String name) {
         super(name);

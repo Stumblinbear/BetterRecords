@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.client.core;
 
+import com.codingforcookies.betterrecords.CommonProxy;
 import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.BetterRecordsAPI;
 import com.codingforcookies.betterrecords.api.song.LibrarySong;
@@ -9,7 +10,6 @@ import com.codingforcookies.betterrecords.client.render.*;
 import com.codingforcookies.betterrecords.client.sound.SoundHandler;
 import com.codingforcookies.betterrecords.block.ModBlocks;
 import com.codingforcookies.betterrecords.block.tile.*;
-import com.codingforcookies.betterrecords.common.core.CommonProxy;
 import com.codingforcookies.betterrecords.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -119,11 +119,12 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new BetterEventHandler());
 
         RenderItem renderItem = Minecraft.getMinecraft().getRenderItem();
-        renderItem.getItemModelMesher().register(ModItems.itemFreqCrystal, 0, new ModelResourceLocation(ConstantsKt.ID + ":" + "freqcrystal", "inventory"));
-        renderItem.getItemModelMesher().register(ModItems.itemRecordWire, 0, new ModelResourceLocation(ConstantsKt.ID + ":" + "recordwire", "inventory"));
-        renderItem.getItemModelMesher().register(ModItems.itemRecordCutters, 0, new ModelResourceLocation(ConstantsKt.ID + ":" + "recordwirecutters", "inventory"));
-        renderItem.getItemModelMesher().register(ModItems.itemURLMultiRecord, 0, new ModelResourceLocation(ConstantsKt.ID + ":" + "urlmultirecord", "inventory"));
-        renderItem.getItemModelMesher().register(ModItems.itemURLRecord, 0, new ModelResourceLocation(ConstantsKt.ID + ":" + "urlrecord", "inventory"));
+
+        ModItems.INSTANCE.getItemFrequencyCrystal().registerRender();
+        ModItems.INSTANCE.getItemRecord().registerRender();
+        ModItems.INSTANCE.getItemMultiRecord().registerRender();
+        ModItems.INSTANCE.getItemWire().registerRender();
+        ModItems.INSTANCE.getItemWireCutters().registerRender();
     }
 
     @Override
@@ -137,8 +138,8 @@ public class ClientProxy extends CommonProxy {
             }
         };
 
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(color, ModItems.itemURLRecord);
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(color, ModItems.itemURLMultiRecord);
-        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(color, ModItems.itemFreqCrystal);
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(color, ModItems.INSTANCE.getItemRecord());
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(color, ModItems.INSTANCE.getItemMultiRecord());
+        Minecraft.getMinecraft().getItemColors().registerItemColorHandler(color, ModItems.INSTANCE.getItemFrequencyCrystal());
     }
 }

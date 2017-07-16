@@ -99,7 +99,7 @@ public class ConnectionHelper {
                     float ry = rand.nextFloat() * 0.8F + 0.1F;
                     float rz = rand.nextFloat() * 0.8F + 0.1F;
 
-                    EntityItem entityItem = new EntityItem(world, te.getPos().getX() + rx, te.getPos().getY() + ry, te.getPos().getZ() + rz, new ItemStack(ModItems.itemRecordWire));
+                    EntityItem entityItem = new EntityItem(world, te.getPos().getX() + rx, te.getPos().getY() + ry, te.getPos().getZ() + rz, new ItemStack(ModItems.INSTANCE.getItemWire()));
 
                     entityItem.motionX = rand.nextGaussian() * 0.05F;
                     entityItem.motionY = rand.nextGaussian() * 0.05F + 0.2F;
