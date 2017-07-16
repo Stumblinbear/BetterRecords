@@ -10,7 +10,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class BlockRecordSpeakerRenderer extends TileEntitySpecialRenderer {
+public class RenderSpeaker extends TileEntitySpecialRenderer {
 
     private static final ModelSMSpeaker MODEL_SM = new ModelSMSpeaker();
     private static final ResourceLocation TEXTURE_SM = new ResourceLocation(ConstantsKt.ID, "textures/models/smspeaker.png");

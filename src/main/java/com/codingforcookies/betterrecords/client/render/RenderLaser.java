@@ -2,19 +2,19 @@ package com.codingforcookies.betterrecords.client.render;
 
 import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.client.model.ModelLazer;
-import com.codingforcookies.betterrecords.block.tile.TileLazer;
+import com.codingforcookies.betterrecords.block.tile.TileLaser;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class BlockLazerRenderer extends TileEntitySpecialRenderer<TileLazer> {
+public class RenderLaser extends TileEntitySpecialRenderer<TileLaser> {
 
     private static final ModelLazer MODEL = new ModelLazer();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/lazer.png");
 
     @Override
-    public void renderTileEntityAt(TileLazer te, double x, double y, double z, float scale, int destroyStage) {
+    public void renderTileEntityAt(TileLaser te, double x, double y, double z, float scale, int destroyStage) {
         if(te == null) {
             GL11.glPushMatrix();
             {

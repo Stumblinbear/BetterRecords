@@ -31,8 +31,8 @@ public final class ModBlocks {
         blockLGSpeaker = new BlockSpeaker("speaker.lg", 2);
 
         blockStrobeLight = new BlockStrobeLight("strobelight");
-        blockLazer = new BlockLazer("lazer");
-        blockLazerCluster = new BlockLazerCluster("lazercluster");
+        blockLazer = new BlockLaser("lazer");
+        blockLazerCluster = new BlockLaserCluster("lazercluster");
 
         initTileEntities();
     }
@@ -44,8 +44,8 @@ public final class ModBlocks {
         registerTile(TileRadio.class, "radio");
         registerTile(TileSpeaker.class, "speaker");
         registerTile(TileStrobeLight.class, "strobelight");
-        registerTile(TileLazer.class, "lazer");
-        registerTile(TileLazerCluster.class, "lazercluster");
+        registerTile(TileLaser.class, "lazer");
+        registerTile(TileLaserCluster.class, "lazercluster");
     }
 
     private static void registerTile(Class<? extends TileEntity> class_, String key) {

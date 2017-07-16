@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Map.Entry;
 
-public class BlockRadioRenderer extends TileEntitySpecialRenderer<TileRadio> {
+public class RenderRadio extends TileEntitySpecialRenderer<TileRadio> {
 
     private static final ModelRadio MODEL = new ModelRadio();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/radio.png");

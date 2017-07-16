@@ -12,14 +12,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TileLazer extends BetterTile implements IRecordWire, IRecordAmplitude, ITickable {
+public class TileLaserCluster extends BetterTile implements IRecordWire, IRecordAmplitude, ITickable {
     public ArrayList<RecordConnection> connections = null;
     public ArrayList<RecordConnection> getConnections() { return connections; }
 
-    public float pitch = 0F, yaw = 0F;
-    public float bass = 0F;
-    public float r = 0F, g = 0F, b = 0F;
-    public int length = 10;
+    public float bass = 0;
+    public float r, g, b;
 
     public void setTreble(float amplitude) { }
     public void setTreble(float amplitude, float r, float g, float b) { }
@@ -52,10 +50,10 @@ public class TileLazer extends BetterTile implements IRecordWire, IRecordAmplitu
     }
     public float getBass() { return bass; }
 
-    public String getName() { return "Lazer"; }
+    public String getName() { return "Lazer Cluster"; }
     public float getSongRadiusIncrease() { return 0F; }
 
-    public TileLazer() {
+    public TileLaserCluster() {
         connections = new ArrayList<RecordConnection>();
     }
 
@@ -72,28 +70,17 @@ public class TileLazer extends BetterTile implements IRecordWire, IRecordAmplitu
             bass = 0F;
     }
 
-    @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
 
         if(compound.hasKey("connections"))
             connections = ConnectionHelper.unserializeConnections(compound.getString("connections"));
-        if(compound.hasKey("pitch"))
-            pitch = compound.getFloat("pitch");
-        if(compound.hasKey("yaw"))
-            yaw = compound.getFloat("yaw");
-        if(compound.hasKey("length"))
-            length = compound.getInteger("length");
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
 
         compound.setString("connections", ConnectionHelper.serializeConnections(connections));
-        compound.setFloat("pitch", pitch);
-        compound.setFloat("yaw", yaw);
-        compound.setInteger("length", length);
 
         return compound;
     }

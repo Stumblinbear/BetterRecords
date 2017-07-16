@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class BlockStrobeLightRenderer extends TileEntitySpecialRenderer<TileStrobeLight> {
+public class RenderStrobeLight extends TileEntitySpecialRenderer<TileStrobeLight> {
 
     private static final ModelStrobeLight MODEL = new ModelStrobeLight();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/strobelight.png");

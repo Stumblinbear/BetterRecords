@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.block;
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
-import com.codingforcookies.betterrecords.block.tile.TileLazer;
+import com.codingforcookies.betterrecords.block.tile.TileLaser;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
@@ -20,9 +20,9 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockLazer extends BetterBlock {
+public class BlockLaser extends BetterBlock {
 
-    public BlockLazer(String name){
+    public BlockLaser(String name){
         super(Material.IRON, name);
         setHardness(3.2F);
         setResistance(4.3F);
@@ -50,9 +50,9 @@ public class BlockLazer extends BetterBlock {
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase entityLiving, ItemStack itemStack){
         TileEntity te = world.getTileEntity(pos);
-        if(te != null && te instanceof TileLazer){
-            ((TileLazer) te).pitch = entityLiving.rotationPitch;
-            ((TileLazer) te).yaw = entityLiving.rotationYaw;
+        if(te != null && te instanceof TileLaser){
+            ((TileLaser) te).pitch = entityLiving.rotationPitch;
+            ((TileLaser) te).yaw = entityLiving.rotationYaw;
         }
         if(world.isRemote && !ConfigHandler.tutorials.get("lazer")){
             BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.lazer");
@@ -72,26 +72,26 @@ public class BlockLazer extends BetterBlock {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ) {
         TileEntity tileEntity = world.getTileEntity(pos);
-        if(tileEntity == null || !(tileEntity instanceof TileLazer)) return false;
-        TileLazer tileLazer = (TileLazer) tileEntity;
-        float length = tileLazer.length;
+        if(tileEntity == null || !(tileEntity instanceof TileLaser)) return false;
+        TileLaser tileLaser = (TileLaser) tileEntity;
+        float length = tileLaser.length;
         if(player.isSneaking()){
-            if(tileLazer.length > 0){
-                tileLazer.length--;
+            if(tileLaser.length > 0){
+                tileLaser.length--;
             }
         }else{
-            if(tileLazer.length < 25){
-                tileLazer.length++;
+            if(tileLaser.length < 25){
+                tileLaser.length++;
             }
         }
-        if(tileLazer.length != length && !world.isRemote){
-            player.sendMessage(new TextComponentTranslation("msg.lazerlength." + (tileLazer.length > length ? "increase" : "decrease")).appendText(" " + tileLazer.length));
+        if(tileLaser.length != length && !world.isRemote){
+            player.sendMessage(new TextComponentTranslation("msg.lazerlength." + (tileLaser.length > length ? "increase" : "decrease")).appendText(" " + tileLaser.length));
         }
         return true;
     }
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2){
-        return new TileLazer();
+        return new TileLaser();
     }
 }

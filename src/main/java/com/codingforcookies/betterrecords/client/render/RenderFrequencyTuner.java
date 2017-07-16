@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class BlockFrequencyTunerRenderer extends TileEntitySpecialRenderer<TileFrequencyTuner> {
+public class RenderFrequencyTuner extends TileEntitySpecialRenderer<TileFrequencyTuner> {
 
     private static final ModelFrequencyTuner MODEL = new ModelFrequencyTuner();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/frequencytuner.png");

@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class BlockRecordEtcherRenderer extends TileEntitySpecialRenderer<TileRecordEtcher> {
+public class RenderRecordEtcher extends TileEntitySpecialRenderer<TileRecordEtcher> {
 
     private static final ModelRecordEtcher MODEL = new ModelRecordEtcher();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/recordetcher.png");

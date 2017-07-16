@@ -3,7 +3,6 @@ package com.codingforcookies.betterrecords.client.core.handler;
 import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.client.sound.FileDownloader;
 import com.codingforcookies.betterrecords.client.sound.SoundHandler;
 import com.codingforcookies.betterrecords.client.sound.SoundManager;
@@ -266,28 +265,6 @@ public class BetterEventHandler{
     @SubscribeEvent
     public void onClientTick(TickEvent.ClientTickEvent event){
         if(event.phase == TickEvent.Phase.START){
-            if(Minecraft.getMinecraft().player != null){
-                if(!ConfigHandler.devMode && ClientProxy.checkForUpdates && !ClientProxy.hasCheckedForUpdates){
-                    ClientProxy.hasCheckedForUpdates = true;
-                    new Thread(){
-                        public void run(){
-                            try {
-                                URL url = new URL("http://widget.mcf.li/mc-mods/minecraft/222722-better-records.json");
-                                String latestVersion = CurseModInfo.fromURL(url).getNewestVersion(MinecraftForge.MC_VERSION).getModVersion();
-                                String modVersion = ConstantsKt.VERSION;
-                                if (!latestVersion.trim().equals(ConstantsKt.VERSION)) {
-                                    Minecraft.getMinecraft().player.sendChatMessage(new TextComponentTranslation("msg.newversion.txt").toString());
-                                    Minecraft.getMinecraft().player.sendChatMessage(new TextComponentString("       " + BetterUtils.getTranslatedString("overlay.curversion") + ": " + latestVersion).toString());
-                                }
-                            } catch (MalformedURLException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }.start();
-                }
-            }
             if(!SoundHandler.nowPlaying.equals("")) if(SoundHandler.nowPlayingEnd < System.currentTimeMillis()){
                 SoundHandler.nowPlaying = "";
             }else SoundHandler.nowPlayingInt += 3;

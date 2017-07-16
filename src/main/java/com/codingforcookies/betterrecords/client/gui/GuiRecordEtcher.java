@@ -2,8 +2,8 @@ package com.codingforcookies.betterrecords.client.gui;
 
 import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.song.LibrarySong;
-import com.codingforcookies.betterrecords.client.core.ClientProxy;
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher;
+import com.codingforcookies.betterrecords.client.ClientProxy;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
@@ -59,9 +59,9 @@ public class GuiRecordEtcher extends GuiContainer {
         nameField = new GuiTextField(1, this.fontRendererObj, 44, 20, 124, 10);
         urlField = new GuiTextField(2, this.fontRendererObj, 44, 35, 124, 10);
         urlField.setMaxStringLength(256);
-        if(ClientProxy.defaultLibrary.size() == 0 || (ClientProxy.lastCheckType == 0 || ClientProxy.lastCheckType != (Minecraft.getMinecraft().world.isRemote ? 1 : 2))){
+        if(ClientProxy.Companion.getDefaultLibrary().size() == 0 || (ClientProxy.Companion.getLastCheckType() == 0 || ClientProxy.Companion.getLastCheckType() != (Minecraft.getMinecraft().world.isRemote ? 1 : 2))){
             System.out.println("Loading default library...");
-            ClientProxy.lastCheckType = Minecraft.getMinecraft().world.isRemote ? 1 : 2;
+            ClientProxy.Companion.setLastCheckType(Minecraft.getMinecraft().world.isRemote ? 1 : 2);
             new Thread(new Runnable(){
 
                 public void run(){
@@ -75,7 +75,7 @@ public class GuiRecordEtcher extends GuiContainer {
                             for(Entry<String, JsonElement> entry : rootobj.entrySet()){
                                 if(entry.getValue().isJsonObject()){
                                     JsonObject obj = entry.getValue().getAsJsonObject();
-                                    ClientProxy.defaultLibrary.add(new LibrarySong(entry.getKey(), obj.get("author").getAsString(), obj.get("name").getAsString(), obj.get("url").getAsString(), Integer.parseInt(obj.get("color").getAsString().replaceFirst("#", ""), 16)));
+                                    ClientProxy.Companion.getDefaultLibrary().add(new LibrarySong(entry.getKey(), obj.get("author").getAsString(), obj.get("name").getAsString(), obj.get("url").getAsString(), Integer.parseInt(obj.get("color").getAsString().replaceFirst("#", ""), 16)));
                                 }
                             }
                         }
@@ -93,11 +93,11 @@ public class GuiRecordEtcher extends GuiContainer {
                         HttpURLConnection request = (HttpURLConnection) new URL("https://raw.githubusercontent.com/stumblinbear/Versions/master/betterrecords/encodings.txt").openConnection();
                         request.connect();
                         if(request.getResponseCode() == 200){
-                            ClientProxy.encodings = new ArrayList<String>();
+                            ClientProxy.Companion.setEncodings(new ArrayList<>());
                             BufferedReader br = new BufferedReader(new InputStreamReader((InputStream) request.getContent()));
                             String line;
                             while((line = br.readLine()) != null)
-                                ClientProxy.encodings.add(line);
+                                ClientProxy.Companion.getEncodings().add(line);
                             br.close();
                         }
                         request.disconnect();
@@ -106,21 +106,21 @@ public class GuiRecordEtcher extends GuiContainer {
                     }
                 }
             }).start();
-            if(ClientProxy.lastCheckType == 1){
+            if(ClientProxy.Companion.getLastCheckType() == 1){
                 System.out.println("Loading local library...");
                 loadLocalLibrary();
             }
         }
-        maxpage = (int) Math.ceil(ClientProxy.defaultLibrary.size() / 14);
+        maxpage = (int) Math.ceil(ClientProxy.Companion.getDefaultLibrary().size() / 14);
     }
 
     private void loadLocalLibrary() {
         try{
-            if(!ClientProxy.localLibrary.exists()){
-                ClientProxy.localLibrary.createNewFile();
+            if(!ClientProxy.Companion.getLocalLibrary().exists()){
+                ClientProxy.Companion.getLocalLibrary().createNewFile();
                 BufferedWriter writer = null;
                 try{
-                    writer = new BufferedWriter(new FileWriter(ClientProxy.localLibrary));
+                    writer = new BufferedWriter(new FileWriter(ClientProxy.Companion.getLocalLibrary()));
                     writer.write("{}");
                 }finally{
                     try{
@@ -131,12 +131,12 @@ public class GuiRecordEtcher extends GuiContainer {
                 }
             }
             JsonParser jp = new JsonParser();
-            root = jp.parse(new InputStreamReader(new FileInputStream(ClientProxy.localLibrary)));
+            root = jp.parse(new InputStreamReader(new FileInputStream(ClientProxy.Companion.getLocalLibrary())));
             rootObj = root.getAsJsonObject();
             for(Entry<String, JsonElement> entry : rootObj.entrySet()){
                 if(entry.getValue().isJsonObject()){
                     JsonObject obj = entry.getValue().getAsJsonObject();
-                    ClientProxy.defaultLibrary.add(0, new LibrarySong(entry.getKey(), obj.get("author").getAsString(), obj.get("name").getAsString(), obj.get("url").getAsString(), Integer.parseInt(obj.get("color").getAsString().replaceFirst("#", ""), 16)));
+                    ClientProxy.Companion.getDefaultLibrary().add(0, new LibrarySong(entry.getKey(), obj.get("author").getAsString(), obj.get("name").getAsString(), obj.get("url").getAsString(), Integer.parseInt(obj.get("color").getAsString().replaceFirst("#", ""), 16)));
                 }
             }
         }catch(Exception e){
@@ -162,7 +162,7 @@ public class GuiRecordEtcher extends GuiContainer {
         urlField.mouseClicked(x, y, mouseButton);
         if(error.equals(BetterUtils.getTranslatedString("gui.recordetcher.ready")) && x >= 44 && x <= 75 && y >= 51 && y <= 66){
             if(selectedLib != -1){
-                LibrarySong sel = ClientProxy.defaultLibrary.get(selectedLib);
+                LibrarySong sel = ClientProxy.Companion.getDefaultLibrary().get(selectedLib);
                 try{
                     PacketHandler.sendURLWriteFromClient(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(), sel.name, sel.url, sel.local, new URL(sel.url).openConnection().getContentLength() / 1024 / 1024, sel.color, sel.author);
                 }catch(MalformedURLException e){
@@ -175,9 +175,9 @@ public class GuiRecordEtcher extends GuiContainer {
                 superName = superName.split("#")[0];
                 superName = superName.split("\\?")[0];
                 String superLocal = nameField.getText().trim();
-                if(ClientProxy.lastCheckType == 1){
+                if(ClientProxy.Companion.getLastCheckType() == 1){
                     boolean exists = false;
-                    for(LibrarySong sng : ClientProxy.defaultLibrary){
+                    for(LibrarySong sng : ClientProxy.Companion.getDefaultLibrary()){
                         if(sng.local.equals(superLocal)){
                             exists = true;
                             break;
@@ -192,17 +192,17 @@ public class GuiRecordEtcher extends GuiContainer {
                         if(rootObj == null) loadLocalLibrary();
                         if(rootObj != null){
                             rootObj.add(superLocal, elmnt);
-                            ClientProxy.defaultLibrary.add(0, new LibrarySong(superLocal, Minecraft.getMinecraft().player.getName(), superName, urlField.getText(), Integer.parseInt("FFFFFF", 16)));
-                            if(!ClientProxy.localLibrary.exists()){
-                                if(ClientProxy.localLibrary.getParentFile().mkdirs()) try{
-                                    ClientProxy.localLibrary.createNewFile();
+                            ClientProxy.Companion.getDefaultLibrary().add(0, new LibrarySong(superLocal, Minecraft.getMinecraft().player.getName(), superName, urlField.getText(), Integer.parseInt("FFFFFF", 16)));
+                            if(!ClientProxy.Companion.getLocalLibrary().exists()){
+                                if(ClientProxy.Companion.getLocalLibrary().getParentFile().mkdirs()) try{
+                                    ClientProxy.Companion.getLocalLibrary().createNewFile();
                                 }catch(IOException e){
                                     e.printStackTrace();
                                 }
                             }
                             BufferedWriter writer = null;
                             try{
-                                writer = new BufferedWriter(new FileWriter(ClientProxy.localLibrary));
+                                writer = new BufferedWriter(new FileWriter(ClientProxy.Companion.getLocalLibrary()));
                                 writer.write(rootObj.toString());
                             }catch(IOException e){
                                 e.printStackTrace();
@@ -226,7 +226,7 @@ public class GuiRecordEtcher extends GuiContainer {
         }
         for(int i = 0; i < 14; i++){
             int offsetI = page * 14 + i;
-            if(offsetI > ClientProxy.defaultLibrary.size() - 1) break;
+            if(offsetI > ClientProxy.Companion.getDefaultLibrary().size() - 1) break;
             if(x >= 178 && x <= 245 && y >= 9 + i * 10 && y <= 17 + i * 10){
                 if(selectedLib == offsetI){
                     selectedLib = -1;
@@ -284,7 +284,7 @@ public class GuiRecordEtcher extends GuiContainer {
                     if(!error.equals("")){
                         etchSize = connection.getContentLength() / 1024 / 1024;
                         String contentType = connection.getContentType();
-                        if(ClientProxy.encodings.contains(contentType)) error = BetterUtils.getTranslatedString("gui.recordetcher.ready");
+                        if(ClientProxy.Companion.getEncodings().contains(contentType)) error = BetterUtils.getTranslatedString("gui.recordetcher.ready");
                         else error = BetterUtils.getTranslatedString("gui.recordetcher.error1").replace("<type>", contentType);
                     }
                 }catch(MalformedURLException e) {
@@ -300,13 +300,13 @@ public class GuiRecordEtcher extends GuiContainer {
         fontRendererObj.drawString((page + 1) + "/" + (maxpage + 1), 195 + fontRendererObj.getStringWidth((page + 1) + "/" + (maxpage + 1)) / 2, 151, 4210752);
         for(int i = 0; i < 14; i++){
             int offsetI = page * 14 + i;
-            if(offsetI > ClientProxy.defaultLibrary.size() - 1) break;
+            if(offsetI > ClientProxy.Companion.getDefaultLibrary().size() - 1) break;
             if(mx >= 178 && mx <= 245 && my >= 9 + i * 10 && my <= 17 + i * 10){
                 GL11.glPushMatrix();
                 {
                     List<String> txt = new ArrayList<String>();
-                    txt.add(ClientProxy.defaultLibrary.get(offsetI).local);
-                    txt.add("\2477" + BetterUtils.getTranslatedString("item.record.by") + ": " + ClientProxy.defaultLibrary.get(offsetI).author);
+                    txt.add(ClientProxy.Companion.getDefaultLibrary().get(offsetI).local);
+                    txt.add("\2477" + BetterUtils.getTranslatedString("item.record.by") + ": " + ClientProxy.Companion.getDefaultLibrary().get(offsetI).author);
                     drawHoveringText(txt, mx, my, fontRendererObj);
                 }
                 GL11.glPopMatrix();
@@ -324,10 +324,10 @@ public class GuiRecordEtcher extends GuiContainer {
         drawTexturedModalRect(x + 44, y + 51, 0, (error.equals(BetterUtils.getTranslatedString("gui.recordetcher.ready")) ? 166 : 178), 33, 12);
         int mx = mouseX - x;
         int my = mouseY - y;
-        if(ClientProxy.defaultLibrary.isEmpty()) return;
+        if(ClientProxy.Companion.getDefaultLibrary().isEmpty()) return;
         for(int i = 0; i < 14; i++){
             int offsetI = page * 14 + i;
-            if(offsetI > ClientProxy.defaultLibrary.size() - 1) break;
+            if(offsetI > ClientProxy.Companion.getDefaultLibrary().size() - 1) break;
             GL11.glPushMatrix();
             {
                 GL11.glTranslatef(x, y, 0F);
@@ -346,7 +346,7 @@ public class GuiRecordEtcher extends GuiContainer {
                 }
                 GL11.glBegin(GL11.GL_QUADS);
                 {
-                    Color color = new Color(ClientProxy.defaultLibrary.get(offsetI).color);
+                    Color color = new Color(ClientProxy.Companion.getDefaultLibrary().get(offsetI).color);
                     GL11.glColor3f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F);
                     GL11.glVertex2f(185, 9 + i * 10);
                     GL11.glVertex2f(178, 9 + i * 10);
@@ -355,7 +355,7 @@ public class GuiRecordEtcher extends GuiContainer {
                 }
                 GL11.glEnd();
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
-                fontRendererObj.drawString(ClientProxy.defaultLibrary.get(offsetI).local, 188, 9 + i * 10, mx >= 178 && mx <= 245 && my >= 9 + i * 10 && my <= 17 + i * 10 ? 0xFFFF00 : 4210752);
+                fontRendererObj.drawString(ClientProxy.Companion.getDefaultLibrary().get(offsetI).local, 188, 9 + i * 10, mx >= 178 && mx <= 245 && my >= 9 + i * 10 && my <= 17 + i * 10 ? 0xFFFF00 : 4210752);
             }
             GL11.glPopMatrix();
         }

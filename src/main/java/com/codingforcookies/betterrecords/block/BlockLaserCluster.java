@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.block;
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler;
-import com.codingforcookies.betterrecords.block.tile.TileLazerCluster;
+import com.codingforcookies.betterrecords.block.tile.TileLaserCluster;
 import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
@@ -16,9 +16,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockLazerCluster extends BetterBlock {
+public class BlockLaserCluster extends BetterBlock {
 
-    public BlockLazerCluster(String name){
+    public BlockLaserCluster(String name){
         super(Material.IRON, name);
         setHardness(4.8F);
         setResistance(4.8F);
@@ -57,6 +57,6 @@ public class BlockLazerCluster extends BetterBlock {
 
     @Override
     public TileEntity createNewTileEntity(World var1, int var2){
-        return new TileLazerCluster();
+        return new TileLaserCluster();
     }
 }

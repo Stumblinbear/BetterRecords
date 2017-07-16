@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Map.Entry;
 
-public class BlockRecordPlayerRenderer extends TileEntitySpecialRenderer<TileRecordPlayer> {
+public class RenderRecordPlayer extends TileEntitySpecialRenderer<TileRecordPlayer> {
 
     private static final ModelRecordPlayer MODEL = new ModelRecordPlayer();
     private static final ResourceLocation TEXTURE = new ResourceLocation(ConstantsKt.ID, "textures/models/recordplayer.png");
