@@ -33,11 +33,6 @@ class RenderSpeaker : TileEntitySpecialRenderer<TileSpeaker>() {
             size = te.type
         }
 
-        // Why even.
-        if (size == 0) {
-            translate(0.06, 0.0, 0.06)
-        }
-
         bindTexture(when (size) {
             0 -> TEXTURE_SM
             1 -> TEXTURE_MD
