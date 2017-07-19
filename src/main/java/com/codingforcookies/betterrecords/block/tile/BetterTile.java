@@ -10,7 +10,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
 
-abstract class BetterTile extends TileEntity {
+public abstract class BetterTile extends TileEntity {
 
     @Override
     public boolean shouldRefresh(World world, BlockPos pos, @Nonnull IBlockState oldState, @Nonnull IBlockState newState) {

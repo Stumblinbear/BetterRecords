@@ -13,11 +13,12 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Random;
 
 public class ConnectionHelper {
-    public static String serializeConnections(ArrayList<RecordConnection> rec) {
+    public static String serializeConnections(List<RecordConnection> rec) {
         if(rec.size() == 0)
             return "";
 

@@ -19,65 +19,56 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
-class BlockSpeaker(name: String, meta: Int) : ModBlock(Material.WOOD, name) {
-    var meta = 0
+class BlockSpeaker(name: String, val meta: Int) : ModBlock(Material.WOOD, name) {
 
     init {
-        this.meta = meta
+        setHardness(when (meta) {
+            0 -> 2F
+            1 -> 3F
+            2 -> 4F
+            else -> 2F // Uh oh
+        })
 
-        when (meta) {
-            0 -> {
-                setHardness(2f)
-                setResistance(7.5f)
-            }
-            1 -> {
-                setHardness(3f)
-                setResistance(8f)
-            }
-            2 -> {
-                setHardness(4f)
-                setResistance(9.5f)
-            }
-        }
+        setResistance(when (meta) {
+            0 -> 7.5F
+            1 -> 8F
+            2 -> 9.5F
+            else -> 7.5F // Uh oh
+        })
     }
 
-    override fun onBlockAdded(world: World?, pos: BlockPos?, state: IBlockState?) {
-        super.onBlockAdded(world, pos, state)
-        world!!.notifyBlockUpdate(pos!!, state!!, state, 3)
+    override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?) = when (meta) {
+        0 -> AxisAlignedBB(0.26, 0.05, 0.25, 0.75, 0.65, 0.74)
+        1 -> AxisAlignedBB(0.2, 0.0, 0.2, 0.8, 0.88, 0.8)
+        2 -> AxisAlignedBB(0.12, 0.0, 0.12, 0.88, 1.51, 0.88)
+        else -> Block.FULL_BLOCK_AABB
     }
 
-    override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?): AxisAlignedBB {
-        when (meta) {
-            0 -> return AxisAlignedBB(0.26, 0.05, 0.25, 0.75, 0.65, 0.74)
-            1 -> return AxisAlignedBB(0.2, 0.0, 0.2, 0.8, 0.88, 0.8)
-            2 -> return AxisAlignedBB(0.12, 0.0, 0.12, 0.88, 1.51, 0.88)
-            else -> return Block.FULL_BLOCK_AABB
-        }
+    override fun onBlockAdded(world: World, pos: BlockPos, state: IBlockState) {
+        world.notifyBlockUpdate(pos, state, state, 3)
     }
 
-    override fun onBlockPlacedBy(world: World?, pos: BlockPos?, state: IBlockState?, placer: EntityLivingBase?, stack: ItemStack?) {
-        val tileEntity = world!!.getTileEntity(pos!!)
-        if (tileEntity == null || tileEntity !is TileSpeaker) return
-        tileEntity.rotation = placer!!.rotationYaw
-        tileEntity.type = meta
-        if (world.isRemote && !ConfigHandler.tutorials["speaker"]!!) {
-            BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.speaker")
-            BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000
-            ConfigHandler.tutorials.put("speaker", true)
+    override fun onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, stack: ItemStack) {
+        (world.getTileEntity(pos) as? TileSpeaker)?.let { te ->
+            te.rotation = placer.rotationYaw
+            te.type = meta
+
+            if (world.isRemote && !ConfigHandler.tutorials["speaker"]!!) {
+                BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.speaker")
+                BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000
+                ConfigHandler.tutorials["speaker"] = true
+            }
         }
     }
 
     override fun removedByPlayer(state: IBlockState, world: World, pos: BlockPos, player: EntityPlayer, willHarvest: Boolean): Boolean {
-        if (world.isRemote) return super.removedByPlayer(state, world, pos, player, willHarvest)
-        val te = world.getTileEntity(pos)
-        if (te != null && te is IRecordWire) ConnectionHelper.clearConnections(world, te as IRecordWire?)
+        if (!world.isRemote) {
+            (world.getTileEntity(pos) as? IRecordWire)?.let { te ->
+                ConnectionHelper.clearConnections(world, te)
+            }
+        }
         return super.removedByPlayer(state, world, pos, player, willHarvest)
     }
 
     override fun getTileEntityClass() = TileSpeaker::class
-
-    companion object {
-
-        var speakers = arrayOf("sm", "md", "lg")
-    }
 }
