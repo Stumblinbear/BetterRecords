@@ -23,10 +23,9 @@ class RenderLaser : TileEntitySpecialRenderer<TileLaser>() {
 
         bindTexture(TEXTURE)
 
-        val bass = if (te?.bass != 0F) 1F else 0F
         val yaw = te?.yaw ?: 0F
         val pitch = te?.pitch ?: 0F
-        MODEL.render(null, bass, yaw, pitch, 0.0f, 0.0f, 0.0625f)
+        MODEL.render(null, pitch, yaw, 0.0f, 0.0f, 0.0f, 0.0625f)
 
         rotate(-180f, 0.0f, 0.0f, 1.0f)
         translate(0.0f, -.926f, 0.0f)
