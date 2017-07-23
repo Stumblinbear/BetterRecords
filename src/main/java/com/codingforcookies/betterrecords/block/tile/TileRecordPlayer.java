@@ -89,12 +89,12 @@ public class TileRecordPlayer extends SimpleRecordWireHome implements IRecordWir
             setRecord(ItemStack.loadItemStackFromNBT(compound.getCompoundTag("record")));
         if(compound.hasKey("opening"))
             opening = compound.getBoolean("opening");
-        if(compound.hasKey("connections"))
-            connections = ConnectionHelper.unserializeConnections(compound.getString("connections"));
-        if(compound.hasKey("wireSystemInfo"))
-            wireSystemInfo = ConnectionHelper.unserializeWireSystemInfo(compound.getString("wireSystemInfo"));
-        if(compound.hasKey("playRadius"))
-            playRadius = compound.getFloat("playRadius");
+        //if(compound.hasKey("connections"))
+            //connections = ConnectionHelper.unserializeConnections(compound.getString("connections"));
+        //if(compound.hasKey("wireSystemInfo"))
+            //wireSystemInfo = ConnectionHelper.unserializeWireSystemInfo(compound.getString("wireSystemInfo"));
+        //if(compound.hasKey("playRadius"))
+            //playRadius = compound.getFloat("playRadius");
     }
 
     @Override
@@ -104,9 +104,9 @@ public class TileRecordPlayer extends SimpleRecordWireHome implements IRecordWir
         compound.setFloat("rotation", getBlockMetadata());
         compound.setTag("record", getStackTagCompound(record));
         compound.setBoolean("opening", opening);
-        compound.setString("connections", ConnectionHelper.serializeConnections(connections));
-        compound.setString("wireSystemInfo", ConnectionHelper.serializeWireSystemInfo(wireSystemInfo));
-        compound.setFloat("playRadius", playRadius);
+        //compound.setString("connections", ConnectionHelper.serializeConnections(connections));
+        //compound.setString("wireSystemInfo", ConnectionHelper.serializeWireSystemInfo(wireSystemInfo));
+        //compound.setFloat("playRadius", playRadius);
 
         return compound;
     }
@@ -116,5 +116,15 @@ public class TileRecordPlayer extends SimpleRecordWireHome implements IRecordWir
         if(stack != null)
             stack.writeToNBT(tag);
         return tag;
+    }
+
+
+    // TEMP
+    public float getSongRadiusIncrease$BetterRecords_main() {
+        return 40F;
+    }
+
+    public float getSongRadiusIncrease$production_sources_for_module_BetterRecords_main() {
+        return 40F;
     }
 }

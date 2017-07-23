@@ -64,13 +64,13 @@ class BlockRadio(name: String) : ModBlock(Material.WOOD, name) {
         } else if (tileRadio!!.opening) {
             if (tileRadio.crystal != null) {
                 if (!world.isRemote) dropItem(world, pos)
-                tileRadio.setCrystal(null)
+                tileRadio.crystal = null
                 world.notifyBlockUpdate(pos, state!!, state, 3)
             } else if (heldItem != null && heldItem.item === ModItems.itemFrequencyCrystal && heldItem.tagCompound != null && heldItem.tagCompound!!.hasKey("url")) {
-                tileRadio.setCrystal(heldItem)
+                tileRadio.crystal = heldItem
                 world.notifyBlockUpdate(pos, state!!, state, 3)
                 heldItem.stackSize--
-                if (!world.isRemote) PacketHandler.sendRadioPlayToAllFromServer(tileRadio.pos.x, tileRadio.pos.y, tileRadio.pos.z, world.provider.dimension, tileRadio.songRadius, tileRadio.crystal.tagCompound!!.getString("name"), tileRadio.crystal.tagCompound!!.getString("url"))
+                if (!world.isRemote) PacketHandler.sendRadioPlayToAllFromServer(tileRadio.pos.x, tileRadio.pos.y, tileRadio.pos.z, world.provider.dimension, tileRadio.songRadius, tileRadio.crystal!!.tagCompound!!.getString("name"), tileRadio.crystal!!.tagCompound!!.getString("url"))
             }
         }
         return true

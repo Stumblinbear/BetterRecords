@@ -26,7 +26,7 @@ class TileSpeaker : BetterTile(), IRecordWire {
         else -> prefixes[type] + " Speaker"
     }
 
-    override fun getSongRadiusIncrease() = when (type) {
+    override val songRadiusIncrease = when (type) {
         -1   -> 0F
         else -> radius[type]
     }

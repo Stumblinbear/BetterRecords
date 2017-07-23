@@ -45,7 +45,7 @@ class TileLaser : BetterTile(), IRecordWire, IRecordAmplitude, ITickable {
 
     override fun getName() = "Laser"
 
-    override fun getSongRadiusIncrease() = 0F
+    override val songRadiusIncrease = 0F
 
     override fun update() {
         if (bass > 0) bass--

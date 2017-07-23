@@ -8,5 +8,5 @@ interface IRecordWire {
 
     fun getName(): String
 
-    fun getSongRadiusIncrease(): Float
+    val songRadiusIncrease: Float
 }
