@@ -30,7 +30,7 @@ public class ConfigHandler {
         put("speaker", false);
         put("radio", false);
         put("strobelight", false);
-        put("lazer", false);
+        put("laser", false);
         put("lazercluster", false);
     }};
 

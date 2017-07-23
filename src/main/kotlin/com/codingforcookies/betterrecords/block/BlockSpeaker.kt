@@ -37,6 +37,8 @@ class BlockSpeaker(name: String, val meta: Int) : ModBlock(Material.WOOD, name) 
         })
     }
 
+    override fun getTileEntityClass() = TileSpeaker::class
+
     override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?) = when (meta) {
         0 -> AxisAlignedBB(0.26, 0.05, 0.25, 0.75, 0.65, 0.74)
         1 -> AxisAlignedBB(0.2, 0.0, 0.2, 0.8, 0.88, 0.8)
@@ -44,9 +46,8 @@ class BlockSpeaker(name: String, val meta: Int) : ModBlock(Material.WOOD, name) 
         else -> Block.FULL_BLOCK_AABB
     }
 
-    override fun onBlockAdded(world: World, pos: BlockPos, state: IBlockState) {
-        world.notifyBlockUpdate(pos, state, state, 3)
-    }
+    override fun onBlockAdded(world: World, pos: BlockPos, state: IBlockState) =
+            world.notifyBlockUpdate(pos, state, state, 3)
 
     override fun onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, stack: ItemStack) {
         (world.getTileEntity(pos) as? TileSpeaker)?.let { te ->
@@ -69,6 +70,4 @@ class BlockSpeaker(name: String, val meta: Int) : ModBlock(Material.WOOD, name) 
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest)
     }
-
-    override fun getTileEntityClass() = TileSpeaker::class
 }

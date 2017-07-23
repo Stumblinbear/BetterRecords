@@ -1,7 +1,7 @@
 msg.newversion.txt=A new version of BetterRecords is available!
 
-msg.lazerlength.increase=Lazer length has increased to
-msg.lazerlength.decrease=Lazer length has decreased to
+msg.laserlength.increase=Lazer length has increased to
+msg.laserlength.decrease=Lazer length has decreased to
 
 itemGroup.betterrecords=Better Records
 
