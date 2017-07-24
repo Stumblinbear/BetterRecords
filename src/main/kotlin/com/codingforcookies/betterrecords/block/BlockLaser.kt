@@ -34,10 +34,10 @@ class BlockLaser(name: String) : ModBlock(Material.IRON, name) {
     override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?) =
             AxisAlignedBB(0.25, 0.0, 0.25, 0.75, 0.75, 0.74)
 
-    // override fun getLightValue(state: IBlockState, access: IBlockAccess, pos: BlockPos): Int TODO: value from flash
-
     override fun onBlockAdded(world: World?, pos: BlockPos?, state: IBlockState?) =
             world!!.notifyBlockUpdate(pos!!, state!!, state, 3)
+
+    // override fun getLightValue(state: IBlockState, access: IBlockAccess, pos: BlockPos): Int TODO: value from flash
 
     override fun onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, entityLiving: EntityLivingBase, itemStack: ItemStack) {
         (world.getTileEntity(pos) as? TileLaser)?.let { te ->
