@@ -77,8 +77,8 @@ public class GuiFrequencyTuner extends GuiContainer {
         fontRendererObj.drawString(error, 172 - fontRendererObj.getStringWidth(error), 65, (error.equals(BetterUtils.getTranslatedString("gui.frequencytuner.ready")) ? 0x229922 : 0x992222));
         nameField.drawTextBox();
         urlField.drawTextBox();
-        if(tileEntity.crystal == null) error = BetterUtils.getTranslatedString("gui.frequencytuner.error1");
-        else if(tileEntity.crystal.hasTagCompound() && tileEntity.crystal.getTagCompound().hasKey("url")) error = BetterUtils.getTranslatedString("gui.frequencytuner.error2");
+        if(tileEntity.getCrystal() == null) error = BetterUtils.getTranslatedString("gui.frequencytuner.error1");
+        else if(tileEntity.getCrystal().hasTagCompound() && tileEntity.getCrystal().getTagCompound().hasKey("url")) error = BetterUtils.getTranslatedString("gui.frequencytuner.error2");
         else if(nameField.getText().length() == 0) error = BetterUtils.getTranslatedString("gui.error1");
         else if(nameField.getText().length() < 3) error = BetterUtils.getTranslatedString("gui.error2");
         else if(urlField.getText().length() == 0) error = BetterUtils.getTranslatedString("gui.error3");

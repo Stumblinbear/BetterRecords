@@ -85,7 +85,7 @@ public class PacketURLWriter implements IPacket {
             }
         }else if(te instanceof TileFrequencyTuner) {
             TileFrequencyTuner tileEntityFrequencyTuner = (TileFrequencyTuner)te;
-            ItemStack itemStack = tileEntityFrequencyTuner.crystal;
+            ItemStack itemStack = tileEntityFrequencyTuner.getCrystal();
             if(itemStack != null) {
                 if(itemStack.getTagCompound() == null)
                     itemStack.setTagCompound(new NBTTagCompound());
