@@ -31,7 +31,7 @@ public class ConfigHandler {
         put("radio", false);
         put("strobelight", false);
         put("laser", false);
-        put("lazercluster", false);
+        put("lasercluster", false);
     }};
 
     public static void loadConfig(File configurationFile) {
