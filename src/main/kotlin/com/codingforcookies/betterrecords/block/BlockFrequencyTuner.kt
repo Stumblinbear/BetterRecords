@@ -3,6 +3,8 @@ package com.codingforcookies.betterrecords.block
 import com.codingforcookies.betterrecords.api.BetterRecordsAPI
 import com.codingforcookies.betterrecords.BetterRecords
 import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner
+import com.codingforcookies.betterrecords.block.tile.TileRadio
+import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.BlockStateContainer
@@ -22,49 +24,30 @@ import net.minecraft.world.World
 import java.util.Random
 import kotlin.reflect.KClass
 
-class BlockFrequencyTuner(name: String) : ModBlock(Material.WOOD, name) {
+class BlockFrequencyTuner(name: String) : ModBlockDirectional(Material.WOOD, name) {
 
     init {
         setHardness(1.5f)
         setResistance(5.5f)
-
     }
 
-    override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?): AxisAlignedBB {
-        when (getMetaFromState(state)) {
-            0, 2 -> return AxisAlignedBB(.18, 0.0, .12, .82, .6, .88)
-            1, 3 -> return AxisAlignedBB(.12, 0.0, .18, .88, .6, .82)
-            else -> return Block.FULL_BLOCK_AABB
+    override fun getTileEntityClass() = TileFrequencyTuner::class
+
+    override fun onBlockAdded(world: World, pos: BlockPos, state: IBlockState) =
+            world.notifyBlockUpdate(pos, state, state, 3)
+
+    override fun getBoundingBox(state: IBlockState, block: IBlockAccess, pos: BlockPos) = when (getMetaFromState(state)) {
+        0, 2 -> AxisAlignedBB(.18, 0.0, .12, .82, .6, .88)
+        1, 3 -> AxisAlignedBB(.12, 0.0, .18, .88, .6, .82)
+        else -> Block.FULL_BLOCK_AABB
+    }
+
+    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        (world.getTileEntity(pos) as? TileFrequencyTuner)?.let {
+            player.openGui(BetterRecords, 1, world, pos.x, pos.y, pos.z)
+            return true
         }
-    }
-
-    override fun onBlockAdded(world: World?, pos: BlockPos?, state: IBlockState?) {
-        super.onBlockAdded(world, pos, state)
-        world!!.notifyBlockUpdate(pos!!, state!!, state, 3)
-    }
-
-    override fun onBlockActivated(world: World?, pos: BlockPos?, state: IBlockState?, player: EntityPlayer?, hand: EnumHand?, heldItem: ItemStack?, side: EnumFacing?, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        if (world!!.getTileEntity(pos!!) !is TileFrequencyTuner)
-            return false
-
-        player!!.openGui(BetterRecords, 1, world, pos.x, pos.y, pos.z)
-        return true
-    }
-
-    public override fun createBlockState(): BlockStateContainer {
-        return BlockStateContainer(this, BetterRecordsAPI.CARDINAL_DIRECTIONS)
-    }
-
-    override fun getMetaFromState(state: IBlockState?): Int {
-        return state!!.getValue(BetterRecordsAPI.CARDINAL_DIRECTIONS).horizontalIndex
-    }
-
-    override fun getStateFromMeta(meta: Int): IBlockState {
-        return defaultState.withProperty(BetterRecordsAPI.CARDINAL_DIRECTIONS, EnumFacing.getHorizontal(meta))
-    }
-
-    override fun onBlockPlacedBy(world: World?, pos: BlockPos?, state: IBlockState?, placer: EntityLivingBase?, stack: ItemStack?) {
-        world!!.setBlockState(pos!!, state!!.withProperty(BetterRecordsAPI.CARDINAL_DIRECTIONS, placer!!.horizontalFacing.opposite))
+        return false
     }
 
     override fun breakBlock(world: World, pos: BlockPos, state: IBlockState) {
@@ -73,34 +56,23 @@ class BlockFrequencyTuner(name: String) : ModBlock(Material.WOOD, name) {
     }
 
     private fun dropItem(world: World, pos: BlockPos) {
-        val tileEntity = world.getTileEntity(pos)
-        if (tileEntity == null || tileEntity !is TileFrequencyTuner)
-            return
+        (world.getTileEntity(pos) as? TileFrequencyTuner)?.let { te ->
+            te.crystal?.let {
+                val random = Random()
+                val rx = random.nextDouble() * 0.8F + 0.1F
+                val ry = random.nextDouble() * 0.8F + 0.1F
+                val rz = random.nextDouble() * 0.8F + 0.1F
 
-        val tileEntityFrequencyTuner = tileEntity as TileFrequencyTuner?
-        val item = tileEntityFrequencyTuner!!.crystal
+                val entityItem = EntityItem(world, pos.x + rx, pos.y + ry, pos.z + rz, ItemStack(it.item, it.stackSize, it.itemDamage))
+                if (it.hasTagCompound()) entityItem.entityItem.tagCompound = it.tagCompound!!.copy()
+                entityItem.motionX = random.nextGaussian() * 0.05F
+                entityItem.motionY = random.nextGaussian() * 0.05F + 0.2F
+                entityItem.motionZ = random.nextGaussian() * 0.05F
 
-        if (item != null) {
-            val rand = Random()
-
-            val rx = rand.nextFloat() * 0.8f + 0.1f
-            val ry = rand.nextFloat() * 0.8f + 0.1f
-            val rz = rand.nextFloat() * 0.8f + 0.1f
-
-            val entityItem = EntityItem(world, (pos.x + rx).toDouble(), (pos.y + ry).toDouble(), (pos.z + rz).toDouble(), ItemStack(item.item, item.stackSize, item.itemDamage))
-
-            if (item.hasTagCompound())
-                entityItem.entityItem.tagCompound = item.tagCompound!!.copy()
-
-            entityItem.motionX = rand.nextGaussian() * 0.05f
-            entityItem.motionY = rand.nextGaussian() * 0.05f + 0.2f
-            entityItem.motionZ = rand.nextGaussian() * 0.05f
-            world.spawnEntity(entityItem)
-            item.stackSize = 0
-
-            tileEntityFrequencyTuner.crystal = null
+                world.spawnEntity(entityItem)
+                it.stackSize = 0
+                te.crystal = null
+            }
         }
     }
-
-    override fun getTileEntityClass() = TileFrequencyTuner::class
 }
