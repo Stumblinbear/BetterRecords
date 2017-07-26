@@ -68,7 +68,7 @@ public class PacketURLWriter implements IPacket {
 
         if(te instanceof TileRecordEtcher) {
             TileRecordEtcher tileRecordEtcher = (TileRecordEtcher)te;
-            ItemStack itemStack = tileRecordEtcher.record;
+            ItemStack itemStack = tileRecordEtcher.getRecord();
             if(itemStack != null) {
                 if(itemStack.getTagCompound() == null)
                     itemStack.setTagCompound(new NBTTagCompound());

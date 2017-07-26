@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.block.tile
 
+import com.codingforcookies.betterrecords.block.tile.delegate.CopyOnSetDelegate
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemRecord
@@ -9,18 +10,15 @@ import net.minecraft.util.ITickable
 
 class TileRecordEtcher : ModInventoryTile(), IInventory, ITickable {
 
-    var record: ItemStack? = null
-        set(value) {
-            value?.let {
-                field = value.copy()
-                field!!.stackSize = 1
-                recordEntity = EntityItem(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), field)
-                recordEntity!!.hoverStart = 0F
-                recordRotation = 0F
-            }
-        }
+    var record by CopyOnSetDelegate()
 
     var recordEntity: EntityItem? = null
+    get() {
+        record?.let {
+            return EntityItem(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), record)
+        }
+        return null
+    }
 
     var recordRotation = 0F
     var needleLocation = 0F

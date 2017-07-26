@@ -1,15 +1,12 @@
 package com.codingforcookies.betterrecords.block
 
 import com.codingforcookies.betterrecords.BetterRecords
-import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
-import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumHand
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
@@ -26,21 +23,20 @@ class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name) {
         setResistance(5.5f)
     }
 
-    override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?): AxisAlignedBB {
-        return AxisAlignedBB(.065, 0.0, .065, .935, .875, .935)
-    }
+    override fun getTileEntityClass() = TileRecordEtcher::class
 
-    override fun onBlockAdded(world: World?, pos: BlockPos?, state: IBlockState?) {
-        super.onBlockAdded(world, pos, state)
-        world!!.notifyBlockUpdate(pos!!, state!!, state, 3)
-    }
+    override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?) =
+        AxisAlignedBB(.065, 0.0, .065, .935, .875, .935)
 
-    override fun onBlockActivated(world: World?, pos: BlockPos?, state: IBlockState?, player: EntityPlayer?, hand: EnumHand?, heldItem: ItemStack?, side: EnumFacing?, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        if (world!!.getTileEntity(pos!!) !is TileRecordEtcher)
-            return false
+    override fun onBlockAdded(world: World, pos: BlockPos, state: IBlockState) =
+        world.notifyBlockUpdate(pos, state, state, 3)
 
-        player!!.openGui(BetterRecords, 0, world, pos.x, pos.y, pos.z)
-        return true
+    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        (world.getTileEntity(pos) as? TileRecordEtcher)?.let {
+            player.openGui(BetterRecords, 0, world, pos.x, pos.y, pos.z)
+            return true
+        }
+        return false
     }
 
     override fun breakBlock(world: World, pos: BlockPos, state: IBlockState) {
@@ -77,6 +73,4 @@ class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name) {
             tileRecordEtcher.record = null
         }
     }
-
-    override fun getTileEntityClass() = TileRecordEtcher::class
 }
