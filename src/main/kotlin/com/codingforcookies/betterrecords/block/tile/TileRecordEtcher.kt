@@ -63,6 +63,8 @@ class TileRecordEtcher : ModInventoryTile(), IInventory, ITickable {
     }
 
     override fun writeToNBT(compound: NBTTagCompound) = compound.apply {
+        super.writeToNBT(compound)
+
         setTag("record", getStackTagCompound(record))
     }
 
