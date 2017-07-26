@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.block.tile
 
 import com.codingforcookies.betterrecords.block.tile.delegate.CopyOnSetDelegate
+import com.codingforcookies.betterrecords.item.ItemRecord
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.inventory.IInventory
-import net.minecraft.item.ItemRecord
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.ITickable
@@ -53,8 +53,9 @@ class TileRecordEtcher : ModInventoryTile(), IInventory, ITickable {
         record = stack
     }
 
-    override fun isItemValidForSlot(index: Int, stack: ItemStack) =
-            stack.item is ItemRecord && (!stack.hasTagCompound() || !stack.tagCompound!!.hasKey("url"))
+    override fun isItemValidForSlot(index: Int, stack: ItemStack): Boolean {
+        return stack.item is ItemRecord && (!stack.hasTagCompound() || !stack.tagCompound!!.hasKey("url"))
+    }
 
     override fun readFromNBT(compound: NBTTagCompound) = compound.run {
         super.readFromNBT(compound)
