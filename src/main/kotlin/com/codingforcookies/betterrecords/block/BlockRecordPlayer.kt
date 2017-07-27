@@ -66,7 +66,7 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
         } else if (tileRecordPlayer!!.opening) {
             if (tileRecordPlayer.record != null) {
                 if (!world.isRemote) dropItem(world, pos)
-                tileRecordPlayer.setRecord(null)
+                tileRecordPlayer.record = null
                 world.notifyBlockUpdate(pos, state!!, state, 3)
             } else if (heldItem != null && (heldItem.item === Items.DIAMOND || heldItem.item is IRecord && (heldItem.item as IRecord).isRecordValid(heldItem))) {
                 if (heldItem.item === Items.DIAMOND) {
@@ -76,11 +76,11 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
                     itemStack.tagCompound!!.setString("url", "http://files.enjin.com/788858/SBear'sMods/Songs/easteregg.ogg")
                     itemStack.tagCompound!!.setString("local", "Darude - Sandstorm")
                     itemStack.tagCompound!!.setInteger("color", 0x53EAD7)
-                    tileRecordPlayer.setRecord(itemStack)
+                    tileRecordPlayer.record = itemStack
                     world.notifyBlockUpdate(pos, state!!, state, 3)
                     heldItem.stackSize--
                 } else {
-                    tileRecordPlayer.setRecord(heldItem)
+                    tileRecordPlayer.record = heldItem
                     world.notifyBlockUpdate(pos, state!!, state, 3)
                     if (!world.isRemote) (heldItem.item as IRecord).onRecordInserted(tileRecordPlayer, heldItem)
                     heldItem.stackSize--

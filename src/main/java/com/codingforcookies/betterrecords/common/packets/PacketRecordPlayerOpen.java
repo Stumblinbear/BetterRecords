@@ -41,7 +41,7 @@ public class PacketRecordPlayerOpen implements IPacket {
                 return;
 
             TileRecordPlayer tileRecordPlayer = (TileRecordPlayer)te;
-            tileRecordPlayer.opening = open;
+            tileRecordPlayer.setOpening(open);
         }
     }
 

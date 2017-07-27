@@ -12,7 +12,7 @@ import java.util.ArrayList
 class TileRadio : SimpleRecordWireHome(), IRecordWire {
 
     var crystal by CopyOnSetDelegate()
-    override val itemStack: ItemStack?
+    override val record: ItemStack?
         get() { return crystal }
 
     var crystalFloaty = 0F
