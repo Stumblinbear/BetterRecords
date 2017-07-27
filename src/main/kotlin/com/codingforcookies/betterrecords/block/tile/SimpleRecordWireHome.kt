@@ -7,7 +7,7 @@ import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler
 import net.minecraft.util.ITickable
 import java.util.ArrayList
 
-abstract class SimpleRecordWireHome : BetterTile(), IRecordWireHome, ITickable {
+abstract class SimpleRecordWireHome : ModTile(), IRecordWireHome, ITickable {
 
     var formTreble = ArrayList<Float>()
     var formBass = ArrayList<Float>()

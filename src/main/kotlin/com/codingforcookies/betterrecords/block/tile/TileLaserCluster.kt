@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.ITickable
 import java.util.*
 
-class TileLaserCluster : BetterTile(), IRecordWire, IRecordAmplitude, ITickable {
+class TileLaserCluster : ModTile(), IRecordWire, IRecordAmplitude, ITickable {
 
     override var connections = mutableListOf<RecordConnection>()
 

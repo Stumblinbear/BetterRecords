@@ -3,13 +3,10 @@ package com.codingforcookies.betterrecords.block.tile
 import com.codingforcookies.betterrecords.api.connection.RecordConnection
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
-import com.codingforcookies.betterrecords.extensions.get
 import com.codingforcookies.betterrecords.extensions.set
 import net.minecraft.nbt.NBTTagCompound
 
-import java.util.ArrayList
-
-class TileSpeaker : BetterTile(), IRecordWire {
+class TileSpeaker : ModTile(), IRecordWire {
 
     companion object {
         private val prefixes = arrayOf("Small", "Medium", "Large")

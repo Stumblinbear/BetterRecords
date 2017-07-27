@@ -3,7 +3,7 @@ package com.codingforcookies.betterrecords.block.tile
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory
 
-abstract class ModInventoryTile : BetterTile(), IInventory {
+abstract class ModInventoryTile : ModTile(), IInventory {
 
     override fun getField(id: Int) = 0
     override fun hasCustomName() = true

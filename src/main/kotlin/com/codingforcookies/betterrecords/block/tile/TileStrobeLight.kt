@@ -7,7 +7,7 @@ import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.ITickable
 
-class TileStrobeLight : BetterTile(), IRecordWire, IRecordAmplitude, ITickable {
+class TileStrobeLight : ModTile(), IRecordWire, IRecordAmplitude, ITickable {
 
     override var connections = mutableListOf<RecordConnection>()
 
