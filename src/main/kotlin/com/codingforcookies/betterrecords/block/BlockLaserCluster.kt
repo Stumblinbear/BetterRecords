@@ -33,9 +33,9 @@ class BlockLaserCluster(name: String) : ModBlock(Material.IRON, name) {
 
     //override fun getLightValue(state: IBlockState, access: IBlockAccess, pos: BlockPos): Int TODO: Value from flash
 
-    override fun onBlockPlacedBy(world: World?, pos: net.minecraft.util.math.BlockPos?, state: IBlockState?, entityLiving: EntityLivingBase?, itemStack: ItemStack?) {
-        if (world!!.isRemote && !ConfigHandler.tutorials["lazercluster"]!!) {
-            BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.lazercluster")
+    override fun onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, entityLiving: EntityLivingBase, itemStack: ItemStack?) {
+        if (world.isRemote && !ConfigHandler.tutorials["lasercluster"]!!) {
+            BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.lasercluster")
             BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000
             ConfigHandler.tutorials["lasercluster"] = true
         }
