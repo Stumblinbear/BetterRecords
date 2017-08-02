@@ -1,21 +1,20 @@
 package com.codingforcookies.betterrecords.item
 
-import com.codingforcookies.betterrecords.api.record.IRecord
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.common.util.BetterUtils
+import com.codingforcookies.betterrecords.extensions.forEachIndexed
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.text.translation.I18n
 
-open class ItemRecord(name: String) : ModItem(name), IRecord {
+class ItemMultiRecord(name: String) : ItemRecord(name) {
 
-    init {
-        maxStackSize = 1
-    }
+    override fun getItemStackDisplayName(stack: ItemStack) =
+            I18n.translateToLocal("$unlocalizedName.name")
 
     override fun isRecordValid(itemStack: ItemStack) =
-        itemStack.hasTagCompound() && itemStack.tagCompound!!.hasKey("name")
+            itemStack.hasTagCompound() && itemStack.tagCompound!!.hasKey("songs")
 
     override fun onRecordInserted(wireHome: IRecordWireHome, itemStack: ItemStack) {
         itemStack.tagCompound?.let {
@@ -25,9 +24,7 @@ open class ItemRecord(name: String) : ModItem(name), IRecord {
                     wireHome.tileEntity.pos.z,
                     wireHome.tileEntity.world.provider.dimension,
                     wireHome.songRadius,
-                    it.getString("name"),
-                    it.getString("url"),
-                    it.getString("local"),
+                    itemStack.tagCompound,
                     it.getBoolean("repeat"),
                     it.getBoolean("shuffle")
             )
@@ -36,19 +33,17 @@ open class ItemRecord(name: String) : ModItem(name), IRecord {
 
     override fun addInformation(stack: ItemStack, player: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
         stack.tagCompound?.let {
-            tooltip += BetterUtils.getTranslatedString("item.record.by") + ": " + it.getString("author")
-            tooltip += BetterUtils.getTranslatedString("item.record.size") + ": " + it.getString("size") + "mb"
-            if (it.getBoolean("repeat")) {
-                tooltip += ""
-                tooltip.add("\u00a7e" + BetterUtils.getTranslatedString("item.record.repeatenabled"))
+            if (it.hasKey("songs")) {
+                it.getTagList("songs", 10).forEachIndexed { i, _ ->
+                    tooltip += BetterUtils.getTranslatedString("item.record.song") + "${i + 1}: ${it.getString("local")}"
+                }
+            }
+            if (it.hasKey("repeat") && it.getBoolean("repeat")) {
+                tooltip += "\u00a7e" + BetterUtils.getTranslatedString("item.record.repeatenabled")
+            }
+            if (it.hasKey("shuffle") && it.getBoolean("shuffle")) {
+                tooltip += "\u00a7e" + BetterUtils.getTranslatedString("item.record.shuffleenabled")
             }
         }
     }
-
-    override fun getItemStackDisplayName(stack: ItemStack) =
-            if (stack.hasTagCompound() && stack.tagCompound!!.hasKey("local")) {
-                stack.tagCompound!!.getString("local")
-            } else {
-                I18n.translateToLocal("${unlocalizedName}.name")
-            }
 }

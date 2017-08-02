@@ -1,9 +1,22 @@
 package com.codingforcookies.betterrecords.extensions
 
 import net.minecraft.nbt.NBTBase
+import net.minecraft.nbt.NBTTagByte
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.nbt.NBTTagList
 import java.util.*
+
+fun NBTTagList.forEach(action: (NBTBase) -> Unit) {
+    for (index in 0 until tagCount()) {
+        action(get(index))
+    }
+}
+
+fun NBTTagList.forEachIndexed(action: (Int, NBTBase) -> Unit) {
+    for (index in 0 until tagCount()) {
+        action(index, get(index))
+    }
+}
 
 operator fun NBTTagList.get(index: Int) = get(index)
 operator fun NBTTagCompound.get(key: String) = getTag(key)
