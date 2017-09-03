@@ -4,9 +4,11 @@ import org.lwjgl.opengl.GL11
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms
 import com.codingforcookies.betterrecords.ID
+import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.block.tile.TileRecordPlayer
 import net.minecraft.util.ResourceLocation
 import com.codingforcookies.betterrecords.client.model.ModelRecordPlayer
+import com.codingforcookies.betterrecords.client.render.helper.renderConnectionsAndInfo
 import net.minecraft.client.renderer.GlStateManager.*
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 
@@ -54,6 +56,8 @@ class RenderRecordPlayer : TileEntitySpecialRenderer<TileRecordPlayer>() {
                 popMatrix()
             }
             //endregion RENDER_RECORD
+
+            renderConnectionsAndInfo(te, te.pos, x, y ,z)
         }
     }
 }

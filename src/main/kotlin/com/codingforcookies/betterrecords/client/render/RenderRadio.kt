@@ -3,6 +3,7 @@ package com.codingforcookies.betterrecords.client.render
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.block.tile.TileRadio
 import com.codingforcookies.betterrecords.client.model.ModelRadio
+import com.codingforcookies.betterrecords.client.render.helper.renderConnectionsAndInfo
 import net.minecraft.client.renderer.GlStateManager.*
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.util.ResourceLocation
@@ -29,5 +30,9 @@ class RenderRadio : TileEntitySpecialRenderer<TileRadio>() {
         MODEL.render(null, openAmount, crystalFloat, 0F, 0F, 0F, 0.0625F, te?.crystal)
 
         popMatrix()
+
+        te?.let {
+            renderConnectionsAndInfo(te, te.pos, x , y ,z)
+        }
     }
 }

@@ -22,7 +22,7 @@ abstract class SimpleRecordWireHome : ModTile(), IRecordWireHome, ITickable {
 
     override var connections = mutableListOf<RecordConnection>()
 
-    var wireSystemInfo = hashMapOf<String, Int>()
+    override var wireSystemInfo = hashMapOf<String, Int>()
 
     internal var playRadius = 0f
 

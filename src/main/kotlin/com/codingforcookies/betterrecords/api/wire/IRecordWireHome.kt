@@ -18,4 +18,6 @@ interface  IRecordWireHome {
 
     val tileEntity: TileEntity
     val record: ItemStack?
+
+    var wireSystemInfo: HashMap<String, Int>
 }
