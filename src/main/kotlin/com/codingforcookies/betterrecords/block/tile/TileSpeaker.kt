@@ -23,10 +23,11 @@ class TileSpeaker : ModTile(), IRecordWire {
         else -> prefixes[type] + " Speaker"
     }
 
-    override val songRadiusIncrease = when (type) {
-        -1   -> 0F
-        else -> radius[type]
-    }
+    override val songRadiusIncrease
+        get() = when (type) {
+            -1   -> 20F
+            else -> radius[type]
+        }
 
     override fun readFromNBT(compound: NBTTagCompound) = compound.run {
         super.readFromNBT(compound)
