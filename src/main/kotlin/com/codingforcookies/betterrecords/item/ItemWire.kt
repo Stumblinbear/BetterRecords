@@ -56,6 +56,7 @@ class ItemWire(name: String) : ModItem(name), IRecordWireManipulator {
                     }
                 }
 
+                connection = null
                 return EnumActionResult.PASS
             }
 
