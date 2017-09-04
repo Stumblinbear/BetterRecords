@@ -1,6 +1,7 @@
 package com.codingforcookies.betterrecords.block.tile
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
+import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
@@ -73,14 +74,23 @@ class TileRecordPlayer : SimpleRecordWireHome(), IRecordWire {
 
         record = ItemStack.loadItemStackFromNBT(getCompoundTag("record"))
         opening = getBoolean("opening")
+
+        connections = ConnectionHelper.unserializeConnections(getString("connections"))
+        wireSystemInfo = ConnectionHelper.unserializeWireSystemInfo(compound.getString("wireSystemInfo"))
+
+        playRadius = getFloat("playRadius")
     }
 
     override fun writeToNBT(compound: NBTTagCompound) = compound.apply {
         super.writeToNBT(compound)
 
-        setFloat("rotation", blockMetadata.toFloat())
         setTag("record", getStackTagCompound(record))
         setBoolean("opening", opening)
+
+        setString("connections", ConnectionHelper.serializeConnections(connections))
+        setString("wireSystemInfo", ConnectionHelper.serializeWireSystemInfo(wireSystemInfo))
+
+        setFloat("playRadius", playRadius)
     }
 
     fun getStackTagCompound(stack: ItemStack?): NBTTagCompound {

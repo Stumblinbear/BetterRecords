@@ -44,8 +44,6 @@ abstract class SimpleRecordWireHome : ModTile(), IRecordWireHome, ITickable {
         }
     }
 
-
-
     override fun update() {
         if (world.isRemote) {
             while (formTreble.size > 2500) {
