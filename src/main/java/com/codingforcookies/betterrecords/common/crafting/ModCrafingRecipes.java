@@ -2,19 +2,18 @@ package com.codingforcookies.betterrecords.common.crafting;
 
 import com.codingforcookies.betterrecords.block.ModBlocks;
 import com.codingforcookies.betterrecords.common.crafting.recipe.*;
+import com.codingforcookies.betterrecords.item.ModItem;
 import com.codingforcookies.betterrecords.item.ModItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public final class ModCrafingRecipes {
 
     public static void init() {
-
-        RecipeSorter.register("bettrecords:urlrecord", RecipeRecord.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
-        GameRegistry.addRecipe(new RecipeRecord());
 
         RecipeSorter.register("betterrecords:urlmultirecord", RecipeMultiRecord.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
         GameRegistry.addRecipe(new RecipeMultiRecord());
@@ -32,6 +31,8 @@ public final class ModCrafingRecipes {
         GameRegistry.addRecipe(new RecipeColoredRecord());
 
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.INSTANCE.getItemFrequencyCrystal()), "RQR", "QDQ", "RQR", 'R', Items.REDSTONE, 'Q', Items.QUARTZ, 'D', Items.DIAMOND);
+
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(ModItems.INSTANCE.getItemRecord()), "record", Items.ENDER_EYE));
 
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.INSTANCE.getItemWire(), 4), "WWW", "III", "WWW", 'I', Items.IRON_INGOT, 'W', new ItemStack(Blocks.WOOL, 1, 15));
         GameRegistry.addShapedRecipe(new ItemStack(ModItems.INSTANCE.getItemWire(), 4), "WIW", "WIW", "WIW", 'I', Items.IRON_INGOT, 'W', new ItemStack(Blocks.WOOL, 1, 15));
