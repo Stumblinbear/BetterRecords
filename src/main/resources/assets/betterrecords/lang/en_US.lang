@@ -12,18 +12,18 @@ item.betterrecords.frequencycrystal.name=Frequency Crystal
 item.betterrecords.wire.name=Speaker Wire
 item.betterrecords.wirecutters.name=Wire Cutters
 
-tile.betterrecords:recordetcher.name=Record Etcher
-tile.betterrecords:recordplayer.name=Record Player
-tile.betterrecords:frequencytuner.name=Frequency Tuner
-tile.betterrecords:radio.name=Radio
+tile.betterrecords.recordetcher.name=Record Etcher
+tile.betterrecords.recordplayer.name=Record Player
+tile.betterrecords.frequencytuner.name=Frequency Tuner
+tile.betterrecords.radio.name=Radio
 
-tile.betterrecords:speaker.sm.name=Small Speaker
-tile.betterrecords:speaker.md.name=Medium Speaker
-tile.betterrecords:speaker.lg.name=Large Speaker
+tile.betterrecords.speaker.sm.name=Small Speaker
+tile.betterrecords.speaker.md.name=Medium Speaker
+tile.betterrecords.speaker.lg.name=Large Speaker
 
-tile.betterrecords:strobelight.name=Strobe Light
-tile.betterrecords:lazer.name=Lazer
-tile.betterrecords:lazercluster.name=Lazer Cluster
+tile.betterrecords.strobelight.name=Strobe Light
+tile.betterrecords.laser.name=Laser
+tile.betterrecords.lasercluster.name=Laser Cluster
 
 gui.recordetcher=Record Etcher
 gui.frequencytuner=Crystal Tune
@@ -74,8 +74,8 @@ gui.disclaimer.flashymode.rave.line4=unplayable at times. But,
 gui.disclaimer.flashymode.rave.line5=it looks awesome.
 
 
-tutorial.lazer=Connect this to a record player using wire to add a stream of color to your songs!
-tutorial.lazercluster=Connect this to a record player using wire to add some streams of color to your songs!
+tutorial.laser=Connect this to a record player using wire to add a stream of color to your songs!
+tutorial.lasercluster=Connect this to a record player using wire to add some streams of color to your songs!
 tutorial.radio=Insert a tuned frequency crystal to start streaming!
 tutorial.recordplayer=Shift+Right Click while holding nothing to open and close the record player!
 tutorial.speaker=Connect this to a record player using speaker wire to increase the play radius!
