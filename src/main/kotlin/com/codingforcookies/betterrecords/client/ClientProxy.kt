@@ -83,13 +83,11 @@ class ClientProxy : CommonProxy() {
     override fun postInit(event: FMLPostInitializationEvent) {
         super.postInit(event)
 
-        val color = object : IItemColor {
-            override fun getColorFromItemstack(stack: ItemStack, tintIndex: Int): Int {
-                return if (stack.hasTagCompound() && stack.tagCompound!!.hasKey("color")) {
-                    stack.tagCompound!!.getInteger("color")
-                } else {
-                    0xFFFFFF
-                }
+        val color = IItemColor { stack, tintIndex ->
+            if (tintIndex > 0 && stack.hasTagCompound() && stack.tagCompound!!.hasKey("color")) {
+                stack.tagCompound!!.getInteger("color")
+            } else {
+                0xFFFFFF
             }
         }
 
