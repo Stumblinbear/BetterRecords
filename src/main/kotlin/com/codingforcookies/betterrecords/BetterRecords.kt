@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 
-@Mod(modid = ID, name = NAME, version = VERSION, modLanguageAdapter = LANGUAGE_ADAPTER)
+@Mod(modid = ID, name = NAME, version = VERSION, modLanguageAdapter = LANGUAGE_ADAPTER, dependencies = DEPENDENCIES)
 object BetterRecords {
 
     @SidedProxy(clientSide = CLIENT_PROXY, serverSide = SERVER_PROXY)
