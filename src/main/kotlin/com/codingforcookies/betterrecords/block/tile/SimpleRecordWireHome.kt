@@ -5,7 +5,7 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.util.ITickable
-import java.util.ArrayList
+import java.util.*
 
 abstract class SimpleRecordWireHome : ModTile(), IRecordWireHome, ITickable {
 

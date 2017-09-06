@@ -2,12 +2,12 @@ package com.codingforcookies.betterrecords.block
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
-import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.block.tile.TileRadio
-import com.codingforcookies.betterrecords.handler.ConfigHandler
+import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.common.util.BetterUtils
+import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.item.ModItems
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
@@ -21,8 +21,7 @@ import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-
-import java.util.Random
+import java.util.*
 
 class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name) {
 

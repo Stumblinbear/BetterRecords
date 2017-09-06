@@ -6,8 +6,7 @@ import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.entity.Entity
 import net.minecraft.item.ItemStack
 import org.lwjgl.opengl.GL11
-
-import java.awt.*
+import java.awt.Color
 
 class ModelRadio : ModelBase() {
     internal var Crystal_1: ModelRenderer

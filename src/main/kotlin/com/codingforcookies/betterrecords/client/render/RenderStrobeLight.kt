@@ -1,14 +1,14 @@
 package com.codingforcookies.betterrecords.client.render
 
-import org.lwjgl.opengl.GL11
-import net.minecraft.client.Minecraft
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.block.tile.TileStrobeLight
-import net.minecraft.client.renderer.GlStateManager.*
-import net.minecraft.util.ResourceLocation
 import com.codingforcookies.betterrecords.client.model.ModelStrobeLight
 import com.codingforcookies.betterrecords.handler.ConfigHandler
+import net.minecraft.client.Minecraft
+import net.minecraft.client.renderer.GlStateManager.*
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
+import net.minecraft.util.ResourceLocation
+import org.lwjgl.opengl.GL11
 
 class RenderStrobeLight : TileEntitySpecialRenderer<TileStrobeLight>() {
 

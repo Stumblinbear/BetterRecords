@@ -1,13 +1,13 @@
 package com.codingforcookies.betterrecords.client.render
 
-import org.lwjgl.opengl.GL11
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.block.tile.TileLaser
 import com.codingforcookies.betterrecords.client.model.ModelLaser
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.client.renderer.GlStateManager.*
-import net.minecraft.util.ResourceLocation
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
+import net.minecraft.util.ResourceLocation
+import org.lwjgl.opengl.GL11
 
 class RenderLaser : TileEntitySpecialRenderer<TileLaser>() {
 

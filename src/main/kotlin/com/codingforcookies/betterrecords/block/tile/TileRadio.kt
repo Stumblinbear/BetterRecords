@@ -1,13 +1,10 @@
 package com.codingforcookies.betterrecords.block.tile
 
-import com.codingforcookies.betterrecords.api.connection.RecordConnection
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.delegate.CopyOnSetDelegate
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
-import net.minecraft.inventory.IInventory
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import java.util.ArrayList
 
 class TileRadio : SimpleRecordWireHome(), IRecordWire {
 

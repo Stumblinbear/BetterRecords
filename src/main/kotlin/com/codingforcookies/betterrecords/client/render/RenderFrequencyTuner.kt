@@ -2,11 +2,10 @@ package com.codingforcookies.betterrecords.client.render
 
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner
-import net.minecraft.util.ResourceLocation
 import com.codingforcookies.betterrecords.client.model.ModelFrequencyTuner
 import net.minecraft.client.renderer.GlStateManager.*
-
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
+import net.minecraft.util.ResourceLocation
 
 class RenderFrequencyTuner : TileEntitySpecialRenderer<TileFrequencyTuner>() {
 
