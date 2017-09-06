@@ -6,7 +6,7 @@ import com.codingforcookies.betterrecords.client.sound.FileDownloader;
 import com.codingforcookies.betterrecords.client.sound.SoundHandler;
 import com.codingforcookies.betterrecords.client.sound.SoundManager;
 import com.codingforcookies.betterrecords.BetterRecords;
-import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
+import com.codingforcookies.betterrecords.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.item.ItemWire;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import net.minecraft.block.Block;
@@ -87,7 +87,7 @@ public class BetterEventHandler{
                         GL11.glVertex3f(0F, 3F, 0F);
                     }
                     GL11.glEnd();
-                    if(ConfigHandler.devMode && ItemWire.Companion.getConnection().fromHome){
+                    if(ConfigHandler.INSTANCE.getDevMode() && ItemWire.Companion.getConnection().fromHome){
                         if(SoundHandler.soundPlaying.containsKey(ItemWire.Companion.getConnection().x1 + "," + ItemWire.Companion.getConnection().y1 + "," + ItemWire.Companion.getConnection().z1 + "," + mc.world.provider.getDimension())){
                             float radius = SoundHandler.soundPlaying.get(ItemWire.Companion.getConnection().x1 + "," + ItemWire.Companion.getConnection().y1 + "," + ItemWire.Companion.getConnection().z1 + "," + mc.world.provider.getDimension()).getCurrentSong().playRadius;
                             GL11.glDisable(GL11.GL_CULL_FACE);
@@ -173,7 +173,7 @@ public class BetterEventHandler{
                     GL11.glEnable(GL11.GL_TEXTURE_2D);
                 }
                 GL11.glPopMatrix();
-                strobeLinger -= (ConfigHandler.flashyMode < 3 ? 0.01F : 0.2F);
+                strobeLinger -= (ConfigHandler.INSTANCE.getFlashyMode() < 3 ? 0.01F : 0.2F);
             }
             if(!tutorialText.equals("")){
                 if(tutorialTime > System.currentTimeMillis()){
@@ -296,7 +296,7 @@ public class BetterEventHandler{
             }
         } else { //TickEvent.Phase.END
             if(Minecraft.getMinecraft().player != null) {
-                if (ConfigHandler.flashyMode == -1)
+                if (ConfigHandler.INSTANCE.getFlashyMode() == -1)
                     Minecraft.getMinecraft().player.openGui(BetterRecords.INSTANCE, 2, Minecraft.getMinecraft().world, 0, 0, 0);
             }
         }

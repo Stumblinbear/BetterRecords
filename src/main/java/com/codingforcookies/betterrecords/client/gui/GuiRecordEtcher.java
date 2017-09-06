@@ -4,7 +4,7 @@ import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.song.LibrarySong;
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher;
 import com.codingforcookies.betterrecords.client.ClientProxy;
-import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler;
+import com.codingforcookies.betterrecords.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
 import com.codingforcookies.betterrecords.common.util.BetterUtils;
 import com.google.gson.JsonElement;
@@ -66,7 +66,7 @@ public class GuiRecordEtcher extends GuiContainer {
 
                 public void run(){
                     try{
-                        HttpURLConnection request = (HttpURLConnection) new URL(ConfigHandler.defaultLibraryURL).openConnection();
+                        HttpURLConnection request = (HttpURLConnection) new URL(ConfigHandler.INSTANCE.getDefaultLibraryURL()).openConnection();
                         request.connect();
                         if(request.getResponseCode() == 200){
                             JsonParser jp = new JsonParser();
@@ -271,8 +271,8 @@ public class GuiRecordEtcher extends GuiContainer {
                         ((HttpURLConnection) connection).setRequestMethod("HEAD");
                         connection.connect();
                         if(((HttpURLConnection) connection).getResponseCode() == 200){
-                            if(connection.getContentLength() / 1024 / 1024 > (ConfigHandler.downloadMax != 100 ? ConfigHandler.downloadMax : 102400)){
-                                error = BetterUtils.getTranslatedString("gui.recordetcher.error3").replace("<size>", "" + ConfigHandler.downloadMax);
+                            if(connection.getContentLength() / 1024 / 1024 > (ConfigHandler.INSTANCE.getDownloadMax() != 100 ? ConfigHandler.INSTANCE.getDownloadMax() : 102400)){
+                                error = BetterUtils.getTranslatedString("gui.recordetcher.error3").replace("<size>", "" + ConfigHandler.INSTANCE.getDownloadMax());
                             }
                         }else error = BetterUtils.getTranslatedString("gui.error4");
                     }else{

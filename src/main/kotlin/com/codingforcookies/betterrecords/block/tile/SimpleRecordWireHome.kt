@@ -3,7 +3,7 @@ package com.codingforcookies.betterrecords.block.tile
 import com.codingforcookies.betterrecords.api.connection.RecordConnection
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
-import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler
+import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.util.ITickable
 import java.util.ArrayList
 

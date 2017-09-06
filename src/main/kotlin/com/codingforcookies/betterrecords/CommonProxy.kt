@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords
 
 import com.codingforcookies.betterrecords.block.ModBlock
 import com.codingforcookies.betterrecords.block.ModBlocks
-import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler
+import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.common.core.handler.GuiHandler
 import com.codingforcookies.betterrecords.common.crafting.ModCrafingRecipes
 import com.codingforcookies.betterrecords.common.packets.ChannelHandler

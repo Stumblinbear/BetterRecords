@@ -4,10 +4,9 @@ import com.codingforcookies.betterrecords.api.BetterRecordsAPI
 import com.codingforcookies.betterrecords.api.record.IRecord
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
-import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.block.tile.TileRecordPlayer
-import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler
+import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.common.util.BetterUtils
@@ -22,7 +21,6 @@ import net.minecraft.init.Blocks
 import net.minecraft.init.Items
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.*
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos

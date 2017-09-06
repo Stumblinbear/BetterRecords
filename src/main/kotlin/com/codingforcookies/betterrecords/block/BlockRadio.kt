@@ -1,25 +1,20 @@
 package com.codingforcookies.betterrecords.block
 
-import com.codingforcookies.betterrecords.api.BetterRecordsAPI
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.block.tile.TileRadio
-import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler
+import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.common.util.BetterUtils
-import com.codingforcookies.betterrecords.item.ItemFrequencyCrystal
 import com.codingforcookies.betterrecords.item.ModItems
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
-import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.inventory.IInventory
-import net.minecraft.inventory.InventoryHelper
 import net.minecraft.item.ItemStack
 import net.minecraft.util.*
 import net.minecraft.util.math.AxisAlignedBB

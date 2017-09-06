@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.RenderHelper
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.block.tile.TileLaserCluster
 import com.codingforcookies.betterrecords.client.model.ModelLaserCluster
-import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler
+import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.client.renderer.GlStateManager.*
 import net.minecraft.util.ResourceLocation
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer

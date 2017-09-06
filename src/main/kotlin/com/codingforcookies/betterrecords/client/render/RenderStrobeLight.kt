@@ -7,7 +7,7 @@ import com.codingforcookies.betterrecords.block.tile.TileStrobeLight
 import net.minecraft.client.renderer.GlStateManager.*
 import net.minecraft.util.ResourceLocation
 import com.codingforcookies.betterrecords.client.model.ModelStrobeLight
-import com.codingforcookies.betterrecords.common.core.handler.ConfigHandler
+import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 
 class RenderStrobeLight : TileEntitySpecialRenderer<TileStrobeLight>() {
