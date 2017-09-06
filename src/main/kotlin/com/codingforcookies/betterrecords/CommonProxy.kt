@@ -3,7 +3,7 @@ package com.codingforcookies.betterrecords
 import com.codingforcookies.betterrecords.block.ModBlock
 import com.codingforcookies.betterrecords.block.ModBlocks
 import com.codingforcookies.betterrecords.common.core.handler.GuiHandler
-import com.codingforcookies.betterrecords.common.crafting.ModCrafingRecipes
+import com.codingforcookies.betterrecords.crafting.CrafingRecipes
 import com.codingforcookies.betterrecords.common.packets.ChannelHandler
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.handler.ConfigHandler
@@ -34,7 +34,7 @@ open class CommonProxy {
     open fun init(event: FMLInitializationEvent) {
         PacketHandler.channels = NetworkRegistry.INSTANCE.newChannel("BetterRecords", ChannelHandler())
         NetworkRegistry.INSTANCE.registerGuiHandler(BetterRecords, GuiHandler())
-        ModCrafingRecipes.init()
+        CrafingRecipes.init()
     }
 
     open fun postInit(event: FMLPostInitializationEvent) {
