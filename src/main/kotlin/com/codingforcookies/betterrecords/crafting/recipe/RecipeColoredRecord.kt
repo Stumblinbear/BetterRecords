@@ -11,7 +11,6 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.World
 
 class RecipeColoredRecord : IRecipe {
-    //If something changes, check RecipesArmorDyes
 
      override fun matches(inventoryCrafting: InventoryCrafting, world: World): Boolean {
         var foundRecord = false
