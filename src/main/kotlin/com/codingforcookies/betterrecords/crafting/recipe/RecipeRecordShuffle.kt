@@ -12,27 +12,24 @@ import net.minecraft.world.World
 
 class RecipeRecordShuffle : IRecipe {
 
-    override fun matches(inventoryCrafting: InventoryCrafting, world: World): Boolean {
-        var record: ItemStack? = null
-        var shuffle = false
-        for (i in 0..inventoryCrafting.sizeInventory - 1) {
-            val itemstack = inventoryCrafting.getStackInSlot(i)
-            if (itemstack != null) {
-                if (itemstack.item is ItemMultiRecord && itemstack.tagCompound != null)
-                    if (record != null)
+    override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World): Boolean {
+        var foundRecord = false
+        var foundTorch = false
+
+        (0 until inventoryCrafting.sizeInventory)
+                .asSequence()
+                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .forEach {
+                    if (it.item is ItemMultiRecord && it.hasTagCompound() && !foundRecord) {
+                        foundRecord = true
+                    } else if (it.item == Item.getItemFromBlock(Blocks.REDSTONE_TORCH) && !foundTorch) {
+                        foundTorch = true
+                    } else {
                         return false
-                    else
-                        record = itemstack
-                else if (itemstack.item === Item.getItemFromBlock(Blocks.REDSTONE_TORCH))
-                    if (shuffle)
-                        return false
-                    else
-                        shuffle = true
-                else
-                    return false
-            }
-        }
-        return record != null && shuffle
+                    }
+                }
+
+        return foundRecord && foundTorch
     }
 
     override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack? {

@@ -13,19 +13,20 @@ import java.util.ArrayList
 
 class RecipeMultiRecord : IRecipe {
 
-    override fun matches(inventoryCrafting: InventoryCrafting, world: World): Boolean {
-        val records = ArrayList<ItemStack>()
+    override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World): Boolean {
+        var count = 0
 
-        for (i in 0 until inventoryCrafting.sizeInventory) {
-            val itemstack = inventoryCrafting.getStackInSlot(i)
-            if (itemstack != null)
-                if (itemstack.item is ItemRecord && itemstack.tagCompound != null && itemstack.tagCompound!!.hasKey("name"))
-                    records.add(itemstack)
-                else
-                    return false
-        }
+        (0 until inventoryCrafting.sizeInventory)
+                .asSequence()
+                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .forEach {
+                    if (it.item is ItemRecord
+                            && it.hasTagCompound()
+                            && it.tagCompound!!.hasKey("name")) count++
+                    else return false
+                }
 
-        return !records.isEmpty() && records.size != 1
+        return count > 1
     }
 
     override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack? {

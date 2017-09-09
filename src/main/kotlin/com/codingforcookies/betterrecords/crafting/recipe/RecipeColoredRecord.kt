@@ -10,31 +10,27 @@ import net.minecraft.item.crafting.IRecipe
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.world.World
 
-import java.util.ArrayList
-
 class RecipeColoredRecord : IRecipe {
     //If something changes, check RecipesArmorDyes
 
-    override fun matches(inventoryCrafting: InventoryCrafting, world: World): Boolean {
-        var itemToColor: ItemStack? = null
-        val dyes = ArrayList<ItemStack>()
+     override fun matches(inventoryCrafting: InventoryCrafting, world: World): Boolean {
+        var foundRecord = false
+        var foundDye = false
 
-        for (i in 0..inventoryCrafting.sizeInventory - 1) {
-            val itemstack1 = inventoryCrafting.getStackInSlot(i)
-            if (itemstack1 != null) {
-                if (itemstack1.item is ItemRecord) {
-                    if (itemToColor != null)
+        (0 until inventoryCrafting.sizeInventory)
+                .asSequence()
+                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .forEach {
+                    if (it.item is ItemRecord && !foundRecord) {
+                        foundRecord = true
+                    } else if (it.item == Items.DYE) {
+                        foundDye = true
+                    } else {
                         return false
-                    itemToColor = itemstack1
-                } else {
-                    if (itemstack1.item !== Items.DYE)
-                        return false
-                    dyes.add(itemstack1)
+                    }
                 }
-            }
-        }
 
-        return itemToColor != null && !dyes.isEmpty()
+        return foundRecord && foundDye
     }
 
     override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack? {

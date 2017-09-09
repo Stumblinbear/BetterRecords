@@ -10,29 +10,24 @@ import net.minecraft.world.World
 
 class RecipeRecordRepeatable : IRecipe {
 
-    override fun matches(inventoryCrafting: InventoryCrafting, world: World): Boolean {
-        var record: ItemStack? = null
-        var comparator = false
+    override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World): Boolean {
+        var foundRecord = false
+        var foundComparator = false
 
-        for (i in 0..inventoryCrafting.sizeInventory - 1) {
-            val itemstack = inventoryCrafting.getStackInSlot(i)
-            if (itemstack != null) {
-                if (itemstack.item is ItemRecord && itemstack.tagCompound != null)
-                    if (record != null)
+        (0 until inventoryCrafting.sizeInventory)
+                .asSequence()
+                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .forEach {
+                    if (it.item is ItemRecord && !foundRecord) {
+                        foundRecord = true
+                    } else if (it.item == Items.COMPARATOR && !foundComparator) {
+                        foundComparator = true
+                    } else {
                         return false
-                    else
-                        record = itemstack
-                else if (itemstack.item === Items.COMPARATOR)
-                    if (comparator)
-                        return false
-                    else
-                        comparator = true
-                else
-                    return false
-            }
-        }
+                    }
+                }
 
-        return record != null && comparator
+        return foundRecord && foundComparator
     }
 
     override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack? {
