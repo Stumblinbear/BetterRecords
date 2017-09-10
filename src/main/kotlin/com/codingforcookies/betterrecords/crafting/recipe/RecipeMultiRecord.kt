@@ -20,10 +20,11 @@ class RecipeMultiRecord : IRecipe {
                 .asSequence()
                 .mapNotNull { inventoryCrafting.getStackInSlot(it) }
                 .forEach {
-                    if (it.item is ItemRecord
-                            && it.hasTagCompound()
-                            && it.tagCompound!!.hasKey("name")) count++
-                    else return false
+                    if (it.item is ItemRecord && it.hasTagCompound() && it.tagCompound!!.hasKey("name")) {
+                        count++
+                    } else {
+                        return false
+                    }
                 }
 
         return count > 1
@@ -32,34 +33,25 @@ class RecipeMultiRecord : IRecipe {
     override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack? {
         val records = ArrayList<ItemStack>()
 
-        for (k in 0..inventoryCrafting.sizeInventory - 1) {
-            val itemstack = inventoryCrafting.getStackInSlot(k)
-            if (itemstack != null) {
-                if (itemstack.item is ItemRecord && itemstack.tagCompound != null && itemstack.tagCompound!!.hasKey("name"))
-                    records.add(itemstack)
-                else
-                    return null
-            }
-        }
+        (0 until inventoryCrafting.sizeInventory)
+                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .forEach {
+                    records.add(it)
+                }
 
-        if (records.isEmpty() || records.size == 1)
-            return null
-        else {
-            val itemMultiRecord = ItemStack(ModItems.itemMultiRecord)
-            itemMultiRecord.tagCompound = NBTTagCompound()
-
+        return ItemStack(ModItems.itemMultiRecord).apply {
+            tagCompound = NBTTagCompound()
             val songs = NBTTagList()
 
-            for (record in records) {
-                val song = NBTTagCompound()
-                song.setString("name", record.tagCompound!!.getString("name"))
-                song.setString("url", record.tagCompound!!.getString("url"))
-                song.setString("local", record.tagCompound!!.getString("local"))
-                songs.appendTag(song)
+            records.forEach {
+                songs.appendTag(NBTTagCompound().apply {
+                    setString("name", it.tagCompound!!.getString("name"))
+                    setString("url", it.tagCompound!!.getString("url"))
+                    setString("local", it.tagCompound!!.getString("local"))
+                })
             }
 
-            itemMultiRecord.tagCompound!!.setTag("songs", songs)
-            return itemMultiRecord
+            tagCompound!!.setTag("songs", songs)
         }
     }
 
