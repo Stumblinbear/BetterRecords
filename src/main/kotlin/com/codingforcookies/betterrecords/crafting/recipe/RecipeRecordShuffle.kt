@@ -33,32 +33,16 @@ class RecipeRecordShuffle : IRecipe {
     }
 
     override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack? {
-        var record: ItemStack? = null
-        var shuffle = false
-        for (i in 0..inventoryCrafting.sizeInventory - 1) {
-            val itemstack = inventoryCrafting.getStackInSlot(i)
-            if (itemstack != null) {
-                if (itemstack.item is ItemRecord && itemstack.tagCompound != null)
-                    if (record != null)
-                        return null
-                    else
-                        record = itemstack
-                else if (itemstack.item === Item.getItemFromBlock(Blocks.REDSTONE_TORCH))
-                    if (shuffle)
-                        return null
-                    else
-                        shuffle = true
-                else
-                    return null
+        val record =
+                (0 until inventoryCrafting.sizeInventory)
+                        .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                        .find { it.item is ItemRecord }
+
+        return record?.copy()?.apply {
+            if (!hasTagCompound()) {
+                tagCompound = NBTTagCompound()
             }
-        }
-        if (record == null || !shuffle)
-            return null
-        else {
-            val newRecord = ItemStack.copyItemStack(record)
-            if (newRecord.tagCompound == null) newRecord.tagCompound = NBTTagCompound()
-            newRecord.tagCompound!!.setBoolean("shuffle", true)
-            return newRecord
+            tagCompound!!.setBoolean("shuffle", true)
         }
     }
 
