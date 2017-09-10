@@ -1,7 +1,6 @@
 package com.codingforcookies.betterrecords.crafting.recipe
 
 import com.codingforcookies.betterrecords.item.ItemRecord
-import com.codingforcookies.betterrecords.util.blendRGB
 import net.minecraft.init.Items
 import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.EnumDyeColor
@@ -22,7 +21,7 @@ class RecipeColoredRecord : IRecipe {
                 .forEach {
                     if (it.item is ItemRecord && !foundRecord) {
                         foundRecord = true
-                    } else if (it.item == Items.DYE) {
+                    } else if (it.item == Items.DYE && !foundDye) {
                         foundDye = true
                     } else {
                         return false
@@ -43,10 +42,8 @@ class RecipeColoredRecord : IRecipe {
                     if (it.item is ItemRecord && record == null) {
                         record = it
                     } else {
-                        val dyeColor = EnumDyeColor.byDyeDamage(it.itemDamage).mapColor.colorValue
-                        color = if (color < 0) dyeColor else blendRGB(color, dyeColor)
+                        color = EnumDyeColor.byDyeDamage(it.itemDamage).mapColor.colorValue
                     }
-
                 }
 
         return record?.copy()?.apply {
