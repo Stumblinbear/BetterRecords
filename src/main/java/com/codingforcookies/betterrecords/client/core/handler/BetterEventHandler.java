@@ -8,7 +8,7 @@ import com.codingforcookies.betterrecords.client.sound.SoundManager;
 import com.codingforcookies.betterrecords.BetterRecords;
 import com.codingforcookies.betterrecords.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.item.ItemWire;
-import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import com.codingforcookies.betterrecords.util.BetterUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -177,7 +177,7 @@ public class BetterEventHandler{
             }
             if(!tutorialText.equals("")){
                 if(tutorialTime > System.currentTimeMillis()){
-                    String[] str = BetterUtils.getWordWrappedString(70, tutorialText);
+                    String[] str = BetterUtils.INSTANCE.getWordWrappedString(70, tutorialText);
                     long difference = tutorialTime - System.currentTimeMillis();
                     if(difference > 9000) difference = 10000 - difference;
                     else if(difference > 1000) difference = 1000;
@@ -235,7 +235,7 @@ public class BetterEventHandler{
                     GL11.glEnable(GL11.GL_TEXTURE_2D);
                 }
                 GL11.glPopMatrix();
-                fontRenderer.drawStringWithShadow(BetterUtils.getTranslatedString("overlay.downloading") + ": " + FileDownloader.nowDownloading, width / 2 - fontRenderer.getStringWidth(BetterUtils.getTranslatedString("overlay.downloading") + ": " + FileDownloader.nowDownloading) / 2, height - height / 4 + 15, 0xFFFF33);
+                fontRenderer.drawStringWithShadow(BetterUtils.INSTANCE.getTranslatedString("overlay.downloading") + ": " + FileDownloader.nowDownloading, width / 2 - fontRenderer.getStringWidth(BetterUtils.INSTANCE.getTranslatedString("overlay.downloading") + ": " + FileDownloader.nowDownloading) / 2, height - height / 4 + 15, 0xFFFF33);
             }
             if(!SoundHandler.nowPlaying.equals("")){
                 if(SoundHandler.nowPlaying.startsWith("Error:")){
@@ -249,7 +249,7 @@ public class BetterEventHandler{
                 int l1 = Color.HSBtoRGB(f3 / 50.0F, 0.7F, 0.6F) & 16777215;
                 int k1 = (int) (f3 * 255.0F / 20.0F);
                 if(k1 > 255) k1 = 255;
-                fontRenderer.drawStringWithShadow(BetterUtils.getTranslatedString("overlay.nowplaying") + ": " + SoundHandler.nowPlaying, width / 2 - fontRenderer.getStringWidth(BetterUtils.getTranslatedString("overlay.nowplaying") + ": " + SoundHandler.nowPlaying) / 2, height - height / 4, l1 + (k1 << 24 & -16777216));
+                fontRenderer.drawStringWithShadow(BetterUtils.INSTANCE.getTranslatedString("overlay.nowplaying") + ": " + SoundHandler.nowPlaying, width / 2 - fontRenderer.getStringWidth(BetterUtils.INSTANCE.getTranslatedString("overlay.nowplaying") + ": " + SoundHandler.nowPlaying) / 2, height - height / 4, l1 + (k1 << 24 & -16777216));
             }
         }
     }

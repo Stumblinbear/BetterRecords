@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords.client.gui;
 
 import com.codingforcookies.betterrecords.handler.ConfigHandler;
-import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import com.codingforcookies.betterrecords.util.BetterUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.opengl.GL11;
@@ -85,42 +85,42 @@ public class GuiBetterDisclaimer extends GuiScreen {
             GL11.glEnable(GL11.GL_TEXTURE_2D);
         }
         GL11.glPopMatrix();
-        fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.disclaimer.title"), (width - fontRendererObj.getStringWidth(BetterUtils.getTranslatedString("gui.disclaime.title"))) / 2, y + 6, 0xFFFFFF);
+        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.title"), (width - fontRendererObj.getStringWidth(BetterUtils.INSTANCE.getTranslatedString("gui.disclaime.title"))) / 2, y + 6, 0xFFFFFF);
         GL11.glPushMatrix();
         {
             GL11.glScalef(.5F, .5F, 0F);
-            String[] wrapped = BetterUtils.getWordWrappedString(75, BetterUtils.getTranslatedString("gui.disclaimer.warning"));
+            String[] wrapped = BetterUtils.INSTANCE.getWordWrappedString(75, BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.warning"));
             for(int i = 0; i < wrapped.length; i++)
                 fontRendererObj.drawString(wrapped[i], x * 2 + 6, y * 2 + 42 + i * 12, 0xFFFFFF);
         }
         GL11.glPopMatrix();
-        fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.config.flashymode.none"), x + 13, y + 54, 0x000000);
-        fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.config.flashymode.low"), x + 62, y + 54, 0x000000);
-        fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.config.flashymode.norm"), x + 107, y + 54, 0x000000);
-        fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.config.flashymode.rave"), x + 165, y + 54, 0x000000);
+        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.config.flashymode.none"), x + 13, y + 54, 0x000000);
+        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.config.flashymode.low"), x + 62, y + 54, 0x000000);
+        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.config.flashymode.norm"), x + 107, y + 54, 0x000000);
+        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.config.flashymode.rave"), x + 165, y + 54, 0x000000);
         if(mouseX > x + 5 && mouseX < x + 45 && mouseY > y + 50 && mouseY < y + 65) {
             List<String> infoText = new ArrayList<String>();
-            infoText.add(BetterUtils.getTranslatedString("gui.disclaimer.flashymode.none"));
-            infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.none.line1"));
+            infoText.add(BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.none"));
+            infoText.add("\2477" + BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.none.line1"));
             drawHoveringText(infoText, mouseX, mouseY, fontRendererObj);
         }else if(mouseX > x + 50 && mouseX < x + 90 && mouseY > y + 50 && mouseY < y + 65) {
             List<String> infoText = new ArrayList<String>();
-            infoText.add(BetterUtils.getTranslatedString("gui.disclaimer.flashymode.low"));
-            infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.low.line1"));
+            infoText.add(BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.low"));
+            infoText.add("\2477" + BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.low.line1"));
             drawHoveringText(infoText, mouseX, mouseY, fontRendererObj);
         }else if(mouseX > x + 95 && mouseX < x + 150 && mouseY > y + 50 && mouseY < y + 65) {
             List<String> infoText = new ArrayList<String>();
-            infoText.add(BetterUtils.getTranslatedString("gui.disclaimer.flashymode.norm"));
-            infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.norm.line1"));
+            infoText.add(BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.norm"));
+            infoText.add("\2477" + BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.norm.line1"));
             drawHoveringText(infoText, mouseX, mouseY, fontRendererObj);
         }else if(mouseX > x + 155 && mouseX < x + 195 && mouseY > y + 50 && mouseY < y + 65) {
             List<String> infoText = new ArrayList<String>();
-            infoText.add(BetterUtils.getTranslatedString("gui.disclaimer.flashymode.rave"));
-            infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.rave.line1"));
-            infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.rave.line2"));
-            infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.rave.line3"));
-            infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.rave.line4"));
-            infoText.add("\2477" + BetterUtils.getTranslatedString("gui.disclaimer.flashymode.rave.line5"));
+            infoText.add(BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.rave"));
+            infoText.add("\2477" + BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.rave.line1"));
+            infoText.add("\2477" + BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.rave.line2"));
+            infoText.add("\2477" + BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.rave.line3"));
+            infoText.add("\2477" + BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.rave.line4"));
+            infoText.add("\2477" + BetterUtils.INSTANCE.getTranslatedString("gui.disclaimer.flashymode.rave.line5"));
             drawHoveringText(infoText, mouseX, mouseY, fontRendererObj);
         }
     }

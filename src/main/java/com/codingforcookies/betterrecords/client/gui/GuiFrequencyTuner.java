@@ -4,7 +4,7 @@ import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.client.sound.IcyURLConnection;
 import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
-import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import com.codingforcookies.betterrecords.util.BetterUtils;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -57,7 +57,7 @@ public class GuiFrequencyTuner extends GuiContainer {
         int y = mouseY - (height - ySize) / 2;
         nameField.mouseClicked(x, y, mouseButton);
         urlField.mouseClicked(x, y, mouseButton);
-        if(error.equals(BetterUtils.getTranslatedString("gui.frequencytuner.ready")) && x >= 44 && x <= 75 && y >= 51 && y <= 66){
+        if(error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.ready")) && x >= 44 && x <= 75 && y >= 51 && y <= 66){
             String superName = FilenameUtils.getName(urlField.getText());
             superName = superName.split("#")[0];
             superName = superName.split("\\?")[0];
@@ -67,23 +67,23 @@ public class GuiFrequencyTuner extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
-        fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.frequencytuner"), 8, 6, 4210752);
+        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner"), 8, 6, 4210752);
         fontRendererObj.drawString(I18n.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
-        fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.name") + ": ", 10, 21, 4210752);
-        fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.url") + ": ", 10, 36, 4210752);
+        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.name") + ": ", 10, 21, 4210752);
+        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.url") + ": ", 10, 36, 4210752);
         int mx = mouseX - (width - xSize) / 2;
         int my = mouseY - (height - ySize) / 2;
-        fontRendererObj.drawStringWithShadow(BetterUtils.getTranslatedString("gui.frequencytuner.tune"), 48, 53, (error.equals(BetterUtils.getTranslatedString("gui.frequencytuner.ready")) ? (mx >= 44 && mx <= 75 && my >= 51 && my <= 66 ? 0xFFFF55 : 0xFFFFFF) : 0x555555));
-        fontRendererObj.drawString(error, 172 - fontRendererObj.getStringWidth(error), 65, (error.equals(BetterUtils.getTranslatedString("gui.frequencytuner.ready")) ? 0x229922 : 0x992222));
+        fontRendererObj.drawStringWithShadow(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.tune"), 48, 53, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.ready")) ? (mx >= 44 && mx <= 75 && my >= 51 && my <= 66 ? 0xFFFF55 : 0xFFFFFF) : 0x555555));
+        fontRendererObj.drawString(error, 172 - fontRendererObj.getStringWidth(error), 65, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.ready")) ? 0x229922 : 0x992222));
         nameField.drawTextBox();
         urlField.drawTextBox();
-        if(tileEntity.getCrystal() == null) error = BetterUtils.getTranslatedString("gui.frequencytuner.error1");
-        else if(tileEntity.getCrystal().hasTagCompound() && tileEntity.getCrystal().getTagCompound().hasKey("url")) error = BetterUtils.getTranslatedString("gui.frequencytuner.error2");
-        else if(nameField.getText().length() == 0) error = BetterUtils.getTranslatedString("gui.error1");
-        else if(nameField.getText().length() < 3) error = BetterUtils.getTranslatedString("gui.error2");
-        else if(urlField.getText().length() == 0) error = BetterUtils.getTranslatedString("gui.error3");
+        if(tileEntity.getCrystal() == null) error = BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.error1");
+        else if(tileEntity.getCrystal().hasTagCompound() && tileEntity.getCrystal().getTagCompound().hasKey("url")) error = BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.error2");
+        else if(nameField.getText().length() == 0) error = BetterUtils.INSTANCE.getTranslatedString("gui.error1");
+        else if(nameField.getText().length() < 3) error = BetterUtils.INSTANCE.getTranslatedString("gui.error2");
+        else if(urlField.getText().length() == 0) error = BetterUtils.INSTANCE.getTranslatedString("gui.error3");
         else if(!checkedURL){
-            error = BetterUtils.getTranslatedString("gui.validating");
+            error = BetterUtils.INSTANCE.getTranslatedString("gui.validating");
             if(checkURLTime < System.currentTimeMillis()){
                 checkURLTime = 0;
                 try{
@@ -92,13 +92,13 @@ public class GuiFrequencyTuner extends GuiContainer {
                         connection.setInstanceFollowRedirects(true);
                         connection.setRequestMethod("HEAD");
                         connection.connect();
-                        if(connection.getResponseCode() != 200) error = BetterUtils.getTranslatedString("gui.error4");
-                        else error = BetterUtils.getTranslatedString("gui.frequencytuner.ready");
-                    }else error = BetterUtils.getTranslatedString("gui.frequencytuner.error3");
+                        if(connection.getResponseCode() != 200) error = BetterUtils.INSTANCE.getTranslatedString("gui.error4");
+                        else error = BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.ready");
+                    }else error = BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.error3");
                 }catch(MalformedURLException e){
-                    error = BetterUtils.getTranslatedString("gui.error5");
+                    error = BetterUtils.INSTANCE.getTranslatedString("gui.error5");
                 }catch(IOException e){
-                    error = BetterUtils.getTranslatedString("gui.error6");
+                    error = BetterUtils.INSTANCE.getTranslatedString("gui.error6");
                 }
                 checkedURL = true;
             }
@@ -112,6 +112,6 @@ public class GuiFrequencyTuner extends GuiContainer {
         int y = (height - ySize) / 2;
         mc.renderEngine.bindTexture(GUI);
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-        drawTexturedModalRect(x + 43, y + 51, 0, (error.equals(BetterUtils.getTranslatedString("gui.frequencytuner.ready")) ? 166 : 178), 33, 12);
+        drawTexturedModalRect(x + 43, y + 51, 0, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.ready")) ? 166 : 178), 33, 12);
     }
 }

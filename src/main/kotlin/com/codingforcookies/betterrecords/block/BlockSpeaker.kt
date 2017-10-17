@@ -4,7 +4,7 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileSpeaker
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
-import com.codingforcookies.betterrecords.common.util.BetterUtils
+import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material

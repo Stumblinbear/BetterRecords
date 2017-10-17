@@ -6,7 +6,7 @@ import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher;
 import com.codingforcookies.betterrecords.client.ClientProxy;
 import com.codingforcookies.betterrecords.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.common.packets.PacketHandler;
-import com.codingforcookies.betterrecords.common.util.BetterUtils;
+import com.codingforcookies.betterrecords.util.BetterUtils;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -160,7 +160,7 @@ public class GuiRecordEtcher extends GuiContainer {
         int y = mouseY - (height - ySize) / 2;
         nameField.mouseClicked(x, y, mouseButton);
         urlField.mouseClicked(x, y, mouseButton);
-        if(error.equals(BetterUtils.getTranslatedString("gui.recordetcher.ready")) && x >= 44 && x <= 75 && y >= 51 && y <= 66){
+        if(error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready")) && x >= 44 && x <= 75 && y >= 51 && y <= 66){
             if(selectedLib != -1){
                 LibrarySong sel = ClientProxy.Companion.getDefaultLibrary().get(selectedLib);
                 try{
@@ -243,24 +243,24 @@ public class GuiRecordEtcher extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.recordetcher"), 8, 6, 4210752);
+        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher"), 8, 6, 4210752);
         fontRendererObj.drawString(I18n.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
-        fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.name") + ": ", 10, 21, 4210752);
-        fontRendererObj.drawString(BetterUtils.getTranslatedString("gui.url") + ": ", 10, 36, 4210752);
+        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.name") + ": ", 10, 21, 4210752);
+        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.url") + ": ", 10, 36, 4210752);
         int mx = mouseX - (width - xSize) / 2;
         int my = mouseY - (height - ySize) / 2;
-        fontRendererObj.drawStringWithShadow(BetterUtils.getTranslatedString("gui.recordetcher.etch"), 50, 53, (error.equals(BetterUtils.getTranslatedString("gui.recordetcher.ready")) ? (mx >= 44 && mx <= 75 && my >= 51 && my <= 66 ? 0xFFFF55 : 0xFFFFFF) : 0x555555));
-        fontRendererObj.drawString(error, 172 - fontRendererObj.getStringWidth(error), 65, (error.equals(BetterUtils.getTranslatedString("gui.recordetcher.ready")) ? 0x229922 : 0x992222));
+        fontRendererObj.drawStringWithShadow(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.etch"), 50, 53, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready")) ? (mx >= 44 && mx <= 75 && my >= 51 && my <= 66 ? 0xFFFF55 : 0xFFFFFF) : 0x555555));
+        fontRendererObj.drawString(error, 172 - fontRendererObj.getStringWidth(error), 65, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready")) ? 0x229922 : 0x992222));
         nameField.drawTextBox();
         urlField.drawTextBox();
-        if(tileEntity.getRecord() == null) error = BetterUtils.getTranslatedString("gui.recordetcher.error1");
-        else if(tileEntity.getRecord().hasTagCompound() && tileEntity.getRecord().getTagCompound().hasKey("url")) error = BetterUtils.getTranslatedString("gui.recordetcher.error2");
-        else if(selectedLib != -1) error = BetterUtils.getTranslatedString("gui.recordetcher.ready");
-        else if(nameField.getText().length() == 0) error = BetterUtils.getTranslatedString("gui.error1");
-        else if(nameField.getText().length() < 3) error = BetterUtils.getTranslatedString("gui.error2");
-        else if(urlField.getText().length() == 0) error = BetterUtils.getTranslatedString("gui.error3");
+        if(tileEntity.getRecord() == null) error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.error1");
+        else if(tileEntity.getRecord().hasTagCompound() && tileEntity.getRecord().getTagCompound().hasKey("url")) error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.error2");
+        else if(selectedLib != -1) error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready");
+        else if(nameField.getText().length() == 0) error = BetterUtils.INSTANCE.getTranslatedString("gui.error1");
+        else if(nameField.getText().length() < 3) error = BetterUtils.INSTANCE.getTranslatedString("gui.error2");
+        else if(urlField.getText().length() == 0) error = BetterUtils.INSTANCE.getTranslatedString("gui.error3");
         else if(!checkedURL){
-            error = BetterUtils.getTranslatedString("gui.validating");
+            error = BetterUtils.INSTANCE.getTranslatedString("gui.validating");
             if(checkURLTime < System.currentTimeMillis()){
                 checkURLTime = 0;
                 URL url;
@@ -272,27 +272,27 @@ public class GuiRecordEtcher extends GuiContainer {
                         connection.connect();
                         if(((HttpURLConnection) connection).getResponseCode() == 200){
                             if(connection.getContentLength() / 1024 / 1024 > (ConfigHandler.INSTANCE.getDownloadMax() != 100 ? ConfigHandler.INSTANCE.getDownloadMax() : 102400)){
-                                error = BetterUtils.getTranslatedString("gui.recordetcher.error3").replace("<size>", "" + ConfigHandler.INSTANCE.getDownloadMax());
+                                error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.error3").replace("<size>", "" + ConfigHandler.INSTANCE.getDownloadMax());
                             }
-                        }else error = BetterUtils.getTranslatedString("gui.error4");
+                        }else error = BetterUtils.INSTANCE.getTranslatedString("gui.error4");
                     }else{
                         if(Minecraft.getMinecraft().world.isRemote){
                             connection.connect();
-                            if(connection.getContentLength() == 0) error = BetterUtils.getTranslatedString("gui.recordetcher.error4");
-                        }else error = BetterUtils.getTranslatedString("gui.recordetcher.error5");
+                            if(connection.getContentLength() == 0) error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.error4");
+                        }else error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.error5");
                     }
                     if(!error.equals("")){
                         etchSize = connection.getContentLength() / 1024 / 1024;
                         String contentType = connection.getContentType();
-                        if(ClientProxy.Companion.getEncodings().contains(contentType)) error = BetterUtils.getTranslatedString("gui.recordetcher.ready");
-                        else error = BetterUtils.getTranslatedString("gui.recordetcher.error1").replace("<type>", contentType);
+                        if(ClientProxy.Companion.getEncodings().contains(contentType)) error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready");
+                        else error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.error1").replace("<type>", contentType);
                     }
                 }catch(MalformedURLException e) {
-                    error = BetterUtils.getTranslatedString("gui.error5");
+                    error = BetterUtils.INSTANCE.getTranslatedString("gui.error5");
                 }catch (StringIndexOutOfBoundsException e) {
-                    error = BetterUtils.getTranslatedString("gui.error5");
+                    error = BetterUtils.INSTANCE.getTranslatedString("gui.error5");
                 }catch(IOException e){
-                    error = BetterUtils.getTranslatedString("gui.error6");
+                    error = BetterUtils.INSTANCE.getTranslatedString("gui.error6");
                 }
                 checkedURL = true;
             }
@@ -306,7 +306,7 @@ public class GuiRecordEtcher extends GuiContainer {
                 {
                     List<String> txt = new ArrayList<String>();
                     txt.add(ClientProxy.Companion.getDefaultLibrary().get(offsetI).local);
-                    txt.add("\2477" + BetterUtils.getTranslatedString("item.record.by") + ": " + ClientProxy.Companion.getDefaultLibrary().get(offsetI).author);
+                    txt.add("\2477" + BetterUtils.INSTANCE.getTranslatedString("item.record.by") + ": " + ClientProxy.Companion.getDefaultLibrary().get(offsetI).author);
                     drawHoveringText(txt, mx, my, fontRendererObj);
                 }
                 GL11.glPopMatrix();
@@ -321,7 +321,7 @@ public class GuiRecordEtcher extends GuiContainer {
         int y = (height - ySize) / 2;
         mc.renderEngine.bindTexture(GUI);
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
-        drawTexturedModalRect(x + 44, y + 51, 0, (error.equals(BetterUtils.getTranslatedString("gui.recordetcher.ready")) ? 166 : 178), 33, 12);
+        drawTexturedModalRect(x + 44, y + 51, 0, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready")) ? 166 : 178), 33, 12);
         int mx = mouseX - x;
         int my = mouseY - y;
         if(ClientProxy.Companion.getDefaultLibrary().isEmpty()) return;

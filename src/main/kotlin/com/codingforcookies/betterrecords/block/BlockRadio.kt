@@ -6,7 +6,7 @@ import com.codingforcookies.betterrecords.block.tile.TileRadio
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
-import com.codingforcookies.betterrecords.common.util.BetterUtils
+import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.item.ModItems
 import net.minecraft.block.Block

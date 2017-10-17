@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.item
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
-import com.codingforcookies.betterrecords.common.util.BetterUtils
+import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.extensions.forEachIndexed
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
