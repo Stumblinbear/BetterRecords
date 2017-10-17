@@ -37,7 +37,7 @@ open class ItemRecord(name: String) : ModItem(name), IRecord {
     override fun addInformation(stack: ItemStack, player: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
         stack.tagCompound?.let {
             tooltip += BetterUtils.getTranslatedString("item.record.by") + ": " + it.getString("author")
-            tooltip += BetterUtils.getTranslatedString("item.record.size") + ": " + it.getString("size") + "mb"
+            tooltip += BetterUtils.getTranslatedString("item.record.size") + ": " + it.getInteger("size") + "mb"
             if (it.getBoolean("repeat")) {
                 tooltip += ""
                 tooltip.add("\u00a7e" + BetterUtils.getTranslatedString("item.record.repeatenabled"))

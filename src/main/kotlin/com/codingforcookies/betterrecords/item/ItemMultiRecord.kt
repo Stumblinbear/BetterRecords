@@ -34,8 +34,9 @@ class ItemMultiRecord(name: String) : ItemRecord(name) {
     override fun addInformation(stack: ItemStack, player: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
         stack.tagCompound?.let {
             if (it.hasKey("songs")) {
-                it.getTagList("songs", 10).forEachIndexed { i, _ ->
-                    tooltip += BetterUtils.getTranslatedString("item.record.song") + "${i + 1}: ${it.getString("local")}"
+                val tagList = it.getTagList("songs", 10)
+                tagList.forEachIndexed { i, h ->
+                    tooltip += BetterUtils.getTranslatedString("item.record.song") + " ${i + 1}: ${tagList.getCompoundTagAt(i).getString("local")}"
                 }
             }
             if (it.hasKey("repeat") && it.getBoolean("repeat")) {
