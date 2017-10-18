@@ -29,7 +29,6 @@ class TileFrequencyTuner : ModInventoryTile(), IInventory, ITickable {
         crystal = stack
     }
 
-    @SideOnly(Side.CLIENT)
     override fun update() {
         crystal?.let {
             crystalFloaty += 0.86F
