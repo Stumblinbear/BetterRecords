@@ -3,7 +3,7 @@ package com.codingforcookies.betterrecords.item
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
+import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumActionResult
@@ -22,7 +22,7 @@ class ItemWireCutter(name: String) : ModItem(name), IRecordWireManipulator {
         if (world.isRemote)
             return EnumActionResult.PASS
 
-        ConnectionHelper.clearConnections(te.world, te as IRecordWire?)
+        ConnectionHelper.clearConnections(te.world, te as IRecordWire)
         return EnumActionResult.PASS
     }
 }

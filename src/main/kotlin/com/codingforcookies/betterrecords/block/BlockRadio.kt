@@ -4,7 +4,7 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.block.tile.TileRadio
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
+import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.handler.ConfigHandler

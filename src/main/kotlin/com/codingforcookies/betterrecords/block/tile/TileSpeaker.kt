@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.block.tile
 
 import com.codingforcookies.betterrecords.api.connection.RecordConnection
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
+import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.extensions.set
 import net.minecraft.nbt.NBTTagCompound
 
@@ -34,7 +34,7 @@ class TileSpeaker : ModTile(), IRecordWire {
 
         type = getInteger("type")
         rotation = getFloat("rotation")
-        connections = ConnectionHelper.unserializeConnections(getString("connections"))
+        connections = ConnectionHelper.unserializeConnections(getString("connections")).toMutableList()
     }
 
     override fun writeToNBT(compound: NBTTagCompound) = compound.apply {

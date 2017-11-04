@@ -3,7 +3,7 @@ package com.codingforcookies.betterrecords.block.tile
 import com.codingforcookies.betterrecords.api.connection.RecordConnection
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
+import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.util.ITickable
 
@@ -29,7 +29,7 @@ class TileStrobeLight : ModTile(), IRecordWire, IRecordAmplitude, ITickable {
     override fun readFromNBT(compound: NBTTagCompound) = compound.run {
         super.readFromNBT(compound)
 
-        connections = ConnectionHelper.unserializeConnections(getString("connections"))
+        connections = ConnectionHelper.unserializeConnections(getString("connections")).toMutableList()
     }
 
     override fun writeToNBT(compound: NBTTagCompound) = compound.apply {

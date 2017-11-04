@@ -3,7 +3,7 @@ package com.codingforcookies.betterrecords.common.packets;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.wire.IRecordWire;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper;
+import com.codingforcookies.betterrecords.helper.ConnectionHelper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -34,9 +34,9 @@ public class PacketWireConnection implements IPacket {
         TileEntity te2 = player.world.getTileEntity(new BlockPos(connection.x2, connection.y2, connection.z2));
         if(te1 instanceof IRecordWire && te2 instanceof IRecordWire) {
             if(!(te1 instanceof IRecordWireHome && te2 instanceof IRecordWireHome)) {
-                ConnectionHelper.addConnection(player.world, (IRecordWire)te1, connection, player.world.getBlockState(te1.getPos()));
-                ConnectionHelper.addConnection(player.world, (IRecordWire)te1, connection, player.world.getBlockState(te1.getPos()));
-                ConnectionHelper.addConnection(player.world, (IRecordWire)te2, connection, player.world.getBlockState(te2.getPos()));
+                ConnectionHelper.INSTANCE.addConnection(player.world, (IRecordWire)te1, connection, player.world.getBlockState(te1.getPos()));
+                ConnectionHelper.INSTANCE.addConnection(player.world, (IRecordWire)te1, connection, player.world.getBlockState(te1.getPos()));
+                ConnectionHelper.INSTANCE.addConnection(player.world, (IRecordWire)te2, connection, player.world.getBlockState(te2.getPos()));
             }
         }
     }

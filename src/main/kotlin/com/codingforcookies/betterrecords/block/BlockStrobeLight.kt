@@ -4,7 +4,7 @@ import com.codingforcookies.betterrecords.api.record.IRecordAmplitude
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileStrobeLight
 import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
+import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.block.material.Material
@@ -51,7 +51,7 @@ class BlockStrobeLight(name: String) : ModBlock(Material.IRON, name) {
     override fun removedByPlayer(state: IBlockState, world: World, pos: net.minecraft.util.math.BlockPos, player: EntityPlayer, willHarvest: Boolean): Boolean {
         if (world.isRemote) return super.removedByPlayer(state, world, pos, player, willHarvest)
         val te = world.getTileEntity(pos)
-        if (te != null && te is IRecordWire) ConnectionHelper.clearConnections(world, te as IRecordWire?)
+        if (te != null && te is IRecordWire) ConnectionHelper.clearConnections(world, te as IRecordWire)
         return super.removedByPlayer(state, world, pos, player, willHarvest)
     }
 

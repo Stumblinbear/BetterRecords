@@ -4,7 +4,7 @@ import com.codingforcookies.betterrecords.api.connection.RecordConnection
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
+import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
@@ -49,8 +49,8 @@ class ItemWire(name: String) : ModItem(name), IRecordWireManipulator {
 
                 if (te2 is IRecordWire) {
                     if (!(te1 is IRecordWireHome && te2 is IRecordWireHome)) {
-                        ConnectionHelper.addConnection((te as TileEntity).world, te1 as IRecordWire, connection, world.getBlockState(te.getPos()))
-                        ConnectionHelper.addConnection((te as TileEntity).world, te2 as IRecordWire, connection, world.getBlockState(te.getPos()))
+                        ConnectionHelper.addConnection((te as TileEntity).world, te1 as IRecordWire, connection!!, world.getBlockState(te.pos))
+                        ConnectionHelper.addConnection((te as TileEntity).world, te2 as IRecordWire, connection!!, world.getBlockState(te.pos))
                         PacketHandler.sendWireConnectionFromClient(connection)
                         stack.stackSize--
                     }

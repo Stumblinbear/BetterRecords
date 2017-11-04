@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.block.tile
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.delegate.CopyOnSetDelegate
-import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
+import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 
@@ -46,7 +46,7 @@ class TileRadio : SimpleRecordWireHome(), IRecordWire {
 
         crystal = ItemStack.loadItemStackFromNBT(getCompoundTag("crystal"))
         opening = getBoolean("opening")
-        connections = ConnectionHelper.unserializeConnections(getString("connections"))
+        connections = ConnectionHelper.unserializeConnections(getString("connections")).toMutableList()
         wireSystemInfo = ConnectionHelper.unserializeWireSystemInfo(getString("wireSystemInfo"))
         playRadius = getFloat("playRadius")
     }
