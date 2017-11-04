@@ -35,34 +35,6 @@ public class BetterEventHandler{
     public static float strobeLinger = 0F;
 
     @SubscribeEvent
-    public void onDrawBlockHighlight(DrawBlockHighlightEvent event){
-        if(!event.getTarget().typeOfHit.equals(RayTraceResult.Type.BLOCK)) return;
-        Minecraft mc = Minecraft.getMinecraft();
-        if(ItemWire.Companion.getConnection() != null){
-            float dx = (float) (mc.player.prevPosX + (mc.player.posX - mc.player.prevPosX) * event.getPartialTicks());
-            float dy = (float) (mc.player.prevPosY + (mc.player.posY - mc.player.prevPosY) * event.getPartialTicks());
-            float dz = (float) (mc.player.prevPosZ + (mc.player.posZ - mc.player.prevPosZ) * event.getPartialTicks());
-            float x1 = -(float) (event.getTarget().getBlockPos().getX() - (ItemWire.Companion.getConnection().fromHome ? ItemWire.Companion.getConnection().x1 : ItemWire.Companion.getConnection().x2));
-            float y1 = -(float) (event.getTarget().getBlockPos().getY() - (ItemWire.Companion.getConnection().fromHome ? ItemWire.Companion.getConnection().y1 : ItemWire.Companion.getConnection().y2));
-            float z1 = -(float) (event.getTarget().getBlockPos().getZ() - (ItemWire.Companion.getConnection().fromHome ? ItemWire.Companion.getConnection().z1 : ItemWire.Companion.getConnection().z2));
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            GL11.glLineWidth(2F);
-            GL11.glDisable(GL11.GL_TEXTURE_2D);
-            GL11.glDepthMask(false);
-            Block j = mc.world.getBlockState(new BlockPos(event.getTarget().getBlockPos().getX(), event.getTarget().getBlockPos().getY(), event.getTarget().getBlockPos().getZ())).getBlock();
-            //TODO
-            //j.setBlockBoundsBasedOnState(mc.world, new BlockPos(event.getTarget().getBlockPos().getX(), event.getTarget().getBlockPos().getY(), event.getTarget().getBlockPos().getZ()));
-            TileEntity t = mc.world.getTileEntity(new BlockPos(event.getTarget().getBlockPos().getX(), event.getTarget().getBlockPos().getY(), event.getTarget().getBlockPos().getZ()));
-            //RenderGlobal.drawOutlinedBoundingBox(j.getSelectedBoundingBoxFromPool(mc.world, event.getTarget().blockX, event.getTarget().blockY, event.getTarget().blockZ).expand(0.002D, 0.002D, 0.002D).getOffsetBoundingBox(-dx, -dy, -dz), ((t instanceof IRecordWire ? (ItemWire.connection.fromHome ? t instanceof IRecordWireHome : !(t instanceof IRecordWireHome)) : false) || Math.sqrt(Math.pow(x1, 2) + Math.pow(y1, 2) + Math.pow(z1, 2)) > 7) ? 0xFF0000 : (t instanceof IRecordWire ? 0x00FF00 : 0xFFFF00));
-            GL11.glDepthMask(true);
-            GL11.glEnable(GL11.GL_TEXTURE_2D);
-            GL11.glDisable(GL11.GL_BLEND);
-            event.setCanceled(true);
-        }
-    }
-
-    @SubscribeEvent
     public void onRenderEvent(RenderWorldLastEvent event){
         Minecraft mc = Minecraft.getMinecraft();
         if(ItemWire.Companion.getConnection() != null){
