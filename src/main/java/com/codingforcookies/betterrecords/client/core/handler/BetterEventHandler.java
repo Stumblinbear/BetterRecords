@@ -294,11 +294,6 @@ public class BetterEventHandler{
                     }
                 }
             }
-        } else { //TickEvent.Phase.END
-            if(Minecraft.getMinecraft().player != null) {
-                if (ConfigHandler.INSTANCE.getFlashyMode() == -1)
-                    Minecraft.getMinecraft().player.openGui(BetterRecords.INSTANCE, 2, Minecraft.getMinecraft().world, 0, 0, 0);
-            }
         }
     }
 }
