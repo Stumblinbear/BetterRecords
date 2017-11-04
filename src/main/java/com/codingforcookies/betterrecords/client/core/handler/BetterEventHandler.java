@@ -253,47 +253,4 @@ public class BetterEventHandler{
             }
         }
     }
-
-    @SubscribeEvent
-    public void onClientTick(TickEvent.ClientTickEvent event){
-        if(event.phase == TickEvent.Phase.START){
-            if(!SoundHandler.nowPlaying.equals("")) if(SoundHandler.nowPlayingEnd < System.currentTimeMillis()){
-                SoundHandler.nowPlaying = "";
-            }else SoundHandler.nowPlayingInt += 3;
-            if(SoundHandler.soundPlaying.size() > 0){
-                EntityPlayer player = Minecraft.getMinecraft().player;
-                World world = Minecraft.getMinecraft().world;
-                if(world == null || player == null){
-                    SoundHandler.soundPlaying.clear();
-                    SoundHandler.nowPlaying = "";
-                    SoundHandler.nowPlayingEnd = 0;
-                    SoundHandler.nowPlayingInt = 0;
-                }else for(Entry<String, SoundManager> entry : SoundHandler.soundPlaying.entrySet()){
-                    if(entry.getValue().getCurrentSong() == null || entry.getValue().getCurrentSong().volume == null) continue;
-                    if(entry.getValue().getCurrentSong().dimension == 1234) entry.getValue().getCurrentSong().volume.setValue(-20F);
-                    else if(entry.getValue().getCurrentSong().dimension != world.provider.getDimension()) entry.getValue().getCurrentSong().volume.setValue(-80F);
-                    else{
-                        TileEntity tileEntity = Minecraft.getMinecraft().world.getTileEntity(new BlockPos(entry.getValue().getCurrentSong().x, entry.getValue().getCurrentSong().y, entry.getValue().getCurrentSong().z));
-                        if(tileEntity != null && tileEntity instanceof IRecordWireHome) entry.getValue().getCurrentSong().playRadius = ((IRecordWireHome) tileEntity).getSongRadius();
-                        float dist = (float) Math.abs(Math.sqrt(Math.pow(player.posX - entry.getValue().getCurrentSong().x, 2) + Math.pow(player.posY - entry.getValue().getCurrentSong().y, 2) + Math.pow(player.posZ - entry.getValue().getCurrentSong().z, 2)));
-                        IRecordWireHome wireHome = (IRecordWireHome) tileEntity;
-                        if (wireHome != null) {
-                            for (RecordConnection rc : wireHome.getConnections()) {
-                                float d = (float) Math.abs(Math.sqrt(Math.pow(player.posX - rc.x2, 2) + Math.pow(player.posY - rc.y2, 2) + Math.pow(player.posZ - rc.z2, 2)));
-                                if (d < dist) {
-                                    dist = d;
-                                }
-                            }
-                        }
-                        if(dist > entry.getValue().getCurrentSong().playRadius + 10F) entry.getValue().getCurrentSong().volume.setValue(-80F);
-                        else{
-                            float volume = dist * (50F / entry.getValue().getCurrentSong().playRadius / (Minecraft.getMinecraft().gameSettings.getSoundLevel(SoundCategory.MASTER) * Minecraft.getMinecraft().gameSettings.getSoundLevel(SoundCategory.RECORDS)));
-                            if(volume > 80F) entry.getValue().getCurrentSong().volume.setValue(-80F);
-                            else entry.getValue().getCurrentSong().volume.setValue(0F - volume);
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
