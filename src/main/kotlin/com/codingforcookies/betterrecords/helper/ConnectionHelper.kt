@@ -12,6 +12,7 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.World
 import java.util.*
 
+// TODO: Create unit tests and refactor methods.
 object ConnectionHelper {
 
     fun serializeConnections(rec: List<RecordConnection>): String {
