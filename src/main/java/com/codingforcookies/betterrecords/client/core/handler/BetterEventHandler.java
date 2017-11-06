@@ -1,122 +1,23 @@
 package com.codingforcookies.betterrecords.client.core.handler;
 
-import com.codingforcookies.betterrecords.api.connection.RecordConnection;
-import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.client.sound.FileDownloader;
 import com.codingforcookies.betterrecords.client.sound.SoundHandler;
-import com.codingforcookies.betterrecords.client.sound.SoundManager;
-import com.codingforcookies.betterrecords.BetterRecords;
 import com.codingforcookies.betterrecords.handler.ConfigHandler;
-import com.codingforcookies.betterrecords.item.ItemWire;
 import com.codingforcookies.betterrecords.util.BetterUtils;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
-import net.minecraftforge.client.event.DrawBlockHighlightEvent;
-import net.minecraftforge.client.event.RenderWorldLastEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
-import java.util.Map.Entry;
 
 public class BetterEventHandler{
 
     public static String tutorialText = "";
     public static long tutorialTime = 0;
     public static float strobeLinger = 0F;
-
-    @SubscribeEvent
-    public void onRenderEvent(RenderWorldLastEvent event){
-        Minecraft mc = Minecraft.getMinecraft();
-        if(ItemWire.Companion.getConnection() != null){
-            if(mc.player.getHeldItemMainhand() == null || !(mc.player.getHeldItemMainhand().getItem() instanceof ItemWire)){
-                ItemWire.Companion.setConnection(null);
-            }else{
-                GL11.glPushMatrix();
-                {
-                    GL11.glDisable(GL11.GL_TEXTURE_2D);
-                    float dx = (float) (mc.player.prevPosX + (mc.player.posX - mc.player.prevPosX) * event.getPartialTicks());
-                    float dy = (float) (mc.player.prevPosY + (mc.player.posY - mc.player.prevPosY) * event.getPartialTicks());
-                    float dz = (float) (mc.player.prevPosZ + (mc.player.posZ - mc.player.prevPosZ) * event.getPartialTicks());
-                    float x1 = -(dx - (ItemWire.Companion.getConnection().fromHome ? ItemWire.Companion.getConnection().x1 : ItemWire.Companion.getConnection().x2));
-                    float y1 = -(dy - (ItemWire.Companion.getConnection().fromHome ? ItemWire.Companion.getConnection().y1 : ItemWire.Companion.getConnection().y2));
-                    float z1 = -(dz - (ItemWire.Companion.getConnection().fromHome ? ItemWire.Companion.getConnection().z1 : ItemWire.Companion.getConnection().z2));
-                    GL11.glTranslatef(x1 + .5F, y1 + .5F, z1 + .5F);
-                    GL11.glLineWidth(2F);
-                    GL11.glColor3f(0F, 0F, 0F);
-                    GL11.glBegin(GL11.GL_LINE_STRIP);
-                    {
-                        GL11.glVertex3f(0F, 0F, 0F);
-                        GL11.glVertex3f(0F, 3F, 0F);
-                    }
-                    GL11.glEnd();
-                    if(ConfigHandler.INSTANCE.getDevMode() && ItemWire.Companion.getConnection().fromHome){
-                        if(SoundHandler.soundPlaying.containsKey(ItemWire.Companion.getConnection().x1 + "," + ItemWire.Companion.getConnection().y1 + "," + ItemWire.Companion.getConnection().z1 + "," + mc.world.provider.getDimension())){
-                            float radius = SoundHandler.soundPlaying.get(ItemWire.Companion.getConnection().x1 + "," + ItemWire.Companion.getConnection().y1 + "," + ItemWire.Companion.getConnection().z1 + "," + mc.world.provider.getDimension()).getCurrentSong().playRadius;
-                            GL11.glDisable(GL11.GL_CULL_FACE);
-                            GL11.glEnable(GL11.GL_BLEND);
-                            GL11.glColor4f(.1F, .1F, 1F, .2F);
-                            GL11.glBegin(GL11.GL_LINE_STRIP);
-                            {
-                                GL11.glVertex2f(0F, 0F);
-                                GL11.glVertex2f(0F, radius + 10F);
-                            }
-                            GL11.glEnd();
-                            double factor = Math.PI * 2 / 45;
-                            for(double phi = 0; phi <= Math.PI / 1.05; phi += factor){
-                                GL11.glBegin(GL11.GL_QUAD_STRIP);
-                                {
-                                    for(double theta = 0; theta <= Math.PI * 2 + factor; theta += factor){
-                                        double x = radius * Math.sin(phi) * Math.cos(theta);
-                                        double y = -radius * Math.cos(phi);
-                                        double z = radius * Math.sin(phi) * Math.sin(theta);
-                                        GL11.glVertex3d(x, y, z);
-                                        x = radius * Math.sin(phi + factor) * Math.cos(theta);
-                                        y = -radius * Math.cos(phi + factor);
-                                        z = radius * Math.sin(phi + factor) * Math.sin(theta);
-                                        GL11.glVertex3d(x, y, z);
-                                    }
-                                }
-                                GL11.glEnd();
-                            }
-                            float volumeRadius = radius * (Minecraft.getMinecraft().gameSettings.getSoundLevel(SoundCategory.MASTER) * Minecraft.getMinecraft().gameSettings.getSoundLevel(SoundCategory.RECORDS));
-                            GL11.glColor4f(1F, .1F, .1F, .2F);
-                            for(double phi = 0; phi <= Math.PI / 1.05; phi += factor){
-                                GL11.glBegin(GL11.GL_QUAD_STRIP);
-                                {
-                                    for(double theta = 0; theta <= Math.PI * 2 + factor; theta += factor){
-                                        double x = volumeRadius * Math.sin(phi) * Math.cos(theta);
-                                        double y = -volumeRadius * Math.cos(phi);
-                                        double z = volumeRadius * Math.sin(phi) * Math.sin(theta);
-                                        GL11.glVertex3d(x, y, z);
-                                        x = volumeRadius * Math.sin(phi + factor) * Math.cos(theta);
-                                        y = -volumeRadius * Math.cos(phi + factor);
-                                        z = volumeRadius * Math.sin(phi + factor) * Math.sin(theta);
-                                        GL11.glVertex3d(x, y, z);
-                                    }
-                                }
-                                GL11.glEnd();
-                            }
-                            GL11.glDisable(GL11.GL_BLEND);
-                            GL11.glEnable(GL11.GL_CULL_FACE);
-                        }
-                    }
-                    GL11.glColor3f(1F, 1F, 1F);
-                    GL11.glEnable(GL11.GL_TEXTURE_2D);
-                }
-                GL11.glPopMatrix();
-            }
-        }
-    }
 
     @SubscribeEvent
     public void onClientRender(TickEvent.RenderTickEvent event){
