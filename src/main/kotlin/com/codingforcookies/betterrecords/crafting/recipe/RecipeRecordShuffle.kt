@@ -12,7 +12,7 @@ import net.minecraft.world.World
 
 class RecipeRecordShuffle : IRecipe {
 
-    override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World): Boolean {
+    override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World?): Boolean {
         var foundRecord = false
         var foundTorch = false
 

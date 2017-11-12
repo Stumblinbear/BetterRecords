@@ -11,7 +11,7 @@ import net.minecraft.world.World
 
 class RecipeColoredRecord : IRecipe {
 
-     override fun matches(inventoryCrafting: InventoryCrafting, world: World): Boolean {
+     override fun matches(inventoryCrafting: InventoryCrafting, world: World?): Boolean {
         var foundRecord = false
         var foundDye = false
 

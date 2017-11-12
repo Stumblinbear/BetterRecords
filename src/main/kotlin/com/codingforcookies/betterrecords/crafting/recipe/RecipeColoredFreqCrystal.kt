@@ -12,7 +12,7 @@ import net.minecraft.world.World
 
 class RecipeColoredFreqCrystal : IRecipe {
 
-    override fun matches(inventoryCrafting: InventoryCrafting, world: World): Boolean {
+    override fun matches(inventoryCrafting: InventoryCrafting, world: World?): Boolean {
         var foundCrystal = false
         var foundDye = false
 

@@ -13,7 +13,7 @@ import java.util.ArrayList
 
 class RecipeMultiRecord : IRecipe {
 
-    override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World): Boolean {
+    override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World?): Boolean {
         var count = 0
 
         (0 until inventoryCrafting.sizeInventory)

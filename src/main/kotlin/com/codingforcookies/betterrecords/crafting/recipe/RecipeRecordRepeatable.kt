@@ -10,7 +10,7 @@ import net.minecraft.world.World
 
 class RecipeRecordRepeatable : IRecipe {
 
-    override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World): Boolean {
+    override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World?): Boolean {
         var foundRecord = false
         var foundComparator = false
 
