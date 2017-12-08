@@ -5,7 +5,7 @@ import com.codingforcookies.betterrecords.api.record.IRecord
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.block.tile.TileRecordPlayer
-import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
+import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.util.BetterUtils
@@ -102,8 +102,8 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
     override fun onBlockPlacedBy(world: World?, pos: net.minecraft.util.math.BlockPos?, state: IBlockState?, placer: EntityLivingBase?, stack: ItemStack?) {
         world!!.setBlockState(pos!!, state!!.withProperty(BetterRecordsAPI.CARDINAL_DIRECTIONS, placer!!.horizontalFacing.opposite))
         if (world.isRemote && !ConfigHandler.tutorials["recordplayer"]!!) {
-            BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.recordplayer")
-            BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000
+            ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.recordplayer")
+            ClientRenderHandler.tutorialTime = System.currentTimeMillis() + 10000
             ConfigHandler.tutorials.put("recordplayer", true)
         }
     }

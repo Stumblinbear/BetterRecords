@@ -4,7 +4,9 @@ import com.codingforcookies.betterrecords.CommonProxy
 import com.codingforcookies.betterrecords.api.song.LibrarySong
 import com.codingforcookies.betterrecords.block.ModBlock
 import com.codingforcookies.betterrecords.block.tile.*
-import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
+import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
+import com.codingforcookies.betterrecords.client.handler.ClientTickHandler
+import com.codingforcookies.betterrecords.client.handler.RenderEventHandler
 import com.codingforcookies.betterrecords.client.render.*
 import com.codingforcookies.betterrecords.client.sound.SoundHandler
 import com.codingforcookies.betterrecords.item.ModItem
@@ -72,7 +74,9 @@ class ClientProxy : CommonProxy() {
             }
         }
 
-        MinecraftForge.EVENT_BUS.register(BetterEventHandler())
+        MinecraftForge.EVENT_BUS.register(ClientRenderHandler)
+        MinecraftForge.EVENT_BUS.register(ClientTickHandler)
+        MinecraftForge.EVENT_BUS.register(RenderEventHandler)
 
         Item.REGISTRY
                 .filterIsInstance<ModItem>()

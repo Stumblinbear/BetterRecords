@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.block
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileLaserCluster
-import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
+import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.handler.ConfigHandler
@@ -35,8 +35,8 @@ class BlockLaserCluster(name: String) : ModBlock(Material.IRON, name) {
 
     override fun onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, entityLiving: EntityLivingBase, itemStack: ItemStack?) {
         if (world.isRemote && !ConfigHandler.tutorials["lasercluster"]!!) {
-            BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.lasercluster")
-            BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000
+            ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.lasercluster")
+            ClientRenderHandler.tutorialTime = System.currentTimeMillis() + 10000
             ConfigHandler.tutorials["lasercluster"] = true
         }
     }
