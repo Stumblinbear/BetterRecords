@@ -13,7 +13,7 @@ object BetterUtils {
     private var lang = "en_US"
 
     fun markBlockDirty(world: World, pos: BlockPos) =
-        world.getChunkFromBlockCoords(pos).setChunkModified()
+        world.getChunkFromBlockCoords(pos).setModified(true)
 
     fun getTranslatedString(str: String): String {
         var cct = translations[str]
