@@ -14,7 +14,7 @@ import net.minecraft.world.World
 
 class ItemWireCutter(name: String) : ModItem(name), IRecordWireManipulator {
 
-    override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+    override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         val te = world.getTileEntity(pos)
         if (te == null || te !is IRecordWire || te is IRecordWireHome)
             return EnumActionResult.PASS

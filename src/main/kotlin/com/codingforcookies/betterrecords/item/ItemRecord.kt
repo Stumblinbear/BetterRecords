@@ -4,9 +4,11 @@ import com.codingforcookies.betterrecords.api.record.IRecord
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.util.BetterUtils
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.text.translation.I18n
+import net.minecraft.world.World
 
 open class ItemRecord(name: String) : ModItem(name), IRecord {
 
@@ -34,7 +36,7 @@ open class ItemRecord(name: String) : ModItem(name), IRecord {
         }
     }
 
-    override fun addInformation(stack: ItemStack, player: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
+    override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         stack.tagCompound?.let {
             tooltip += BetterUtils.getTranslatedString("item.record.by") + ": " + it.getString("author")
             tooltip += BetterUtils.getTranslatedString("item.record.size") + ": " + it.getInteger("size") + "mb"

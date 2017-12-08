@@ -7,7 +7,6 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumActionResult
 import net.minecraft.util.EnumFacing
@@ -21,7 +20,7 @@ class ItemWire(name: String) : ModItem(name), IRecordWireManipulator {
         var connection: RecordConnection? = null
     }
 
-    override fun onItemUse(stack: ItemStack, player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
+    override fun onItemUse(player: EntityPlayer, world: World, pos: BlockPos, hand: EnumHand, facing: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): EnumActionResult {
         if (!world.isRemote) {
             return EnumActionResult.PASS
         }
@@ -52,7 +51,7 @@ class ItemWire(name: String) : ModItem(name), IRecordWireManipulator {
                         ConnectionHelper.addConnection((te as TileEntity).world, te1 as IRecordWire, connection!!, world.getBlockState(te.pos))
                         ConnectionHelper.addConnection((te as TileEntity).world, te2 as IRecordWire, connection!!, world.getBlockState(te.pos))
                         PacketHandler.sendWireConnectionFromClient(connection)
-                        stack.stackSize--
+                        // stack.count-- TODO: Decrement player's amount of wire.
                     }
                 }
 

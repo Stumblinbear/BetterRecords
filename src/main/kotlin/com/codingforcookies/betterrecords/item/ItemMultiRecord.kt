@@ -4,9 +4,11 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.extensions.forEachIndexed
+import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.text.translation.I18n
+import net.minecraft.world.World
 
 class ItemMultiRecord(name: String) : ItemRecord(name) {
 
@@ -31,7 +33,7 @@ class ItemMultiRecord(name: String) : ItemRecord(name) {
         }
     }
 
-    override fun addInformation(stack: ItemStack, player: EntityPlayer, tooltip: MutableList<String>, advanced: Boolean) {
+    override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         stack.tagCompound?.let {
             if (it.hasKey("songs")) {
                 val tagList = it.getTagList("songs", 10)
