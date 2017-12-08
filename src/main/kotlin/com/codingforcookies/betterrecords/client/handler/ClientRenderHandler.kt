@@ -25,7 +25,7 @@ object ClientRenderHandler {
             val res = ScaledResolution(mc)
             val width = res.scaledWidth
             val height = res.scaledHeight
-            val fontRenderer = mc.fontRendererObj
+            val fontRenderer = mc.fontRenderer
             mc.entityRenderer.setupOverlayRendering()
             if (strobeLinger > 0f) {
                 glMatrix {

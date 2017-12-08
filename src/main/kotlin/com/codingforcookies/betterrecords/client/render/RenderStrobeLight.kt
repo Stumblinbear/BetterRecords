@@ -15,7 +15,7 @@ class RenderStrobeLight : TileEntitySpecialRenderer<TileStrobeLight>() {
     val MODEL = ModelStrobeLight()
     val TEXTURE = ResourceLocation(ID, "textures/models/strobelight.png")
 
-    override fun renderTileEntityAt(te: TileStrobeLight?, x: Double, y: Double, z: Double, scale: Float, destroyStage: Int) {
+    override fun render(te: TileStrobeLight?, x: Double, y: Double, z: Double, scale: Float, destroyStage: Int, alpha: Float) {
 
         pushMatrix()
         

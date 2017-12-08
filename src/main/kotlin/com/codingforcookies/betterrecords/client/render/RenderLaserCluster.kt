@@ -15,7 +15,7 @@ class RenderLaserCluster : TileEntitySpecialRenderer<TileLaserCluster>() {
     val MODEL = ModelLaserCluster()
     val TEXTURE = ResourceLocation(ID, "textures/models/lasercluster.png")
 
-    override fun renderTileEntityAt(te: TileLaserCluster?, x: Double, y: Double, z: Double, scale: Float, unknown: Int) {
+    override fun render(te: TileLaserCluster?, x: Double, y: Double, z: Double, scale: Float, unknown: Int, alpha: Float) {
 
         pushMatrix()
 

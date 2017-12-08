@@ -14,7 +14,7 @@ class RenderLaser : TileEntitySpecialRenderer<TileLaser>() {
     val MODEL = ModelLaser()
     val TEXTURE = ResourceLocation(ID, "textures/models/laser.png")
 
-    override fun renderTileEntityAt(te: TileLaser?, x: Double, y: Double, z: Double, scale: Float, destroyStage: Int) {
+    override fun render(te: TileLaser?, x: Double, y: Double, z: Double, scale: Float, destroyStage: Int, alpha: Float) {
 
         pushMatrix()
         

@@ -12,7 +12,7 @@ class RenderFrequencyTuner : TileEntitySpecialRenderer<TileFrequencyTuner>() {
     val MODEL = ModelFrequencyTuner()
     val TEXTURE = ResourceLocation(ID, "textures/models/frequencytuner.png")
 
-    override fun renderTileEntityAt(te: TileFrequencyTuner?, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int) {
+    override fun render(te: TileFrequencyTuner?, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int, alpha: Float) {
 
         pushMatrix()
 

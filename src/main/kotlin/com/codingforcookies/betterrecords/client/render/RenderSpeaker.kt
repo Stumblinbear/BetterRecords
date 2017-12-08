@@ -20,7 +20,7 @@ class RenderSpeaker : TileEntitySpecialRenderer<TileSpeaker>() {
     val MODEL_LG = ModelLGSpeaker()
     val TEXTURE_LG = ResourceLocation(ID, "textures/models/lgspeaker.png")
 
-    override fun renderTileEntityAt(te: TileSpeaker?, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int) {
+    override fun render(te: TileSpeaker?, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int, alpha: Float) {
         var size = -1
 
         pushMatrix()

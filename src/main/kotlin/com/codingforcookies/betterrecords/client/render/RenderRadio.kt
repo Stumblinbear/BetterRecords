@@ -13,7 +13,7 @@ class RenderRadio : TileEntitySpecialRenderer<TileRadio>() {
     val MODEL = ModelRadio()
     val TEXTURE = ResourceLocation(ID, "textures/models/radio.png")
 
-    override fun renderTileEntityAt(te: TileRadio?, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int) {
+    override fun render(te: TileRadio?, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int, alpha: Float) {
         pushMatrix()
 
         translate(x + 0.5, y + 1.5, z + 0.5)

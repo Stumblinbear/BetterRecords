@@ -14,7 +14,7 @@ class RenderRecordEtcher : TileEntitySpecialRenderer<TileRecordEtcher>() {
     val MODEL = ModelRecordEtcher()
     val TEXTURE = ResourceLocation(ID, "textures/models/recordetcher.png")
 
-    override fun renderTileEntityAt(te: TileRecordEtcher?, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int) {
+    override fun render(te: TileRecordEtcher?, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int, alpha: Float) {
 
         te?.recordEntity?.let {
             pushMatrix()
@@ -23,7 +23,7 @@ class RenderRecordEtcher : TileEntitySpecialRenderer<TileRecordEtcher>() {
             rotate(90F, 1F, 0F, 0F)
             rotate(te.recordRotation * 57.3F, 0F, 0F, 1F)
 
-            Minecraft.getMinecraft().renderItem.renderItem(it.entityItem, ItemCameraTransforms.TransformType.NONE)
+            Minecraft.getMinecraft().renderItem.renderItem(it.item, ItemCameraTransforms.TransformType.NONE)
 
             popMatrix()
         }

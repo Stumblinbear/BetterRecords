@@ -15,7 +15,7 @@ class RenderRecordPlayer : TileEntitySpecialRenderer<TileRecordPlayer>() {
     val MODEL = ModelRecordPlayer()
     val TEXTURE = ResourceLocation(ID, "textures/models/recordplayer.png")
 
-    override fun renderTileEntityAt(te: TileRecordPlayer?, x: Double, y: Double, z: Double, scale: Float, destroyStage: Int) {
+    override fun render(te: TileRecordPlayer?, x: Double, y: Double, z: Double, scale: Float, destroyStage: Int, alpha: Float) {
 
         //region RENDER_BLOCK
         pushMatrix()
@@ -46,7 +46,7 @@ class RenderRecordPlayer : TileEntitySpecialRenderer<TileRecordPlayer>() {
                 rotate(te.recordRotation * 57.3f, 0f, 0f, 1f)
                 disableLighting()
                 disableCull()
-                Minecraft.getMinecraft().renderItem.renderItem(te.recordEntity?.entityItem, ItemCameraTransforms.TransformType.NONE)
+                Minecraft.getMinecraft().renderItem.renderItem(te.recordEntity?.item, ItemCameraTransforms.TransformType.NONE)
                 enableLighting()
                 enableCull()
                 color(1f, 1f, 1f)
