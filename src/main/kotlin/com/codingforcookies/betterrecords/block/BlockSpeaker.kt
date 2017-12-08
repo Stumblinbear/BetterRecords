@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.block
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileSpeaker
-import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
+import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.handler.ConfigHandler
@@ -53,8 +53,8 @@ class BlockSpeaker(name: String, val meta: Int) : ModBlock(Material.WOOD, name) 
             te.type = meta
 
             if (world.isRemote && !ConfigHandler.tutorials["speaker"]!!) {
-                BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.speaker")
-                BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000
+                ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.speaker")
+                ClientRenderHandler.tutorialTime = System.currentTimeMillis() + 10000
                 ConfigHandler.tutorials["speaker"] = true
             }
         }

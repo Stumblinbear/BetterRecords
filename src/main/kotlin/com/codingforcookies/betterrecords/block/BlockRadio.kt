@@ -3,7 +3,7 @@ package com.codingforcookies.betterrecords.block
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.block.tile.TileRadio
-import com.codingforcookies.betterrecords.client.core.handler.BetterEventHandler
+import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.common.core.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.util.BetterUtils
@@ -45,8 +45,8 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name) {
         super.onBlockPlacedBy(world, pos, state, placer, itemStack)
 
         if (world.isRemote && !ConfigHandler.tutorials["radio"]!!) {
-            BetterEventHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.radio")
-            BetterEventHandler.tutorialTime = System.currentTimeMillis() + 10000
+            ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.radio")
+            ClientRenderHandler.tutorialTime = System.currentTimeMillis() + 10000
             ConfigHandler.tutorials["radio"] = true
         }
     }
