@@ -58,7 +58,7 @@ class BlockLaser(name: String) : ModBlock(Material.IRON, name) {
         return super.removedByPlayer(state, world, pos, player, willHarvest)
     }
 
-    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         (world.getTileEntity(pos) as? TileLaser)?.let { te ->
             val length = te.length
 

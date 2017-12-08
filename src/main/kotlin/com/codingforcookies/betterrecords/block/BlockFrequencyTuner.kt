@@ -34,7 +34,7 @@ class BlockFrequencyTuner(name: String) : ModBlockDirectional(Material.WOOD, nam
         else -> Block.FULL_BLOCK_AABB
     }
 
-    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         (world.getTileEntity(pos) as? TileFrequencyTuner)?.let {
             player.openGui(BetterRecords, 1, world, pos.x, pos.y, pos.z)
             return true
@@ -55,14 +55,14 @@ class BlockFrequencyTuner(name: String) : ModBlockDirectional(Material.WOOD, nam
                 val ry = random.nextDouble() * 0.8F + 0.1F
                 val rz = random.nextDouble() * 0.8F + 0.1F
 
-                val entityItem = EntityItem(world, pos.x + rx, pos.y + ry, pos.z + rz, ItemStack(it.item, it.stackSize, it.itemDamage))
-                if (it.hasTagCompound()) entityItem.entityItem.tagCompound = it.tagCompound!!.copy()
+                val entityItem = EntityItem(world, pos.x + rx, pos.y + ry, pos.z + rz, ItemStack(it.item, it.count, it.itemDamage))
+                if (it.hasTagCompound()) entityItem.item.tagCompound = it.tagCompound!!.copy()
                 entityItem.motionX = random.nextGaussian() * 0.05F
                 entityItem.motionY = random.nextGaussian() * 0.05F + 0.2F
                 entityItem.motionZ = random.nextGaussian() * 0.05F
 
                 world.spawnEntity(entityItem)
-                it.stackSize = 0
+                it.count = 0
                 te.crystal = null
             }
         }

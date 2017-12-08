@@ -30,7 +30,7 @@ class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name) {
     override fun onBlockAdded(world: World, pos: BlockPos, state: IBlockState) =
         world.notifyBlockUpdate(pos, state, state, 3)
 
-    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, heldItem: ItemStack?, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+    override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         (world.getTileEntity(pos) as? TileRecordEtcher)?.let {
             player.openGui(BetterRecords, 0, world, pos.x, pos.y, pos.z)
             return true
@@ -58,16 +58,16 @@ class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name) {
             val ry = rand.nextFloat() * 0.8f + 0.1f
             val rz = rand.nextFloat() * 0.8f + 0.1f
 
-            val entityItem = EntityItem(world, (pos.x + rx).toDouble(), (pos.y + ry).toDouble(), (pos.z + rz).toDouble(), ItemStack(item.item, item.stackSize, item.itemDamage))
+            val entityItem = EntityItem(world, (pos.x + rx).toDouble(), (pos.y + ry).toDouble(), (pos.z + rz).toDouble(), ItemStack(item.item, item.count, item.itemDamage))
 
             if (item.hasTagCompound())
-                entityItem.entityItem.tagCompound = item.tagCompound!!.copy()
+                entityItem.item.tagCompound = item.tagCompound!!.copy()
 
             entityItem.motionX = rand.nextGaussian() * 0.05f
             entityItem.motionY = rand.nextGaussian() * 0.05f + 0.2f
             entityItem.motionZ = rand.nextGaussian() * 0.05f
             world.spawnEntity(entityItem)
-            item.stackSize = 0
+            item.count = 0
 
             tileRecordEtcher.record = null
         }

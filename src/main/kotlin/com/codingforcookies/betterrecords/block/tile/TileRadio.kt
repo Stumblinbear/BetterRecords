@@ -44,7 +44,7 @@ class TileRadio : SimpleRecordWireHome(), IRecordWire {
     override fun readFromNBT(compound: NBTTagCompound) = compound.run {
         super.readFromNBT(compound)
 
-        crystal = ItemStack.loadItemStackFromNBT(getCompoundTag("crystal"))
+        crystal = ItemStack(getCompoundTag("crystal"))
         opening = getBoolean("opening")
         connections = ConnectionHelper.unserializeConnections(getString("connections")).toMutableList()
         wireSystemInfo = ConnectionHelper.unserializeWireSystemInfo(getString("wireSystemInfo"))

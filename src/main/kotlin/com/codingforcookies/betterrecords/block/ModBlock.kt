@@ -32,8 +32,6 @@ abstract class ModBlock(material: Material, val name: String) : BlockContainer(m
      * @see getTileEntityClass
      */
     fun register() = this.apply {
-        GameRegistry.register(this.setRegistryName(name))
-        GameRegistry.register(ItemBlock(this).setRegistryName(name))
         unlocalizedName = "$ID.$name"
         setCreativeTab(BetterRecords.creativeTab)
 

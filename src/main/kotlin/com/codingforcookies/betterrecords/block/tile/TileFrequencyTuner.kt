@@ -19,6 +19,7 @@ class TileFrequencyTuner : ModInventoryTile(), IInventory, ITickable {
 
     override fun getSizeInventory() = 1
     override fun getInventoryStackLimit() = 1
+    override fun isEmpty() = crystal != null
 
     override fun getStackInSlot(index: Int) = crystal
 
@@ -38,7 +39,8 @@ class TileFrequencyTuner : ModInventoryTile(), IInventory, ITickable {
     override fun readFromNBT(compound: NBTTagCompound) = compound.run {
         super.readFromNBT(compound)
 
-        crystal = ItemStack.loadItemStackFromNBT(getCompoundTag("crystal"))
+        crystal = ItemStack(getCompoundTag("crystal"))
+        crystal = ItemStack(getCompoundTag("crystal"))
     }
 
     override fun writeToNBT(compound: NBTTagCompound) = compound.apply {

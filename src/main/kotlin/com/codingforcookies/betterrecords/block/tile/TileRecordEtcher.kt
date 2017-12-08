@@ -47,6 +47,7 @@ class TileRecordEtcher : ModInventoryTile(), IInventory, ITickable {
 
     override fun getSizeInventory() = 1
     override fun getInventoryStackLimit() = 1
+    override fun isEmpty() = record != null
 
     override fun getStackInSlot(index: Int) = record
     override fun setInventorySlotContents(index: Int, stack: ItemStack?) {
@@ -60,7 +61,7 @@ class TileRecordEtcher : ModInventoryTile(), IInventory, ITickable {
     override fun readFromNBT(compound: NBTTagCompound) = compound.run {
         super.readFromNBT(compound)
 
-        record = ItemStack.loadItemStackFromNBT(getCompoundTag("record"))
+        record = ItemStack(getCompoundTag("record"))
     }
 
     override fun writeToNBT(compound: NBTTagCompound) = compound.apply {

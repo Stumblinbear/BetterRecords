@@ -12,11 +12,11 @@ abstract class ModInventoryTile : ModTile(), IInventory {
 
     override fun decrStackSize(index: Int, count: Int) = getStackInSlot(index).apply {
         this?.let {
-            if (this.stackSize <= count) {
+            if (this.count <= count) {
                 setInventorySlotContents(index, null)
             } else {
                 val splitStack = this.splitStack(count)
-                if (splitStack.stackSize == 0) {
+                if (splitStack.count == 0) {
                     setInventorySlotContents(index, null)
                 }
                 return splitStack

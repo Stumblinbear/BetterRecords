@@ -16,7 +16,7 @@ class TileRecordPlayer : SimpleRecordWireHome(), IRecordWire {
         set(value) {
             value?.let {
                 field = value.copy()
-                field!!.stackSize = 1
+                field!!.count = 1
                 recordEntity = EntityItem(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), this.record!!)
                 recordEntity!!.hoverStart = 0f
                 recordEntity!!.rotationPitch = 0f
@@ -72,7 +72,7 @@ class TileRecordPlayer : SimpleRecordWireHome(), IRecordWire {
     override fun readFromNBT(compound: NBTTagCompound) = compound.run {
         super.readFromNBT(compound)
 
-        record = ItemStack.loadItemStackFromNBT(getCompoundTag("record"))
+        record = ItemStack(getCompoundTag("record"))
         opening = getBoolean("opening")
 
         connections = ConnectionHelper.unserializeConnections(getString("connections")).toMutableList()

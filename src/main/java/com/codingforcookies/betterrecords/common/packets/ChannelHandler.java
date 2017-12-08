@@ -34,7 +34,7 @@ public class ChannelHandler extends FMLIndexedMessageToMessageCodec<IPacket> {
                 break;
             case SERVER:
                 INetHandler netHandler = ctx.channel().attr(NetworkRegistry.NET_HANDLER).get();
-                packet.executeServer(((NetHandlerPlayServer)netHandler).playerEntity);
+                packet.executeServer(((NetHandlerPlayServer)netHandler).player);
                 break;
         }
     }

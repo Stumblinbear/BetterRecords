@@ -44,12 +44,12 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
         world!!.notifyBlockUpdate(pos!!, state!!, state, 3)
     }
 
-    override fun onBlockActivated(world: World?, pos: BlockPos?, state: IBlockState?, player: EntityPlayer?, hand: EnumHand?, heldItem: ItemStack?, side: EnumFacing?, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        if (heldItem != null && heldItem.item is IRecordWireManipulator) return false
+    override fun onBlockActivated(world: World?, pos: BlockPos?, state: IBlockState?, player: EntityPlayer, hand: EnumHand?, side: EnumFacing?, hitX: Float, hitY: Float, hitZ: Float): Boolean {
+        if (player.heldItemMainhand != null && player.heldItemMainhand.item is IRecordWireManipulator) return false
         val tileEntity = world!!.getTileEntity(pos!!)
         if (tileEntity == null || tileEntity !is TileRecordPlayer) return false
         val tileRecordPlayer = tileEntity as TileRecordPlayer?
-        if (player!!.isSneaking) {
+        if (player.isSneaking) {
             if (world.getBlockState(pos.add(0, 1, 0)).block === Blocks.AIR) {
                 if (!world.isRemote) {
                     tileRecordPlayer!!.opening = !tileRecordPlayer.opening
@@ -65,8 +65,8 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
                 if (!world.isRemote) dropItem(world, pos)
                 tileRecordPlayer.record = null
                 world.notifyBlockUpdate(pos, state!!, state, 3)
-            } else if (heldItem != null && (heldItem.item === Items.DIAMOND || heldItem.item is IRecord && (heldItem.item as IRecord).isRecordValid(heldItem))) {
-                if (heldItem.item === Items.DIAMOND) {
+            } else if (player.heldItemMainhand != null && (player.heldItemMainhand.item === Items.DIAMOND || player.heldItemMainhand.item is IRecord && (player.heldItemMainhand.item as IRecord).isRecordValid(player.heldItemMainhand))) {
+                if (player.heldItemMainhand.item === Items.DIAMOND) {
                     val itemStack = ItemStack(ModItems.itemRecord)
                     itemStack.tagCompound = NBTTagCompound()
                     itemStack.tagCompound!!.setString("name", "easteregg.ogg")
@@ -75,12 +75,12 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
                     itemStack.tagCompound!!.setInteger("color", 0x53EAD7)
                     tileRecordPlayer.record = itemStack
                     world.notifyBlockUpdate(pos, state!!, state, 3)
-                    heldItem.stackSize--
+                    player.heldItemMainhand.count--
                 } else {
-                    tileRecordPlayer.record = heldItem
+                    tileRecordPlayer.record = player.heldItemMainhand
                     world.notifyBlockUpdate(pos, state!!, state, 3)
-                    if (!world.isRemote) (heldItem.item as IRecord).onRecordInserted(tileRecordPlayer, heldItem)
-                    heldItem.stackSize--
+                    if (!world.isRemote) (player.heldItemMainhand.item as IRecord).onRecordInserted(tileRecordPlayer, player.heldItemMainhand)
+                    player.heldItemMainhand.count--
                 }
             }
         }
@@ -131,13 +131,13 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
             val rx = rand.nextFloat() * 0.8f + 0.1f
             val ry = rand.nextFloat() * 0.8f + 0.1f
             val rz = rand.nextFloat() * 0.8f + 0.1f
-            val entityItem = EntityItem(world, (pos.x + rx).toDouble(), (pos.y + ry).toDouble(), (pos.z + rz).toDouble(), ItemStack(item.item, item.stackSize, item.itemDamage))
-            if (item.hasTagCompound()) entityItem.entityItem.tagCompound = item.tagCompound!!.copy()
+            val entityItem = EntityItem(world, (pos.x + rx).toDouble(), (pos.y + ry).toDouble(), (pos.z + rz).toDouble(), ItemStack(item.item, item.count, item.itemDamage))
+            if (item.hasTagCompound()) entityItem.item.tagCompound = item.tagCompound!!.copy()
             entityItem.motionX = rand.nextGaussian() * 0.05f
             entityItem.motionY = rand.nextGaussian() * 0.05f + 0.2f
             entityItem.motionZ = rand.nextGaussian() * 0.05f
             world.spawnEntity(entityItem)
-            item.stackSize = 0
+            item.count = 0
             tileRecordPlayer.record = null
             PacketHandler.sendSoundStopToAllFromServer(tileRecordPlayer.pos.x, tileRecordPlayer.pos.y, tileRecordPlayer.pos.z, world.provider.dimension)
         }
