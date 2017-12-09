@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "GGG",
+    "PDP",
+    "PPP"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "P": {
+      "item": "minecraft:planks"
+    },
+    "D": {
+      "item": "betterrecords:diamond_block"
+    }
+  },
+  "result": {
+    "item": "betterrecords:recordplayer"
+  }
+}

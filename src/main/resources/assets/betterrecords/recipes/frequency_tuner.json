@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SHH",
+    "PQP",
+    "PIP"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "H": {
+      "item": "minecraft:wooden_slab"
+    },
+    "P": {
+      "item": "minecraft:planks"
+    },
+    "Q": {
+      "item": "betterrecords:frequencyrystal"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "betterrecords:frequencytuner"
+  }
+}

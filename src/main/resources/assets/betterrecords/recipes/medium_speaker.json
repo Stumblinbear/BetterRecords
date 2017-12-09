@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLW",
+    "CSW",
+    "LLW"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:log"
+    },
+    "W": {
+      "item": "minecraft:wool",
+      "data": 15
+    },
+    "C": {
+      "item": "minecraft:comparator"
+    },
+    "S": {
+      "item": "betterrecords:speaker.sm"
+    }
+  },
+  "result": {
+    "item": "betterrecords:speaker.md"
+  }
+}

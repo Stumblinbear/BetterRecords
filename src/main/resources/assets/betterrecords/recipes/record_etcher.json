@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "HIH",
+    "PQP",
+    "PPP"
+  ],
+  "key": {
+    "H": {
+      "item": "minecraft:wooden_slab"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "P": {
+      "item": "minecraft:planks"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "result": {
+    "item": "betterrecords:recordetcher"
+  }
+}

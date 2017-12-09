@@ -1,0 +1,12 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "forge:ore_dict",
+      "ore": "record"
+    },
+    {
+      "item": "minecraft:ender_eye"
+    }
+  ]
+}

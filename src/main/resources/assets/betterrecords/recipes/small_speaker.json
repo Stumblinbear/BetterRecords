@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLW",
+    "QDW",
+    "LLW"
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:log"
+    },
+    "W": {
+      "item": "minecraft:wool",
+      "data": 15
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "betterrecords:speaker.sm"
+  }
+}
