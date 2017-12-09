@@ -1,33 +1,41 @@
 package com.codingforcookies.betterrecords.crafting
 
-import com.codingforcookies.betterrecords.block.ModBlocks
 import com.codingforcookies.betterrecords.crafting.recipe.*
-import com.codingforcookies.betterrecords.item.ModItems
-import net.minecraft.init.Blocks
-import net.minecraft.init.Items
-import net.minecraft.item.ItemStack
-import net.minecraftforge.fml.common.registry.GameRegistry
-import net.minecraftforge.oredict.RecipeSorter
-import net.minecraftforge.oredict.ShapelessOreRecipe
+import net.minecraft.item.crafting.IRecipe
+import net.minecraftforge.event.RegistryEvent
+import net.minecraftforge.fml.common.Mod
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 
+@Mod.EventBusSubscriber
 object CrafingRecipes {
 
-    fun init() {
+    @SubscribeEvent
+    fun registerRecipes(event: RegistryEvent.Register<IRecipe>) {
+        event.registry.registerAll(
+                RecipeMultiRecord(),
+                RecipeRecordRepeatable(),
+                RecipeRecordShuffle(),
+                RecipeColoredFreqCrystal(),
+                RecipeColoredRecord()
+        )
+    }
 
-        RecipeSorter.register("betterrecords:urlmultirecord", RecipeMultiRecord::class.java, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless")
-        GameRegistry.addRecipe(RecipeMultiRecord())
-
-        RecipeSorter.register("betterrecords:urlrecordrepeatable", RecipeRecordRepeatable::class.java, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless")
-        GameRegistry.addRecipe(RecipeRecordRepeatable())
-
-        RecipeSorter.register("betterrecords:urlrecordshuffle", RecipeRecordShuffle::class.java, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless")
-        GameRegistry.addRecipe(RecipeRecordShuffle())
-
-        RecipeSorter.register("betterrecords:freqcrystal", RecipeColoredFreqCrystal::class.java, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless")
-        GameRegistry.addRecipe(RecipeColoredFreqCrystal())
-
-        RecipeSorter.register("betterrecords:urlrecord", RecipeColoredRecord::class.java, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless")
-        GameRegistry.addRecipe(RecipeColoredRecord())
+//    fun init() {
+//
+//        RecipeSorter.register("betterrecords:urlmultirecord", RecipeMultiRecord::class.java, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless")
+//        GameRegistry.addRecipe(RecipeMultiRecord())
+//
+//        RecipeSorter.register("betterrecords:urlrecordrepeatable", RecipeRecordRepeatable::class.java, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless")
+//        GameRegistry.addRecipe(RecipeRecordRepeatable())
+//
+//        RecipeSorter.register("betterrecords:urlrecordshuffle", RecipeRecordShuffle::class.java, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless")
+//        GameRegistry.addRecipe(RecipeRecordShuffle())
+//
+//        RecipeSorter.register("betterrecords:freqcrystal", RecipeColoredFreqCrystal::class.java, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless")
+//        GameRegistry.addRecipe(RecipeColoredFreqCrystal())
+//
+//        RecipeSorter.register("betterrecords:urlrecord", RecipeColoredRecord::class.java, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless")
+//        GameRegistry.addRecipe(RecipeColoredRecord())
 
 //        GameRegistry.addShapedRecipe(ItemStack(ModItems.itemFrequencyCrystal), "RQR", "QDQ", "RQR", 'R', Items.REDSTONE, 'Q', Items.QUARTZ, 'D', Items.DIAMOND)
 
@@ -48,5 +56,5 @@ object CrafingRecipes {
 //        GameRegistry.addShapedRecipe(ItemStack(ModBlocks.blockStrobeLight), "GGG", "GRG", "CTC", 'G', Blocks.GLASS, 'C', Items.COMPARATOR, 'R', Blocks.REDSTONE_LAMP, 'T', Blocks.REDSTONE_TORCH)
 //        GameRegistry.addShapedRecipe(ItemStack(ModBlocks.blockLaser), "LLL", "LQG", "HLH", 'L', Blocks.LOG, 'H', Blocks.WOODEN_SLAB, 'G', Blocks.GLASS, 'Q', Items.QUARTZ)
 //        GameRegistry.addShapedRecipe(ItemStack(ModBlocks.blockLaserCluster), "LLL", "LRL", "LLL", 'L', ModBlocks.blockLaser, 'R', Items.REDSTONE)
-    }
+//    }
 }

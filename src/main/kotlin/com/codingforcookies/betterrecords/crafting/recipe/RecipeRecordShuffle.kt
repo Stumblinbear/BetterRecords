@@ -8,9 +8,13 @@ import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.crafting.IRecipe
 import net.minecraft.nbt.NBTTagCompound
+import net.minecraft.util.NonNullList
 import net.minecraft.world.World
+import net.minecraftforge.registries.IForgeRegistryEntry
 
-class RecipeRecordShuffle : IRecipe {
+class RecipeRecordShuffle : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
+
+    override fun canFit(width: Int, height: Int) = width * height >= 2
 
     override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World?): Boolean {
         var foundRecord = false
@@ -46,16 +50,12 @@ class RecipeRecordShuffle : IRecipe {
         }
     }
 
-    override fun getRecipeSize(): Int {
-        return 10
-    }
-
     override fun getRecipeOutput(): ItemStack? {
         return null
     }
 
-    override fun getRemainingItems(inv: InventoryCrafting): Array<ItemStack> {
+    override fun getRemainingItems(inv: InventoryCrafting): NonNullList<ItemStack> {
         inv.clear()
-        return arrayOf()
+        return NonNullList.create()
     }
 }
