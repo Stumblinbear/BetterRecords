@@ -56,8 +56,8 @@ public class GuiRecordEtcher extends GuiContainer {
     @Override
     public void initGui() {
         super.initGui();
-        nameField = new GuiTextField(1, this.fontRendererObj, 44, 20, 124, 10);
-        urlField = new GuiTextField(2, this.fontRendererObj, 44, 35, 124, 10);
+        nameField = new GuiTextField(1, this.fontRenderer, 44, 20, 124, 10);
+        urlField = new GuiTextField(2, this.fontRenderer, 44, 35, 124, 10);
         urlField.setMaxStringLength(256);
         if(ClientProxy.Companion.getDefaultLibrary().size() == 0 || (ClientProxy.Companion.getLastCheckType() == 0 || ClientProxy.Companion.getLastCheckType() != (Minecraft.getMinecraft().world.isRemote ? 1 : 2))){
             System.out.println("Loading default library...");
@@ -243,14 +243,14 @@ public class GuiRecordEtcher extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher"), 8, 6, 4210752);
-        fontRendererObj.drawString(I18n.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
-        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.name") + ": ", 10, 21, 4210752);
-        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.url") + ": ", 10, 36, 4210752);
+        fontRenderer.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher"), 8, 6, 4210752);
+        fontRenderer.drawString(I18n.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
+        fontRenderer.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.name") + ": ", 10, 21, 4210752);
+        fontRenderer.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.url") + ": ", 10, 36, 4210752);
         int mx = mouseX - (width - xSize) / 2;
         int my = mouseY - (height - ySize) / 2;
-        fontRendererObj.drawStringWithShadow(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.etch"), 50, 53, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready")) ? (mx >= 44 && mx <= 75 && my >= 51 && my <= 66 ? 0xFFFF55 : 0xFFFFFF) : 0x555555));
-        fontRendererObj.drawString(error, 172 - fontRendererObj.getStringWidth(error), 65, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready")) ? 0x229922 : 0x992222));
+        fontRenderer.drawStringWithShadow(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.etch"), 50, 53, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready")) ? (mx >= 44 && mx <= 75 && my >= 51 && my <= 66 ? 0xFFFF55 : 0xFFFFFF) : 0x555555));
+        fontRenderer.drawString(error, 172 - fontRenderer.getStringWidth(error), 65, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready")) ? 0x229922 : 0x992222));
         nameField.drawTextBox();
         urlField.drawTextBox();
         if(tileEntity.getRecord() == null) error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.error1");
@@ -297,7 +297,7 @@ public class GuiRecordEtcher extends GuiContainer {
                 checkedURL = true;
             }
         }
-        fontRendererObj.drawString((page + 1) + "/" + (maxpage + 1), 195 + fontRendererObj.getStringWidth((page + 1) + "/" + (maxpage + 1)) / 2, 151, 4210752);
+        fontRenderer.drawString((page + 1) + "/" + (maxpage + 1), 195 + fontRenderer.getStringWidth((page + 1) + "/" + (maxpage + 1)) / 2, 151, 4210752);
         for(int i = 0; i < 14; i++){
             int offsetI = page * 14 + i;
             if(offsetI > ClientProxy.Companion.getDefaultLibrary().size() - 1) break;
@@ -307,7 +307,7 @@ public class GuiRecordEtcher extends GuiContainer {
                     List<String> txt = new ArrayList<String>();
                     txt.add(ClientProxy.Companion.getDefaultLibrary().get(offsetI).local);
                     txt.add("\2477" + BetterUtils.INSTANCE.getTranslatedString("item.record.by") + ": " + ClientProxy.Companion.getDefaultLibrary().get(offsetI).author);
-                    drawHoveringText(txt, mx, my, fontRendererObj);
+                    drawHoveringText(txt, mx, my, fontRenderer);
                 }
                 GL11.glPopMatrix();
             }
@@ -355,7 +355,7 @@ public class GuiRecordEtcher extends GuiContainer {
                 }
                 GL11.glEnd();
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
-                fontRendererObj.drawString(ClientProxy.Companion.getDefaultLibrary().get(offsetI).local, 188, 9 + i * 10, mx >= 178 && mx <= 245 && my >= 9 + i * 10 && my <= 17 + i * 10 ? 0xFFFF00 : 4210752);
+                fontRenderer.drawString(ClientProxy.Companion.getDefaultLibrary().get(offsetI).local, 188, 9 + i * 10, mx >= 178 && mx <= 245 && my >= 9 + i * 10 && my <= 17 + i * 10 ? 0xFFFF00 : 4210752);
             }
             GL11.glPopMatrix();
         }

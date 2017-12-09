@@ -36,8 +36,8 @@ public class GuiFrequencyTuner extends GuiContainer {
     @Override
     public void initGui(){
         super.initGui();
-        nameField = new GuiTextField(1, this.fontRendererObj, 44, 20, 124, 10);
-        urlField = new GuiTextField(2, this.fontRendererObj, 44, 35, 124, 10);
+        nameField = new GuiTextField(1, this.fontRenderer, 44, 20, 124, 10);
+        urlField = new GuiTextField(2, this.fontRenderer, 44, 35, 124, 10);
         urlField.setMaxStringLength(128);
     }
 
@@ -67,14 +67,14 @@ public class GuiFrequencyTuner extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY){
-        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner"), 8, 6, 4210752);
-        fontRendererObj.drawString(I18n.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
-        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.name") + ": ", 10, 21, 4210752);
-        fontRendererObj.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.url") + ": ", 10, 36, 4210752);
+        fontRenderer.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner"), 8, 6, 4210752);
+        fontRenderer.drawString(I18n.translateToLocal("container.inventory"), 8, ySize - 96 + 2, 4210752);
+        fontRenderer.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.name") + ": ", 10, 21, 4210752);
+        fontRenderer.drawString(BetterUtils.INSTANCE.getTranslatedString("gui.url") + ": ", 10, 36, 4210752);
         int mx = mouseX - (width - xSize) / 2;
         int my = mouseY - (height - ySize) / 2;
-        fontRendererObj.drawStringWithShadow(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.tune"), 48, 53, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.ready")) ? (mx >= 44 && mx <= 75 && my >= 51 && my <= 66 ? 0xFFFF55 : 0xFFFFFF) : 0x555555));
-        fontRendererObj.drawString(error, 172 - fontRendererObj.getStringWidth(error), 65, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.ready")) ? 0x229922 : 0x992222));
+        fontRenderer.drawStringWithShadow(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.tune"), 48, 53, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.ready")) ? (mx >= 44 && mx <= 75 && my >= 51 && my <= 66 ? 0xFFFF55 : 0xFFFFFF) : 0x555555));
+        fontRenderer.drawString(error, 172 - fontRenderer.getStringWidth(error), 65, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.ready")) ? 0x229922 : 0x992222));
         nameField.drawTextBox();
         urlField.drawTextBox();
         if(tileEntity.getCrystal() == null) error = BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.error1");
