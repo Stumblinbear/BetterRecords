@@ -34,7 +34,6 @@ open class CommonProxy {
     open fun init(event: FMLInitializationEvent) {
         PacketHandler.channels = NetworkRegistry.INSTANCE.newChannel("BetterRecords", ChannelHandler())
         NetworkRegistry.INSTANCE.registerGuiHandler(BetterRecords, GuiHandler())
-        CrafingRecipes.init()
     }
 
     open fun postInit(event: FMLPostInitializationEvent) {

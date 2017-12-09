@@ -45,7 +45,7 @@ fun renderConnectionsAndInfo(te: IRecordWireHome, pos: BlockPos, x: Double, y: D
 
         GlStateManager.color(1F, 1F, 1F)
         var currentY = te.wireSystemInfo.size * -10 - 75
-        val fontRenderer = Minecraft.getMinecraft().fontRendererObj
+        val fontRenderer = Minecraft.getMinecraft().fontRenderer
         val radiusString = "Play Radius: ${te.songRadius}"
         fontRenderer.drawString(radiusString, -fontRenderer.getStringWidth(radiusString) / 2, currentY, 0xFFFFFF)
         for (info in te.wireSystemInfo.entries) {
