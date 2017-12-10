@@ -9,8 +9,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry
 
 open class ModItem(val name: String): Item() {
 
-    fun register() = this.apply {
-        unlocalizedName = "$ID.$name"
+    init {
+        setRegistryName(name)
+        unlocalizedName = registryName.toString()
         creativeTab = BetterRecords.creativeTab
     }
 
