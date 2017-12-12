@@ -49,7 +49,7 @@ abstract class ModBlock(material: Material, val name: String) : BlockContainer(m
         val item = Item.getItemFromBlock(this)
         setStateMapper()
         ForgeHooksClient.registerTESRItemStack(item, 0, getTileEntityClass()?.java)
-        ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation(registryName, "inventory"))
+        ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("$ID:itemblock/$name", "inventory"))
     }
 
     /**
