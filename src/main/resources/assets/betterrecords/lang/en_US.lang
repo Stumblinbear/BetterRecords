@@ -5,25 +5,25 @@ msg.laserlength.decrease=Lazer length has decreased to
 
 itemGroup.betterrecords=Better Records
 
-item.betterrecords.record.name=Blank Record
-item.betterrecords.multirecord.name=Multi Record
-item.betterrecords.frequencycrystal.name=Frequency Crystal
+item.betterrecords:record.name=Blank Record
+item.betterrecords:multirecord.name=Multi Record
+item.betterrecords:frequencycrystal.name=Frequency Crystal
 
-item.betterrecords.wire.name=Speaker Wire
-item.betterrecords.wirecutters.name=Wire Cutters
+item.betterrecords:wire.name=Speaker Wire
+item.betterrecords:wirecutters.name=Wire Cutters
 
-tile.betterrecords.recordetcher.name=Record Etcher
-tile.betterrecords.recordplayer.name=Record Player
-tile.betterrecords.frequencytuner.name=Frequency Tuner
-tile.betterrecords.radio.name=Radio
+tile.betterrecords:recordetcher.name=Record Etcher
+tile.betterrecords:recordplayer.name=Record Player
+tile.betterrecords:frequencytuner.name=Frequency Tuner
+tile.betterrecords:radio.name=Radio
 
-tile.betterrecords.speaker.sm.name=Small Speaker
-tile.betterrecords.speaker.md.name=Medium Speaker
-tile.betterrecords.speaker.lg.name=Large Speaker
+tile.betterrecords:speaker.sm.name=Small Speaker
+tile.betterrecords:speaker.md.name=Medium Speaker
+tile.betterrecords:speaker.lg.name=Large Speaker
 
-tile.betterrecords.strobelight.name=Strobe Light
-tile.betterrecords.laser.name=Laser
-tile.betterrecords.lasercluster.name=Laser Cluster
+tile.betterrecords:strobelight.name=Strobe Light
+tile.betterrecords:laser.name=Laser
+tile.betterrecords:lasercluster.name=Laser Cluster
 
 gui.recordetcher=Record Etcher
 gui.frequencytuner=Crystal Tune
