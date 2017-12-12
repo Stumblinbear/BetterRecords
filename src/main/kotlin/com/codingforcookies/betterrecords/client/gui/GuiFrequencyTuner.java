@@ -114,4 +114,11 @@ public class GuiFrequencyTuner extends GuiContainer {
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
         drawTexturedModalRect(x + 43, y + 51, 0, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.frequencytuner.ready")) ? 166 : 178), 33, 12);
     }
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        this.drawDefaultBackground();
+        super.drawScreen(mouseX, mouseY, partialTicks);
+        this.renderHoveredToolTip(mouseX, mouseY);
+    }
 }
