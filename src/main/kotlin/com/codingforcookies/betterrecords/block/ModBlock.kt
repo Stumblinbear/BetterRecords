@@ -36,10 +36,7 @@ abstract class ModBlock(material: Material, val name: String) : BlockContainer(m
         unlocalizedName = registryName.toString()
 
         setCreativeTab(BetterRecords.creativeTab)
-
-        getTileEntityClass()?.let {
-            GameRegistry.registerTileEntity(it.java, "$ID:$name")
-        }
+        println("$name should be registered")
     }
 
     /**
@@ -48,10 +45,12 @@ abstract class ModBlock(material: Material, val name: String) : BlockContainer(m
      * @see setStateMapper
      */
     fun registerTESR() {
+        GameRegistry.registerTileEntity(getTileEntityClass()?.java, registryName.toString())
+
         val item = Item.getItemFromBlock(this)
         setStateMapper()
         ForgeHooksClient.registerTESRItemStack(item, 0, getTileEntityClass()?.java)
-        ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("$ID:itemblock/$name", "inventory"))
+        ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation(registryName, "inventory"))
     }
 
     /**

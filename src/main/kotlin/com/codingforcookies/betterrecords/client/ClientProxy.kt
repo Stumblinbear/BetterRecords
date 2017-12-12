@@ -45,20 +45,6 @@ class ClientProxy : CommonProxy() {
 
     override fun preInit(event: FMLPreInitializationEvent) {
         super.preInit(event)
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TileRecordEtcher::class.java, RenderRecordEtcher())
-        ClientRegistry.bindTileEntitySpecialRenderer(TileFrequencyTuner::class.java, RenderFrequencyTuner())
-        ClientRegistry.bindTileEntitySpecialRenderer(TileLaserCluster::class.java, RenderLaserCluster())
-        ClientRegistry.bindTileEntitySpecialRenderer(TileLaser::class.java, RenderLaser())
-        ClientRegistry.bindTileEntitySpecialRenderer(TileRadio::class.java, RenderRadio())
-        ClientRegistry.bindTileEntitySpecialRenderer(TileStrobeLight::class.java, RenderStrobeLight())
-        ClientRegistry.bindTileEntitySpecialRenderer(TileRecordPlayer::class.java, RenderRecordPlayer())
-        ClientRegistry.bindTileEntitySpecialRenderer(TileSpeaker::class.java, RenderSpeaker())
-
-        Block.REGISTRY
-                .filterIsInstance<ModBlock>()
-                .forEach(ModBlock::registerTESR)
-
         SoundHandler.initalize()
     }
 
