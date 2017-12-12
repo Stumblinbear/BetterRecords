@@ -45,7 +45,7 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
     }
 
     override fun onBlockActivated(world: World?, pos: BlockPos?, state: IBlockState?, player: EntityPlayer, hand: EnumHand?, side: EnumFacing?, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        if (player.heldItemMainhand != null && player.heldItemMainhand.item is IRecordWireManipulator) return false
+        if (player.heldItemMainhand.isEmpty && player.heldItemMainhand.item is IRecordWireManipulator) return false
         val tileEntity = world!!.getTileEntity(pos!!)
         if (tileEntity == null || tileEntity !is TileRecordPlayer) return false
         val tileRecordPlayer = tileEntity as TileRecordPlayer?
@@ -61,11 +61,12 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
                     world.playSound(pos.x.toDouble(), pos.y.toDouble() + 0.5, pos.z.toDouble(), SoundEvent.REGISTRY.getObject(ResourceLocation("block.chest.open")), SoundCategory.NEUTRAL, 0.2f, world.rand.nextFloat() * 0.2f + 3f, false)
             }
         } else if (tileRecordPlayer!!.opening) {
-            if (tileRecordPlayer.record != null) {
+            if (!tileRecordPlayer.record.isEmpty) {
+                println("not empty")
                 if (!world.isRemote) dropItem(world, pos)
-                tileRecordPlayer.record = null
+                tileRecordPlayer.record = ItemStack.EMPTY
                 world.notifyBlockUpdate(pos, state!!, state, 3)
-            } else if (player.heldItemMainhand != null && (player.heldItemMainhand.item === Items.DIAMOND || player.heldItemMainhand.item is IRecord && (player.heldItemMainhand.item as IRecord).isRecordValid(player.heldItemMainhand))) {
+            } else if (!player.heldItemMainhand.isEmpty && (player.heldItemMainhand.item === Items.DIAMOND || player.heldItemMainhand.item is IRecord && (player.heldItemMainhand.item as IRecord).isRecordValid(player.heldItemMainhand))) {
                 if (player.heldItemMainhand.item === Items.DIAMOND) {
                     val itemStack = ItemStack(ModItems.itemRecord)
                     itemStack.tagCompound = NBTTagCompound()
@@ -125,7 +126,7 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
         val tileEntity = world.getTileEntity(pos)
         if (tileEntity == null || tileEntity !is TileRecordPlayer) return
         val tileRecordPlayer = tileEntity as TileRecordPlayer?
-        val item = tileRecordPlayer!!.record
+        val item = tileRecordPlayer?.record
         if (item != null) {
             val rand = Random()
             val rx = rand.nextFloat() * 0.8f + 0.1f
@@ -138,7 +139,7 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
             entityItem.motionZ = rand.nextGaussian() * 0.05f
             world.spawnEntity(entityItem)
             item.count = 0
-            tileRecordPlayer.record = null
+            tileRecordPlayer.record = ItemStack.EMPTY
             PacketHandler.sendSoundStopToAllFromServer(tileRecordPlayer.pos.x, tileRecordPlayer.pos.y, tileRecordPlayer.pos.z, world.provider.dimension)
         }
     }

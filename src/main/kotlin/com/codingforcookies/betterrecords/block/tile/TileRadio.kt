@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound
 class TileRadio : SimpleRecordWireHome(), IRecordWire {
 
     var crystal by CopyOnSetDelegate()
-    override val record: ItemStack?
+    override val record: ItemStack
         get() { return crystal }
 
     var crystalFloaty = 0F
@@ -34,7 +34,7 @@ class TileRadio : SimpleRecordWireHome(), IRecordWire {
             openAmount = 0F
         }
 
-        crystal?.let {
+        if (!crystal.isEmpty) {
             crystalFloaty += 0.86F
         }
 

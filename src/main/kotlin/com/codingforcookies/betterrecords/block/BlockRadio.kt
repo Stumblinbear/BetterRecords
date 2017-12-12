@@ -52,7 +52,7 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name) {
     }
 
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
-        if (player.heldItemMainhand?.item is IRecordWireManipulator) return false
+        if (player.heldItemMainhand.item is IRecordWireManipulator) return false
 
         (world.getTileEntity(pos) as? TileRadio)?.let { te ->
             if (player.isSneaking) {
@@ -60,7 +60,7 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name) {
                 world.notifyBlockUpdate(pos, state, state, 3)
                 world.playSound(pos.x.toDouble(), pos.y.toDouble() + 0.5, pos.z.toDouble(), SoundEvent.REGISTRY.getObject(ResourceLocation("block.chest.close")), SoundCategory.NEUTRAL, 0.2f, world.rand.nextFloat() * 0.2f + 3f, false)
             } else if (te.opening) {
-                if (te.crystal != null) {
+                if (!te.crystal.isEmpty) {
                     if (!world.isRemote) dropItem(world, pos)
                     te.crystal = ItemStack.EMPTY
                     world.notifyBlockUpdate(pos, state, state, 3)
@@ -94,20 +94,20 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name) {
 
     private fun dropItem(world: World, pos: BlockPos) {
         (world.getTileEntity(pos) as? TileRadio)?.let { te ->
-            te.crystal?.let {
+            if (!te.crystal.isEmpty) {
                 val random = Random()
                 val rx = random.nextDouble() * 0.8F + 0.1F
                 val ry = random.nextDouble() * 0.8F + 0.1F
                 val rz = random.nextDouble() * 0.8F + 0.1F
 
-                val entityItem = EntityItem(world, pos.x + rx, pos.y + ry, pos.z + rz, ItemStack(it.item, it.count, it.itemDamage))
-                if (it.hasTagCompound()) entityItem.item.tagCompound = it.tagCompound!!.copy()
+                val entityItem = EntityItem(world, pos.x + rx, pos.y + ry, pos.z + rz, ItemStack(te.crystal.item, te.crystal.count, te.crystal.itemDamage))
+                if (te.crystal.hasTagCompound()) entityItem.item.tagCompound = te.crystal.tagCompound!!.copy()
                 entityItem.motionX = random.nextGaussian() * 0.05F
                 entityItem.motionY = random.nextGaussian() * 0.05F + 0.2F
                 entityItem.motionZ = random.nextGaussian() * 0.05F
 
                 world.spawnEntity(entityItem)
-                it.count = 0
+                te.crystal.count = 0
                 te.crystal = ItemStack.EMPTY
                 PacketHandler.sendSoundStopToAllFromServer(te.pos.x, te.pos.y, te.pos.z, world.provider.dimension)
             }

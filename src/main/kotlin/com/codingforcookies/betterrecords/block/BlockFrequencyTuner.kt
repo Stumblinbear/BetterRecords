@@ -49,20 +49,20 @@ class BlockFrequencyTuner(name: String) : ModBlockDirectional(Material.WOOD, nam
 
     private fun dropItem(world: World, pos: BlockPos) {
         (world.getTileEntity(pos) as? TileFrequencyTuner)?.let { te ->
-            te.crystal?.let {
+            if (!te.crystal.isEmpty) {
                 val random = Random()
                 val rx = random.nextDouble() * 0.8F + 0.1F
                 val ry = random.nextDouble() * 0.8F + 0.1F
                 val rz = random.nextDouble() * 0.8F + 0.1F
 
-                val entityItem = EntityItem(world, pos.x + rx, pos.y + ry, pos.z + rz, ItemStack(it.item, it.count, it.itemDamage))
-                if (it.hasTagCompound()) entityItem.item.tagCompound = it.tagCompound!!.copy()
+                val entityItem = EntityItem(world, pos.x + rx, pos.y + ry, pos.z + rz, ItemStack(te.crystal.item, te.crystal.count, te.crystal.itemDamage))
+                if (te.crystal.hasTagCompound()) entityItem.item.tagCompound = te.crystal.tagCompound!!.copy()
                 entityItem.motionX = random.nextGaussian() * 0.05F
                 entityItem.motionY = random.nextGaussian() * 0.05F + 0.2F
                 entityItem.motionZ = random.nextGaussian() * 0.05F
 
                 world.spawnEntity(entityItem)
-                it.count = 0
+                te.crystal.count = 0
                 te.crystal = ItemStack.EMPTY
             }
         }

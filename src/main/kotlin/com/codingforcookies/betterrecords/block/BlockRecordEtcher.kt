@@ -51,7 +51,7 @@ class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name) {
         val tileRecordEtcher = tileEntity as TileRecordEtcher?
         val item = tileRecordEtcher!!.record
 
-        if (item != null) {
+        if (!item.isEmpty) {
             val rand = Random()
 
             val rx = rand.nextFloat() * 0.8f + 0.1f

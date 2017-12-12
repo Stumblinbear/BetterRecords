@@ -5,6 +5,7 @@ import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner
 import com.codingforcookies.betterrecords.client.model.ModelFrequencyTuner
 import net.minecraft.client.renderer.GlStateManager.*
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
+import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 
 class RenderFrequencyTuner : TileEntitySpecialRenderer<TileFrequencyTuner>() {
@@ -26,7 +27,8 @@ class RenderFrequencyTuner : TileEntitySpecialRenderer<TileFrequencyTuner>() {
         bindTexture(TEXTURE)
 
         val crystalFloat = te?.crystalFloaty ?: 0F
-        MODEL.render(null, crystalFloat, 0F, 0F, 0F, 0F, 0.0625F, te?.crystal)
+        val crystal = te?.crystal ?: ItemStack.EMPTY
+        MODEL.render(null, crystalFloat, 0F, 0F, 0F, 0F, 0.0625F, crystal)
 
         popMatrix()
     }

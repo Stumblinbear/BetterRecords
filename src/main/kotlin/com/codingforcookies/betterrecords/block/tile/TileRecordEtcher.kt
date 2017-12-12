@@ -14,7 +14,7 @@ class TileRecordEtcher : ModInventoryTile(), IInventory, ITickable {
 
     var recordEntity: EntityItem? = null
     get() {
-        record?.let {
+        if (!record.isEmpty) {
             return EntityItem(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), record)
         }
         return null
@@ -25,7 +25,7 @@ class TileRecordEtcher : ModInventoryTile(), IInventory, ITickable {
     var needleOut = true
 
     override fun update() {
-        record?.let {
+        if (!record.isEmpty) {
             recordRotation += .08F
 
             if (needleOut) {
@@ -47,7 +47,7 @@ class TileRecordEtcher : ModInventoryTile(), IInventory, ITickable {
 
     override fun getSizeInventory() = 1
     override fun getInventoryStackLimit() = 1
-    override fun isEmpty() = record != null
+    override fun isEmpty() = record.isEmpty
 
     override fun getStackInSlot(index: Int) = record
     override fun setInventorySlotContents(index: Int, stack: ItemStack) {

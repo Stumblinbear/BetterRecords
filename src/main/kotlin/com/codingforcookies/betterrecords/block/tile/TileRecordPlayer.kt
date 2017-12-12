@@ -12,21 +12,13 @@ class TileRecordPlayer : SimpleRecordWireHome(), IRecordWire {
 
     override val songRadiusIncrease = 40F
 
-    override var record: ItemStack? = null
+    override var record = ItemStack.EMPTY
         set(value) {
-            value?.let {
-                field = value.copy()
-                field!!.count = 1
-                recordEntity = EntityItem(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), this.record!!)
-                recordEntity!!.hoverStart = 0f
-                recordEntity!!.rotationPitch = 0f
-                recordEntity!!.rotationYaw = 0f
-                recordRotation = 0f
-                return
-            }
-
-            field = null
-            recordEntity = null
+            field = value.copy()
+            recordEntity = EntityItem(world, pos.x.toDouble(), pos.y.toDouble(), pos.z.toDouble(), field)
+            recordEntity?.hoverStart= 0F
+            recordEntity?.rotationPitch = 0F
+            recordEntity?.rotationYaw = 0F
             recordRotation = 0F
         }
 
@@ -53,7 +45,7 @@ class TileRecordPlayer : SimpleRecordWireHome(), IRecordWire {
             openAmount = 0f
         }
 
-        if (record != null) {
+        if (!record.isEmpty) {
             recordRotation += 0.08f
             if (needleLocation < .3f) {
                 needleLocation += 0.01f

@@ -19,7 +19,7 @@ class TileFrequencyTuner : ModInventoryTile(), IInventory, ITickable {
 
     override fun getSizeInventory() = 1
     override fun getInventoryStackLimit() = 1
-    override fun isEmpty() = crystal != null
+    override fun isEmpty() = crystal.isEmpty
 
     override fun getStackInSlot(index: Int) = crystal
 

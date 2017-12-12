@@ -17,7 +17,7 @@ interface  IRecordWireHome {
     val songRadius: Float
 
     val tileEntity: TileEntity
-    val record: ItemStack?
+    val record: ItemStack
 
     var wireSystemInfo: HashMap<String, Int>
 }

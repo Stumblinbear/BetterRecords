@@ -71,11 +71,11 @@ class ModelFrequencyTuner() : ModelBase() {
         }
     }
 
-    fun render(entity: Entity?, f: Float, f1: Float, f2: Float, f3: Float, f4: Float, f5: Float, crystal: ItemStack?) {
+    fun render(entity: Entity?, f: Float, f1: Float, f2: Float, f3: Float, f4: Float, f5: Float, crystal: ItemStack) {
         super.render(entity, f, f1, f2, f3, f4, f5)
         setRotationAngles(f, f1, f2, f3, f4, f5, entity)
 
-        crystal?.let {
+       if (!crystal?.isEmpty) {
             GlStateManager.pushMatrix()
 
             GlStateManager.enableBlend()
