@@ -1,5 +1,5 @@
 {
-  "type": "crafting_shapeless",
+  "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
       "type": "forge:ore_dict",
@@ -8,5 +8,8 @@
     {
       "item": "minecraft:ender_eye"
     }
-  ]
+  ],
+  "result": {
+    "item": "betterrecords:record"
+  }
 }

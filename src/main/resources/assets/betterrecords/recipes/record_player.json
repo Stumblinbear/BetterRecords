@@ -10,10 +10,11 @@
       "item": "minecraft:glass_pane"
     },
     "P": {
-      "item": "minecraft:planks"
+      "item": "minecraft:planks",
+      "data": 32767
     },
     "D": {
-      "item": "betterrecords:diamond_block"
+      "item": "minecraft:diamond_block"
     }
   },
   "result": {

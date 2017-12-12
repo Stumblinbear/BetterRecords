@@ -7,16 +7,18 @@
   ],
   "key": {
     "H": {
-      "item": "minecraft:wooden_slab"
+      "item": "minecraft:wooden_slab",
+      "data": 32767
     },
     "I": {
       "item": "minecraft:iron_ingot"
     },
     "P": {
-      "item": "minecraft:planks"
+      "item": "minecraft:planks",
+      "data": 32767
     },
     "Q": {
-      "item": "betterrecords:frequencyrystal"
+      "item": "betterrecords:frequencycrystal"
     }
   },
   "result": {
