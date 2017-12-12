@@ -36,7 +36,6 @@ abstract class ModBlock(material: Material, val name: String) : BlockContainer(m
         unlocalizedName = registryName.toString()
 
         setCreativeTab(BetterRecords.creativeTab)
-        println("$name should be registered")
     }
 
     /**
