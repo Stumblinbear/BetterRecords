@@ -69,7 +69,7 @@ class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name) {
             world.spawnEntity(entityItem)
             item.count = 0
 
-            tileRecordEtcher.record = null
+            tileRecordEtcher.record = ItemStack.EMPTY
         }
     }
 }

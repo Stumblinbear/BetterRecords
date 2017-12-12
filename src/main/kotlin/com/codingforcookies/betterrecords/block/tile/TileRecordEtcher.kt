@@ -50,7 +50,7 @@ class TileRecordEtcher : ModInventoryTile(), IInventory, ITickable {
     override fun isEmpty() = record != null
 
     override fun getStackInSlot(index: Int) = record
-    override fun setInventorySlotContents(index: Int, stack: ItemStack?) {
+    override fun setInventorySlotContents(index: Int, stack: ItemStack) {
         record = stack
     }
 

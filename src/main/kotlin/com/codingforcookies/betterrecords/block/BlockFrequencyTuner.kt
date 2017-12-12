@@ -63,7 +63,7 @@ class BlockFrequencyTuner(name: String) : ModBlockDirectional(Material.WOOD, nam
 
                 world.spawnEntity(entityItem)
                 it.count = 0
-                te.crystal = null
+                te.crystal = ItemStack.EMPTY
             }
         }
     }

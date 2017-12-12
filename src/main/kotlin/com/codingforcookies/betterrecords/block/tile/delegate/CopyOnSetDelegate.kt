@@ -5,10 +5,10 @@ import kotlin.reflect.KProperty
 
 class CopyOnSetDelegate {
 
-    private var field: ItemStack? = null
+    private var field: ItemStack = ItemStack.EMPTY
 
     operator fun getValue(thisRef: Any?, property: KProperty<*>) = field
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: ItemStack?) {
-        field = value?.copy()
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, value: ItemStack) {
+        field = value.copy()
     }
 }

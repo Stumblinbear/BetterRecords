@@ -62,7 +62,7 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name) {
             } else if (te.opening) {
                 if (te.crystal != null) {
                     if (!world.isRemote) dropItem(world, pos)
-                    te.crystal = null
+                    te.crystal = ItemStack.EMPTY
                     world.notifyBlockUpdate(pos, state, state, 3)
                 } else if (player.heldItemMainhand?.item == ModItems.itemFrequencyCrystal && player.heldItemMainhand.hasTagCompound() && player.heldItemMainhand.tagCompound!!.hasKey("url")) {
                     te.crystal = player.heldItemMainhand
@@ -108,7 +108,7 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name) {
 
                 world.spawnEntity(entityItem)
                 it.count = 0
-                te.crystal = null
+                te.crystal = ItemStack.EMPTY
                 PacketHandler.sendSoundStopToAllFromServer(te.pos.x, te.pos.y, te.pos.z, world.provider.dimension)
             }
         }

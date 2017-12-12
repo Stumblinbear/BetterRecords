@@ -26,7 +26,7 @@ class TileFrequencyTuner : ModInventoryTile(), IInventory, ITickable {
     override fun isItemValidForSlot(index: Int, stack: ItemStack) =
             stack.item is ItemFrequencyCrystal && (!stack.hasTagCompound() || !stack.tagCompound!!.hasKey("url"))
 
-    override fun setInventorySlotContents(index: Int, stack: ItemStack?) {
+    override fun setInventorySlotContents(index: Int, stack: ItemStack) {
         crystal = stack
     }
 

@@ -2,6 +2,7 @@ package com.codingforcookies.betterrecords.block.tile
 
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.IInventory
+import net.minecraft.item.ItemStack
 
 abstract class ModInventoryTile : ModTile(), IInventory {
 
@@ -13,11 +14,11 @@ abstract class ModInventoryTile : ModTile(), IInventory {
     override fun decrStackSize(index: Int, count: Int) = getStackInSlot(index).apply {
         this?.let {
             if (this.count <= count) {
-                setInventorySlotContents(index, null)
+                setInventorySlotContents(index, ItemStack.EMPTY)
             } else {
                 val splitStack = this.splitStack(count)
                 if (splitStack.count == 0) {
-                    setInventorySlotContents(index, null)
+                    setInventorySlotContents(index, ItemStack.EMPTY)
                 }
                 return splitStack
             }
