@@ -71,7 +71,6 @@ object ClientRenderHandler {
                         for (i in str.indices)
                             fontRenderer.drawStringWithShadow(str[i], (180 - fontRenderer.getStringWidth(str[i]) / 2).toFloat(), (5 + i * 10).toFloat(), 0xFFFFFF)
                     }
-                    GL11.glPopMatrix()
                 } else {
                     tutorialText = ""
                     tutorialTime = 0
@@ -102,7 +101,6 @@ object ClientRenderHandler {
                     GL11.glDisable(GL11.GL_BLEND)
                     GL11.glEnable(GL11.GL_TEXTURE_2D)
                 }
-                GL11.glPopMatrix()
                 fontRenderer.drawStringWithShadow(BetterUtils.getTranslatedString("overlay.downloading") + ": " + FileDownloader.nowDownloading, (width / 2 - fontRenderer.getStringWidth(BetterUtils.getTranslatedString("overlay.downloading") + ": " + FileDownloader.nowDownloading) / 2).toFloat(), (height - height / 4 + 15).toFloat(), 0xFFFF33)
             }
             if (SoundHandler.nowPlaying != "") {
