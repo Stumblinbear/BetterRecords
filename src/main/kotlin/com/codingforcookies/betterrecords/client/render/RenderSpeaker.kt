@@ -1,6 +1,7 @@
 package com.codingforcookies.betterrecords.client.render
 
 import com.codingforcookies.betterrecords.ID
+import com.codingforcookies.betterrecords.block.BlockSpeaker
 import com.codingforcookies.betterrecords.block.tile.TileSpeaker
 import com.codingforcookies.betterrecords.client.model.ModelLGSpeaker
 import com.codingforcookies.betterrecords.client.model.ModelMDSpeaker
@@ -21,7 +22,7 @@ class RenderSpeaker : TileEntitySpecialRenderer<TileSpeaker>() {
     val TEXTURE_LG = ResourceLocation(ID, "textures/models/lgspeaker.png")
 
     override fun render(te: TileSpeaker?, x: Double, y: Double, z: Double, partialTicks: Float, destroyStage: Int, alpha: Float) {
-        var size = -1
+
 
         pushMatrix()
 
@@ -30,21 +31,23 @@ class RenderSpeaker : TileEntitySpecialRenderer<TileSpeaker>() {
 
         te?.let {
             rotate(te.rotation, 0F, 1F, 0F)
-            size = te.type
+        }
+
+        val size = when(te) {
+            null -> BlockSpeaker.SpeakerSize.MEDIUM
+            else -> te.size
         }
 
         bindTexture(when (size) {
-            0 -> TEXTURE_SM
-            1 -> TEXTURE_MD
-            2 -> TEXTURE_LG
-            else -> TEXTURE_MD
+            BlockSpeaker.SpeakerSize.SMALL -> TEXTURE_SM
+            BlockSpeaker.SpeakerSize.MEDIUM -> TEXTURE_MD
+            BlockSpeaker.SpeakerSize.LARGE -> TEXTURE_LG
         })
 
         when (size) {
-            0 -> MODEL_SM
-            1 -> MODEL_MD
-            2 -> MODEL_LG
-            else -> MODEL_MD
+            BlockSpeaker.SpeakerSize.SMALL -> MODEL_SM
+            BlockSpeaker.SpeakerSize.MEDIUM -> MODEL_MD
+            BlockSpeaker.SpeakerSize.LARGE -> MODEL_LG
         }.render(null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F)
 
         popMatrix()

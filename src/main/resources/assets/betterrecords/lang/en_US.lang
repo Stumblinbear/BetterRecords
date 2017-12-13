@@ -17,9 +17,9 @@ tile.betterrecords:recordplayer.name=Record Player
 tile.betterrecords:frequencytuner.name=Frequency Tuner
 tile.betterrecords:radio.name=Radio
 
-tile.betterrecords:speaker.sm.name=Small Speaker
-tile.betterrecords:speaker.md.name=Medium Speaker
-tile.betterrecords:speaker.lg.name=Large Speaker
+tile.betterrecords:speaker.small.name=Small Speaker
+tile.betterrecords:speaker.medium.name=Medium Speaker
+tile.betterrecords:speaker.large.name=Large Speaker
 
 tile.betterrecords:strobelight.name=Strobe Light
 tile.betterrecords:laser.name=Laser

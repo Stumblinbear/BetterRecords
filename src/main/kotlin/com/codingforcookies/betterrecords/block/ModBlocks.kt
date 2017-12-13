@@ -1,21 +1,17 @@
 package com.codingforcookies.betterrecords.block
 
 import com.codingforcookies.betterrecords.ID
+import com.codingforcookies.betterrecords.block.itemblock.ItemBlockSpeaker
 import com.codingforcookies.betterrecords.block.tile.*
 import com.codingforcookies.betterrecords.client.render.*
 import net.minecraft.block.Block
 import net.minecraft.item.Item
 import net.minecraft.item.ItemBlock
-import net.minecraft.tileentity.TileEntity
 import net.minecraftforge.client.event.ModelRegistryEvent
 import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.fml.client.registry.ClientRegistry
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import net.minecraftforge.fml.common.registry.GameRegistry
-import kotlin.reflect.KClass
-import kotlin.reflect.full.declaredMemberProperties
-import kotlin.reflect.full.memberProperties
 
 @Mod.EventBusSubscriber(modid = ID)
 object ModBlocks {
@@ -24,9 +20,7 @@ object ModBlocks {
     val blockRecordPlayer = BlockRecordPlayer("recordplayer")
     val blockFrequencyTuner = BlockFrequencyTuner("frequencytuner")
     val blockRadio = BlockRadio("radio")
-    val blockSpeakerSM = BlockSpeaker("speaker.sm", 0)
-    // val blockSpeakerMD = BlockSpeaker("speaker.md", 1)
-    // val blockSpeakerLG = BlockSpeaker("speaker.lg", 2)
+    val blockSpeaker = BlockSpeaker("speaker")
     val blockStrobeLight = BlockStrobeLight("strobelight")
     val blockLaser = BlockLaser("laser")
     val blockLaserCluster = BlockLaserCluster("lasercluster")
@@ -41,9 +35,7 @@ object ModBlocks {
                 blockRecordPlayer,
                 blockFrequencyTuner,
                 blockRadio,
-                blockSpeakerSM,
-                //blockSpeakerMD,
-                //blockSpeakerLG,
+                blockSpeaker,
                 blockStrobeLight,
                 blockLaser,
                 blockLaserCluster
@@ -58,13 +50,15 @@ object ModBlocks {
                 blockRecordPlayer,
                 blockFrequencyTuner,
                 blockRadio,
-                blockSpeakerSM,
                 blockStrobeLight,
                 blockLaser,
                 blockLaserCluster
         ).map {
             ItemBlock(it).setRegistryName(it.registryName)
         }.forEach(event.registry::register)
+
+        // Register the speaker specially since it has variants
+        event.registry.register(ItemBlockSpeaker(blockSpeaker).setRegistryName(blockSpeaker.registryName))
     }
 
     @JvmStatic

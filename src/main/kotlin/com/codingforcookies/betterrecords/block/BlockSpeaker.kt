@@ -8,26 +8,38 @@ import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
+import net.minecraft.block.properties.IProperty
+import net.minecraft.block.properties.PropertyEnum
+import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
+import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
+import net.minecraft.util.EnumFacing
+import net.minecraft.util.EnumHand
+import net.minecraft.util.IStringSerializable
+import net.minecraft.util.NonNullList
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
-class BlockSpeaker(name: String, val meta: Int) : ModBlock(Material.WOOD, name) {
+class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name) {
+
+    companion object {
+        val PROPERTYSIZE = PropertyEnum.create("size", SpeakerSize::class.java)
+    }
 
     init {
-        setHardness(when (meta) {
+        setHardness(when (0) {
             0 -> 2F
             1 -> 3F
             2 -> 4F
             else -> 2F // Uh oh
         })
 
-        setResistance(when (meta) {
+        setResistance(when (0) {
             0 -> 7.5F
             1 -> 8F
             2 -> 9.5F
@@ -37,7 +49,7 @@ class BlockSpeaker(name: String, val meta: Int) : ModBlock(Material.WOOD, name) 
 
     override fun getTileEntityClass() = TileSpeaker::class
 
-    override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?) = when (meta) {
+    override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?) = when (0) {
         0 -> AxisAlignedBB(0.26, 0.05, 0.25, 0.75, 0.65, 0.74)
         1 -> AxisAlignedBB(0.2, 0.0, 0.2, 0.8, 0.88, 0.8)
         2 -> AxisAlignedBB(0.12, 0.0, 0.12, 0.88, 1.51, 0.88)
@@ -50,7 +62,7 @@ class BlockSpeaker(name: String, val meta: Int) : ModBlock(Material.WOOD, name) 
     override fun onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, stack: ItemStack) {
         (world.getTileEntity(pos) as? TileSpeaker)?.let { te ->
             te.rotation = placer.rotationYaw
-            te.type = meta
+            te.size = state.getValue(PROPERTYSIZE)
 
             if (world.isRemote && !ConfigHandler.tutorials["speaker"]!!) {
                 ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.speaker")
@@ -67,5 +79,35 @@ class BlockSpeaker(name: String, val meta: Int) : ModBlock(Material.WOOD, name) 
             }
         }
         return super.removedByPlayer(state, world, pos, player, willHarvest)
+    }
+
+    override fun damageDropped(state: IBlockState) = state.getValue(PROPERTYSIZE).meta
+
+    override fun getSubBlocks(itemIn: CreativeTabs, items: NonNullList<ItemStack>) {
+        SpeakerSize.values().mapTo(items) {
+            ItemStack(this, 1, it.meta)
+        }
+    }
+
+    override fun getStateFromMeta(meta: Int) = this.defaultState.withProperty(PROPERTYSIZE, SpeakerSize.fromMeta(meta))
+    override fun getMetaFromState(state: IBlockState) = state.getValue(PROPERTYSIZE).meta
+
+    override fun createBlockState() = BlockStateContainer(this, PROPERTYSIZE)
+
+    override fun getStateForPlacement(world: World?, pos: BlockPos?, facing: EnumFacing?, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase?, hand: EnumHand?): IBlockState {
+        return this.defaultState.withProperty(PROPERTYSIZE, SpeakerSize.fromMeta(meta))
+    }
+
+    enum class SpeakerSize(val meta: Int, val typeName: String) : IStringSerializable {
+        SMALL(0, "small"),
+        MEDIUM(1, "medium"),
+        LARGE(2, "large");
+
+        override fun getName() = typeName
+
+        companion object {
+            private val map = SpeakerSize.values().associateBy(SpeakerSize::meta)
+            fun fromMeta(meta: Int) = map[meta] ?: SMALL
+        }
     }
 }
