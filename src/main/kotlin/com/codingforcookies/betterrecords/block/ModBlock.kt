@@ -49,8 +49,16 @@ abstract class ModBlock(material: Material, val name: String) : BlockContainer(m
         val item = Item.getItemFromBlock(this)
         setStateMapper()
         ForgeHooksClient.registerTESRItemStack(item, 0, getTileEntityClass()?.java)
+    }
+
+    /**
+     * Register the item model for this block.
+     */
+    open fun registerItemModel() {
+        val item = Item.getItemFromBlock(this)
         ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("$ID:itemblock/$name", "inventory"))
     }
+
 
     /**
      * By default, the state mapper for our block will be cardinal directions.

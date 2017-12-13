@@ -59,6 +59,10 @@ object ModBlocks {
 
         // Register the speaker specially since it has variants
         event.registry.register(ItemBlockSpeaker(blockSpeaker).setRegistryName(blockSpeaker.registryName))
+
+        Block.REGISTRY
+                .filterIsInstance<ModBlock>()
+                .forEach(ModBlock::registerItemModel)
     }
 
     @JvmStatic

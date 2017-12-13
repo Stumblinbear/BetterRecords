@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.block
 
+import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileSpeaker
 import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
@@ -12,9 +13,11 @@ import net.minecraft.block.properties.IProperty
 import net.minecraft.block.properties.PropertyEnum
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
+import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.util.EnumFacing
 import net.minecraft.util.EnumHand
@@ -24,6 +27,7 @@ import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import net.minecraftforge.client.model.ModelLoader
 
 class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name) {
 
@@ -96,6 +100,13 @@ class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name) {
 
     override fun getStateForPlacement(world: World?, pos: BlockPos?, facing: EnumFacing?, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase?, hand: EnumHand?): IBlockState {
         return this.defaultState.withProperty(PROPERTYSIZE, SpeakerSize.fromMeta(meta))
+    }
+
+    override fun registerItemModel() {
+        val item = Item.getItemFromBlock(this)
+        ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))
+        ModelLoader.setCustomModelResourceLocation(item, 1, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))
+        ModelLoader.setCustomModelResourceLocation(item, 2, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))
     }
 
     enum class SpeakerSize(val meta: Int, val typeName: String) : IStringSerializable {
