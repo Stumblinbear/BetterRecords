@@ -22,6 +22,7 @@
     }
   },
   "result": {
-    "item": "betterrecords:speaker.sm"
+    "item": "betterrecords:speaker",
+    "data": 0
   }
 }

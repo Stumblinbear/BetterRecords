@@ -18,10 +18,12 @@
       "item": "minecraft:ender_eye"
     },
     "M": {
-      "item": "betterrecords:speaker.md"
+      "item": "betterrecords:speaker",
+      "data": 1
     }
   },
   "result": {
-    "item": "betterrecords:speaker.lg"
+    "item": "betterrecords:speaker",
+    "data": 2
   }
 }
