@@ -4,6 +4,7 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.block.tile.TileRadio
 import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
+import com.codingforcookies.betterrecords.client.render.RenderRadio
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.util.BetterUtils
@@ -12,6 +13,7 @@ import com.codingforcookies.betterrecords.item.ModItems
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
@@ -22,8 +24,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
+import kotlin.reflect.KClass
 
-class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name) {
+class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name), TESRProvider<TileRadio>{
 
     init {
         setHardness(2f)
@@ -31,6 +34,7 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name) {
     }
 
     override fun getTileEntityClass() = TileRadio::class
+    override fun getRenderClass() = RenderRadio::class
 
     override fun onBlockAdded(world: World, pos: BlockPos, state: IBlockState) =
         world.notifyBlockUpdate(pos, state, state, 3)

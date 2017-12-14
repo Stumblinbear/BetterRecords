@@ -2,6 +2,7 @@ package com.codingforcookies.betterrecords.block
 
 import com.codingforcookies.betterrecords.BetterRecords
 import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner
+import com.codingforcookies.betterrecords.client.render.RenderFrequencyTuner
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
@@ -16,7 +17,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockFrequencyTuner(name: String) : ModBlockDirectional(Material.WOOD, name) {
+class BlockFrequencyTuner(name: String) : ModBlockDirectional(Material.WOOD, name), TESRProvider<TileFrequencyTuner> {
 
     init {
         setHardness(1.5f)
@@ -24,6 +25,7 @@ class BlockFrequencyTuner(name: String) : ModBlockDirectional(Material.WOOD, nam
     }
 
     override fun getTileEntityClass() = TileFrequencyTuner::class
+    override fun getRenderClass() = RenderFrequencyTuner::class
 
     override fun onBlockAdded(world: World, pos: BlockPos, state: IBlockState) =
             world.notifyBlockUpdate(pos, state, state, 3)

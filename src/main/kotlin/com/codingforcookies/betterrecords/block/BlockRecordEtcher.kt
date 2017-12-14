@@ -2,8 +2,10 @@ package com.codingforcookies.betterrecords.block
 
 import com.codingforcookies.betterrecords.BetterRecords
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
+import com.codingforcookies.betterrecords.client.render.RenderRecordEtcher
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
@@ -14,8 +16,9 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
+import kotlin.reflect.KClass
 
-class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name) {
+class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name), TESRProvider<TileRecordEtcher> {
 
     init {
         setHardness(1.5f)
@@ -23,6 +26,7 @@ class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name) {
     }
 
     override fun getTileEntityClass() = TileRecordEtcher::class
+    override fun getRenderClass() = RenderRecordEtcher::class
 
     override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?) =
         AxisAlignedBB(.065, 0.0, .065, .935, .875, .935)

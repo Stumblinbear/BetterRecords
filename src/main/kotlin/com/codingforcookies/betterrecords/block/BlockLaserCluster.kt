@@ -3,11 +3,13 @@ package com.codingforcookies.betterrecords.block
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileLaserCluster
 import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
+import com.codingforcookies.betterrecords.client.render.RenderLaserCluster
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
@@ -15,8 +17,9 @@ import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import kotlin.reflect.KClass
 
-class BlockLaserCluster(name: String) : ModBlock(Material.IRON, name) {
+class BlockLaserCluster(name: String) : ModBlock(Material.IRON, name), TESRProvider<TileLaserCluster> {
 
     init {
         setHardness(4.8f)
@@ -24,6 +27,7 @@ class BlockLaserCluster(name: String) : ModBlock(Material.IRON, name) {
     }
 
     override fun getTileEntityClass() = TileLaserCluster::class
+    override fun getRenderClass() = RenderLaserCluster::class
 
     override fun getBoundingBox(state: IBlockState, source: IBlockAccess, pos: BlockPos) =
             AxisAlignedBB(0.12, 0.0, 0.12, 0.88, 0.76, 0.88)

@@ -4,6 +4,7 @@ import com.codingforcookies.betterrecords.api.record.IRecordAmplitude
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileStrobeLight
 import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
+import com.codingforcookies.betterrecords.client.render.RenderStrobeLight
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.handler.ConfigHandler
@@ -17,12 +18,15 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
-class BlockStrobeLight(name: String) : ModBlock(Material.IRON, name) {
+class BlockStrobeLight(name: String) : ModBlock(Material.IRON, name), TESRProvider<TileStrobeLight> {
 
     init {
         setHardness(2.75f)
         setResistance(4f)
     }
+
+    override fun getTileEntityClass() = TileStrobeLight::class
+    override fun getRenderClass() = RenderStrobeLight::class
 
     override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?): AxisAlignedBB {
         return AxisAlignedBB(0.25, 0.0, 0.25, 0.75, 0.75, 0.74)
@@ -54,6 +58,4 @@ class BlockStrobeLight(name: String) : ModBlock(Material.IRON, name) {
         if (te != null && te is IRecordWire) ConnectionHelper.clearConnections(world, te as IRecordWire)
         return super.removedByPlayer(state, world, pos, player, willHarvest)
     }
-
-    override fun getTileEntityClass() = TileStrobeLight::class
 }

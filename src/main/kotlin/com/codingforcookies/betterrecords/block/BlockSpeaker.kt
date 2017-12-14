@@ -4,12 +4,12 @@ import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileSpeaker
 import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
+import com.codingforcookies.betterrecords.client.render.RenderSpeaker
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
-import net.minecraft.block.properties.IProperty
 import net.minecraft.block.properties.PropertyEnum
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
@@ -29,7 +29,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import net.minecraftforge.client.model.ModelLoader
 
-class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name) {
+class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name), TESRProvider<TileSpeaker>, ItemModelProvider {
 
     companion object {
         val PROPERTYSIZE = PropertyEnum.create("size", SpeakerSize::class.java)
@@ -52,6 +52,7 @@ class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name) {
     }
 
     override fun getTileEntityClass() = TileSpeaker::class
+    override fun getRenderClass() = RenderSpeaker::class
 
     override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?) = when (0) {
         0 -> AxisAlignedBB(0.26, 0.05, 0.25, 0.75, 0.65, 0.74)
@@ -102,8 +103,8 @@ class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name) {
         return this.defaultState.withProperty(PROPERTYSIZE, SpeakerSize.fromMeta(meta))
     }
 
-    override fun registerItemModel() {
-        val item = Item.getItemFromBlock(this)
+    override fun registerItemModel(block: ModBlock) {
+        val item = Item.getItemFromBlock(block)
         ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))
         ModelLoader.setCustomModelResourceLocation(item, 1, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))
         ModelLoader.setCustomModelResourceLocation(item, 2, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))

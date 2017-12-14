@@ -6,6 +6,7 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.block.tile.TileRecordPlayer
 import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
+import com.codingforcookies.betterrecords.client.render.RenderRecordPlayer
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.util.BetterUtils
@@ -28,12 +29,16 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
+class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name), TESRProvider<TileRecordPlayer> {
 
     init {
         setHardness(1f)
         setResistance(5f)
     }
+
+    override fun getTileEntityClass() = TileRecordPlayer::class
+    override fun getRenderClass() = RenderRecordPlayer::class
+
 
     override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?): AxisAlignedBB {
         return AxisAlignedBB(.025, 0.0, .025, .975, .975, .975)
@@ -143,6 +148,4 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name) {
             PacketHandler.sendSoundStopToAllFromServer(tileRecordPlayer.pos.x, tileRecordPlayer.pos.y, tileRecordPlayer.pos.z, world.provider.dimension)
         }
     }
-
-    override fun getTileEntityClass() = TileRecordPlayer::class
 }
