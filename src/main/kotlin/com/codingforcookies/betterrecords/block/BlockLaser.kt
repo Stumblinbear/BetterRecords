@@ -20,7 +20,7 @@ import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 
-class BlockLaser(name: String) : ModBlock(Material.IRON, name), TESRProvider<TileLaser> {
+class BlockLaser(name: String) : ModBlock(Material.IRON, name), TESRProvider<TileLaser>, ItemModelProvider  {
 
     init {
         setHardness(3.2f)

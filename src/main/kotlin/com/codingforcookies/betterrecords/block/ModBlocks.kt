@@ -80,6 +80,7 @@ object ModBlocks {
 
                     if (it is TESRProvider<*>) {
                         it.bindTESR()
+                        it.registerTESRItemStacks(it)
                     }
                 }
     }

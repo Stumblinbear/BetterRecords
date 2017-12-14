@@ -18,7 +18,7 @@ import net.minecraft.world.World
 import java.util.*
 import kotlin.reflect.KClass
 
-class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name), TESRProvider<TileRecordEtcher> {
+class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name), TESRProvider<TileRecordEtcher>, ItemModelProvider  {
 
     init {
         setHardness(1.5f)

@@ -17,7 +17,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
 
-class BlockFrequencyTuner(name: String) : ModBlockDirectional(Material.WOOD, name), TESRProvider<TileFrequencyTuner> {
+class BlockFrequencyTuner(name: String) : ModBlockDirectional(Material.WOOD, name), TESRProvider<TileFrequencyTuner>, ItemModelProvider {
 
     init {
         setHardness(1.5f)

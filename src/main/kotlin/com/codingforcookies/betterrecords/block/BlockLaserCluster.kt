@@ -19,7 +19,7 @@ import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import kotlin.reflect.KClass
 
-class BlockLaserCluster(name: String) : ModBlock(Material.IRON, name), TESRProvider<TileLaserCluster> {
+class BlockLaserCluster(name: String) : ModBlock(Material.IRON, name), TESRProvider<TileLaserCluster>, ItemModelProvider  {
 
     init {
         setHardness(4.8f)

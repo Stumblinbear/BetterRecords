@@ -26,7 +26,7 @@ import net.minecraft.world.World
 import java.util.*
 import kotlin.reflect.KClass
 
-class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name), TESRProvider<TileRadio>{
+class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name), TESRProvider<TileRadio>, ItemModelProvider {
 
     init {
         setHardness(2f)

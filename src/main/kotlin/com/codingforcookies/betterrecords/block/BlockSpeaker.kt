@@ -27,6 +27,7 @@ import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
+import net.minecraftforge.client.ForgeHooksClient
 import net.minecraftforge.client.model.ModelLoader
 
 class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name), TESRProvider<TileSpeaker>, ItemModelProvider {
@@ -108,6 +109,13 @@ class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name), TESRProvider<T
         ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))
         ModelLoader.setCustomModelResourceLocation(item, 1, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))
         ModelLoader.setCustomModelResourceLocation(item, 2, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))
+    }
+
+    override fun registerTESRItemStacks(block: ModBlock) {
+        val item = Item.getItemFromBlock(block)
+        ForgeHooksClient.registerTESRItemStack(item, 0, getTileEntityClass().java)
+        ForgeHooksClient.registerTESRItemStack(item, 1, getTileEntityClass().java)
+        ForgeHooksClient.registerTESRItemStack(item, 2, getTileEntityClass().java)
     }
 
     enum class SpeakerSize(val meta: Int, val typeName: String) : IStringSerializable {
