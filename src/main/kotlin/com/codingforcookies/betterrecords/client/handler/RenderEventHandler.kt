@@ -17,7 +17,7 @@ object RenderEventHandler {
     fun onRenderEvent(event: RenderWorldLastEvent) {
         val mc = Minecraft.getMinecraft()
         ItemWire.connection?.let {
-            if (mc.player.heldItemMainhand == null || mc.player.heldItemMainhand?.item !is ItemWire) {
+            if (mc.player.heldItemMainhand.isEmpty || mc.player.heldItemMainhand.item !is ItemWire) {
                 ItemWire.connection = null
             } else {
                 glMatrix {
