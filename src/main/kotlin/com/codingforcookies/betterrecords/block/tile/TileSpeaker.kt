@@ -9,8 +9,11 @@ import net.minecraft.nbt.NBTTagCompound
 
 class TileSpeaker : ModTile(), IRecordWire {
 
-    var size = world?.getBlockState(pos)?.getValue(BlockSpeaker.PROPERTYSIZE) ?: BlockSpeaker.SpeakerSize.SMALL
     var rotation = 0f
+
+    var size = BlockSpeaker.SpeakerSize.SMALL
+        get() = world?.getBlockState(pos)?.getValue(BlockSpeaker.PROPERTYSIZE) ?: BlockSpeaker.SpeakerSize.SMALL
+
 
     override var connections = mutableListOf<RecordConnection>()
 
