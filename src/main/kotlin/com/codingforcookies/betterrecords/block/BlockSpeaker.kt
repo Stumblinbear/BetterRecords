@@ -55,10 +55,13 @@ class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name), TESRProvider<T
     override fun getTileEntityClass() = TileSpeaker::class
     override fun getRenderClass() = RenderSpeaker::class
 
-    override fun getBoundingBox(state: IBlockState?, block: IBlockAccess?, pos: BlockPos?) = when (0) {
-        0 -> AxisAlignedBB(0.26, 0.05, 0.25, 0.75, 0.65, 0.74)
-        1 -> AxisAlignedBB(0.2, 0.0, 0.2, 0.8, 0.88, 0.8)
-        2 -> AxisAlignedBB(0.12, 0.0, 0.12, 0.88, 1.51, 0.88)
+    override fun getBoundingBox(state: IBlockState, block: IBlockAccess?, pos: BlockPos?) = getBouningBoxFromState(state)
+    override fun getCollisionBoundingBox(state: IBlockState, worldIn: IBlockAccess?, pos: BlockPos?) = getBouningBoxFromState(state)
+
+    private fun getBouningBoxFromState(state: IBlockState) = when (state.getValue(PROPERTYSIZE)) {
+        SpeakerSize.SMALL -> AxisAlignedBB(0.26, 0.05, 0.25, 0.75, 0.65, 0.74)
+        SpeakerSize.MEDIUM -> AxisAlignedBB(0.2, 0.0, 0.2, 0.8, 0.88, 0.8)
+        SpeakerSize.LARGE -> AxisAlignedBB(0.12, 0.0, 0.12, 0.88, 1.51, 0.88)
         else -> Block.FULL_BLOCK_AABB
     }
 
@@ -100,15 +103,11 @@ class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name), TESRProvider<T
 
     override fun createBlockState() = BlockStateContainer(this, PROPERTYSIZE)
 
-    override fun getStateForPlacement(world: World?, pos: BlockPos?, facing: EnumFacing?, hitX: Float, hitY: Float, hitZ: Float, meta: Int, placer: EntityLivingBase?, hand: EnumHand?): IBlockState {
-        return this.defaultState.withProperty(PROPERTYSIZE, SpeakerSize.fromMeta(meta))
-    }
-
     override fun registerItemModel(block: ModBlock) {
         val item = Item.getItemFromBlock(block)
-        ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))
-        ModelLoader.setCustomModelResourceLocation(item, 1, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))
-        ModelLoader.setCustomModelResourceLocation(item, 2, ModelResourceLocation("${ID}:itemblock/$name", "inventory"))
+        ModelLoader.setCustomModelResourceLocation(item, 0, ModelResourceLocation("$ID:itemblock/$name", "inventory"))
+        ModelLoader.setCustomModelResourceLocation(item, 1, ModelResourceLocation("$ID:itemblock/$name", "inventory"))
+        ModelLoader.setCustomModelResourceLocation(item, 2, ModelResourceLocation("$ID:itemblock/$name", "inventory"))
     }
 
     override fun registerTESRItemStacks(block: ModBlock) {
