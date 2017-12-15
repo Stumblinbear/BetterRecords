@@ -253,7 +253,7 @@ public class GuiRecordEtcher extends GuiContainer {
         fontRenderer.drawString(error, 172 - fontRenderer.getStringWidth(error), 65, (error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready")) ? 0x229922 : 0x992222));
         nameField.drawTextBox();
         urlField.drawTextBox();
-        if(tileEntity.getRecord() == null) error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.error1");
+        if(tileEntity.getRecord().isEmpty()) error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.error1");
         else if(tileEntity.getRecord().hasTagCompound() && tileEntity.getRecord().getTagCompound().hasKey("url")) error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.error2");
         else if(selectedLib != -1) error = BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready");
         else if(nameField.getText().length() == 0) error = BetterUtils.INSTANCE.getTranslatedString("gui.error1");
