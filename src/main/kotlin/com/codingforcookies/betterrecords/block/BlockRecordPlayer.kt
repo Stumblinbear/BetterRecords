@@ -67,7 +67,6 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name), TESRProvi
             }
         } else if (tileRecordPlayer!!.opening) {
             if (!tileRecordPlayer.record.isEmpty) {
-                println("not empty")
                 if (!world.isRemote) dropItem(world, pos)
                 tileRecordPlayer.record = ItemStack.EMPTY
                 world.notifyBlockUpdate(pos, state!!, state, 3)
