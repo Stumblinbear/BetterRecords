@@ -56,14 +56,6 @@ object ModBlocks {
 
         // Register the speaker specially since it has variants
         event.registry.register(ItemBlockSpeaker(blockSpeaker).setRegistryName(blockSpeaker.registryName))
-
-        Block.REGISTRY
-                .filterIsInstance<ModBlock>()
-                .forEach {
-                    if (it is ItemModelProvider) {
-                        it.registerItemModel(it)
-                    }
-                }
     }
 
     @JvmStatic
@@ -73,6 +65,10 @@ object ModBlocks {
                 .filterIsInstance<ModBlock>()
                 .forEach {
                     it.setStateMapper()
+
+                    if (it is ItemModelProvider) {
+                        it.registerItemModel(it)
+                    }
 
                     if (it is TileEntityProvider<*>) {
                         it.registerTileEntity(it)
