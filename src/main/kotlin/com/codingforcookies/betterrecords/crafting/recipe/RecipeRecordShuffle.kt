@@ -2,6 +2,7 @@ package com.codingforcookies.betterrecords.crafting.recipe
 
 import com.codingforcookies.betterrecords.item.ItemMultiRecord
 import com.codingforcookies.betterrecords.item.ItemRecord
+import com.codingforcookies.betterrecords.item.ModItems
 import net.minecraft.init.Blocks
 import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.Item
@@ -14,6 +15,10 @@ import net.minecraftforge.registries.IForgeRegistryEntry
 
 class RecipeRecordShuffle : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
+    init {
+        setRegistryName("reciperecordshuffle")
+    }
+
     override fun canFit(width: Int, height: Int) = width * height >= 2
 
     override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World?): Boolean {
@@ -21,8 +26,8 @@ class RecipeRecordShuffle : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         var foundTorch = false
 
         (0 until inventoryCrafting.sizeInventory)
-                .asSequence()
-                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .map { inventoryCrafting.getStackInSlot(it) }
+                .filter { !it.isEmpty }
                 .forEach {
                     if (it.item is ItemMultiRecord && it.hasTagCompound() && !foundRecord) {
                         foundRecord = true
@@ -39,7 +44,8 @@ class RecipeRecordShuffle : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
     override fun getCraftingResult(inventoryCrafting: InventoryCrafting): ItemStack? {
         val record =
                 (0 until inventoryCrafting.sizeInventory)
-                        .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                        .map { inventoryCrafting.getStackInSlot(it) }
+                        .filter { !it.isEmpty }
                         .find { it.item is ItemRecord }
 
         return record?.copy()?.apply {
@@ -50,9 +56,7 @@ class RecipeRecordShuffle : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         }
     }
 
-    override fun getRecipeOutput(): ItemStack? {
-        return null
-    }
+    override fun getRecipeOutput() = ItemStack(ModItems.itemMultiRecord)
 
     override fun getRemainingItems(inv: InventoryCrafting): NonNullList<ItemStack> {
         inv.clear()

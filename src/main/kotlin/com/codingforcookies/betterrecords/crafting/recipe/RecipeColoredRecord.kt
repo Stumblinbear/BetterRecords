@@ -1,6 +1,7 @@
 package com.codingforcookies.betterrecords.crafting.recipe
 
 import com.codingforcookies.betterrecords.item.ItemRecord
+import com.codingforcookies.betterrecords.item.ModItems
 import net.minecraft.init.Items
 import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.EnumDyeColor
@@ -13,6 +14,10 @@ import net.minecraftforge.registries.IForgeRegistryEntry
 
 class RecipeColoredRecord : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
+    init {
+        setRegistryName("recipecoloredrecord")
+    }
+
     override fun canFit(width: Int, height: Int) = width * height >= 2
 
     override fun matches(inventoryCrafting: InventoryCrafting, world: World?): Boolean {
@@ -20,8 +25,8 @@ class RecipeColoredRecord : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         var foundDye = false
 
         (0 until inventoryCrafting.sizeInventory)
-                .asSequence()
-                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .map { inventoryCrafting.getStackInSlot(it) }
+                .filter { !it.isEmpty }
                 .forEach {
                     if (it.item is ItemRecord && !foundRecord) {
                         foundRecord = true
@@ -40,8 +45,8 @@ class RecipeColoredRecord : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         var color = -1
 
         (0 until inventoryCrafting.sizeInventory)
-                .asSequence()
-                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .map { inventoryCrafting.getStackInSlot(it) }
+                .filter { !it.isEmpty }
                 .forEach {
                     if (it.item is ItemRecord && record == null) {
                         record = it
@@ -58,9 +63,7 @@ class RecipeColoredRecord : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         }
     }
 
-    override fun getRecipeOutput(): ItemStack? {
-        return null
-    }
+    override fun getRecipeOutput() = ItemStack(ModItems.itemRecord)
 
     override fun getRemainingItems(inv: InventoryCrafting): NonNullList<ItemStack> {
         inv.clear()

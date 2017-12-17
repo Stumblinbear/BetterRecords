@@ -15,6 +15,10 @@ import java.util.ArrayList
 
 class RecipeMultiRecord : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
+    init {
+        setRegistryName("recipemultirecord")
+    }
+
     override fun canFit(width: Int, height: Int) = width * height >= 2
 
     override fun matches(inventoryCrafting: InventoryCrafting, worldIn: World?): Boolean {
@@ -22,7 +26,8 @@ class RecipeMultiRecord : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
         (0 until inventoryCrafting.sizeInventory)
                 .asSequence()
-                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .map { inventoryCrafting.getStackInSlot(it) }
+                .filter { !it.isEmpty }
                 .forEach {
                     if (it.item is ItemRecord && it.hasTagCompound() && it.tagCompound!!.hasKey("name")) {
                         count++
@@ -38,7 +43,8 @@ class RecipeMultiRecord : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         val records = ArrayList<ItemStack>()
 
         (0 until inventoryCrafting.sizeInventory)
-                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .map { inventoryCrafting.getStackInSlot(it) }
+                .filter { !it.isEmpty }
                 .forEach {
                     records.add(it)
                 }
@@ -59,9 +65,7 @@ class RecipeMultiRecord : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         }
     }
 
-    override fun getRecipeOutput(): ItemStack? {
-        return ItemStack(ModItems.itemRecord)
-    }
+    override fun getRecipeOutput() = ItemStack(ModItems.itemRecord)
 
     override fun getRemainingItems(inv: InventoryCrafting): NonNullList<ItemStack> {
         inv.clear()

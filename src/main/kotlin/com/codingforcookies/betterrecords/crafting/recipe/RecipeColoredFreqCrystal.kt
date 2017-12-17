@@ -1,6 +1,7 @@
 package com.codingforcookies.betterrecords.crafting.recipe
 
 import com.codingforcookies.betterrecords.item.ItemFrequencyCrystal
+import com.codingforcookies.betterrecords.item.ModItems
 import net.minecraft.init.Items
 import net.minecraft.inventory.InventoryCrafting
 import net.minecraft.item.EnumDyeColor
@@ -13,6 +14,10 @@ import net.minecraftforge.registries.IForgeRegistryEntry
 
 class RecipeColoredFreqCrystal : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
 
+    init {
+        setRegistryName("recipecoloredfrequencycrystal")
+    }
+
     override fun canFit(width: Int, height: Int) = width * height >= 2
 
     override fun matches(inventoryCrafting: InventoryCrafting, world: World?): Boolean {
@@ -20,8 +25,8 @@ class RecipeColoredFreqCrystal : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         var foundDye = false
 
         (0 until inventoryCrafting.sizeInventory)
-                .asSequence()
-                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .map { inventoryCrafting.getStackInSlot(it) }
+                .filter { !it.isEmpty }
                 .forEach {
                     if (it.item is ItemFrequencyCrystal && !foundCrystal) {
                         foundCrystal = true
@@ -40,8 +45,8 @@ class RecipeColoredFreqCrystal : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         var color = -1
 
         (0 until inventoryCrafting.sizeInventory)
-                .asSequence()
-                .mapNotNull { inventoryCrafting.getStackInSlot(it) }
+                .map { inventoryCrafting.getStackInSlot(it) }
+                .filter { !it.isEmpty }
                 .forEach {
                     if (it.item is ItemFrequencyCrystal) {
                         crystal = it
@@ -58,9 +63,7 @@ class RecipeColoredFreqCrystal : IForgeRegistryEntry.Impl<IRecipe>(), IRecipe {
         }
     }
 
-    override fun getRecipeOutput(): ItemStack? {
-        return null
-    }
+    override fun getRecipeOutput() = ItemStack(ModItems.itemFrequencyCrystal)
 
     override fun getRemainingItems(inv: InventoryCrafting): NonNullList<ItemStack> {
         inv.clear()
