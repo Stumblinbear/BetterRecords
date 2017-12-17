@@ -128,23 +128,31 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name), TESRProvi
 
     private fun dropItem(world: World, pos: BlockPos) {
         val tileEntity = world.getTileEntity(pos)
-        if (tileEntity == null || tileEntity !is TileRecordPlayer) return
-        val tileRecordPlayer = tileEntity as TileRecordPlayer?
-        val item = tileRecordPlayer?.record
-        if (item != null) {
+        if (tileEntity == null || tileEntity !is TileRecordPlayer)
+            return
+
+        val item = tileEntity.record
+
+        if (!item.isEmpty) {
             val rand = Random()
+
             val rx = rand.nextFloat() * 0.8f + 0.1f
             val ry = rand.nextFloat() * 0.8f + 0.1f
             val rz = rand.nextFloat() * 0.8f + 0.1f
+
             val entityItem = EntityItem(world, (pos.x + rx).toDouble(), (pos.y + ry).toDouble(), (pos.z + rz).toDouble(), ItemStack(item.item, item.count, item.itemDamage))
-            if (item.hasTagCompound()) entityItem.item.tagCompound = item.tagCompound!!.copy()
+
+            if (item.hasTagCompound())
+                entityItem.item.tagCompound = item.tagCompound!!.copy()
+
             entityItem.motionX = rand.nextGaussian() * 0.05f
             entityItem.motionY = rand.nextGaussian() * 0.05f + 0.2f
             entityItem.motionZ = rand.nextGaussian() * 0.05f
             world.spawnEntity(entityItem)
             item.count = 0
-            tileRecordPlayer.record = ItemStack.EMPTY
-            PacketHandler.sendSoundStopToAllFromServer(tileRecordPlayer.pos.x, tileRecordPlayer.pos.y, tileRecordPlayer.pos.z, world.provider.dimension)
+
+            tileEntity.record = ItemStack.EMPTY
+            PacketHandler.sendSoundStopToAllFromServer(tileEntity.pos.x, tileEntity.pos.y, tileEntity.pos.z, world.provider.dimension)
         }
     }
 }

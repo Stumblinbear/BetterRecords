@@ -52,8 +52,7 @@ class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name), TESRProvi
         if (tileEntity == null || tileEntity !is TileRecordEtcher)
             return
 
-        val tileRecordEtcher = tileEntity as TileRecordEtcher?
-        val item = tileRecordEtcher!!.record
+        val item = tileEntity.record
 
         if (!item.isEmpty) {
             val rand = Random()
@@ -73,7 +72,7 @@ class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name), TESRProvi
             world.spawnEntity(entityItem)
             item.count = 0
 
-            tileRecordEtcher.record = ItemStack.EMPTY
+            tileEntity.record = ItemStack.EMPTY
         }
     }
 }
