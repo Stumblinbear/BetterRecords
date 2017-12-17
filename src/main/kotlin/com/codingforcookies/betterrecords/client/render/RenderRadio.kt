@@ -6,6 +6,7 @@ import com.codingforcookies.betterrecords.client.model.ModelRadio
 import com.codingforcookies.betterrecords.client.render.helper.renderConnectionsAndInfo
 import net.minecraft.client.renderer.GlStateManager.*
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
+import net.minecraft.item.ItemStack
 import net.minecraft.util.ResourceLocation
 
 class RenderRadio : TileEntitySpecialRenderer<TileRadio>() {
@@ -27,7 +28,8 @@ class RenderRadio : TileEntitySpecialRenderer<TileRadio>() {
 
         val openAmount = te?.openAmount ?: 0F
         val crystalFloat = te?.crystalFloaty ?: 0F
-        MODEL.render(null, openAmount, crystalFloat, 0F, 0F, 0F, 0.0625F, te?.crystal)
+        val crystal = te?.crystal ?: ItemStack.EMPTY
+        MODEL.render(null, openAmount, crystalFloat, 0F, 0F, 0F, 0.0625F, crystal)
 
         popMatrix()
 
