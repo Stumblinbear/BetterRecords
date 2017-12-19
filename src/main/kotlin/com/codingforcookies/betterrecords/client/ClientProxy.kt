@@ -28,6 +28,7 @@ class ClientProxy : CommonProxy() {
 
     companion object {
         /**
+         * TODO: Change these arcane magic numbers
          * 0 = Unchecked
          * 1 = Single Player
          * 2 = Multi Player

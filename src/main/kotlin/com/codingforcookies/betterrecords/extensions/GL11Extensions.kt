@@ -1,9 +1,15 @@
 package com.codingforcookies.betterrecords.extensions
 
-import org.lwjgl.opengl.GL11
+import net.minecraft.client.renderer.GlStateManager
 
 fun glMatrix(block: () -> Unit) {
-    GL11.glPushMatrix()
+    GlStateManager.pushMatrix()
     block()
-    GL11.glPopMatrix()
+    GlStateManager.popMatrix()
+}
+
+fun glVertices(mode: Int, block: () -> Unit) {
+    GlStateManager.glBegin(mode)
+    block()
+    GlStateManager.glEnd()
 }
