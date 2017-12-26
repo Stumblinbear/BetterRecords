@@ -9,6 +9,7 @@ import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.item.ModItems
 import com.codingforcookies.betterrecords.network.PacketHandler
+import com.codingforcookies.betterrecords.network.PacketRadioPlay
 import com.codingforcookies.betterrecords.network.PacketSoundStop
 import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.block.Block
@@ -72,7 +73,13 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name), TESRP
                     world.notifyBlockUpdate(pos, state, state, 3)
                     player.heldItemMainhand.count--
                     if (!world.isRemote) {
-                        // TODO PacketHandler.sendRadioPlayToAllFromServer(te.pos.x, te.pos.y, te.pos.z, world.provider.dimension, te.songRadius, te.crystal!!.tagCompound!!.getString("name"), te.crystal!!.tagCompound!!.getString("url"))
+                        PacketHandler.sendToAll(PacketRadioPlay(
+                                pos,
+                                world.provider.dimension,
+                                te.songRadius,
+                                te.crystal.tagCompound!!.getString("name"),
+                                te.crystal.tagCompound!!.getString("url")
+                        ))
                     }
                 }
             }

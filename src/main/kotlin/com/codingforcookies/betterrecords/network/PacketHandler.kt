@@ -11,7 +11,8 @@ object PacketHandler {
 
     fun init() {
         HANDLER.registerMessage(PacketRecordPlay.Handler::class.java, PacketRecordPlay::class.java, 0, CLIENT)
-        HANDLER.registerMessage(PacketSoundStop.Handler::class.java, PacketSoundStop::class.java, 1, CLIENT)
+        HANDLER.registerMessage(PacketRadioPlay.Handler::class.java, PacketRadioPlay::class.java, 1, CLIENT)
+        HANDLER.registerMessage(PacketSoundStop.Handler::class.java, PacketSoundStop::class.java, 2, CLIENT)
     }
 
     fun sendToAll(msg: IMessage) {
