@@ -5,7 +5,8 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
-import com.codingforcookies.betterrecords.common.packets.PacketHandler
+import com.codingforcookies.betterrecords.network.PacketHandler
+import com.codingforcookies.betterrecords.network.PacketWireConnection
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumActionResult
@@ -50,7 +51,7 @@ class ItemWire(name: String) : ModItem(name), IRecordWireManipulator {
                     if (!(te1 is IRecordWireHome && te2 is IRecordWireHome)) {
                         ConnectionHelper.addConnection((te as TileEntity).world, te1 as IRecordWire, connection!!, world.getBlockState(te.pos))
                         ConnectionHelper.addConnection((te as TileEntity).world, te2 as IRecordWire, connection!!, world.getBlockState(te.pos))
-                        PacketHandler.sendWireConnectionFromClient(connection)
+                        PacketHandler.sendToServer(PacketWireConnection(connection!!))
                         // stack.count-- TODO: Decrement player's amount of wire.
                     }
                 }
