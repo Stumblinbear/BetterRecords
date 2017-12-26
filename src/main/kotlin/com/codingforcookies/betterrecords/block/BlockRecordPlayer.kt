@@ -10,6 +10,8 @@ import com.codingforcookies.betterrecords.client.render.RenderRecordPlayer
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.item.ModItems
+import com.codingforcookies.betterrecords.network.PacketHandler
+import com.codingforcookies.betterrecords.network.PacketSoundStop
 import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.BlockStateContainer
@@ -83,8 +85,11 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name), TESRProvi
                 } else {
                     tileRecordPlayer.record = player.heldItemMainhand
                     world.notifyBlockUpdate(pos, state!!, state, 3)
-                    if (!world.isRemote) (player.heldItemMainhand.item as IRecord).onRecordInserted(tileRecordPlayer, player.heldItemMainhand)
                     player.heldItemMainhand.count--
+                }
+
+                if (!world.isRemote) {
+                    (tileEntity.record.item as IRecord).onRecordInserted(tileRecordPlayer, tileEntity.record)
                 }
             }
         }
@@ -151,7 +156,7 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name), TESRProvi
             item.count = 0
 
             tileEntity.record = ItemStack.EMPTY
-                // TODO PacketHandler.sendSoundStopToAllFromServer(tileEntity.pos.x, tileEntity.pos.y, tileEntity.pos.z, world.provider.dimension)
+            PacketHandler.sendToAll(PacketSoundStop(tileEntity.pos, world.provider.dimension))
         }
     }
 }

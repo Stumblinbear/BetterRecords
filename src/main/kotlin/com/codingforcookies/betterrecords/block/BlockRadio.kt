@@ -8,6 +8,8 @@ import com.codingforcookies.betterrecords.client.render.RenderRadio
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.item.ModItems
+import com.codingforcookies.betterrecords.network.PacketHandler
+import com.codingforcookies.betterrecords.network.PacketSoundStop
 import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
@@ -110,7 +112,7 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name), TESRP
                 world.spawnEntity(entityItem)
                 te.crystal.count = 0
                 te.crystal = ItemStack.EMPTY
-                // TODO PacketHandler.sendSoundStopToAllFromServer(te.pos.x, te.pos.y, te.pos.z, world.provider.dimension)
+                PacketHandler.sendToAll(PacketSoundStop(te.pos, world.provider.dimension))
             }
         }
     }

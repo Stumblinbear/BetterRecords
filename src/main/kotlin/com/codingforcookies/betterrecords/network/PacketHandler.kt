@@ -10,10 +10,11 @@ object PacketHandler {
     private val HANDLER = SimpleNetworkWrapper(NETWORK_CHANNEL)
 
     fun init() {
-      HANDLER.registerMessage(PacketRecordPlay.Handler::class.java, PacketRecordPlay::class.java, 0, CLIENT)
+        HANDLER.registerMessage(PacketRecordPlay.Handler::class.java, PacketRecordPlay::class.java, 0, CLIENT)
+        HANDLER.registerMessage(PacketSoundStop.Handler::class.java, PacketSoundStop::class.java, 1, CLIENT)
     }
 
     fun sendToAll(msg: IMessage) {
-      HANDLER.sendToAll(msg)
+        HANDLER.sendToAll(msg)
     }
 }
