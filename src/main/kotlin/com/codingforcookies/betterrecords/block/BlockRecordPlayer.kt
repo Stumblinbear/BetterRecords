@@ -7,11 +7,10 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.block.tile.TileRecordPlayer
 import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.client.render.RenderRecordPlayer
-import com.codingforcookies.betterrecords.helper.ConnectionHelper
-import com.codingforcookies.betterrecords.common.packets.PacketHandler
-import com.codingforcookies.betterrecords.util.BetterUtils
 import com.codingforcookies.betterrecords.handler.ConfigHandler
+import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.item.ModItems
+import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
@@ -152,7 +151,7 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name), TESRProvi
             item.count = 0
 
             tileEntity.record = ItemStack.EMPTY
-            PacketHandler.sendSoundStopToAllFromServer(tileEntity.pos.x, tileEntity.pos.y, tileEntity.pos.z, world.provider.dimension)
+                // TODO PacketHandler.sendSoundStopToAllFromServer(tileEntity.pos.x, tileEntity.pos.y, tileEntity.pos.z, world.provider.dimension)
         }
     }
 }

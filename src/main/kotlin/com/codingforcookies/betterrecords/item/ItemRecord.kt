@@ -2,10 +2,10 @@ package com.codingforcookies.betterrecords.item
 
 import com.codingforcookies.betterrecords.api.record.IRecord
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
-import com.codingforcookies.betterrecords.common.packets.PacketHandler
+import com.codingforcookies.betterrecords.network.PacketHandler
+import com.codingforcookies.betterrecords.network.PacketRecordPlay
 import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.client.util.ITooltipFlag
-import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
 import net.minecraft.util.text.translation.I18n
 import net.minecraft.world.World
@@ -21,10 +21,8 @@ open class ItemRecord(name: String) : ModItem(name), IRecord {
 
     override fun onRecordInserted(wireHome: IRecordWireHome, itemStack: ItemStack) {
         itemStack.tagCompound?.let {
-            PacketHandler.sendRecordPlayToAllFromServer(
-                    wireHome.tileEntity.pos.x,
-                    wireHome.tileEntity.pos.y,
-                    wireHome.tileEntity.pos.z,
+            PacketHandler.sendToAll(PacketRecordPlay(
+                wireHome.tileEntity.pos,
                     wireHome.tileEntity.world.provider.dimension,
                     wireHome.songRadius,
                     it.getString("name"),
@@ -32,7 +30,7 @@ open class ItemRecord(name: String) : ModItem(name), IRecord {
                     it.getString("local"),
                     it.getBoolean("repeat"),
                     it.getBoolean("shuffle")
-            )
+            ))
         }
     }
 

@@ -29,21 +29,7 @@ public class PacketHandler{
 
     public static void sendRecordPlayToAllFromServer(int x, int y, int z, int dimension, float playRadius, NBTTagCompound nbt, boolean repeat, boolean shuffle){
         channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
-        channels.get(Side.SERVER).writeOutbound(new PacketRecordPlayerPlay(x, y, z, playRadius, dimension, nbt, repeat, shuffle));
+        //channels.get(Side.SERVER).writeOutbound(new PacketRecordPlayerPlay(x, y, z, playRadius, dimension, nbt, repeat, shuffle));
     }
 
-    public static void sendRecordPlayToAllFromServer(int x, int y, int z, int dimension, float playRadius, String name, String url, String local, boolean repeat, boolean shuffle){
-        channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
-        channels.get(Side.SERVER).writeOutbound(new PacketRecordPlayerPlay(x, y, z, playRadius, dimension, name, url, local, repeat, shuffle));
-    }
-
-    public static void sendSoundStopToAllFromServer(int x, int y, int z, int dimension){
-        channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
-        channels.get(Side.SERVER).writeOutbound(new PacketSoundStop(x, y, z, dimension));
-    }
-
-    public static void sendRadioPlayToAllFromServer(int x, int y, int z, int dimension, float playRadius, String local, String url){
-        channels.get(Side.SERVER).attr(FMLOutboundHandler.FML_MESSAGETARGET).set(FMLOutboundHandler.OutboundTarget.ALL);
-        channels.get(Side.SERVER).writeOutbound(new PacketRadioPlay(x, y, z, playRadius, dimension, local, url));
-    }
 }
