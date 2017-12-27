@@ -129,6 +129,16 @@ public class SoundHandler{
         tryToStart(x, y, z, dimension);
     }
 
+    public static boolean isPlaying(BlockPos pos, int dimension) {
+        return soundPlaying.containsKey(pos.getX() + "," + pos.getY() + "," + pos.getZ() + "," + dimension);
+    }
+
+    public static void stopPlaying(BlockPos pos, int dimension) {
+        if (isPlaying(pos, dimension)) {
+            soundPlaying.remove(pos.getX() + "," + pos.getY() + "," + pos.getZ() + "," + dimension);
+        }
+    }
+
     private static void tryToStart(final int x, final int y, final int z, final int dimension){
         if(soundPlaying.get(x + "," + y + "," + z + "," + dimension) != null && soundPlaying.get(x + "," + y + "," + z + "," + dimension).current == -1) new Thread(new Runnable(){
 
@@ -145,8 +155,13 @@ public class SoundHandler{
         }).start();
     }
 
-    public static void playSoundFromStream(final int x, final int y, final int z, final int dimension, final float playRadius, final String localName, final String url){
+    public static void playSoundFromStream(final BlockPos pos, final int dimension, final float playRadius, final String localName, final String url){
         if(!ConfigHandler.INSTANCE.getStreamRadio()) return;
+
+        int x = pos.getX();
+        int y = pos.getY();
+        int z = pos.getZ();
+
         soundPlaying.put(x + "," + y + "," + z + "," + dimension, new SoundManager(new Sound(x, y, z, dimension, playRadius).setInfo("", url, localName), false, false));
         new Thread(new Runnable(){
 

@@ -4,8 +4,9 @@ import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.api.song.LibrarySong;
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher;
 import com.codingforcookies.betterrecords.client.ClientProxy;
+import com.codingforcookies.betterrecords.network.PacketHandler;
 import com.codingforcookies.betterrecords.handler.ConfigHandler;
-import com.codingforcookies.betterrecords.common.packets.PacketHandler;
+import com.codingforcookies.betterrecords.network.PacketURLWrite;
 import com.codingforcookies.betterrecords.util.BetterUtils;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -163,8 +164,16 @@ public class GuiRecordEtcher extends GuiContainer {
         if(error.equals(BetterUtils.INSTANCE.getTranslatedString("gui.recordetcher.ready")) && x >= 44 && x <= 75 && y >= 51 && y <= 66){
             if(selectedLib != -1){
                 LibrarySong sel = ClientProxy.Companion.getDefaultLibrary().get(selectedLib);
-                try{
-                    PacketHandler.sendURLWriteFromClient(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(), sel.name, sel.url, sel.local, new URL(sel.url).openConnection().getContentLength() / 1024 / 1024, sel.color, sel.author);
+                try {
+                    PacketHandler.INSTANCE.sendToServer(new PacketURLWrite(
+                        tileEntity.getPos(),
+                        new URL(sel.url).openConnection().getContentLength() / 1024 / 1024,
+                        sel.name,
+                        sel.url,
+                        sel.local,
+                        sel.color,
+                        sel.author
+                    ));
                 }catch(MalformedURLException e){
                     e.printStackTrace();
                 }catch(IOException e){
@@ -216,7 +225,13 @@ public class GuiRecordEtcher extends GuiContainer {
                         }
                     }
                 }
-                PacketHandler.sendURLWriteFromClient(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(), superName, urlField.getText(), superLocal, etchSize);
+                PacketHandler.INSTANCE.sendToServer(new PacketURLWrite(
+                    tileEntity.getPos(),
+                    etchSize,
+                    superName,
+                    urlField.getText(),
+                    superLocal
+                ));
             }
         }
         if(x >= 175 && x <= 195 && y >= 150 && y <= 159){
