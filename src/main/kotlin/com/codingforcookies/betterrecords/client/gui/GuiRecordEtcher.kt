@@ -330,7 +330,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         mc.renderEngine.bindTexture(GUI)
 
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize)
-        drawTexturedModalRect(x + 44, y + 51, 0, if (error == I18n.format("gui.recordetcher.ready")) 116 else 178, 33, 12)
+        drawTexturedModalRect(x + 44, y + 51, 0, if (error == I18n.format("gui.recordetcher.ready")) 166 else 178, 33, 12)
 
         val mx = mouseX - x
         val my = mouseY - y
