@@ -3,7 +3,8 @@ package com.codingforcookies.betterrecords.client.gui;
 import com.codingforcookies.betterrecords.ConstantsKt;
 import com.codingforcookies.betterrecords.client.sound.IcyURLConnection;
 import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner;
-import com.codingforcookies.betterrecords.common.packets.PacketHandler;
+import com.codingforcookies.betterrecords.network.PacketHandler;
+import com.codingforcookies.betterrecords.network.PacketURLWrite;
 import com.codingforcookies.betterrecords.util.BetterUtils;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -61,7 +62,13 @@ public class GuiFrequencyTuner extends GuiContainer {
             String superName = FilenameUtils.getName(urlField.getText());
             superName = superName.split("#")[0];
             superName = superName.split("\\?")[0];
-            PacketHandler.sendURLWriteFromClient(tileEntity.getPos().getX(), tileEntity.getPos().getY(), tileEntity.getPos().getZ(), superName, urlField.getText(), nameField.getText(), 0);
+            PacketHandler.INSTANCE.sendToServer(new PacketURLWrite(
+                tileEntity.getPos(),
+                0,
+                superName,
+                urlField.getText(),
+                nameField.getText()
+            ));
         }
     }
 

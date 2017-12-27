@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent
 import net.minecraftforge.fml.common.network.NetworkRegistry
-import com.codingforcookies.betterrecords.common.packets.PacketHandler as OldPacketHandler
 
 open class CommonProxy {
 
