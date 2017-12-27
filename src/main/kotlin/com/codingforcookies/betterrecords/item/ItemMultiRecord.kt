@@ -23,9 +23,9 @@ class ItemMultiRecord(name: String) : ItemRecord(name) {
                     wireHome.tileEntity.pos,
                     wireHome.tileEntity.world.provider.dimension,
                     wireHome.songRadius,
-                    it,
                     it.getBoolean("repeat"),
-                    it.getBoolean("shuffle")
+                    it.getBoolean("shuffle"),
+                    nbt = it
             ))
         }
     }

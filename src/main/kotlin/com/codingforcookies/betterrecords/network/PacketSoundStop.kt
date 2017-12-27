@@ -7,24 +7,17 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 
-class PacketSoundStop : IMessage {
-
-    var pos: BlockPos? = null
-    var dimension: Int? = null
-
-    constructor()
-
-    constructor(pos: BlockPos, dimension: Int) {
-        this.pos = pos
-        this.dimension = dimension
-    }
+class PacketSoundStop @JvmOverloads constructor(
+        var pos: BlockPos = BlockPos(0, 0, 0),
+        var dimension: Int = -1
+) : IMessage {
 
     override fun toBytes(buf: ByteBuf) {
-        buf.writeInt(pos!!.x)
-        buf.writeInt(pos!!.y)
-        buf.writeInt(pos!!.z)
+        buf.writeInt(pos.x)
+        buf.writeInt(pos.y)
+        buf.writeInt(pos.z)
 
-        buf.writeInt(dimension!!)
+        buf.writeInt(dimension)
     }
 
     override fun fromBytes(buf: ByteBuf) {
@@ -37,7 +30,7 @@ class PacketSoundStop : IMessage {
 
         override fun onMessage(message: PacketSoundStop, ctx: MessageContext): IMessage? {
             with(message) {
-                SoundHandler.stopPlaying(pos!!, dimension!!)
+                SoundHandler.stopPlaying(pos, dimension)
             }
 
             return null

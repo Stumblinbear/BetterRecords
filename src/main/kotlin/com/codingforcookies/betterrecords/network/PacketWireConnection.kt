@@ -11,15 +11,9 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 
-class PacketWireConnection : IMessage {
-
-    var connection: RecordConnection? = null
-
-    constructor()
-
-    constructor(connection: RecordConnection) {
-        this.connection = connection
-    }
+class PacketWireConnection @JvmOverloads constructor(
+        var connection: RecordConnection = RecordConnection(0, 0, 0, true)
+) : IMessage {
 
     override fun toBytes(buf: ByteBuf) {
         ByteBufUtils.writeUTF8String(buf, connection.toString())
@@ -35,13 +29,13 @@ class PacketWireConnection : IMessage {
             val player = ctx.serverHandler.player
 
             with(message) {
-                val te1 = player.world.getTileEntity(BlockPos(connection!!.x1, connection!!.y1, connection!!.z1))
-                val te2 = player.world.getTileEntity(BlockPos(connection!!.x2, connection!!.y2, connection!!.z2))
+                val te1 = player.world.getTileEntity(BlockPos(connection.x1, connection.y1, connection.z1))
+                val te2 = player.world.getTileEntity(BlockPos(connection.x2, connection.y2, connection.z2))
 
                 if (te1 is IRecordWire && te2 is IRecordWire) {
                     if (!(te1 is IRecordWireHome && te2 is IRecordWireHome)) {
-                        ConnectionHelper.addConnection(player.world, te1, connection!!, player.world.getBlockState(te1.pos))
-                        ConnectionHelper.addConnection(player.world, te2, connection!!, player.world.getBlockState(te2.pos))
+                        ConnectionHelper.addConnection(player.world, te1, connection, player.world.getBlockState(te1.pos))
+                        ConnectionHelper.addConnection(player.world, te2, connection, player.world.getBlockState(te2.pos))
                     }
                 }
             }

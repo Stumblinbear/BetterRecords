@@ -12,38 +12,26 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 
-class PacketRecordPlay : IMessage {
-
-    var pos: BlockPos? = null
-    var dimension: Int? = null
-    var playRadius: Float? = null
+class PacketRecordPlay @JvmOverloads constructor(
+        var pos: BlockPos = BlockPos(0, 0, 0),
+        var dimension: Int = -1,
+        var playRadius: Float = -1F,
+        var repeat: Boolean = false,
+        var shuffle: Boolean = false,
+        // Following arguments used to construct sounds.
+        // One of the two should be provided.
+        // or both if you want. I'm a comment, not a cop.
+        var sound: Sound = Sound(0,0,0, -1, -1F),
+        var nbt: NBTTagCompound = NBTTagCompound()
+) : IMessage {
 
 
     val sounds = mutableListOf<Sound>()
 
-    var repeat: Boolean? = null
-    var shuffle: Boolean? = null
-
-    constructor()
-
-    constructor(pos: BlockPos, dimension: Int, playRadius: Float, name: String,
-                url: String, local: String, repeat: Boolean, shuffle: Boolean) {
-        this.pos = pos
-        this.dimension = dimension
-        this.playRadius = playRadius
-
-        sounds.add(Sound().setInfo(name, url, local))
-
-        this.repeat = repeat
-        this.shuffle = shuffle
-    }
-
-    constructor(pos: BlockPos, dimension: Int, playRadius: Float, nbt: NBTTagCompound,
-                repeat: Boolean, shuffle: Boolean) {
-
-        this.pos = pos
-        this.dimension = dimension
-        this.playRadius = playRadius
+    init {
+        if (sound.playRadius != -1F) {
+            sounds += sound
+        }
 
         nbt.getTagList("songs", 10).forEachTag {
             sounds += Sound().setInfo(
@@ -52,19 +40,16 @@ class PacketRecordPlay : IMessage {
                     it.getString("local")
             )
         }
-
-        this.repeat = repeat
-        this.shuffle = shuffle
     }
 
     override fun toBytes(buf: ByteBuf) {
-        buf.writeInt(pos!!.x)
-        buf.writeInt(pos!!.y)
-        buf.writeInt(pos!!.z)
+        buf.writeInt(pos.x)
+        buf.writeInt(pos.y)
+        buf.writeInt(pos.z)
 
-        buf.writeInt(dimension!!)
+        buf.writeInt(dimension)
 
-        buf.writeFloat(playRadius!!)
+        buf.writeFloat(playRadius)
 
         // Write the amount of sounds we're going to send,
         // to rebuild on the other side.
@@ -73,8 +58,8 @@ class PacketRecordPlay : IMessage {
             ByteBufUtils.writeUTF8String(buf, it.toString())
         }
 
-        buf.writeBoolean(repeat!!)
-        buf.writeBoolean(shuffle!!)
+        buf.writeBoolean(repeat)
+        buf.writeBoolean(shuffle)
     }
 
     override fun fromBytes(buf: ByteBuf) {
@@ -99,8 +84,8 @@ class PacketRecordPlay : IMessage {
             val player = Minecraft.getMinecraft().player
 
             with(message) {
-                if (playRadius!! > 100000 || Math.abs(Math.sqrt(Math.pow(player.posX - pos!!.x, 2.0) + Math.pow(player.posY - pos!!.y, 2.0) + Math.pow(player.posZ - pos!!.z, 2.0))).toFloat() < playRadius!!) {
-                    SoundHandler.playSound(pos!!.x, pos!!.y, pos!!.z, dimension!!, playRadius!!, sounds, repeat!!, shuffle!!)
+                if (playRadius > 100000 || Math.abs(Math.sqrt(Math.pow(player.posX - pos.x, 2.0) + Math.pow(player.posY - pos.y, 2.0) + Math.pow(player.posZ - pos.z, 2.0))).toFloat() < playRadius) {
+                    SoundHandler.playSound(pos.x, pos.y, pos.z, dimension, playRadius, sounds, repeat, shuffle)
                 }
             }
 

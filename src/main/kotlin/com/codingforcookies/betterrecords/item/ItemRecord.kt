@@ -2,6 +2,7 @@ package com.codingforcookies.betterrecords.item
 
 import com.codingforcookies.betterrecords.api.record.IRecord
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
+import com.codingforcookies.betterrecords.client.sound.Sound
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketRecordPlay
 import com.codingforcookies.betterrecords.util.BetterUtils
@@ -22,14 +23,16 @@ open class ItemRecord(name: String) : ModItem(name), IRecord {
     override fun onRecordInserted(wireHome: IRecordWireHome, itemStack: ItemStack) {
         itemStack.tagCompound?.let {
             PacketHandler.sendToAll(PacketRecordPlay(
-                wireHome.tileEntity.pos,
+                    wireHome.tileEntity.pos,
                     wireHome.tileEntity.world.provider.dimension,
                     wireHome.songRadius,
-                    it.getString("name"),
-                    it.getString("url"),
-                    it.getString("local"),
                     it.getBoolean("repeat"),
-                    it.getBoolean("shuffle")
+                    it.getBoolean("shuffle"),
+                    sound = Sound().setInfo(
+                            it.getString("name"),
+                            it.getString("url"),
+                            it.getString("local")
+                    )
             ))
         }
     }

@@ -9,37 +9,24 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext
 
-class PacketRadioPlay : IMessage {
-
-    var pos: BlockPos? = null
-    var dimension: Int? = null
-
-    var playRadius: Float? = null
-
-    var local: String? = null
-    var url: String? = null
-
-    constructor()
-
-    constructor(pos: BlockPos, dimension: Int, playRadius: Float,
-                local: String, url: String) {
-        this.pos = pos
-        this.dimension = dimension
-        this.playRadius = playRadius
-        this.local = local
-        this.url = url
-    }
+class PacketRadioPlay @JvmOverloads constructor(
+        var pos: BlockPos = BlockPos(0, 0, 0),
+        var dimension: Int = -1,
+        var playRadius: Float = -1F,
+        var local: String = "",
+        var url: String = ""
+) : IMessage {
 
     override fun toBytes(buf: ByteBuf) {
-        buf.writeInt(pos!!.x)
-        buf.writeInt(pos!!.y)
-        buf.writeInt(pos!!.z)
-        buf.writeInt(dimension!!)
+        buf.writeInt(pos.x)
+        buf.writeInt(pos.y)
+        buf.writeInt(pos.z)
+        buf.writeInt(dimension)
 
-        buf.writeFloat(playRadius!!)
+        buf.writeFloat(playRadius)
 
-        ByteBufUtils.writeUTF8String(buf, local!!)
-        ByteBufUtils.writeUTF8String(buf, url!!)
+        ByteBufUtils.writeUTF8String(buf, local)
+        ByteBufUtils.writeUTF8String(buf, url)
     }
 
     override fun fromBytes(buf: ByteBuf) {
@@ -58,8 +45,8 @@ class PacketRadioPlay : IMessage {
             val player = Minecraft.getMinecraft().player
 
             with (message) {
-                if (playRadius!! > 100000 || Math.abs(Math.sqrt(Math.pow(player.posX - pos!!.x, 2.0) + Math.pow(player.posY - pos!!.y, 2.0) + Math.pow(player.posZ - pos!!.z, 2.0))).toFloat() < playRadius!!) {
-                    SoundHandler.playSoundFromStream(pos!!, dimension!!, playRadius!!, local!!, url!!)
+                if (playRadius > 100000 || Math.abs(Math.sqrt(Math.pow(player.posX - pos.x, 2.0) + Math.pow(player.posY - pos.y, 2.0) + Math.pow(player.posZ - pos.z, 2.0))).toFloat() < playRadius) {
+                    SoundHandler.playSoundFromStream(pos, dimension, playRadius, local, url)
                 }
             }
 
