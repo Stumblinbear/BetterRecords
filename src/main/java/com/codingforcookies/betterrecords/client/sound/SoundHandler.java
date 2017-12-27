@@ -5,7 +5,7 @@ import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
 import com.codingforcookies.betterrecords.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.util.BetterUtils;
-import com.codingforcookies.betterrecords.common.util.ClasspathInjector;
+import com.codingforcookies.betterrecords.util.ClasspathInjector;
 import net.minecraft.client.Minecraft;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -61,7 +61,7 @@ public class SoundHandler{
             e.printStackTrace();
             System.err.println("Failed to load library, trying another method: " + file.getName());
             try{
-                ClasspathInjector.addFile(file);
+                ClasspathInjector.INSTANCE.addFile(file);
             }catch(IOException e1){
                 e1.printStackTrace();
             }
