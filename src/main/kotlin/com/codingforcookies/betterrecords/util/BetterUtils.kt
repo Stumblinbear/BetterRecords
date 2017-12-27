@@ -35,6 +35,5 @@ object BetterUtils {
             WordUtils.wrap(string, maxWidth, "\n", false)
                     .replace("\\n", "\n")
                     .split("\n")
-                    .toTypedArray() // Temporary so we don't have to change too much in the old source
 
 }
