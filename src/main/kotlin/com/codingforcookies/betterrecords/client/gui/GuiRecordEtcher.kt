@@ -4,10 +4,11 @@ import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.api.song.LibrarySong
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
 import com.codingforcookies.betterrecords.client.ClientProxy
-import com.codingforcookies.betterrecords.common.packets.PacketHandler
 import com.codingforcookies.betterrecords.extensions.glMatrix
 import com.codingforcookies.betterrecords.extensions.glVertices
 import com.codingforcookies.betterrecords.handler.ConfigHandler
+import com.codingforcookies.betterrecords.network.PacketHandler
+import com.codingforcookies.betterrecords.network.PacketURLWrite
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -134,13 +135,15 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         if (error == I18n.format("gui.recordetcher.ready") && x in 44..75 && y in 51..66) {
             if (selectedLib != -1) {
                 with(ClientProxy.defaultLibrary[selectedLib]) {
-                    PacketHandler.sendURLWriteFromClient(
-                            tileEntity.pos.x,
-                            tileEntity.pos.y,
-                            tileEntity.pos.z,
-                            name, url, local,
+                    PacketHandler.sendToServer(PacketURLWrite(
+                            tileEntity.pos,
                             URL(url).openConnection().contentLength / 1024 / 1024,
-                            color, author)
+                            name,
+                            url,
+                            local,
+                            color,
+                            author
+                    ))
                 }
             } else {
                 val superName = FilenameUtils.getName(urlField.text)
@@ -172,7 +175,13 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                         }
                     }
                 }
-                PacketHandler.sendURLWriteFromClient(tileEntity.pos.x, tileEntity.pos.y, tileEntity.pos.z, superName, urlField.text, superLocal, etchSize)
+                PacketHandler.sendToServer(PacketURLWrite(
+                        tileEntity.pos,
+                        etchSize,
+                        superName,
+                        urlField.text,
+                        superLocal
+                ))
             }
         }
 
