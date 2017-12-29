@@ -1,53 +1,69 @@
 package com.codingforcookies.betterrecords.library
 
-import com.codingforcookies.betterrecords.api.library.LibraryEntry
 import com.codingforcookies.betterrecords.api.library.LibraryEntryMusic
 import com.codingforcookies.betterrecords.api.library.LibraryEntryRadio
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
+import com.google.gson.GsonBuilder
 import java.io.File
 import java.net.URL
 
+
+
 /**
- * Class representing a File containing a number of [LibraryEntry] of type [T].
- *
- * This can either be a local [File] or remote [URL].
- *
- * @param T The type of [LibraryEntry] this file contains
+ * Class representing a Library file
  */
-sealed class LibraryFile<out T> where T: LibraryEntry {
+open class LibraryFile(
+        val entries: EntrySection
+) {
 
     /**
-     * A list of library entries contained in this file
+     * If the LibraryFile was made from a local file, this will be the file (for later updating)
      */
-    abstract val entries: Collection<T>
-}
+    @Transient
+    var localFile: File? = null
 
-class LibraryFileMusic private constructor(content: String) : LibraryFile<LibraryEntryMusic>() {
+    /**
+     * Convenience value
+     * Checks whether this file is a local, based on the presence of [localFile]
+     */
+    val isLocal
+        get() = localFile != null
 
-    override val entries =
-            JsonParser()
-                    .parse(content).asJsonObject
-                    .entrySet()
-                    .map { it.value }
-                    .filterIsInstance<JsonObject>()
-                    .map { Gson().fromJson(it, LibraryEntryMusic::class.java) }
+    class EntrySection(
+            val songs: MutableList<LibraryEntryMusic>,
+            val radioStations: MutableList<LibraryEntryRadio>
+    )
 
-    constructor(file: File) : this(file.readText())
-    constructor(url: URL) : this(url.readText())
-}
+    /**
+     * Writes the contents of the file if it is local
+     */
+    fun save() {
+        localFile?.writeText(gson.toJson(this))
+    }
 
-class LibraryFileRadio private constructor(content: String) : LibraryFile<LibraryEntryRadio>() {
+    companion object {
 
-    override val entries =
-            JsonParser()
-                    .parse(content).asJsonObject
-                    .entrySet()
-                    .map { it.value }
-                    .filterIsInstance<JsonObject>()
-                    .map { Gson().fromJson(it, LibraryEntryRadio::class.java) }
+        var gson = GsonBuilder().setPrettyPrinting().create()
 
-    constructor(file: File) : this(file.readText())
-    constructor(url: URL) : this(url.readText())
+        /**
+         * Create a [LibraryFile] from the given string
+         */
+        fun fromString(content: String): LibraryFile =
+                gson.fromJson(content, LibraryFile::class.java)
+
+        /**
+         * Create a [LibraryFile] from the given file.
+         *
+         * Sets [localFile], so that it can be updated later
+         */
+        fun fromFile(file: File): LibraryFile =
+                fromString(file.readText()).apply {
+                    localFile = file
+                }
+
+        /**
+         * Create a [LibraryFile] from the given url
+         */
+        fun fromURL(url: URL) =
+                fromString(url.readText())
+    }
 }
