@@ -1,42 +1,51 @@
 package com.codingforcookies.betterrecords.library
 
-import net.minecraft.client.Minecraft
 import java.io.File
+import java.net.URL
 
 /**
- * Library containing all of the songs / radio stations
- * that are available on the client or server
- *
- * Sources include:
- *  - Local library files
- *  - Remote library files
- *
- *  Local library files are loaded from  $minecraft/betterrecords/library/
- *
- * If we are running on the server, entries in this library will be sent to the client.
- * If we are running on the client, entries from the server will be added to this library.
+ * Abstract class representing a library File
  */
-object Library {
-
-    /** The directory where local libraries are stored */
-    private val LOCAL_LIBRARY_DIR = File(Minecraft.getMinecraft().mcDataDir, "betterrecords/library")
-
-    // TODO: Load remote URLS from config
-    private val REMOTE_LIBRARY_URLS = listOf("URL1", "URL2")
+sealed class Library {
 
     /**
-     * All of the library files that have been loaded
+     * The [LibraryContent], to be set after reading from whatever source
      */
-    val libraries = mutableListOf<LibraryFile>()
+    abstract protected val libraryContent: LibraryContent
 
     /**
-     * Entry point for loading the library
-     * Load both local and remote files
+     * The list of songs in this library
      */
-    fun init() {
-        LOCAL_LIBRARY_DIR
-                .listFiles()
-                .map { LibraryFile.fromFile(it) }
-                .forEach { libraries.add(it) }
+    val songs
+        get() = libraryContent.music
+
+    /**
+     * The list of radio stations in this library
+     */
+    val radioStations
+        get() = libraryContent.radio
+}
+
+/**
+ * Class representing a library that is stored as a local file
+ */
+class LocalLibrary(val file: File) : Library() {
+
+    override val libraryContent = LibraryContent.fromJson(file.readText())
+
+    /**
+     * Save the library back to the file, in order to save changes
+     */
+    fun save() {
+        file.writeText(libraryContent.toJson())
     }
+}
+
+/**
+ * Class representing a library that is a remote url
+ */
+class RemoteLibrary(url: URL) : Library() {
+
+    override val libraryContent = LibraryContent.fromJson(url.readText())
+
 }
