@@ -4,7 +4,9 @@ import kotlin.test.assertNotNull
 
 fun LibraryEntryMusic.verify() {
     assertNotNull(name)
+    assertNotNull(author)
     assertNotNull(url)
+    assertNotNull(color)
 }
 
 fun LibraryEntryRadio.verify() {
