@@ -25,6 +25,12 @@ object Libraries {
     val libraries = mutableListOf<Library>()
 
     /**
+     * TEMPORARY shunt to adapt this to match old library system, easing transition
+     */
+    val songs
+            get() = libraries.flatMap { it.songs }
+
+    /**
      * Entry point for loading the library
      * Load both local and remote files
      */

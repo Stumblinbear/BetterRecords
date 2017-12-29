@@ -1,17 +1,15 @@
 package com.codingforcookies.betterrecords.client.gui
 
 import com.codingforcookies.betterrecords.ID
-import com.codingforcookies.betterrecords.api.song.LibrarySong
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
 import com.codingforcookies.betterrecords.client.ClientProxy
 import com.codingforcookies.betterrecords.extensions.glMatrix
 import com.codingforcookies.betterrecords.extensions.glVertices
 import com.codingforcookies.betterrecords.handler.ConfigHandler
+import com.codingforcookies.betterrecords.library.Libraries
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketURLWrite
-import com.google.gson.JsonElement
 import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiTextField
 import net.minecraft.client.gui.inventory.GuiContainer
@@ -27,7 +25,6 @@ import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
-import kotlin.concurrent.thread
 
 class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileRecordEtcher) : GuiContainer(ContainerRecordEtcher(inventoryPlayer, tileEntity)) {
 
@@ -61,55 +58,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         urlField = GuiTextField(2, fontRenderer, 44, 35, 124, 10)
         urlField.maxStringLength = 256
 
-        if (ClientProxy.defaultLibrary.size == 0 || ClientProxy.lastCheckType == 0 || ClientProxy.lastCheckType != if (Minecraft.getMinecraft().world.isRemote) 1 else 2) {
-            ClientProxy.lastCheckType = if (Minecraft.getMinecraft().world.isRemote) 1 else 2
-
-            println("Loading default Library")
-            thread(start = true) {
-                val content = URL(ConfigHandler.defaultLibraryURL).readText()
-                JsonParser().parse(content).asJsonObject.entrySet()
-                        .filter { it.value is JsonObject }
-                        .forEach(this::addEntryToLibrary)
-            }
-
-            println("Loading available encodings...")
-            thread(start = true) {
-                val content = URL("https://raw.githubusercontent.com/stumblinbear/Versions/master/betterrecords/encodings.txt").readText()
-                ClientProxy.encodings.clear()
-
-                for (line in content.lines()) {
-                    ClientProxy.encodings.add(line)
-                }
-            }
-
-            if (ClientProxy.lastCheckType == 1) {
-                println("Loading local library...")
-                loadLocalLibrary()
-            }
-        }
-        maxPage = Math.ceil(ClientProxy.defaultLibrary.size.toDouble() / 14).toInt()
-    }
-
-    private fun loadLocalLibrary() {
-        if (!ClientProxy.localLibrary.exists()) {
-            ClientProxy.localLibrary.createNewFile()
-
-            ClientProxy.localLibrary.writer().use {
-                it.write("{}")
-            }
-        }
-
-        ClientProxy.localLibrary.inputStream().reader().use {
-            rootObj = JsonParser().parse(it).asJsonObject
-            rootObj.entrySet()
-                    .filter { it.value is JsonObject }
-                    .forEach(this::addEntryToLibrary)
-        }
-    }
-
-    private fun addEntryToLibrary(entry: Map.Entry<String, JsonElement>) {
-        val obj = entry.value.asJsonObject
-        ClientProxy.defaultLibrary += LibrarySong(entry.key, obj["author"].asString, obj["name"].asString, obj["url"].asString, obj["color"].asString.replace("#", "").toInt(16))
+        maxPage = Math.ceil(Libraries.songs.size.toDouble() / 14).toInt()
     }
 
     override fun keyTyped(typedChar: Char, keyCode: Int) {
@@ -134,13 +83,13 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
         if (error == I18n.format("gui.recordetcher.ready") && x in 44..75 && y in 51..66) {
             if (selectedLib != -1) {
-                with(ClientProxy.defaultLibrary[selectedLib]) {
+                with(Libraries.songs[selectedLib]) {
                     PacketHandler.sendToServer(PacketURLWrite(
                             tileEntity.pos,
                             URL(url).openConnection().contentLength / 1024 / 1024,
                             name,
                             url,
-                            local,
+                            name,
                             color,
                             author
                     ))
@@ -150,31 +99,6 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                         .split("#", "?")[0]
                 val superLocal = nameField.text.trim()
 
-                if (ClientProxy.lastCheckType == 1) {
-                    if (!ClientProxy.defaultLibrary.any { it.local == superLocal }) {
-                        val elmnt = JsonObject().apply {
-                            addProperty("author", Minecraft.getMinecraft().player.name)
-                            addProperty("name", superName)
-                            addProperty("url", urlField.text)
-                            addProperty("color", "#FFFFFF")
-                        }
-
-                        if (rootObj.size() == 0) {
-                            rootObj.add(superLocal, elmnt)
-                            ClientProxy.defaultLibrary.add(0, LibrarySong(superLocal, Minecraft.getMinecraft().player.name, superName, urlField.text, "FFFFFF".toInt(16)))
-                            if (!ClientProxy.localLibrary.exists()) {
-                                with(ClientProxy.localLibrary) {
-                                    parentFile.mkdirs()
-                                    createNewFile()
-                                }
-                            }
-
-                            ClientProxy.localLibrary.writer().use {
-                                it.write(rootObj.toString())
-                            }
-                        }
-                    }
-                }
                 PacketHandler.sendToServer(PacketURLWrite(
                         tileEntity.pos,
                         etchSize,
@@ -197,7 +121,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
         for (i in 0 until 14) {
             val offsetI = page * 14 + i
-            if (offsetI > ClientProxy.defaultLibrary.size - 1) break
+            if (offsetI > Libraries.songs.size - 1) break
             if (x in 178..245 && y in (9 + i * 10)..(17 + i * 10)) {
                 if (selectedLib == offsetI) {
                     selectedLib = -1
@@ -306,15 +230,15 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         for (i in 0 until 14) {
             val offsetI = page * 14 + i
 
-            if (offsetI > ClientProxy.defaultLibrary.size -1) {
+            if (offsetI > Libraries.songs.size -1) {
                 break
             }
 
             if (x in 178..245 && y in (9 + i * 10)..(17 * i + 10)) {
                 glMatrix {
                     val txt = listOf(
-                            ClientProxy.defaultLibrary[offsetI].local,
-                            "\u00a77${I18n.format("item.record.by")}: ${ClientProxy.defaultLibrary[offsetI].author}")
+                            Libraries.songs[offsetI].name,
+                            "\u00a77${I18n.format("item.record.by")}: ${Libraries.songs[offsetI].author}")
                     drawHoveringText(txt, x, y, fontRenderer)
                 }
             }
@@ -335,14 +259,14 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         val mx = mouseX - x
         val my = mouseY - y
 
-        if (ClientProxy.defaultLibrary.isEmpty()) {
+        if (Libraries.songs.isEmpty()) {
             return
         }
 
         for (i in 0 until 14) {
             val offsetI = page * 14 + i
 
-            if (offsetI > ClientProxy.defaultLibrary.size - 1) {
+            if (offsetI > Libraries.songs.size - 1) {
                 break
             }
 
@@ -364,7 +288,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 }
 
                 glVertices(GL11.GL_QUADS) {
-                    with (Color(ClientProxy.defaultLibrary[offsetI].color) ) {
+                    with (Color(Libraries.songs[offsetI].color) ) {
                         GlStateManager.color(red / 255F, green / 255F, blue / 255F)
                     }
 
@@ -381,7 +305,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 } else {
                     4210725
                 }
-                fontRenderer.drawString(ClientProxy.defaultLibrary[offsetI].local, 188, 9 + i * 10, color)
+                fontRenderer.drawString(Libraries.songs[offsetI].name, 188, 9 + i * 10, color)
             }
         }
     }
