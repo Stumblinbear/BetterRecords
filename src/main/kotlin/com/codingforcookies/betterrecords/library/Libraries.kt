@@ -29,6 +29,10 @@ object Libraries {
      * Load both local and remote files
      */
     fun init() {
+        if (LOCAL_LIBRARY_DIR.mkdirs()) {
+            // TODO: Create a local library for etchings
+        }
+
         LOCAL_LIBRARY_DIR
                 .listFiles()
                 .map { LocalLibrary(it) }

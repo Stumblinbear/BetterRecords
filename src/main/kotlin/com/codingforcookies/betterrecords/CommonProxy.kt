@@ -2,6 +2,7 @@ package com.codingforcookies.betterrecords
 
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.handler.GuiHandler
+import com.codingforcookies.betterrecords.library.Libraries
 import com.codingforcookies.betterrecords.network.PacketHandler
 import net.minecraftforge.fml.common.event.FMLInitializationEvent
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent
@@ -18,6 +19,8 @@ open class CommonProxy {
 
     open fun init(event: FMLInitializationEvent) {
         NetworkRegistry.INSTANCE.registerGuiHandler(BetterRecords, GuiHandler())
+
+        Libraries.init()
     }
 
     open fun postInit(event: FMLPostInitializationEvent) {
