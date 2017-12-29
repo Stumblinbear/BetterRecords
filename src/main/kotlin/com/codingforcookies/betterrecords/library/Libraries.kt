@@ -37,5 +37,7 @@ object Libraries {
                 .listFiles()
                 .map { LocalLibrary(it) }
                 .forEach { libraries.add(it) }
+
+        // TODO: Load remote libraries
     }
 }
