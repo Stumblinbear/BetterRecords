@@ -9,7 +9,6 @@ import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.library.Libraries
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketURLWrite
-import com.google.gson.JsonObject
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiTextField
 import net.minecraft.client.gui.inventory.GuiContainer
@@ -35,8 +34,6 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
     var page = 0
     var maxPage = 0
-
-    var rootObj = JsonObject()
 
     var checkedURL = false
     var checkURLTime = 0L
