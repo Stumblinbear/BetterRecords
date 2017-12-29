@@ -3,15 +3,21 @@
   "music": [
     {
       "name": "Song 1",
-      "url": "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3"
+      "author": "Author 1",
+      "url": "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3",
+      "color": "16711680"
     },
     {
       "name": "Song 2",
-      "url": "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3"
+      "author": "Author 2",
+      "url": "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3",
+      "color": "65280"
     },
     {
       "name": "Song 3",
-      "url": "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3"
+      "author": "Author 3",
+      "url": "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3",
+      "color": "255"
     }
   ],
   "radio": [
