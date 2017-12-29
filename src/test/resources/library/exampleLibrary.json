@@ -1,6 +1,6 @@
 {
   "name": "An Example Library",
-  "songs": [
+  "music": [
     {
       "name": "Song 1",
       "url": "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3"
@@ -12,6 +12,16 @@
     {
       "name": "Song 3",
       "url": "https://ia802508.us.archive.org/5/items/testmp3testfile/mpthreetest.mp3"
+    }
+  ],
+  "radio": [
+    {
+      "name": "Station 1",
+      "url": "station-1-url"
+    },
+    {
+      "name": "Station 2",
+      "url": "station-2-url"
     }
   ]
 }
