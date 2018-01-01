@@ -30,7 +30,6 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
     lateinit var urlField: GuiTextField
 
     var selectedLibrary = Libraries.libraries.first()
-    //var selectedSong: LibraryEntryMusic? = selectedLibrary.songs.first()
 
     private var status = Status.NO_RECORD
 
@@ -115,10 +114,16 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
     override fun actionPerformed(button: GuiButton) {
         when (button.id) {
             0 -> {
-                println("LIBRARY LEFT CLICKED")
+                val prevIndex = Libraries.libraries.indexOf(selectedLibrary) - 1
+                // If the index is good, we're happy. Otherwise wrap around to the end
+                val newIndex = if (prevIndex >= 0) prevIndex else Libraries.libraries.lastIndex
+                selectedLibrary = Libraries.libraries[newIndex]
             }
             1 -> {
-                println("LIBRARY RIGHT CLICKED")
+                val nextIndex = Libraries.libraries.indexOf(selectedLibrary) + 1
+                // Wrap around, same shebang as above
+                val newIndex = if (nextIndex <= Libraries.libraries.lastIndex) nextIndex else 0
+                selectedLibrary = Libraries.libraries[newIndex]
             }
             2 -> {
                 println("PAGE LEFT CLICKED")
@@ -138,6 +143,8 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 }
             }
         }
+
+        updateListButtons()
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
@@ -148,6 +155,9 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
             drawString(I18n.format("gui.url") + ": ", 10, 36, 4210752)
 
             drawString(selectedLibrary.name, xSize - 5 - getStringWidth(selectedLibrary.name), 8, 4210752)
+
+            val libraryPageString = "${Libraries.libraries.indexOf(selectedLibrary) + 1}/${Libraries.libraries.lastIndex + 1}"
+            drawString(libraryPageString, 195 + getStringWidth(libraryPageString) / 2, 20, 4210752)
 
             val pageString = "${page + 1}/${maxPage + 1}"
             drawString(pageString, 195 + getStringWidth(pageString) / 2, 151, 4210752)
