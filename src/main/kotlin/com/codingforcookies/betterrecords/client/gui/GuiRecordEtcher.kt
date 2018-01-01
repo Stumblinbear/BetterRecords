@@ -123,7 +123,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         with(fontRenderer) {
             drawString(I18n.format("gui.recordetcher"), 8, 6, 4210752)
-            drawString(I18n.format("container.inventory"), 8, 72, 4210752)
+            //drawString(I18n.format("container.inventory"), 8, 72, 4210752)
             drawString(I18n.format("gui.name") + ": ", 10, 21, 4210752)
             drawString(I18n.format("gui.url") + ": ", 10, 36, 4210752)
 
@@ -187,7 +187,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                             status = Status.MULTIPLAYER
                         }
                     }
-                    if (status != Status.VALIDATING) {
+                    if (status == Status.VALIDATING) {
                         etchSize = connection.contentLength / 1024 / 1024
                         val contentType = connection.contentType
                         status = if (ClientProxy.encodings.contains(contentType))
@@ -235,13 +235,13 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         IO_EXCEPTION("gui.error6"),
         READY("gui.recordetcher.ready");
 
-        var args: MutableCollection<Any> = mutableListOf()
+        var arg: Any = ""
 
-        fun formatParams(vararg args: Any) = this.apply {
-            this.args.clear()
-            this.args.addAll(args)
+        fun formatParams(arg: Any) = this.apply {
+            this.arg = ""
+            this.arg = arg
         }
 
-        val message: String get() = I18n.format(translateKey, args)
+        val message: String get() = I18n.format(translateKey, arg)
     }
 }

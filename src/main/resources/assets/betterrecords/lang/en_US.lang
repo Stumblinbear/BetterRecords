@@ -42,10 +42,10 @@ gui.recordetcher.etch=Etch
 gui.recordetcher.ready=Ready to Etch!
 gui.recordetcher.error1=No record to etch
 gui.recordetcher.error2=Not a blank record
-gui.recordetcher.error3=Max file size is <size>mb
+gui.recordetcher.error3=Max file size is %imb
 gui.recordetcher.error4=Invalid file
 gui.recordetcher.error5=Local files are singleplayer only!
-gui.recordetcher.error6=The content type <type> is not supported!
+gui.recordetcher.error6=%s is not supported!
 
 gui.frequencytuner.tune=Tune
 gui.frequencytuner.ready=Tuner ready!
