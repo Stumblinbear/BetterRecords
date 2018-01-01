@@ -1,7 +1,6 @@
 package com.codingforcookies.betterrecords.client.gui
 
 import com.codingforcookies.betterrecords.ID
-import com.codingforcookies.betterrecords.api.library.LibraryEntryMusic
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
 import com.codingforcookies.betterrecords.client.ClientProxy
 import com.codingforcookies.betterrecords.handler.ConfigHandler
@@ -16,6 +15,7 @@ import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.client.resources.I18n
 import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.util.ResourceLocation
+import net.minecraftforge.fml.client.config.GuiButtonExt
 import org.apache.commons.io.FilenameUtils
 import java.io.IOException
 import java.net.HttpURLConnection
@@ -30,19 +30,14 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
     lateinit var urlField: GuiTextField
 
     var selectedLibrary = Libraries.libraries.first()
-    var selectedSong: LibraryEntryMusic? = selectedLibrary.songs.first()
+    //var selectedSong: LibraryEntryMusic? = selectedLibrary.songs.first()
 
-    private var status = Status.VALIDATING
+    private var status = Status.NO_RECORD
 
     var page = 0
     var maxPage = 0
 
-    var checkedURL = false
-    var checkURLTime = 0L
-
     var selectedLib = -1
-
-    var etchSize = 0
 
     init {
         xSize = 256
@@ -55,6 +50,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         urlField = GuiTextField(2, fontRenderer, 44, 35, 124, 10)
         urlField.maxStringLength = 256
 
+        // Add main buttons
         buttonList.addAll(listOf(
                 // GUI Button image params: id, x, y, width, height, ytexstart, xtexstart, ydifftext
                 // Library Left Button
@@ -68,6 +64,31 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 // Etch Button
                 GuiButton(4, guiLeft + 44, guiTop + 50, 31, 20, "Etch")
         ))
+
+        // Buttons 10-18 are our List buttons
+        (0 until 9).forEach { i ->
+            buttonList.add(GuiButtonExt(10 + i, guiLeft + 176, guiTop + 31 + 13 * i, 72, 13, ""))
+        }
+
+        updateListButtons()
+    }
+
+    private fun updateListButtons() {
+        val songCount = selectedLibrary.songs.count()
+
+        buttonList
+                .takeLast(9 - songCount)
+                .forEach {
+                    it.visible = false
+                }
+
+        buttonList
+                .drop(5)
+                .take(songCount)
+                .forEachIndexed { i, it ->
+                    it.displayString = selectedLibrary.songs[i].name
+                    it.visible = true
+                }
     }
 
     override fun keyTyped(typedChar: Char, keyCode: Int) {
@@ -144,6 +165,9 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         updateStatus()
     }
 
+    var checkedURL = false
+    var checkURLTime = 0L
+
     // This eldritch behemoth lives on
     private fun updateStatus() {
         if (tileEntity.record.isEmpty) {
@@ -187,7 +211,6 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                         }
                     }
                     if (status == Status.VALIDATING) {
-                        etchSize = connection.contentLength / 1024 / 1024
                         val contentType = connection.contentType
                         status = if (ClientProxy.encodings.contains(contentType))
                             Status.READY
