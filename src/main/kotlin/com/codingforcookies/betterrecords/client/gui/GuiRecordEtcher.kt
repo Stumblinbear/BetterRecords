@@ -107,7 +107,6 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
             }
             4 -> { // Etch Button
                 if (status == Status.READY) {
-                    println("ETCHING ${nameField.text}")
                     PacketHandler.sendToServer(PacketURLWrite(
                             tileEntity.pos,
                             URL(urlField.text).openConnection().contentLength / 1024 / 1024,
