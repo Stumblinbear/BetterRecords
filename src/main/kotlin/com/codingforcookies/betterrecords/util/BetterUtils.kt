@@ -36,4 +36,11 @@ object BetterUtils {
                     .replace("\\n", "\n")
                     .split("\n")
 
+    fun wrapInt(x: Int, min: Int, max: Int) =
+            when {
+                x in min..max -> x
+                x < min       -> max
+                else          -> min
+            }
+
 }

@@ -7,6 +7,7 @@ import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.library.Libraries
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketURLWrite
+import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.gui.GuiButtonImage
@@ -34,7 +35,10 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
     private var status = Status.NO_RECORD
 
     var page = 0
-    var maxPage = 0
+    val maxPage get() = Math.ceil(selectedLibrary.songs.size / 9.0).toInt() - 1
+
+    val selectedLibraryIndex get() = Libraries.libraries.indexOf(selectedLibrary)
+    val maxLibraryIndex get() = Libraries.libraries.lastIndex
 
     var selectedLib = -1
 
@@ -74,9 +78,10 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
     private fun updateListButtons() {
         val songCount = selectedLibrary.songs.count()
+        val amountToHide = if (songCount >= 9) 0 else 9 - songCount
 
         buttonList
-                .takeLast(9 - songCount)
+                .takeLast(amountToHide)
                 .forEach {
                     it.visible = false
                 }
@@ -113,23 +118,17 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
     override fun actionPerformed(button: GuiButton) {
         when (button.id) {
-            0 -> {
-                val prevIndex = Libraries.libraries.indexOf(selectedLibrary) - 1
-                // If the index is good, we're happy. Otherwise wrap around to the end
-                val newIndex = if (prevIndex >= 0) prevIndex else Libraries.libraries.lastIndex
-                selectedLibrary = Libraries.libraries[newIndex]
+            0 -> { // Library Left
+                selectedLibrary = Libraries.libraries[BetterUtils.wrapInt(selectedLibraryIndex - 1, 0, maxLibraryIndex)]
             }
-            1 -> {
-                val nextIndex = Libraries.libraries.indexOf(selectedLibrary) + 1
-                // Wrap around, same shebang as above
-                val newIndex = if (nextIndex <= Libraries.libraries.lastIndex) nextIndex else 0
-                selectedLibrary = Libraries.libraries[newIndex]
+            1 -> { // Library Right
+                selectedLibrary = Libraries.libraries[BetterUtils.wrapInt(selectedLibraryIndex + 1, 0, maxLibraryIndex)]
             }
-            2 -> {
-                println("PAGE LEFT CLICKED")
+            2 -> { // Page Left
+                page = BetterUtils.wrapInt(page - 1, 0, maxPage)
             }
-            3 -> {
-                println("PAGE RIGHT CLICKED")
+            3 -> { // Page Right
+                page = BetterUtils.wrapInt(page + 1, 0, maxPage)
             }
             4 -> { // Etch Button
                 if (status == Status.READY) {
