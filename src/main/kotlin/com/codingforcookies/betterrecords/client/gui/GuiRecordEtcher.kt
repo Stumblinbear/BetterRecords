@@ -34,8 +34,8 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
     private var status = Status.NO_RECORD
 
-    var page = 0
-    val maxPage get() = Math.ceil(selectedLibrary.songs.size / 9.0).toInt() - 1
+    var pageIndex = 0
+    val maxPageIndex get() = Math.ceil(selectedLibrary.songs.size / 9.0).toInt() - 1
 
     val selectedLibraryIndex get() = Libraries.libraries.indexOf(selectedLibrary)
     val maxLibraryIndex get() = Libraries.libraries.lastIndex
@@ -77,8 +77,9 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
     }
 
     private fun updateListButtons() {
-        val songCount = selectedLibrary.songs.count()
+        val songCount = selectedLibrary.songs.drop(pageIndex * 9).count()
         val amountToHide = if (songCount >= 9) 0 else 9 - songCount
+        val amountToShow = 9 - amountToHide
 
         buttonList
                 .takeLast(amountToHide)
@@ -88,9 +89,9 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
         buttonList
                 .drop(5)
-                .take(songCount)
+                .take(amountToShow)
                 .forEachIndexed { i, it ->
-                    it.displayString = selectedLibrary.songs[i].name
+                    it.displayString = selectedLibrary.songs[i + pageIndex * 9].name
                     it.visible = true
                 }
     }
@@ -125,10 +126,10 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 selectedLibrary = Libraries.libraries[BetterUtils.wrapInt(selectedLibraryIndex + 1, 0, maxLibraryIndex)]
             }
             2 -> { // Page Left
-                page = BetterUtils.wrapInt(page - 1, 0, maxPage)
+                pageIndex = BetterUtils.wrapInt(pageIndex - 1, 0, maxPageIndex)
             }
             3 -> { // Page Right
-                page = BetterUtils.wrapInt(page + 1, 0, maxPage)
+                pageIndex = BetterUtils.wrapInt(pageIndex + 1, 0, maxPageIndex)
             }
             4 -> { // Etch Button
                 if (status == Status.READY) {
@@ -158,7 +159,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
             val libraryPageString = "${Libraries.libraries.indexOf(selectedLibrary) + 1}/${Libraries.libraries.lastIndex + 1}"
             drawString(libraryPageString, 195 + getStringWidth(libraryPageString) / 2, 20, 4210752)
 
-            val pageString = "${page + 1}/${maxPage + 1}"
+            val pageString = "${pageIndex + 1}/${maxPageIndex + 1}"
             drawString(pageString, 195 + getStringWidth(pageString) / 2, 151, 4210752)
 
             val statusColor = when (status) {
