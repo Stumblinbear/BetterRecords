@@ -1,25 +1,22 @@
 package com.codingforcookies.betterrecords.client.gui
 
 import com.codingforcookies.betterrecords.ID
+import com.codingforcookies.betterrecords.api.library.LibraryEntryMusic
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
 import com.codingforcookies.betterrecords.client.ClientProxy
-import com.codingforcookies.betterrecords.extensions.glMatrix
-import com.codingforcookies.betterrecords.extensions.glVertices
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.library.Libraries
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketURLWrite
 import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.GuiButton
+import net.minecraft.client.gui.GuiButtonImage
 import net.minecraft.client.gui.GuiTextField
 import net.minecraft.client.gui.inventory.GuiContainer
-import net.minecraft.client.renderer.GlStateManager
-import net.minecraft.client.renderer.RenderHelper
 import net.minecraft.client.resources.I18n
 import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.util.ResourceLocation
 import org.apache.commons.io.FilenameUtils
-import org.lwjgl.opengl.GL11
-import java.awt.Color
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
@@ -32,13 +29,16 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
     lateinit var nameField: GuiTextField
     lateinit var urlField: GuiTextField
 
+    var selectedLibrary = Libraries.libraries.first()
+    var selectedSong: LibraryEntryMusic? = selectedLibrary.songs.first()
+
+    private var status = Status.VALIDATING
+
     var page = 0
     var maxPage = 0
 
     var checkedURL = false
     var checkURLTime = 0L
-
-    var error = ""
 
     var selectedLib = -1
 
@@ -55,7 +55,19 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         urlField = GuiTextField(2, fontRenderer, 44, 35, 124, 10)
         urlField.maxStringLength = 256
 
-        maxPage = Math.ceil(Libraries.songs.size.toDouble() / 14).toInt()
+        buttonList.addAll(listOf(
+                // GUI Button image params: id, x, y, width, height, ytexstart, xtexstart, ydifftext
+                // Library Left Button
+                GuiButtonImage(0, guiLeft + 175, guiTop + 20, 20, 9, 0, 166, 0, GUI),
+                // Library Right Button
+                GuiButtonImage(1, guiLeft + 229, guiTop + 20, 20, 9, 20, 166, 0, GUI),
+                // Page Left Button
+                GuiButtonImage(2, guiLeft + 175, guiTop + 150, 20, 9, 0, 166, 0, GUI),
+                // Page Right Button
+                GuiButtonImage(3, guiLeft + 229, guiTop + 150, 20, 9, 20, 166, 0, GUI),
+                // Etch Button
+                GuiButton(4, guiLeft + 44, guiTop + 50, 31, 20, "Etch")
+        ))
     }
 
     override fun keyTyped(typedChar: Char, keyCode: Int) {
@@ -77,57 +89,32 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
         nameField.mouseClicked(x, y, mouseButton)
         urlField.mouseClicked(x, y, mouseButton)
+    }
 
-        if (error == I18n.format("gui.recordetcher.ready") && x in 44..75 && y in 51..66) {
-            if (selectedLib != -1) {
-                with(Libraries.songs[selectedLib]) {
+    override fun actionPerformed(button: GuiButton) {
+        when (button.id) {
+            0 -> {
+                println("LIBRARY LEFT CLICKED")
+            }
+            1 -> {
+                println("LIBRARY RIGHT CLICKED")
+            }
+            2 -> {
+                println("PAGE LEFT CLICKED")
+            }
+            3 -> {
+                println("PAGE RIGHT CLICKED")
+            }
+            4 -> { // Etch Button
+                if (status == Status.READY) {
+                    println("ETCHING ${nameField.text}")
                     PacketHandler.sendToServer(PacketURLWrite(
                             tileEntity.pos,
-                            URL(url).openConnection().contentLength / 1024 / 1024,
-                            name,
-                            url,
-                            name,
-                            color,
-                            author
+                            URL(urlField.text).openConnection().contentLength / 1024 / 1024,
+                            FilenameUtils.getName(urlField.text).split("#", "?")[0], // TODO
+                            urlField.text, // TODO
+                            nameField.text.trim()
                     ))
-                }
-            } else {
-                val superName = FilenameUtils.getName(urlField.text)
-                        .split("#", "?")[0]
-                val superLocal = nameField.text.trim()
-
-                PacketHandler.sendToServer(PacketURLWrite(
-                        tileEntity.pos,
-                        etchSize,
-                        superName,
-                        urlField.text,
-                        superLocal
-                ))
-            }
-        }
-
-        if (x in 175..195 && y in 150..159) {
-            if (page > 0) {
-                page--
-            }
-        } else if (x in 229..249 && y in 150..159) {
-            if (page < maxPage) {
-                page++
-            }
-        }
-
-        for (i in 0 until 14) {
-            val offsetI = page * 14 + i
-            if (offsetI > Libraries.songs.size - 1) break
-            if (x in 178..245 && y in (9 + i * 10)..(17 + i * 10)) {
-                if (selectedLib == offsetI) {
-                    selectedLib = -1
-                    nameField.setEnabled(true)
-                    urlField.setEnabled(true)
-                } else {
-                    selectedLib = offsetI
-                    nameField.setEnabled(false)
-                    urlField.setEnabled(false)
                 }
             }
         }
@@ -136,49 +123,44 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         with(fontRenderer) {
             drawString(I18n.format("gui.recordetcher"), 8, 6, 4210752)
-            drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752)
+            drawString(I18n.format("container.inventory"), 8, 72, 4210752)
             drawString(I18n.format("gui.name") + ": ", 10, 21, 4210752)
             drawString(I18n.format("gui.url") + ": ", 10, 36, 4210752)
-        }
 
-        val x = mouseX - (width - xSize) / 2
-        val y = mouseY - (height - ySize) / 2
+            drawString(selectedLibrary.name, xSize - 5 - getStringWidth(selectedLibrary.name), 8, 4210752)
 
-        with(fontRenderer) {
-            val etchColor = if (error == I18n.format("gui.recordetcher.ready")) {
-                if (x in 44..75 && y in 51..66) {
-                    0xFFFF55
-                } else {
-                    0xFFFFFF
-                }
-            } else {
-                0x555555
+            val pageString = "${page + 1}/${maxPage + 1}"
+            drawString(pageString, 195 + getStringWidth(pageString) / 2, 151, 4210752)
+
+            val statusColor = when (status) {
+                Status.READY -> 0x229922
+                else -> 0x992222
             }
-
-            val errorColor = if (error == I18n.format("gui.recordetcher.ready")) 0x229922 else 0x992222
-
-            drawStringWithShadow(I18n.format("gui.recordetcher.etch"), 50F, 53F, etchColor)
-            drawString(error, 172 - fontRenderer.getStringWidth(error), 65, errorColor)
+            drawString(status.message, 172 - getStringWidth(status.message), 72, statusColor)
         }
 
         nameField.drawTextBox()
         urlField.drawTextBox()
 
-        // TODO: Sort out this eldritch behemoth
+        updateStatus()
+    }
+
+    // This eldritch behemoth lives on
+    private fun updateStatus() {
         if (tileEntity.record.isEmpty) {
-            error = I18n.format("gui.recordetcher.error1")
+            status = Status.NO_RECORD
         } else if (tileEntity.record.hasTagCompound() && tileEntity.record.tagCompound!!.hasKey("url")) {
-            error = I18n.format("gui.recordetcher.error2")
+            status = Status.NOT_BLANK_RECORD
         } else if (selectedLib != -1) {
-            error = I18n.format("gui.recordetcher.ready")
+            status = Status.READY
         } else if (nameField.text.isEmpty()) {
-            error = I18n.format("gui.error1")
+            status = Status.NO_NAME
         } else if (nameField.text.length < 3) {
-            error = I18n.format("gui.error2")
+            status = Status.NAME_TOO_SHORT
         } else if (urlField.text.isEmpty()) {
-            error = I18n.format("gui.error3")
+            status = Status.NO_URL
         } else if (!checkedURL) {
-            error = I18n.format("gui.validating")
+            status = Status.VALIDATING
             if (checkURLTime < System.currentTimeMillis()) {
                 checkURLTime = 0
                 val url: URL
@@ -190,126 +172,76 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                         connection.connect()
                         if (connection.responseCode == 200) {
                             if (connection.getContentLength() / 1024 / 1024 > (if (ConfigHandler.downloadMax != 100) ConfigHandler.downloadMax else 102400)) {
-                                error = I18n.format("gui.recordetcher.error3").replace("<size>", "" + ConfigHandler.downloadMax)
+                                status = Status.FILE_TOO_BIG.formatParams(ConfigHandler.downloadMax)
                             }
-                        } else
-                            error = I18n.format("gui.error4")
+                        } else {
+                            status = Status.INVALID_URL
+                        }
                     } else {
                         if (Minecraft.getMinecraft().world.isRemote) {
                             connection.connect()
-                            if (connection.contentLength == 0) error = I18n.format("gui.recordetcher.error4")
-                        } else
-                            error = I18n.format("gui.recordetcher.error5")
+                            if (connection.contentLength == 0) {
+                                status = Status.INVALID_FILE
+                            }
+                        } else {
+                            status = Status.MULTIPLAYER
+                        }
                     }
-                    if (error != "") {
+                    if (status != Status.VALIDATING) {
                         etchSize = connection.contentLength / 1024 / 1024
                         val contentType = connection.contentType
-                        error = if (ClientProxy.encodings.contains(contentType))
-                            I18n.format("gui.recordetcher.ready")
+                        status = if (ClientProxy.encodings.contains(contentType))
+                            Status.READY
                         else
-                            I18n.format("gui.recordetcher.error1").replace("<type>", contentType)
+                            Status.INVALID_FILE_ENCODING.formatParams(contentType)
                     }
                 } catch (e: MalformedURLException) {
-                    error = I18n.format("gui.error5")
+                    status = Status.INVALID_URL
                 } catch (e: StringIndexOutOfBoundsException) {
-                    error = I18n.format("gui.error5")
+                    status = Status.INVALID_URL
                 } catch (e: IOException) {
-                    error = I18n.format("gui.error6")
+                    status = Status.IO_EXCEPTION
                 } finally {
                     checkedURL = true
-                }
-            }
-        }
-
-        val pageString = "${page + 1}/${maxPage + 1}"
-        fontRenderer.drawString(pageString, 195 + fontRenderer.getStringWidth(pageString) / 2, 151, 4210752)
-
-        for (i in 0 until 14) {
-            val offsetI = page * 14 + i
-
-            if (offsetI > Libraries.songs.size -1) {
-                break
-            }
-
-            if (x in 178..245 && y in (9 + i * 10)..(17 * i + 10)) {
-                glMatrix {
-                    val txt = listOf(
-                            Libraries.songs[offsetI].name,
-                            "\u00a77${I18n.format("item.record.by")}: ${Libraries.songs[offsetI].author}")
-                    drawHoveringText(txt, x, y, fontRenderer)
                 }
             }
         }
     }
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
-        GlStateManager.color(1F, 1F, 1F, 1F)
-
-        val x = (width - xSize) / 2
-        val y = (height - ySize) / 2
-
         mc.renderEngine.bindTexture(GUI)
-
-        drawTexturedModalRect(x, y, 0, 0, xSize, ySize)
-        drawTexturedModalRect(x + 44, y + 51, 0, if (error == I18n.format("gui.recordetcher.ready")) 166 else 178, 33, 12)
-
-        val mx = mouseX - x
-        val my = mouseY - y
-
-        if (Libraries.songs.isEmpty()) {
-            return
-        }
-
-        for (i in 0 until 14) {
-            val offsetI = page * 14 + i
-
-            if (offsetI > Libraries.songs.size - 1) {
-                break
-            }
-
-            glMatrix {
-                GlStateManager.translate(x.toDouble(), y.toDouble(), 0.toDouble())
-
-                GlStateManager.disableTexture2D()
-                RenderHelper.disableStandardItemLighting()
-
-                if (selectedLib == offsetI) {
-                    glVertices(GL11.GL_QUADS) {
-                        GlStateManager.color(.7F, .7F, .7F)
-                        // No GlStateManager methods for this?
-                        GL11.glVertex2i(284, 8 + i * 10)
-                        GL11.glVertex2i(176, 8 + i * 10)
-                        GL11.glVertex2i(176, 18 + i * 10)
-                        GL11.glVertex2i(284, 18 + i * 10)
-                    }
-                }
-
-                glVertices(GL11.GL_QUADS) {
-                    with (Color(Libraries.songs[offsetI].color) ) {
-                        GlStateManager.color(red / 255F, green / 255F, blue / 255F)
-                    }
-
-                    GL11.glVertex2i(185, 9 + i * 10)
-                    GL11.glVertex2i(178, 9 + i * 10)
-                    GL11.glVertex2i(178, 17 + i * 10)
-                    GL11.glVertex2i(185, 17 + i * 10)
-                }
-
-                GlStateManager.enableTexture2D()
-
-                val color = if (mx in 178..245 && my in (9 + i * 10)..(17 + i * 10)) {
-                    0xFFFF00
-                } else {
-                    4210725
-                }
-                fontRenderer.drawString(Libraries.songs[offsetI].name, 188, 9 + i * 10, color)
-            }
-        }
+        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize)
     }
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
         drawDefaultBackground()
         super.drawScreen(mouseX, mouseY, partialTicks)
         renderHoveredToolTip(mouseX, mouseY)
+    }
+
+    private enum class Status(val translateKey: String) {
+
+        VALIDATING("gui.validating"),
+        NO_RECORD("gui.recordetcher.error1"),
+        NOT_BLANK_RECORD("gui.recordetcher.error2"),
+        NO_NAME("gui.error1"),
+        NAME_TOO_SHORT("gui.error2"),
+        NO_URL("gui.error3"),
+        INVALID_URL("gui.error5"),
+        FILE_TOO_BIG("gui.recordetcher.error3"),
+        INVALID_FILE("gui.recordetcher.error4"),
+        INVALID_FILE_ENCODING("gui.recordetcher.error6"),
+        MULTIPLAYER("gui.recordetcher.error5"),
+        IO_EXCEPTION("gui.error6"),
+        READY("gui.recordetcher.ready");
+
+        var args: MutableCollection<Any> = mutableListOf()
+
+        fun formatParams(vararg args: Any) = this.apply {
+            this.args.clear()
+            this.args.addAll(args)
+        }
+
+        val message: String get() = I18n.format(translateKey, args)
     }
 }

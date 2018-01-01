@@ -13,6 +13,9 @@ sealed class Library {
      */
     abstract protected val libraryContent: LibraryContent
 
+    val name
+        get() = libraryContent.name
+
     /**
      * The list of songs in this library
      */
