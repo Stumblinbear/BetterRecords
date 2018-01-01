@@ -121,9 +121,11 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         when (button.id) {
             0 -> { // Library Left
                 selectedLibrary = Libraries.libraries[BetterUtils.wrapInt(selectedLibraryIndex - 1, 0, maxLibraryIndex)]
+                pageIndex = 0
             }
             1 -> { // Library Right
                 selectedLibrary = Libraries.libraries[BetterUtils.wrapInt(selectedLibraryIndex + 1, 0, maxLibraryIndex)]
+                pageIndex = 0
             }
             2 -> { // Page Left
                 pageIndex = BetterUtils.wrapInt(pageIndex - 1, 0, maxPageIndex)
