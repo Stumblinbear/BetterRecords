@@ -3,6 +3,7 @@ package com.codingforcookies.betterrecords.client.gui
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
 import com.codingforcookies.betterrecords.client.ClientProxy
+import com.codingforcookies.betterrecords.client.gui.parts.GuiButtonLibrary
 import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.library.Libraries
 import com.codingforcookies.betterrecords.network.PacketHandler
@@ -16,7 +17,6 @@ import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.client.resources.I18n
 import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.util.ResourceLocation
-import net.minecraftforge.fml.client.config.GuiButtonExt
 import org.apache.commons.io.FilenameUtils
 import java.io.IOException
 import java.net.HttpURLConnection
@@ -70,7 +70,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
         // Buttons 10-18 are our List buttons
         (0 until 9).forEach { i ->
-            buttonList.add(GuiButtonExt(10 + i, guiLeft + 176, guiTop + 31 + 13 * i, 72, 13, ""))
+            buttonList.add(GuiButtonLibrary(10 + i, guiLeft + 176, guiTop + 31 + 13 * i, 72, 13, "", 0xFFFFFF))
         }
 
         updateListButtons()
@@ -90,8 +90,11 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         buttonList
                 .drop(5)
                 .take(amountToShow)
+                .filterIsInstance<GuiButtonLibrary>()
                 .forEachIndexed { i, it ->
-                    it.displayString = selectedLibrary.songs[i + pageIndex * 9].name
+                    val entry = selectedLibrary.songs[i + pageIndex * 9]
+                    it.displayString = entry.name
+                    it.color = entry.color
                     it.visible = true
                 }
     }
@@ -143,6 +146,9 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                             nameField.text.trim()
                     ))
                 }
+            }
+            in 10..18 -> { // One of the Library buttons
+
             }
         }
 
