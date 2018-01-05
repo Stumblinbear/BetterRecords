@@ -44,7 +44,11 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
     val maxLibraryIndex get() = Libraries.libraries.lastIndex
 
     var pageIndex = 0
-    val maxPageIndex get() = Math.ceil(selectedLibrary.songs.size / 9.0).toInt() - 1
+    val maxPageIndex: Int
+        get() {
+            val x = Math.ceil(selectedLibrary.songs.size / 9.0).toInt() - 1
+            return if (x > 0) x else 0
+        }
 
     init {
         xSize = 292
