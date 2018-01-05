@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.library
 
+import com.codingforcookies.betterrecords.ModConfig
 import net.minecraft.client.Minecraft
 import java.io.File
 
@@ -39,6 +40,14 @@ object Libraries {
             // TODO: Create a local library for etchings
         }
 
+        // Load the mod's built in libraries
+        if (ModConfig.client.loadDefaultLibraries) {
+            listOf("/assets/betterrecords/libraries/kevin_macleod.json")
+                    .map { RemoteLibrary(this::class.java.getResource(it)) }
+                    .forEach { libraries.add(it) }
+        }
+
+        // Load all of the local library files
         LOCAL_LIBRARY_DIR
                 .listFiles()
                 .map { LocalLibrary(it) }

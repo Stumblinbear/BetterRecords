@@ -72,7 +72,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 GuiButton(4, guiLeft + 44, guiTop + 50, 31, 20, "Etch")
         ))
 
-        val blankEntry = LibraryEntryMusic("", "", "", 0xFFFFFF) // Blank entry to init buttons with
+        val blankEntry = LibraryEntryMusic("", "", "", "FFFFFF") // Blank entry to init buttons with
         // Buttons 10-18 are our List buttons
         (0 until 9).forEach { i ->
             buttonList.add(GuiButtonLibrary(10 + i, guiLeft + 176, guiTop + 31 + 13 * i, 108, 13, "", blankEntry))
@@ -180,7 +180,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 if (button is GuiButtonLibrary) { // Should be, we just want smart casting.
                     nameField.text = button.entry.name
                     urlField.text = button.entry.url
-                    color = button.entry.color
+                    color = button.entry.colorInt
                     author = button.entry.author
                 }
 

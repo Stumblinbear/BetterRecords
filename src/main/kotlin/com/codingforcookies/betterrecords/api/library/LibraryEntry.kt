@@ -16,8 +16,11 @@ data class LibraryEntryMusic(
         /** The url of the file */
         val url: String,
         /** The color for the record */
-        val color: Int
-) : LibraryEntry()
+        val color: String
+) : LibraryEntry() {
+
+        val colorInt get() = color.toInt(16) // Radix 16 to convert hex
+}
 
 /**
  * Class representing a radio library entry

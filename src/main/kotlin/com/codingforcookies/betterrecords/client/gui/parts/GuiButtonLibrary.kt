@@ -17,7 +17,7 @@ class GuiButtonLibrary(id: Int, xPos: Int, yPos: Int, width: Int, height: Int, d
         if (visible) {
             GlStateManager.disableTexture2D()
             glVertices(GL11.GL_QUADS) {
-                with (Color(entry.color)) {
+                with (Color(entry.colorInt)) {
                     GlStateManager.color(red / 255F, green / 255F, blue / 255F, .50F)
                 }
 
