@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.client.gui.parts
 
+import com.codingforcookies.betterrecords.api.library.LibraryEntryMusic
 import com.codingforcookies.betterrecords.extensions.glVertices
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
@@ -7,7 +8,7 @@ import net.minecraftforge.fml.client.config.GuiButtonExt
 import org.lwjgl.opengl.GL11
 import java.awt.Color
 
-class GuiButtonLibrary(id: Int, xPos: Int, yPos: Int, width: Int, height: Int, displayString: String, var color: Int)
+class GuiButtonLibrary(id: Int, xPos: Int, yPos: Int, width: Int, height: Int, displayString: String, var entry: LibraryEntryMusic)
     : GuiButtonExt(id, xPos, yPos, width, height, displayString) {
 
     override fun drawButton(mc: Minecraft, mouseX: Int, mouseY: Int, partial: Float) {
@@ -16,7 +17,7 @@ class GuiButtonLibrary(id: Int, xPos: Int, yPos: Int, width: Int, height: Int, d
         if (visible) {
             GlStateManager.disableTexture2D()
             glVertices(GL11.GL_QUADS) {
-                with (Color(color)) {
+                with (Color(entry.color)) {
                     GlStateManager.color(red / 255F, green / 255F, blue / 255F, .50F)
                 }
 

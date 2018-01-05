@@ -1,6 +1,7 @@
 package com.codingforcookies.betterrecords.client.gui
 
 import com.codingforcookies.betterrecords.ID
+import com.codingforcookies.betterrecords.api.library.LibraryEntryMusic
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
 import com.codingforcookies.betterrecords.client.ClientProxy
 import com.codingforcookies.betterrecords.client.gui.parts.GuiButtonLibrary
@@ -31,6 +32,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
     lateinit var nameField: GuiTextField
     lateinit var urlField: GuiTextField
     private var color = 0xFFFFFF
+    private var author = Minecraft.getMinecraft().player.name
 
     /**
      * The current status of the GUI. This is updated in [updateStatus]
@@ -70,9 +72,10 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 GuiButton(4, guiLeft + 44, guiTop + 50, 31, 20, "Etch")
         ))
 
+        val blankEntry = LibraryEntryMusic("", "", "", 0xFFFFFF) // Blank entry to init buttons with
         // Buttons 10-18 are our List buttons
         (0 until 9).forEach { i ->
-            buttonList.add(GuiButtonLibrary(10 + i, guiLeft + 176, guiTop + 31 + 13 * i, 108, 13, "", 0xFFFFFF))
+            buttonList.add(GuiButtonLibrary(10 + i, guiLeft + 176, guiTop + 31 + 13 * i, 108, 13, "", blankEntry))
         }
 
         updateListButtons()
@@ -97,8 +100,8 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 .take(amountToShow)
                 .forEachIndexed { i, it ->
                     val entry = selectedLibrary.songs[i + pageIndex * 9]
+                    it.entry = entry
                     it.displayString = entry.name
-                    it.color = entry.color
                     it.visible = true
                 }
     }
@@ -110,17 +113,22 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         nameField.text = ""
         urlField.text = ""
         color = 0xFFFFFF
+        author = Minecraft.getMinecraft().player.name
     }
 
     override fun keyTyped(typedChar: Char, keyCode: Int) {
-        checkedURL = false
-        checkURLTime = System.currentTimeMillis() + 2000
+        resetCheck()
 
         when {
             nameField.isFocused -> nameField.textboxKeyTyped(typedChar, keyCode)
             urlField.isFocused -> urlField.textboxKeyTyped(typedChar, keyCode)
             else -> super.keyTyped(typedChar, keyCode)
         }
+    }
+
+    private fun resetCheck() {
+        checkedURL = false
+        checkURLTime = System.currentTimeMillis() + 2000
     }
 
     override fun mouseClicked(mouseX: Int, mouseY: Int, mouseButton: Int) {
@@ -158,16 +166,25 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                     PacketHandler.sendToServer(PacketURLWrite(
                             tileEntity.pos,
                             URL(urlField.text).openConnection().contentLength / 1024 / 1024,
-                            FilenameUtils.getName(urlField.text).split("#", "?")[0], // TODO
-                            urlField.text, // TODO
-                            nameField.text.trim()
+                            FilenameUtils.getName(urlField.text).split("#", "?")[0],
+                            urlField.text,
+                            nameField.text.trim(),
+                            color,
+                            author
                     ))
 
                     resetGUI()
                 }
             }
             in 10..18 -> { // One of the Library buttons
+                if (button is GuiButtonLibrary) { // Should be, we just want smart casting.
+                    nameField.text = button.entry.name
+                    urlField.text = button.entry.url
+                    color = button.entry.color
+                    author = button.entry.author
+                }
 
+                resetCheck()
             }
         }
     }
