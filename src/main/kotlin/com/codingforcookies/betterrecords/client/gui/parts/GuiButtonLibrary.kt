@@ -18,7 +18,7 @@ class GuiButtonLibrary(id: Int, xPos: Int, yPos: Int, width: Int, height: Int, d
             GlStateManager.disableTexture2D()
             glVertices(GL11.GL_QUADS) {
                 with (Color(entry.colorInt)) {
-                    GlStateManager.color(red / 255F, green / 255F, blue / 255F, .50F)
+                    GlStateManager.color(red / 255F, green / 255F, blue / 255F)
                 }
 
                 val topY = y + 2 // two from the top
