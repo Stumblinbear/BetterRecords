@@ -29,18 +29,20 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
     lateinit var nameField: GuiTextField
     lateinit var urlField: GuiTextField
+    private var color = 0xFFFFFF
+
+    /**
+     * The current status of the GUI. This is updated in [updateStatus]
+     */
+    private var status = Status.NO_RECORD
 
     var selectedLibrary = Libraries.libraries.first()
-
-    private var status = Status.NO_RECORD
+    val selectedLibraryIndex get() = Libraries.libraries.indexOf(selectedLibrary)
+    val maxLibraryIndex get() = Libraries.libraries.lastIndex
 
     var pageIndex = 0
     val maxPageIndex get() = Math.ceil(selectedLibrary.songs.size / 9.0).toInt() - 1
 
-    val selectedLibraryIndex get() = Libraries.libraries.indexOf(selectedLibrary)
-    val maxLibraryIndex get() = Libraries.libraries.lastIndex
-
-    var selectedLib = -1
 
     init {
         xSize = 256
@@ -76,6 +78,9 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         updateListButtons()
     }
 
+    /**
+     * Update the info attached to buttons 10-18, which are our list buttons
+     */
     private fun updateListButtons() {
         val songCount = selectedLibrary.songs.drop(pageIndex * 9).count()
         val amountToHide = if (songCount >= 9) 0 else 9 - songCount
@@ -88,15 +93,23 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 }
 
         buttonList
-                .drop(5)
-                .take(amountToShow)
                 .filterIsInstance<GuiButtonLibrary>()
+                .take(amountToShow)
                 .forEachIndexed { i, it ->
                     val entry = selectedLibrary.songs[i + pageIndex * 9]
                     it.displayString = entry.name
                     it.color = entry.color
                     it.visible = true
                 }
+    }
+
+    /**
+     * Clear any user entries to the GUI, minus the state of the library view.
+     */
+    private fun resetGUI() {
+        nameField.text = ""
+        urlField.text = ""
+        color = 0xFFFFFF
     }
 
     override fun keyTyped(typedChar: Char, keyCode: Int) {
@@ -125,16 +138,20 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
             0 -> { // Library Left
                 selectedLibrary = Libraries.libraries[BetterUtils.wrapInt(selectedLibraryIndex - 1, 0, maxLibraryIndex)]
                 pageIndex = 0
+                updateListButtons()
             }
             1 -> { // Library Right
                 selectedLibrary = Libraries.libraries[BetterUtils.wrapInt(selectedLibraryIndex + 1, 0, maxLibraryIndex)]
                 pageIndex = 0
+                updateListButtons()
             }
             2 -> { // Page Left
                 pageIndex = BetterUtils.wrapInt(pageIndex - 1, 0, maxPageIndex)
+                updateListButtons()
             }
             3 -> { // Page Right
                 pageIndex = BetterUtils.wrapInt(pageIndex + 1, 0, maxPageIndex)
+                updateListButtons()
             }
             4 -> { // Etch Button
                 if (status == Status.READY) {
@@ -145,14 +162,14 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                             urlField.text, // TODO
                             nameField.text.trim()
                     ))
+
+                    resetGUI()
                 }
             }
             in 10..18 -> { // One of the Library buttons
 
             }
         }
-
-        updateListButtons()
     }
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
@@ -183,17 +200,20 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         updateStatus()
     }
 
-    var checkedURL = false
-    var checkURLTime = 0L
+    // Fields required for [updateStatus] to do its thing.
+    private var checkedURL = false
+    private var checkURLTime = 0L
 
-    // This eldritch behemoth lives on
+    /**
+     * Update the current status of the GUI.
+     *
+     * Currently, this is called form [drawGuiContainerForegroundLayer]
+     */
     private fun updateStatus() {
         if (tileEntity.record.isEmpty) {
             status = Status.NO_RECORD
         } else if (tileEntity.record.hasTagCompound() && tileEntity.record.tagCompound!!.hasKey("url")) {
             status = Status.NOT_BLANK_RECORD
-        } else if (selectedLib != -1) {
-            status = Status.READY
         } else if (nameField.text.isEmpty()) {
             status = Status.NO_NAME
         } else if (nameField.text.length < 3) {
@@ -259,6 +279,12 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
         renderHoveredToolTip(mouseX, mouseY)
     }
 
+    /**
+     * Enum representing every possible status of our GUI,
+     * as well as translation keys.
+     *
+     * Kind of ugly, but is better than what we had before.
+     */
     private enum class Status(val translateKey: String) {
 
         VALIDATING("gui.validating"),
