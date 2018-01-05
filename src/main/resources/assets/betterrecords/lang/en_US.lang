@@ -95,3 +95,16 @@ overlay.nowplaying=Now Playing
 overlay.nowplaying.error1=Error: Please wait for song to finish downloading...
 overlay.nowplaying.error2=Error: Could not read stream.
 overlay.nowplaying.error3=Error: Could not read file.
+
+### Config Strings
+betterrecords.config.title=BetterRecords Config
+betterrecords.general.maxspeakerradius=Max Speaker Radius
+
+betterrecords.general.client=Client
+betterrecords.general.client.downloadsongs=Download Songs
+betterrecords.general.client.devmode=Dev Mode
+betterrecords.general.client.downloadmax=Download Max
+betterrecords.general.client.playwhiledownloading=Play While Downloading
+betterrecords.general.client.streambuffer=Stream Buffer
+betterrecords.general.client.streamradio=Stream Radio
+betterrecords.general.client.flashmode=Flash Mode
