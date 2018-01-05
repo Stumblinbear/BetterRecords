@@ -85,24 +85,20 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
      * Update the info attached to buttons 10-18, which are our list buttons
      */
     private fun updateListButtons() {
-        val songCount = selectedLibrary.songs.drop(pageIndex * 9).count()
-        val amountToHide = if (songCount >= 9) 0 else 9 - songCount
-        val amountToShow = 9 - amountToHide
-
-        buttonList
-                .takeLast(amountToHide)
-                .forEach {
-                    it.visible = false
-                }
-
         buttonList
                 .filterIsInstance<GuiButtonLibrary>()
-                .take(amountToShow)
                 .forEachIndexed { i, it ->
-                    val entry = selectedLibrary.songs[i + pageIndex * 9]
-                    it.entry = entry
-                    it.displayString = entry.name
-                    it.visible = true
+                    val indexToGet = i + pageIndex * 9
+
+                    val entry = selectedLibrary.songs.getOrNull(indexToGet)
+
+                    if (entry != null) {
+                        it.entry = entry
+                        it.displayString = entry.name
+                        it.visible = true
+                    } else {
+                        it.visible = false
+                    }
                 }
     }
 

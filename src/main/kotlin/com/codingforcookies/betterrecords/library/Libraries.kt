@@ -36,8 +36,13 @@ object Libraries {
      * Load both local and remote files
      */
     fun init() {
-        if (LOCAL_LIBRARY_DIR.mkdirs()) {
-            // TODO: Create a local library for etchings
+        LOCAL_LIBRARY_DIR.mkdirs()
+
+        // Create an empty library for their etchings if it doesn't exist. We need at least one library.
+        with (File(LOCAL_LIBRARY_DIR, "myEtchings.json")) {
+            if (!exists()) {
+                writeText(this::class.java.getResource("/assets/betterrecords/libraries/empty_library.json").readText())
+            }
         }
 
         // Load the mod's built in libraries
