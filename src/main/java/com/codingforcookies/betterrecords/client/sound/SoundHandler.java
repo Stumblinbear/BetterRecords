@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.client.sound;
 
+import com.codingforcookies.betterrecords.ModConfig;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
-import com.codingforcookies.betterrecords.handler.ConfigHandler;
 import com.codingforcookies.betterrecords.util.BetterUtils;
 import com.codingforcookies.betterrecords.util.ClasspathInjector;
 import net.minecraft.client.Minecraft;
@@ -98,7 +98,7 @@ public class SoundHandler{
             }else sndMgr = soundPlaying.get(x + "," + y + "," + z + "," + dimension);
             for(int i = songIndex; i < sounds.size(); i++){
                 if(!soundList.containsKey(sounds.get(i).name)) {
-                    if(ConfigHandler.INSTANCE.getDownloadSongs()) {
+                    if(ModConfig.client.downloadSongs) {
                         if(FileDownloader.isDownloading) {
                             System.err.println("Song downloading... Please wait...");
                             nowPlaying = BetterUtils.INSTANCE.getTranslatedString("overlay.nowplaying.error1");
@@ -156,7 +156,7 @@ public class SoundHandler{
     }
 
     public static void playSoundFromStream(final BlockPos pos, final int dimension, final float playRadius, final String localName, final String url){
-        if(!ConfigHandler.INSTANCE.getStreamRadio()) return;
+        if(!ModConfig.client.streamRadio) return;
 
         int x = pos.getX();
         int y = pos.getY();
@@ -238,7 +238,7 @@ public class SoundHandler{
     }
 
     private static void stream(AudioInputStream in, SourceDataLine line, int x, int y, int z, int dimension, BetterSoundType soundType) throws IOException{
-        final byte[] buffer = new byte[ConfigHandler.INSTANCE.getStreamBuffer()];
+        final byte[] buffer = new byte[ModConfig.client.streamBuffer];
         for(int n = 0; n != -1; n = in.read(buffer, 0, buffer.length)){
             while(Minecraft.getMinecraft().isSingleplayer() && Minecraft.getMinecraft().currentScreen != null && Minecraft.getMinecraft().currentScreen.doesGuiPauseGame()){
                 try{
@@ -247,7 +247,7 @@ public class SoundHandler{
                     e.printStackTrace();
                 }
             }
-            if(soundPlaying.get(x + "," + y + "," + z + "," + dimension) == null || (soundType == BetterSoundType.RADIO && !ConfigHandler.INSTANCE.getStreamRadio())) return;
+            if(soundPlaying.get(x + "," + y + "," + z + "," + dimension) == null || (soundType == BetterSoundType.RADIO && !ModConfig.client.streamRadio)) return;
             updateAmplitude(buffer, x, y, z, dimension);
             line.write(buffer, 0, n);
         }
@@ -290,8 +290,8 @@ public class SoundHandler{
             avg = avg / toReturn.length;
             if(control) {
                 if(avg < 0F) avg = Math.abs(avg);
-                if(avg > 20F) return(ConfigHandler.INSTANCE.getFlashyMode() < 3 ? 10F : 20F);
-                else return (int) (avg * (ConfigHandler.INSTANCE.getFlashyMode() < 3 ? 1F : 2F));
+                if(avg > 20F) return(ModConfig.client.flashMode < 3 ? 10F : 20F);
+                else return (int) (avg * (ModConfig.client.flashMode < 3 ? 1F : 2F));
             }
             return avg;
         }

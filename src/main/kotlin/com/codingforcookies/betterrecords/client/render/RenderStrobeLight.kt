@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.client.render
 
 import com.codingforcookies.betterrecords.ID
+import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.block.tile.TileStrobeLight
 import com.codingforcookies.betterrecords.client.model.ModelStrobeLight
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager.*
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
@@ -29,7 +29,7 @@ class RenderStrobeLight : TileEntitySpecialRenderer<TileStrobeLight>() {
         
         te?.let {
 
-            if (te.bass != 0F && ConfigHandler.flashyMode > 0) {
+            if (te.bass != 0F && ModConfig.client.flashMode > 0) {
                 val incr = (2 * Math.PI / 10).toFloat()
 
                 pushMatrix()
@@ -48,7 +48,7 @@ class RenderStrobeLight : TileEntitySpecialRenderer<TileStrobeLight>() {
                     rotate(20f, 0f, 0f, 1f)
                     glBegin(GL11.GL_TRIANGLE_FAN)
 
-                    color(1f, 1f, 1f, trans / if (ConfigHandler.flashyMode == 1) 3f else 1f)
+                    color(1f, 1f, 1f, trans / if (ModConfig.client.flashMode == 1) 3f else 1f)
                     GL11.glVertex2f(0f, 0f)
 
                     for (i in 0..9) {
@@ -74,7 +74,7 @@ class RenderStrobeLight : TileEntitySpecialRenderer<TileStrobeLight>() {
 
                 color(1f, 1f, 1f, 1f)
 
-                if (ConfigHandler.flashyMode > 1) {
+                if (ModConfig.client.flashMode > 1) {
                     val mc = Minecraft.getMinecraft()
                     val dist = Math.sqrt(Math.pow(te.getPos().getX() - mc.player.posX, 2.0) + Math.pow(te.getPos().getY() - mc.player.posY, 2.0) + Math.pow(te.getPos().getZ() - mc.player.posZ, 2.0)).toFloat()
                     if (dist < 4 * te.bass) {

@@ -11,8 +11,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry
 open class CommonProxy {
 
     open fun preInit(event: FMLPreInitializationEvent) {
-        //ConfigHandler.loadConfig(event.suggestedConfigurationFile)
-
         PacketHandler.init()
     }
 

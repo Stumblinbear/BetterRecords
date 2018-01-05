@@ -1,11 +1,11 @@
 package com.codingforcookies.betterrecords.client.gui
 
 import com.codingforcookies.betterrecords.ID
+import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.api.library.LibraryEntryMusic
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
 import com.codingforcookies.betterrecords.client.ClientProxy
 import com.codingforcookies.betterrecords.client.gui.parts.GuiButtonLibrary
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.library.Libraries
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketURLWrite
@@ -249,8 +249,8 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                         connection.requestMethod = "HEAD"
                         connection.connect()
                         if (connection.responseCode == 200) {
-                            if (connection.getContentLength() / 1024 / 1024 > (if (ConfigHandler.downloadMax != 100) ConfigHandler.downloadMax else 102400)) {
-                                status = Status.FILE_TOO_BIG.formatParams(ConfigHandler.downloadMax)
+                            if (connection.getContentLength() / 1024 / 1024 > (if (ModConfig.client.downloadMax != 100) ModConfig.client.downloadMax else 102400)) {
+                                status = Status.FILE_TOO_BIG.formatParams(ModConfig.client.downloadMax)
                             }
                         } else {
                             status = Status.INVALID_URL

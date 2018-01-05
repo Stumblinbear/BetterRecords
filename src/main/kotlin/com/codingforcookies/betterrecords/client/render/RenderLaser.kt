@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.client.render
 
 import com.codingforcookies.betterrecords.ID
+import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.block.tile.TileLaser
 import com.codingforcookies.betterrecords.client.model.ModelLaser
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.client.renderer.GlStateManager.*
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.util.ResourceLocation
@@ -31,7 +31,7 @@ class RenderLaser : TileEntitySpecialRenderer<TileLaser>() {
         translate(0.0f, -.926f, 0.0f)
 
         te?.let {
-            if (te.bass != 0F && ConfigHandler.flashyMode > 0) {
+            if (te.bass != 0F && ModConfig.client.flashMode > 0) {
                 pushMatrix()
 
                 disableTexture2D()
@@ -46,7 +46,7 @@ class RenderLaser : TileEntitySpecialRenderer<TileLaser>() {
 
                 glBegin(GL11.GL_QUADS)
 
-                color(te.r, te.g, te.b, if (ConfigHandler.flashyMode == 1) .3f else .8f)
+                color(te.r, te.g, te.b, if (ModConfig.client.flashMode == 1) .3f else .8f)
 
                 glVertex3f(width, 0f, -width)
                 glVertex3f(-width, 0f, -width)

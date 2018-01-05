@@ -2,22 +2,15 @@ package com.codingforcookies.betterrecords.block
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileLaserCluster
-import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.client.render.RenderLaserCluster
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
-import com.codingforcookies.betterrecords.util.BetterUtils
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
-import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemStack
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
-import kotlin.reflect.KClass
 
 class BlockLaserCluster(name: String) : ModBlock(Material.IRON, name), TESRProvider<TileLaserCluster>, ItemModelProvider  {
 
@@ -36,14 +29,6 @@ class BlockLaserCluster(name: String) : ModBlock(Material.IRON, name), TESRProvi
         world.notifyBlockUpdate(pos, state, state, 3)
 
     //override fun getLightValue(state: IBlockState, access: IBlockAccess, pos: BlockPos): Int TODO: Value from flash
-
-    override fun onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, entityLiving: EntityLivingBase, itemStack: ItemStack?) {
-        if (world.isRemote && !ConfigHandler.tutorials["lasercluster"]!!) {
-            ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.lasercluster")
-            ClientRenderHandler.tutorialTime = System.currentTimeMillis() + 10000
-            ConfigHandler.tutorials["lasercluster"] = true
-        }
-    }
 
     override fun removedByPlayer(state: IBlockState, world: World, pos: BlockPos, player: EntityPlayer, willHarvest: Boolean): Boolean {
         if (!world.isRemote) {

@@ -1,6 +1,6 @@
 package com.codingforcookies.betterrecords.client.sound;
 
-import com.codingforcookies.betterrecords.handler.ConfigHandler;
+import com.codingforcookies.betterrecords.ModConfig;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -21,7 +21,7 @@ public class FileDownloader {
         return downloadFile(sound.name, sound.url, sound.local, saveLoc, new DownloadInfo() {
             private boolean started = false;
             public void onDownloading(String local, float percent) {
-                if(songIndex == 0 && ConfigHandler.INSTANCE.getPlayWhileDownload() && !started && downloadPercent > 0.05F) {
+                if(songIndex == 0 && ModConfig.client.playWhileDownloading && !started && downloadPercent > 0.05F) {
                     started = true;
                     SoundHandler.playSound(manager, -1);
                 }
@@ -59,7 +59,7 @@ public class FileDownloader {
             URLConnection conn = url.openConnection();
 
             int size = conn.getContentLength();
-            if(size / 1024 / 1024 > (ConfigHandler.INSTANCE.getDownloadMax() != 100 ? ConfigHandler.INSTANCE.getDownloadMax() : 102400)) {
+            if(size / 1024 / 1024 > (ModConfig.client.downloadMax != 100 ? ModConfig.client.downloadMax : 102400)) {
                 System.err.println("File larger than configured max size!");
                 if(dwnloadNfo != null)
                     dwnloadNfo.onFileTooLarge(localName);

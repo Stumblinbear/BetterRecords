@@ -1,10 +1,9 @@
 package com.codingforcookies.betterrecords.client.handler
 
 import com.codingforcookies.betterrecords.BetterRecords
+import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
-import com.codingforcookies.betterrecords.client.sound.Sound
 import com.codingforcookies.betterrecords.client.sound.SoundHandler
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.client.Minecraft
 import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos
@@ -17,7 +16,7 @@ object ClientTickHandler {
     fun showDisclaimer(event: TickEvent.ClientTickEvent) {
         if (event.phase == TickEvent.Phase.END) {
             Minecraft.getMinecraft().player?.let {
-                if (ConfigHandler.flashyMode < 0) {
+                if (ModConfig.client.flashMode < 0) {
                     it.openGui(BetterRecords, 2, Minecraft.getMinecraft().world, 0, 0, 0)
                 }
             }

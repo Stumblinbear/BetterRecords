@@ -1,8 +1,8 @@
 package com.codingforcookies.betterrecords.client.gui
 
+import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.extensions.glMatrix
 import com.codingforcookies.betterrecords.extensions.glVertices
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiScreen
@@ -19,17 +19,17 @@ class GuiBetterDisclaimer : GuiScreen() {
         val y = height / 2 - 35
 
         if (mouseX > x + 5 && mouseX < x + 45 && mouseY > y + 50 && mouseY < y + 65) {
-            ConfigHandler.flashyMode = 0
+            ModConfig.client.flashMode = 0
         } else if (mouseX > x + 50 && mouseX < x + 90 && mouseY > y + 50 && mouseY < y + 65) {
-            ConfigHandler.flashyMode = 1
+            ModConfig.client.flashMode = 1
         } else if (mouseX > x + 95 && mouseX < x + 150 && mouseY > y + 50 && mouseY < y + 65) {
-            ConfigHandler.flashyMode = 2
+            ModConfig.client.flashMode = 2
         } else if (mouseX > x + 155 && mouseX < x + 195 && mouseY > y + 50 && mouseY < y + 65) {
-            ConfigHandler.flashyMode = 3
+            ModConfig.client.flashMode = 3
         }
 
-        if (ConfigHandler.flashyMode != -1) {
-            ConfigHandler.updateConfig()
+        if (ModConfig.client.flashMode != -1) {
+            ModConfig.update()
             Minecraft.getMinecraft().displayGuiScreen(null)
         }
 

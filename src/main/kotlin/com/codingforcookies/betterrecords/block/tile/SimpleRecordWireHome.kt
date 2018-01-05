@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.block.tile
 
+import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.api.connection.RecordConnection
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.util.ITickable
 import java.util.*
 
@@ -60,7 +60,7 @@ abstract class SimpleRecordWireHome : ModTile(), IRecordWireHome, ITickable {
     override val songRadius: Float
         get() {
             val radius = songRadiusIncrease + playRadius
-            val maxRadius = ConfigHandler.maxSpeakerRadius
+            val maxRadius = ModConfig.maxSpeakerRadius
             return if (radius <= maxRadius || maxRadius == -1) radius else maxRadius.toFloat()
         }
 

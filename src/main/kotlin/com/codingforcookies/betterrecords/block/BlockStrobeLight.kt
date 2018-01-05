@@ -3,16 +3,12 @@ package com.codingforcookies.betterrecords.block
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileStrobeLight
-import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.client.render.RenderStrobeLight
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.util.BetterUtils
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemStack
 import net.minecraft.util.math.AxisAlignedBB
 import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
@@ -42,14 +38,6 @@ class BlockStrobeLight(name: String) : ModBlock(Material.IRON, name), TESRProvid
     override fun onBlockAdded(world: World?, pos: BlockPos?, state: IBlockState?) {
         super.onBlockAdded(world, pos, state)
         world!!.notifyBlockUpdate(pos!!, state!!, state, 3)
-    }
-
-    override fun onBlockPlacedBy(world: World?, pos: net.minecraft.util.math.BlockPos?, state: IBlockState?, entityLiving: EntityLivingBase?, itemStack: ItemStack?) {
-        if (world!!.isRemote && !ConfigHandler.tutorials["strobelight"]!!) {
-            ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.strobelight")
-            ClientRenderHandler.tutorialTime = System.currentTimeMillis() + 10000
-            ConfigHandler.tutorials.put("strobelight", true)
-        }
     }
 
     override fun removedByPlayer(state: IBlockState, world: World, pos: net.minecraft.util.math.BlockPos, player: EntityPlayer, willHarvest: Boolean): Boolean {

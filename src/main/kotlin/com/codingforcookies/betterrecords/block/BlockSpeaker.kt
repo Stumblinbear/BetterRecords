@@ -3,11 +3,8 @@ package com.codingforcookies.betterrecords.block
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileSpeaker
-import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.client.render.RenderSpeaker
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
-import com.codingforcookies.betterrecords.util.BetterUtils
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.properties.PropertyEnum
@@ -19,8 +16,6 @@ import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
-import net.minecraft.util.EnumFacing
-import net.minecraft.util.EnumHand
 import net.minecraft.util.IStringSerializable
 import net.minecraft.util.NonNullList
 import net.minecraft.util.math.AxisAlignedBB
@@ -72,12 +67,6 @@ class BlockSpeaker(name: String) : ModBlock(Material.WOOD, name), TESRProvider<T
         (world.getTileEntity(pos) as? TileSpeaker)?.let { te ->
             te.rotation = placer.rotationYaw
             te.size = state.getValue(PROPERTYSIZE)
-
-            if (world.isRemote && !ConfigHandler.tutorials["speaker"]!!) {
-                ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.speaker")
-                ClientRenderHandler.tutorialTime = System.currentTimeMillis() + 10000
-                ConfigHandler.tutorials["speaker"] = true
-            }
         }
     }
 

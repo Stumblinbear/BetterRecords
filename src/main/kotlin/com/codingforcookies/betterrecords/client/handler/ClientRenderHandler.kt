@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.client.handler
 
+import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.client.sound.FileDownloader
 import com.codingforcookies.betterrecords.client.sound.SoundHandler
 import com.codingforcookies.betterrecords.extensions.glMatrix
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
@@ -43,7 +43,7 @@ object ClientRenderHandler {
                         GL11.glDisable(GL11.GL_BLEND)
                         GL11.glEnable(GL11.GL_TEXTURE_2D)
                 }
-                strobeLinger -= if (ConfigHandler.flashyMode < 3) 0.01f else 0.2f
+                strobeLinger -= if (ModConfig.client.flashMode < 3) 0.01f else 0.2f
             }
             if (tutorialText != "") {
                 if (tutorialTime > System.currentTimeMillis()) {

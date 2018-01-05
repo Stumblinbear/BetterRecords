@@ -3,19 +3,15 @@ package com.codingforcookies.betterrecords.block
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.block.tile.TileRadio
-import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.client.render.RenderRadio
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
 import com.codingforcookies.betterrecords.item.ModItems
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketRadioPlay
 import com.codingforcookies.betterrecords.network.PacketSoundStop
-import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
@@ -43,16 +39,6 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name), TESRP
         0, 2 -> AxisAlignedBB(0.13, 0.0, 0.2, 0.87, 0.98, 0.8)
         1, 3 -> AxisAlignedBB(0.2, 0.0, 0.13, 0.8, 0.98, 0.87)
         else -> Block.FULL_BLOCK_AABB
-    }
-
-    override fun onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, itemStack: ItemStack) {
-        super.onBlockPlacedBy(world, pos, state, placer, itemStack)
-
-        if (world.isRemote && !ConfigHandler.tutorials["radio"]!!) {
-            ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.radio")
-            ClientRenderHandler.tutorialTime = System.currentTimeMillis() + 10000
-            ConfigHandler.tutorials["radio"] = true
-        }
     }
 
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
