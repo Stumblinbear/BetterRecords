@@ -26,6 +26,7 @@ import java.net.URL
 class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileRecordEtcher) : GuiContainer(ContainerRecordEtcher(inventoryPlayer, tileEntity)) {
 
     val GUI = ResourceLocation(ID, "textures/gui/recordetcher.png")
+    val BUTTONS = ResourceLocation(ID, "textures/gui/buttons.png")
 
     lateinit var nameField: GuiTextField
     lateinit var urlField: GuiTextField
@@ -43,9 +44,8 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
     var pageIndex = 0
     val maxPageIndex get() = Math.ceil(selectedLibrary.songs.size / 9.0).toInt() - 1
 
-
     init {
-        xSize = 256
+        xSize = 292
     }
 
     override fun initGui() {
@@ -57,22 +57,22 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
         // Add main buttons
         buttonList.addAll(listOf(
-                // GUI Button image params: id, x, y, width, height, ytexstart, xtexstart, ydifftext
+                // GUI Button image params: id, x, y, width, height, xtexstart, ytexstart, ydifftext
                 // Library Left Button
-                GuiButtonImage(0, guiLeft + 175, guiTop + 20, 20, 9, 0, 166, 0, GUI),
+                GuiButtonImage(0, guiLeft + 175, guiTop + 20, 20, 9, 0, 0, 0, BUTTONS),
                 // Library Right Button
-                GuiButtonImage(1, guiLeft + 229, guiTop + 20, 20, 9, 20, 166, 0, GUI),
+                GuiButtonImage(1, guiLeft + 265, guiTop + 20, 20, 9, 20, 0, 0, BUTTONS),
                 // Page Left Button
-                GuiButtonImage(2, guiLeft + 175, guiTop + 150, 20, 9, 0, 166, 0, GUI),
+                GuiButtonImage(2, guiLeft + 175, guiTop + 150, 20, 9, 0, 0, 0, BUTTONS),
                 // Page Right Button
-                GuiButtonImage(3, guiLeft + 229, guiTop + 150, 20, 9, 20, 166, 0, GUI),
+                GuiButtonImage(3, guiLeft + 265, guiTop + 150, 20, 9, 20, 0, 0, BUTTONS),
                 // Etch Button
                 GuiButton(4, guiLeft + 44, guiTop + 50, 31, 20, "Etch")
         ))
 
         // Buttons 10-18 are our List buttons
         (0 until 9).forEach { i ->
-            buttonList.add(GuiButtonLibrary(10 + i, guiLeft + 176, guiTop + 31 + 13 * i, 72, 13, "", 0xFFFFFF))
+            buttonList.add(GuiButtonLibrary(10 + i, guiLeft + 176, guiTop + 31 + 13 * i, 108, 13, "", 0xFFFFFF))
         }
 
         updateListButtons()
@@ -182,10 +182,10 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
             drawString(selectedLibrary.name, xSize - 5 - getStringWidth(selectedLibrary.name), 8, 4210752)
 
             val libraryPageString = "${Libraries.libraries.indexOf(selectedLibrary) + 1}/${Libraries.libraries.lastIndex + 1}"
-            drawString(libraryPageString, 195 + getStringWidth(libraryPageString) / 2, 20, 4210752)
+            drawString(libraryPageString, 212 + getStringWidth(libraryPageString) / 2, 20, 4210752)
 
             val pageString = "${pageIndex + 1}/${maxPageIndex + 1}"
-            drawString(pageString, 195 + getStringWidth(pageString) / 2, 151, 4210752)
+            drawString(pageString, 212 + getStringWidth(pageString) / 2, 151, 4210752)
 
             val statusColor = when (status) {
                 Status.READY -> 0x229922
@@ -270,7 +270,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
     override fun drawGuiContainerBackgroundLayer(partialTicks: Float, mouseX: Int, mouseY: Int) {
         mc.renderEngine.bindTexture(GUI)
-        drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize)
+        drawModalRectWithCustomSizedTexture(guiLeft, guiTop, 0F, 0F, xSize, ySize, 292F, 292F)
     }
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
