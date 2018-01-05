@@ -25,16 +25,10 @@ class GuiButtonLibrary(id: Int, xPos: Int, yPos: Int, width: Int, height: Int, d
                 val rightX = x + width - 2 // two from the right
                 val leftX = rightX - 2 // Draw two wide
 
-//                GL11.glVertex2i(leftX, topY) // Top Left
-//                GL11.glVertex2i(leftX, bottomY) // Bottom Left
-//                GL11.glVertex2i(rightX, bottomY) // Bottom Right
-//                GL11.glVertex2i(rightX, topY) // Top Right
-
-                // TEST
-                GL11.glVertex2i(x, y) // Top Left
-                GL11.glVertex2i(x, y + height) // Bottom Left
-                GL11.glVertex2i(x + width, y + height) // Bottom Right
-                GL11.glVertex2i(x + width, y) // Top Right
+                GL11.glVertex2i(leftX, topY) // Top Left
+                GL11.glVertex2i(leftX, bottomY) // Bottom Left
+                GL11.glVertex2i(rightX, bottomY) // Bottom Right
+                GL11.glVertex2i(rightX, topY) // Top Right
             }
             GlStateManager.enableTexture2D()
         }
