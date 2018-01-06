@@ -60,4 +60,9 @@ object Libraries {
 
         // TODO: Load remote libraries
     }
+
+    fun urlExistsInAnyLibrary(url: String) =
+            libraries
+                    .flatMap { it.songs }
+                    .any { it.url == url }
 }

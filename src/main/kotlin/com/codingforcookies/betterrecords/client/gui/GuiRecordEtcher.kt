@@ -7,6 +7,7 @@ import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
 import com.codingforcookies.betterrecords.client.ClientProxy
 import com.codingforcookies.betterrecords.client.gui.parts.GuiButtonLibrary
 import com.codingforcookies.betterrecords.library.Libraries
+import com.codingforcookies.betterrecords.library.LocalLibrary
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketURLWrite
 import com.codingforcookies.betterrecords.util.BetterUtils
@@ -173,6 +174,21 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                             author
                     ))
 
+                    val etchingsLibrary = Libraries.libraries
+                            .find { it is LocalLibrary && it.file.name == "myEtchings.json" }
+                    etchingsLibrary?.let {
+                        if (!Libraries.urlExistsInAnyLibrary(urlField.text)) {
+                            it.songs.add(LibraryEntryMusic(
+                                    nameField.text.trim(),
+                                    author,
+                                    urlField.text,
+                                    "FFFFFF"
+                            ))
+                            (it as LocalLibrary).save()
+                        }
+                    }
+
+                    updateListButtons()
                     resetGUI()
                 }
             }

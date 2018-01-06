@@ -15,9 +15,9 @@ class LibraryContent(
         /** The name of this library */
         val name: String,
         /** A list of the songs contained in this library */
-        val music: List<LibraryEntryMusic>,
+        val music: MutableList<LibraryEntryMusic>,
         /** A list of the radio stations contained in this library */
-        val radio: List<LibraryEntryRadio>
+        val radio: MutableList<LibraryEntryRadio>
 ) {
 
     companion object {
