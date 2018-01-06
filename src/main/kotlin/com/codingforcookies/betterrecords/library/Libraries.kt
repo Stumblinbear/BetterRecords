@@ -3,6 +3,7 @@ package com.codingforcookies.betterrecords.library
 import com.codingforcookies.betterrecords.ModConfig
 import net.minecraft.client.Minecraft
 import java.io.File
+import java.net.URL
 
 /**
  * Collection of all Libraries containing the songs / radio stations
@@ -36,7 +37,16 @@ object Libraries {
      * Load both local and remote files
      */
     fun init() {
+        /*  Create the library folder if it doesn't exist */
         LOCAL_LIBRARY_DIR.mkdirs()
+
+        // Create the remoteLibraries file if it doesn't exist.
+        val remoteLibrariesFile = File(LOCAL_LIBRARY_DIR.parent, "remoteLibraries.txt")
+        with (remoteLibrariesFile) {
+            if (!exists()) {
+                writeText(this::class.java.getResource("/assets/betterrecords/libraries/remoteLibraries.txt").readText())
+            }
+        }
 
         // Create an empty library for their etchings if it doesn't exist. We need at least one library.
         with (File(LOCAL_LIBRARY_DIR, "myEtchings.json")) {
@@ -58,7 +68,13 @@ object Libraries {
                 .map { LocalLibrary(it) }
                 .forEach { libraries.add(it) }
 
-        // TODO: Load remote libraries
+        // Load remote libraries
+        remoteLibrariesFile
+                .readLines()
+                .map(String::trim)
+                .filter { !it.startsWith("#") }
+                .map { RemoteLibrary(URL(it)) }
+                .forEach { libraries.add(it) }
     }
 
     fun urlExistsInAnyLibrary(url: String) =
