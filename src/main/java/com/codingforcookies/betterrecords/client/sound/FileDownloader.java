@@ -52,7 +52,7 @@ public class FileDownloader {
 
         BufferedInputStream in = null;
         FileOutputStream out = null;
-        URL url = null;
+        URL url;
 
         try {
             url = new URL(urlLocation);

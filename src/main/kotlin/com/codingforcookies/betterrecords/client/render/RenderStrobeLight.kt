@@ -76,7 +76,7 @@ class RenderStrobeLight : TileEntitySpecialRenderer<TileStrobeLight>() {
 
                 if (ModConfig.client.flashMode > 1) {
                     val mc = Minecraft.getMinecraft()
-                    val dist = Math.sqrt(Math.pow(te.getPos().getX() - mc.player.posX, 2.0) + Math.pow(te.getPos().getY() - mc.player.posY, 2.0) + Math.pow(te.getPos().getZ() - mc.player.posZ, 2.0)).toFloat()
+                    val dist = Math.sqrt(Math.pow(te.pos.x - mc.player.posX, 2.0) + Math.pow(te.pos.y - mc.player.posY, 2.0) + Math.pow(te.pos.z - mc.player.posZ, 2.0)).toFloat()
                     if (dist < 4 * te.bass) {
                         val newStrobe = Math.abs(dist - 4f * te.bass) / 100f
                         // TODO if (newStrobe > 0f && BetterEventHandler.strobeLinger < newStrobe)

@@ -1,24 +1,15 @@
 package com.codingforcookies.betterrecords.block
 
 import com.codingforcookies.betterrecords.BetterRecords
-import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.api.BetterRecordsAPI
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.client.renderer.block.model.ModelResourceLocation
 import net.minecraft.client.renderer.block.statemap.StateMap
-import net.minecraft.item.Item
-import net.minecraft.item.ItemBlock
-import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.EnumBlockRenderType
 import net.minecraft.world.World
-import net.minecraftforge.client.ForgeHooksClient
 import net.minecraftforge.client.model.ModelLoader
-import net.minecraftforge.fml.common.registry.GameRegistry
-import kotlin.reflect.KClass
 import kotlin.reflect.full.createInstance
-import kotlin.reflect.full.primaryConstructor
 
 /**
  * Abstract representation of a BetterRecords block.
@@ -29,8 +20,7 @@ import kotlin.reflect.full.primaryConstructor
 abstract class ModBlock(material: Material, open val name: String) : BlockContainer(material) {
 
     /**
-     * Register the block, as well as the tile entity if it is specified
-     * @see getTileEntityClass
+     * Set the registry name and creative tab for the block
      */
     init {
         setRegistryName(name)

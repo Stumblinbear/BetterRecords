@@ -44,8 +44,8 @@ public class SoundHandler{
         loadLibrary(new File(libs, "mp3spi1.9.5.jar"));
         loadLibrary(new File(libs, "mp3plugin.jar"));
         soundLocation = new File(Minecraft.getMinecraft().mcDataDir, "betterrecords/cache");
-        soundList = new HashMap<String, File>();
-        soundPlaying = new HashMap<String, SoundManager>();
+        soundList = new HashMap<>();
+        soundPlaying = new HashMap<>();
         if(!soundLocation.mkdirs()) for(File sound : soundLocation.listFiles()){
             System.out.println("Loaded " + sound.getName());
             soundList.put(sound.getName(), sound);
@@ -74,13 +74,10 @@ public class SoundHandler{
 
     private static void obtainSound(final SoundManager manager, final int songIndex){
         soundList.put(manager.songs.get(songIndex).name, new File(soundLocation, manager.songs.get(songIndex).name));
-        new Thread(){
-
-            public void run(){
-                if(!FileDownloader.downloadFile(soundLocation, manager, songIndex)) soundList.remove(manager.songs.get(songIndex).name);
-                else playSound(manager, songIndex);
-            }
-        }.start();
+        new Thread(() -> {
+            if(!FileDownloader.downloadFile(soundLocation, manager, songIndex)) soundList.remove(manager.songs.get(songIndex).name);
+            else playSound(manager, songIndex);
+        }).start();
     }
 
     protected static void playSound(SoundManager manager, int songIndex){
@@ -90,7 +87,7 @@ public class SoundHandler{
 
     private static void playSound(final int x, final int y, final int z, final int dimension, final float playRadius, final List<Sound> sounds, boolean repeat, boolean shuffle, int songIndex){
         if(songIndex >= 0) {
-            SoundManager sndMgr = null;
+            SoundManager sndMgr;
             if(soundPlaying.get(x + "," + y + "," + z + "," + dimension) == null) {
                 sndMgr = new SoundManager(repeat, shuffle);
                 sndMgr.songs = sounds;
@@ -140,18 +137,15 @@ public class SoundHandler{
     }
 
     private static void tryToStart(final int x, final int y, final int z, final int dimension){
-        if(soundPlaying.get(x + "," + y + "," + z + "," + dimension) != null && soundPlaying.get(x + "," + y + "," + z + "," + dimension).current == -1) new Thread(new Runnable(){
-
-            public void run(){
-                Sound snd = null;
-                if(soundPlaying.get(x + "," + y + "," + z + "," + dimension).current != -1) return;
-                while(soundPlaying.get(x + "," + y + "," + z + "," + dimension) != null && (snd = soundPlaying.get(x + "," + y + "," + z + "," + dimension).nextSong()) != null){
-                    nowPlaying = snd.local;
-                    nowPlayingEnd = System.currentTimeMillis() + 5000;
-                    playSourceDataLine(snd, x, y, z, dimension, BetterSoundType.SONG, new File(soundLocation, snd.name));
-                }
-                soundPlaying.remove(x + "," + y + "," + z + "," + dimension);
+        if(soundPlaying.get(x + "," + y + "," + z + "," + dimension) != null && soundPlaying.get(x + "," + y + "," + z + "," + dimension).current == -1) new Thread(() -> {
+            Sound snd = null;
+            if(soundPlaying.get(x + "," + y + "," + z + "," + dimension).current != -1) return;
+            while(soundPlaying.get(x + "," + y + "," + z + "," + dimension) != null && (snd = soundPlaying.get(x + "," + y + "," + z + "," + dimension).nextSong()) != null){
+                nowPlaying = snd.local;
+                nowPlayingEnd = System.currentTimeMillis() + 5000;
+                playSourceDataLine(snd, x, y, z, dimension, BetterSoundType.SONG, new File(soundLocation, snd.name));
             }
+            soundPlaying.remove(x + "," + y + "," + z + "," + dimension);
         }).start();
     }
 
@@ -163,26 +157,23 @@ public class SoundHandler{
         int z = pos.getZ();
 
         soundPlaying.put(x + "," + y + "," + z + "," + dimension, new SoundManager(new Sound(x, y, z, dimension, playRadius).setInfo("", url, localName), false, false));
-        new Thread(new Runnable(){
-
-            public void run(){
-                try{
-                    System.out.println("Connection to stream " + localName + "...");
-                    Sound snd = soundPlaying.get(x + "," + y + "," + z + "," + dimension).nextSong();
-                    IcyURLConnection urlConn = new IcyURLConnection(new URL(url.startsWith("http") ? url : "http://" + url));
-                    urlConn.setInstanceFollowRedirects(true);
-                    urlConn.connect();
-                    playSourceDataLine(snd, x, y, z, dimension, BetterSoundType.RADIO, new BufferedInputStream(urlConn.getInputStream()));
-                }catch(Exception e){
-                    e.printStackTrace();
-                    if (Minecraft.getMinecraft().player != null) {
-                        System.err.println("Failed to stream: " + url);
-                        nowPlaying = BetterUtils.INSTANCE.getTranslatedString("overlay.nowplaying.error2");
-                    }
-                    nowPlayingEnd = System.currentTimeMillis() + 5000;
+        new Thread(() -> {
+            try{
+                System.out.println("Connection to stream " + localName + "...");
+                Sound snd = soundPlaying.get(x + "," + y + "," + z + "," + dimension).nextSong();
+                IcyURLConnection urlConn = new IcyURLConnection(new URL(url.startsWith("http") ? url : "http://" + url));
+                urlConn.setInstanceFollowRedirects(true);
+                urlConn.connect();
+                playSourceDataLine(snd, x, y, z, dimension, BetterSoundType.RADIO, new BufferedInputStream(urlConn.getInputStream()));
+            }catch(Exception e){
+                e.printStackTrace();
+                if (Minecraft.getMinecraft().player != null) {
+                    System.err.println("Failed to stream: " + url);
+                    nowPlaying = BetterUtils.INSTANCE.getTranslatedString("overlay.nowplaying.error2");
                 }
-                soundPlaying.remove(x + "," + y + "," + z + "," + dimension);
+                nowPlayingEnd = System.currentTimeMillis() + 5000;
             }
+            soundPlaying.remove(x + "," + y + "," + z + "," + dimension);
         }).start();
     }
 
@@ -195,11 +186,10 @@ public class SoundHandler{
             final AudioFormat outFormat = getOutFormat(in.getFormat());
             final Info info = new Info(SourceDataLine.class, outFormat);
             System.out.println("Playing " + snd.name + ": " + new File(soundLocation, snd.name).getAbsolutePath());
-            final SourceDataLine line = (SourceDataLine) AudioSystem.getLine(info);
-            try{
-                if(line != null) {
+            try (SourceDataLine line = (SourceDataLine) AudioSystem.getLine(info)) {
+                if (line != null) {
                     line.open(outFormat);
-                    if(snd.volume == null) {
+                    if (snd.volume == null) {
                         snd.volume = (FloatControl) line.getControl(FloatControl.Type.MASTER_GAIN);
                         snd.volume.setValue(-20F);
                     }
@@ -208,8 +198,6 @@ public class SoundHandler{
                     line.drain();
                     line.stop();
                 }
-            }finally{
-                line.close();
             }
         }catch(Exception e){
             e.printStackTrace();

@@ -10,7 +10,7 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import java.awt.Color
 
 @SideOnly(Side.CLIENT)
-class ModelFrequencyTuner() : ModelBase() {
+class ModelFrequencyTuner : ModelBase() {
     var Stand: ModelRenderer
     var Crystal_3: ModelRenderer
     var Platform: ModelRenderer

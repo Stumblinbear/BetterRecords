@@ -66,20 +66,17 @@ object ConnectionHelper {
         val wsi = wireSystemInfo.split("]")
         val ret = hashMapOf<String, Int>()
 
-        for (str in wsi) {
-            val split = str.split(",")
-            ret.put(split.first(), Integer.parseInt(split[1]))
-        }
+        wsi
+                .map { it.split(",") }
+                .forEach { ret.put(it.first(), Integer.parseInt(it[1])) }
 
         return ret
     }
 
     fun addConnection(world: World, iRecordWire: IRecordWire, rec: RecordConnection, state: IBlockState) {
-        for (i in 0 until iRecordWire.connections.size) {
-            if (iRecordWire.connections[i].same(rec)) {
-                return
-            }
-        }
+        (0 until iRecordWire.connections.size)
+                .filter { iRecordWire.connections[it].same(rec) }
+                .forEach { return }
 
         iRecordWire.connections.add(rec)
         world.notifyBlockUpdate((iRecordWire as TileEntity).pos, state, state, 3)

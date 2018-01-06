@@ -78,7 +78,7 @@ class GuiFrequencyTuner(inventoryPlayer: InventoryPlayer, val tileEntity: TileFr
         val y = mouseY - (height - ySize) / 2
 
         with (fontRenderer) {
-            val tuneColor = if (error.equals(I18n.format("gui.frequencytuner.ready"))) {
+            val tuneColor = if (error == I18n.format("gui.frequencytuner.ready")) {
                 if (x in 44..75 && y in 51..66) {
                     0xFFFF55
                 } else {

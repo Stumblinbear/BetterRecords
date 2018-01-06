@@ -13,6 +13,6 @@ class ItemFrequencyCrystal(name: String) : ModItem(name) {
             if (stack.hasTagCompound() && stack.tagCompound!!.hasKey("local")) {
                 stack.tagCompound!!.getString("local")
             } else {
-                I18n.translateToLocal("${unlocalizedName}.name")
+                I18n.translateToLocal("$unlocalizedName.name")
             }
 }

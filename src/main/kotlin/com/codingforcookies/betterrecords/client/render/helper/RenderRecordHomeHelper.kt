@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos
 import org.lwjgl.opengl.GL11
 
 fun renderConnectionsAndInfo(te: IRecordWireHome, pos: BlockPos, x: Double, y: Double, z: Double) {
-    (Minecraft.getMinecraft().player.heldItemMainhand?.item as? IRecordWireManipulator)?.let {
+    (Minecraft.getMinecraft().player.heldItemMainhand.item as? IRecordWireManipulator)?.let {
         GlStateManager.pushMatrix()
 
         GlStateManager.translate(x + 0.5, y + 0.5, z + 0.5)

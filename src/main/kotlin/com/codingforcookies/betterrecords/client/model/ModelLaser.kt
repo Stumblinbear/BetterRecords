@@ -8,7 +8,7 @@ import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
 @SideOnly(Side.CLIENT)
-class ModelLaser() : ModelBase() {
+class ModelLaser : ModelBase() {
     var Stand: ModelRenderer
     var Front: ModelRenderer
     var Box: ModelRenderer
@@ -44,10 +44,10 @@ class ModelLaser() : ModelBase() {
 
         pushMatrix()
 
-        rotate(yaw, 0F, 1F, 0F);
-        translate(0F, .95F, 0F);
-        rotate(-pitch, 1F, 0F, 0F);
-        translate(0F, -.95F, 0F);
+        rotate(yaw, 0F, 1F, 0F)
+        translate(0F, .95F, 0F)
+        rotate(-pitch, 1F, 0F, 0F)
+        translate(0F, -.95F, 0F)
 
         Front.render(scale)
         Box.render(scale)
