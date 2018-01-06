@@ -76,9 +76,4 @@ object Libraries {
                 .map { RemoteLibrary(URL(it)) }
                 .forEach { libraries.add(it) }
     }
-
-    fun urlExistsInAnyLibrary(url: String) =
-            libraries
-                    .flatMap { it.songs }
-                    .any { it.url == url }
 }
