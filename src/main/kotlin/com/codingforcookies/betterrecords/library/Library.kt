@@ -1,7 +1,6 @@
 package com.codingforcookies.betterrecords.library
 
-import com.codingforcookies.betterrecords.api.library.LibraryEntryMusic
-import com.codingforcookies.betterrecords.api.library.LibraryEntryRadio
+import com.codingforcookies.betterrecords.api.library.Song
 import java.io.File
 import java.net.URL
 
@@ -21,14 +20,8 @@ sealed class Library {
     /**
      * The list of songs in this library
      */
-    val songs: MutableList<LibraryEntryMusic>
-        get() = libraryContent.music
-
-    /**
-     * The list of radio stations in this library
-     */
-    val radioStations: MutableList<LibraryEntryRadio>
-        get() = libraryContent.radio
+    val songs: MutableList<Song>
+        get() = libraryContent.songs
 }
 
 /**

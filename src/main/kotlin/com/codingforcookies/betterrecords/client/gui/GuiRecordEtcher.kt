@@ -2,11 +2,11 @@ package com.codingforcookies.betterrecords.client.gui
 
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.ModConfig
-import com.codingforcookies.betterrecords.api.library.LibraryEntryMusic
+import com.codingforcookies.betterrecords.api.library.Song
 import com.codingforcookies.betterrecords.api.library.urlExistsInAnyLibrary
 import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
 import com.codingforcookies.betterrecords.client.ClientProxy
-import com.codingforcookies.betterrecords.client.gui.parts.GuiButtonLibrary
+import com.codingforcookies.betterrecords.client.gui.parts.GuiButtonSong
 import com.codingforcookies.betterrecords.library.Libraries
 import com.codingforcookies.betterrecords.library.LocalLibrary
 import com.codingforcookies.betterrecords.network.PacketHandler
@@ -78,10 +78,10 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 GuiButton(4, guiLeft + 44, guiTop + 50, 31, 20, "Etch")
         ))
 
-        val blankEntry = LibraryEntryMusic("", "", "", "FFFFFF") // Blank entry to init buttons with
+        val blankEntry = Song("", "", "", "FFFFFF") // Blank entry to init buttons with
         // Buttons 10-18 are our List buttons
         (0 until 9).forEach { i ->
-            buttonList.add(GuiButtonLibrary(10 + i, guiLeft + 176, guiTop + 31 + 13 * i, 108, 13, "", blankEntry))
+            buttonList.add(GuiButtonSong(10 + i, guiLeft + 176, guiTop + 31 + 13 * i, 108, 13, "", blankEntry))
         }
 
         updateListButtons()
@@ -92,7 +92,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
      */
     private fun updateListButtons() {
         buttonList
-                .filterIsInstance<GuiButtonLibrary>()
+                .filterIsInstance<GuiButtonSong>()
                 .forEachIndexed { i, it ->
                     val indexToGet = i + pageIndex * 9
 
@@ -179,7 +179,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                             .find { it is LocalLibrary && it.file.name == "myEtchings.json" }
                     etchingsLibrary?.let {
                         if (!urlExistsInAnyLibrary(urlField.text)) {
-                            it.songs.add(LibraryEntryMusic(
+                            it.songs.add(Song(
                                     nameField.text.trim(),
                                     author,
                                     urlField.text,
@@ -194,7 +194,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
                 }
             }
             in 10..18 -> { // One of the Library buttons
-                if (button is GuiButtonLibrary) { // Should be, we just want smart casting.
+                if (button is GuiButtonSong) { // Should be, we just want smart casting.
                     nameField.text = button.entry.name
                     urlField.text = button.entry.url
                     color = button.entry.colorInt

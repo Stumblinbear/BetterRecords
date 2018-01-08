@@ -1,6 +1,6 @@
 package com.codingforcookies.betterrecords.client.gui.parts
 
-import com.codingforcookies.betterrecords.api.library.LibraryEntryMusic
+import com.codingforcookies.betterrecords.api.library.Song
 import com.codingforcookies.betterrecords.extensions.glVertices
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
@@ -8,7 +8,7 @@ import net.minecraftforge.fml.client.config.GuiButtonExt
 import org.lwjgl.opengl.GL11
 import java.awt.Color
 
-class GuiButtonLibrary(id: Int, xPos: Int, yPos: Int, width: Int, height: Int, displayString: String, var entry: LibraryEntryMusic)
+class GuiButtonSong(id: Int, xPos: Int, yPos: Int, width: Int, height: Int, displayString: String, var entry: Song)
     : GuiButtonExt(id, xPos, yPos, width, height, displayString) {
 
     override fun drawButton(mc: Minecraft, mouseX: Int, mouseY: Int, partial: Float) {

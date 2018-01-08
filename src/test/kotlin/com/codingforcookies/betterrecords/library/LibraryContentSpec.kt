@@ -14,7 +14,7 @@ class LibraryContentSpec: Spek({
             val content = LibraryContent.fromJson(json)
 
             it("Should have all of the correct info") {
-                content.verify("An Example Library", 3, 2)
+                content.verify("An Example Library", 3)
             }
         }
     }

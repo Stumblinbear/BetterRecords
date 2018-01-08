@@ -1,6 +1,6 @@
 {
   "name": "Kevin MacLeod",
-  "music": [
+  "songs": [
     {
       "name": "Broken Reality",
       "author": "Kevin MacLeod",
@@ -121,7 +121,5 @@
       "url": "http://incompetech.com/music/royalty-free/mp3-royaltyfree/Summon%20the%20Rawk.mp3",
       "color": "FF4800"
     }
-  ],
-  "radio": [
   ]
 }

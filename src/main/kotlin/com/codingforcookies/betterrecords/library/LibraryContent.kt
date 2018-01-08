@@ -1,7 +1,6 @@
 package com.codingforcookies.betterrecords.library
 
-import com.codingforcookies.betterrecords.api.library.LibraryEntryMusic
-import com.codingforcookies.betterrecords.api.library.LibraryEntryRadio
+import com.codingforcookies.betterrecords.api.library.Song
 import com.codingforcookies.betterrecords.library.LibraryContent.Companion.fromJson
 import com.google.gson.GsonBuilder
 
@@ -15,9 +14,7 @@ class LibraryContent(
         /** The name of this library */
         val name: String,
         /** A list of the songs contained in this library */
-        val music: MutableList<LibraryEntryMusic>,
-        /** A list of the radio stations contained in this library */
-        val radio: MutableList<LibraryEntryRadio>
+        val songs: MutableList<Song>
 ) {
 
     companion object {
