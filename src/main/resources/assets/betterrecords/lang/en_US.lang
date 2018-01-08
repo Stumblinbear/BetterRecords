@@ -57,15 +57,15 @@ gui.betterrecords.recordetcher.status.noRecord=No record to etch
 gui.betterrecords.recordetcher.status.notBlank=Not a blank record
 gui.betterrecords.recordetcher.status.fileTooBig=Max file size is %imb
 gui.betterrecords.recordetcher.status.invalidFile=Invalid file
-gui.betterrecords.recordetcher.status.multiplayer=Local files are singleplayer only!
-gui.betterrecords.recordetcher.status.encodingNotSupported=%s is not supported!
+gui.betterrecords.recordetcher.status.multiplayer=Local files are singleplayer only
+gui.betterrecords.recordetcher.status.encodingNotSupported=%s is not supported
 
 ## Frequency Tuner
 gui.betterrecords.frequencytuner.tune=Tune
 gui.betterrecords.frequencytuner.ready=Tuner ready!
 gui.betterrecords.frequencytuner.status.noCrystal=No crystal to tune
 gui.betterrecords.frequencytuner.status.notBlank=Crystal already tuned
-gui.betterrecords.frequencytuner.status.invalidUrl=Invalid Icy Stream URL!
+gui.betterrecords.frequencytuner.status.invalidUrl=Invalid Icy Stream URL
 
 ## Disclaimer
 gui.betterrecords.disclaimer.title=Better Records Disclaimer
@@ -78,10 +78,10 @@ gui.betterrecords.disclaimer.flashmode.norm=Normal
 gui.betterrecords.disclaimer.flashmode.norm.line1=Flashing lights/images
 gui.betterrecords.disclaimer.flashmode.rave=RAVE
 gui.betterrecords.disclaimer.flashmode.rave.line1=For the truly daring.
-gui.betterrecords.disclaimer.flashmode.rave.line2=Waaaay too much flashy stuff
+gui.betterrecords.disclaimer.flashmode.rave.line2=Way too much flashy stuff
 gui.betterrecords.disclaimer.flashmode.rave.line3=which makes the game almost
-gui.betterrecords.disclaimer.flashmode.rave.line4=unplayable at times. But,
-gui.betterrecords.disclaimer.flashmode.rave.line5=it looks awesome.
+gui.betterrecords.disclaimer.flashmode.rave.line4=unplayable at times.
+gui.betterrecords.disclaimer.flashmode.rave.line5=But it looks awesome.
 
 # Overlay
 betterrecords.overlay.downloading=Downloading: %s
