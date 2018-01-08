@@ -12,12 +12,13 @@ item.betterrecords:frequencycrystal.name=Frequency Crystal
 item.betterrecords:wire.name=Speaker Wire
 item.betterrecords:wirecutters.name=Wire Cutters
 
-# Record tooltip
-item.record.song=Song
-item.record.shuffleenabled=Shuffle Enabled
-item.record.repeatenabled=Repeat Enabled
-item.record.size=Size
-item.record.by=By
+# Item Descriptions
+item.betterercords:record.desc.by=By: %s
+item.betterercords:record.desc.size=Size: %imb
+item.betterercords:record.desc.repeat=Repeat Enabled
+
+item.betterrecords:multirecord.desc.song=Song %i: %s
+item.betterrecords:multirecord.desc.shuffle=Shuffle Enabled
 
 ## Blocks
 tile.betterrecords:recordetcher.name=Record Etcher

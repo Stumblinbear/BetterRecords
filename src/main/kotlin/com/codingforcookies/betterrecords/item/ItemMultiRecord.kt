@@ -34,14 +34,14 @@ class ItemMultiRecord(name: String) : ItemRecord(name) {
             if (it.hasKey("songs")) {
                 val tagList = it.getTagList("songs", 10)
                 tagList.forEachIndexed { i, h ->
-                    tooltip += I18n.format("item.record.song") + " ${i + 1}: ${tagList.getCompoundTagAt(i).getString("local")}"
+                    tooltip += I18n.format("item.betterrecords:multirecord.desc.song", i + 1, tagList.getCompoundTagAt(i).getString("local"))
                 }
             }
             if (it.hasKey("repeat") && it.getBoolean("repeat")) {
-                tooltip += "\u00a7e" + I18n.format("item.record.repeatenabled")
+                tooltip += "\u00a7e" + I18n.format("item.betterrecords:record.desc.repeat")
             }
             if (it.hasKey("shuffle") && it.getBoolean("shuffle")) {
-                tooltip += "\u00a7e" + I18n.format("item.record.shuffleenabled")
+                tooltip += "\u00a7e" + I18n.format("item.betterrecords:multirecord.desc.shuffle")
             }
         }
     }
