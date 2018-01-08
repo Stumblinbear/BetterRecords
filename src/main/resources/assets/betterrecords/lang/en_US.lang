@@ -1,7 +1,6 @@
 # MISC
 itemGroup.betterrecords=Better Records
-
-msg.newversion.txt=A new version of BetterRecords is available!
+betterrecords.version.newAvailable=A new version of BetterRecords is available!
 
 # Items & Blocks
 ## Items
