@@ -40,32 +40,31 @@ tile.betterrecords:laser.msg.decrease=Laser length decreased to %i
 
 ### GUI
 ## Shared GUI Strings
-gui.name=Name
-gui.url=URL
-gui.validating=Validating...
+gui.betterrecords.label.name=Name
+gui.betterrecords.label.url=URL
+gui.betterrecords.status.validating=Validating...
 
-# TODO: Make error keys more descriptive
-gui.error1=Please insert a name
-gui.error2=Name is not long enough
-gui.error3=Please insert a URL
-gui.error4=URL unavailable (Does it exist?)
-gui.error5=Invalid URL
-gui.error6=IO Exception
+gui.betterrecords.status.noName=Please insert a name
+gui.betterrecords.status.nameTooShort=Name is not long enough
+gui.betterrecords.status.noUrl=Please insert a URL
+gui.betterrecords.status.urlUnavailable=URL unavailable (Does it exist?)
+gui.betterrecords.status.invalidUrl=Invalid URL
+gui.betterrecords.status.ioException=IO Exception
 
-gui.recordetcher.etch=Etch
-gui.recordetcher.ready=Ready to Etch!
-gui.recordetcher.error1=No record to etch
-gui.recordetcher.error2=Not a blank record
-gui.recordetcher.error3=Max file size is %imb
-gui.recordetcher.error4=Invalid file
-gui.recordetcher.error5=Local files are singleplayer only!
-gui.recordetcher.error6=%s is not supported!
+gui.betterrecords.recordetcher.etch=Etch
+gui.betterrecords.recordetcher.ready=Ready to Etch!
+gui.betterrecords.recordetcher.status.noRecord=No record to etch
+gui.betterrecords.recordetcher.status.notBlank=Not a blank record
+gui.betterrecords.recordetcher.status.fileTooBig=Max file size is %imb
+gui.betterrecords.recordetcher.status.invalidFile=Invalid file
+gui.betterrecords.recordetcher.status.multiplayer=Local files are singleplayer only!
+gui.betterrecords.recordetcher.status.encodingNotSupported=%s is not supported!
 
-gui.frequencytuner.tune=Tune
-gui.frequencytuner.ready=Tuner ready!
-gui.frequencytuner.error1=No crystal to tune
-gui.frequencytuner.error2=Crystal already tuned
-gui.frequencytuner.error3=Invalid Icy Stream URL!
+gui.betterrecords.frequencytuner.tune=Tune
+gui.betterrecords.frequencytuner.ready=Tuner ready!
+gui.betterrecords.frequencytuner.status.noCrystal=No crystal to tune
+gui.betterrecords.frequencytuner.status.notBlank=Crystal already tuned
+gui.betterrecords.frequencytuner.status.invalidUrl=Invalid Icy Stream URL!
 
 gui.config.flashymode.none=None
 gui.config.flashymode.low=Low
