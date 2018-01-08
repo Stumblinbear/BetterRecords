@@ -66,25 +66,20 @@ gui.betterrecords.frequencytuner.status.noCrystal=No crystal to tune
 gui.betterrecords.frequencytuner.status.notBlank=Crystal already tuned
 gui.betterrecords.frequencytuner.status.invalidUrl=Invalid Icy Stream URL!
 
-gui.config.flashymode.none=None
-gui.config.flashymode.low=Low
-gui.config.flashymode.norm=Norm
-gui.config.flashymode.rave=RAVE
-
-gui.disclaimer.title=Better Records Disclaimer
-gui.disclaimer.warning=WARNING: Parts of this mod make use of flashing lights and images. Consult a parent or guardian before continuing. I am not responsible for anything that may occur while using this mod.
-gui.disclaimer.flashymode.none=Flashy Setting: None
-gui.disclaimer.flashymode.none.line1=No flashing lights/images
-gui.disclaimer.flashymode.low=Flashy Setting: Low
-gui.disclaimer.flashymode.low.line1=Some flashing lights/images
-gui.disclaimer.flashymode.norm=Flashy Setting: Normal
-gui.disclaimer.flashymode.norm.line1=Flashing lights/images
-gui.disclaimer.flashymode.rave=Flashy Setting: RAVE
-gui.disclaimer.flashymode.rave.line1=For the truly daring.
-gui.disclaimer.flashymode.rave.line2=Waaaay too much flashy stuff
-gui.disclaimer.flashymode.rave.line3=which makes the game almost
-gui.disclaimer.flashymode.rave.line4=unplayable at times. But,
-gui.disclaimer.flashymode.rave.line5=it looks awesome.
+gui.betterrecords.disclaimer.title=Better Records Disclaimer
+gui.betterrecords.disclaimer.warning=WARNING: Parts of this mod make use of flashing lights and images. Consult a parent or guardian before continuing. I am not responsible for anything that may occur while using this mod.
+gui.betterrecords.disclaimer.flashmode.none=None
+gui.betterrecords.disclaimer.flashmode.none.line1=No flashing lights/images
+gui.betterrecords.disclaimer.flashmode.low=Low
+gui.betterrecords.disclaimer.flashmode.low.line1=Some flashing lights/images
+gui.betterrecords.disclaimer.flashmode.norm=Normal
+gui.betterrecords.disclaimer.flashmode.norm.line1=Flashing lights/images
+gui.betterrecords.disclaimer.flashmode.rave=RAVE
+gui.betterrecords.disclaimer.flashmode.rave.line1=For the truly daring.
+gui.betterrecords.disclaimer.flashmode.rave.line2=Waaaay too much flashy stuff
+gui.betterrecords.disclaimer.flashmode.rave.line3=which makes the game almost
+gui.betterrecords.disclaimer.flashmode.rave.line4=unplayable at times. But,
+gui.betterrecords.disclaimer.flashmode.rave.line5=it looks awesome.
 
 ### Overlay
 overlay.downloading=Downloading
