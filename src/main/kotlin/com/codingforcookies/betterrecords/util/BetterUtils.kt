@@ -2,18 +2,13 @@ package com.codingforcookies.betterrecords.util
 
 import com.google.common.collect.Maps
 import net.minecraft.client.Minecraft
-import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.TextComponentTranslation
-import net.minecraft.world.World
 import org.apache.commons.lang3.text.WordUtils
 
 object BetterUtils {
 
     private val translations = Maps.newHashMap<String, TextComponentTranslation>()
     private var lang = "en_US"
-
-    fun markBlockDirty(world: World, pos: BlockPos) =
-        world.getChunkFromBlockCoords(pos).setModified(true)
 
     fun getTranslatedString(str: String): String {
         var cct = translations[str]

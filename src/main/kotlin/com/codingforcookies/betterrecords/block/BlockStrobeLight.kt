@@ -5,7 +5,6 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileStrobeLight
 import com.codingforcookies.betterrecords.client.render.RenderStrobeLight
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
-import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.player.EntityPlayer
@@ -31,7 +30,6 @@ class BlockStrobeLight(name: String) : ModBlock(Material.IRON, name), TESRProvid
     override fun getLightValue(state: IBlockState, access: IBlockAccess, pos: BlockPos): Int {
         val te = access.getTileEntity(pos)
         if (te == null || te !is IRecordWire || te !is IRecordAmplitude) return 0
-        BetterUtils.markBlockDirty(te.world, te.pos)
         return if ((te as IRecordWire).connections.size > 0) 5 else 0
     }
 
