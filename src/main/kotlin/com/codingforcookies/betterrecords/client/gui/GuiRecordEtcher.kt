@@ -208,7 +208,7 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         with(fontRenderer) {
-            drawString(I18n.format("gui.recordetcher"), 8, 6, 4210752)
+            drawString(I18n.format("tile.betterrecords:recordetcher.name"), 8, 6, 4210752)
             //drawString(I18n.format("container.inventory"), 8, 72, 4210752)
             drawString(I18n.format("gui.name") + ": ", 10, 21, 4210752)
             drawString(I18n.format("gui.url") + ": ", 10, 36, 4210752)

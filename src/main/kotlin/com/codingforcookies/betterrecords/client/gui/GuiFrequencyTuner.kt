@@ -67,7 +67,7 @@ class GuiFrequencyTuner(inventoryPlayer: InventoryPlayer, val tileEntity: TileFr
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         with (fontRenderer) {
-            drawString(I18n.format("gui.frequencytuner"), 8, 6, 4210752)
+            drawString(I18n.format("tile.betterrecords:frequencytuner.name"), 8, 6, 4210752)
             drawString(I18n.format("container.inventory"), 8, ySize - 96 + 2, 4210752)
             drawString(I18n.format("gui.name") + ": ", 10, 21, 4210752)
             drawString(I18n.format("gui.url") + ": ", 10, 36, 4210752)

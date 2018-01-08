@@ -38,11 +38,6 @@ msg.laserlength.increase=Lazer length has increased to
 msg.laserlength.decrease=Lazer length has decreased to
 
 ### GUI
-
-# TODO: Remove these duplicates
-gui.recordetcher=Record Etcher
-gui.frequencytuner=Crystal Tune
-
 ## Shared GUI Strings
 gui.name=Name
 gui.url=URL
