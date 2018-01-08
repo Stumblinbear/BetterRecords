@@ -5,7 +5,6 @@ import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner
 import com.codingforcookies.betterrecords.client.sound.IcyURLConnection
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketURLWrite
-import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.client.gui.GuiTextField
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.client.renderer.GlStateManager
@@ -139,7 +138,7 @@ class GuiFrequencyTuner(inventoryPlayer: InventoryPlayer, val tileEntity: TileFr
         mc.renderEngine.bindTexture(GUI)
 
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize)
-        drawTexturedModalRect(x + 43, y + 51, 0, if (error == BetterUtils.getTranslatedString("gui.frequencytuner.ready")) 166 else 178, 33, 12)
+        drawTexturedModalRect(x + 43, y + 51, 0, if (error == I18n.format("gui.frequencytuner.ready")) 166 else 178, 33, 12)
     }
 
     override fun drawScreen(mouseX: Int, mouseY: Int, partialTicks: Float) {
