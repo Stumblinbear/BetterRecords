@@ -98,7 +98,7 @@ public class SoundHandler{
                     if(ModConfig.client.downloadSongs) {
                         if(FileDownloader.isDownloading) {
                             System.err.println("Song downloading... Please wait...");
-                            nowPlaying = I18n.format("overlay.nowplaying.error1");
+                            nowPlaying = I18n.format("betterrecords.overlay.error.pleaseWait");
                             nowPlayingEnd = System.currentTimeMillis() + 5000;
                             return;
                         }
@@ -169,7 +169,7 @@ public class SoundHandler{
                 e.printStackTrace();
                 if (Minecraft.getMinecraft().player != null) {
                     System.err.println("Failed to stream: " + url);
-                    nowPlaying = I18n.format("overlay.nowplaying.error2");
+                    nowPlaying = I18n.format("betterrecords.overlay.error.cantReadStream");
                 }
                 nowPlayingEnd = System.currentTimeMillis() + 5000;
             }
@@ -204,11 +204,11 @@ public class SoundHandler{
             if (Minecraft.getMinecraft().player != null) {
                 switch (type) {
                     case SONG:
-                        nowPlaying = I18n.format("overlay.nowplaying.error3");
+                        nowPlaying = I18n.format("betterrecords.overlay.error.cantReadFile");
                         System.err.println("Could not read file: Local: " + snd.local + " File: " + snd.name);
                         break;
                     case RADIO:
-                        nowPlaying = I18n.format("overlay.nowplaying.error2");
+                        nowPlaying = I18n.format("betterrecords.overlay.error.cantReadStream");
                         System.err.println("Failed to stream: URL: " + snd.url);
                         break;
                     default:

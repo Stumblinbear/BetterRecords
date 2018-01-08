@@ -68,7 +68,7 @@ object ClientRenderHandler {
                     GL11.glDisable(GL11.GL_BLEND)
                     GL11.glEnable(GL11.GL_TEXTURE_2D)
                 }
-                fontRenderer.drawStringWithShadow(I18n.format("overlay.downloading") + ": " + FileDownloader.nowDownloading, (width / 2 - fontRenderer.getStringWidth(I18n.format("overlay.downloading") + ": " + FileDownloader.nowDownloading) / 2).toFloat(), (height - height / 4 + 15).toFloat(), 0xFFFF33)
+                fontRenderer.drawStringWithShadow(I18n.format("betterrecords.overlay.downloading", FileDownloader.nowDownloading), (width / 2 - fontRenderer.getStringWidth(I18n.format("betterrecords.overlay.downloading") + ": " + FileDownloader.nowDownloading) / 2).toFloat(), (height - height / 4 + 15).toFloat(), 0xFFFF33)
             }
             if (SoundHandler.nowPlaying != "") {
                 if (SoundHandler.nowPlaying.startsWith("Error:")) {
@@ -82,7 +82,7 @@ object ClientRenderHandler {
                 val l1 = Color.HSBtoRGB(f3 / 50.0f, 0.7f, 0.6f) and 16777215
                 var k1 = (f3 * 255.0f / 20.0f).toInt()
                 if (k1 > 255) k1 = 255
-                fontRenderer.drawStringWithShadow(I18n.format("overlay.nowplaying") + ": " + SoundHandler.nowPlaying, (width / 2 - fontRenderer.getStringWidth(I18n.format("overlay.nowplaying") + ": " + SoundHandler.nowPlaying) / 2).toFloat(), (height - height / 4).toFloat(), l1 + (k1 shl 24 and -16777216))
+                fontRenderer.drawStringWithShadow(I18n.format("betterrecords.overlay.playing", SoundHandler.nowPlaying), (width / 2 - fontRenderer.getStringWidth(I18n.format("betterrecords.overlay.nowplaying") + ": " + SoundHandler.nowPlaying) / 2).toFloat(), (height - height / 4).toFloat(), l1 + (k1 shl 24 and -16777216))
             }
         }
     }

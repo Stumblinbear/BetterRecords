@@ -84,13 +84,11 @@ gui.betterrecords.disclaimer.flashmode.rave.line4=unplayable at times. But,
 gui.betterrecords.disclaimer.flashmode.rave.line5=it looks awesome.
 
 # Overlay
-overlay.downloading=Downloading
-overlay.playing=Now Playing
-overlay.curversion=BetterRecords Version
-overlay.nowplaying=Now Playing
-overlay.nowplaying.error1=Error: Please wait for song to finish downloading...
-overlay.nowplaying.error2=Error: Could not read stream.
-overlay.nowplaying.error3=Error: Could not read file.
+betterrecords.overlay.downloading=Downloading: %s
+betterrecords.overlay.nowplaying=Now Playing: %s
+betterrecords.overlay.error.pleaseWait=Error: Please wait for song to finish downloading...
+betterrecords.overlay.error.cantReadStream=Error: Could not read stream.
+betterrecords.overlay.error.cantReadFile=Error: Could not read file.
 
 # Config
 betterrecords.config.title=BetterRecords Config
