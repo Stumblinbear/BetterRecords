@@ -1,10 +1,10 @@
-msg.newversion.txt=A new version of BetterRecords is available!
-
-msg.laserlength.increase=Lazer length has increased to
-msg.laserlength.decrease=Lazer length has decreased to
-
+### MISC
 itemGroup.betterrecords=Better Records
 
+msg.newversion.txt=A new version of BetterRecords is available!
+
+### Items & Blocks
+## Items
 item.betterrecords:record.name=Blank Record
 item.betterrecords:multirecord.name=Multi Record
 item.betterrecords:frequencycrystal.name=Frequency Crystal
@@ -12,6 +12,14 @@ item.betterrecords:frequencycrystal.name=Frequency Crystal
 item.betterrecords:wire.name=Speaker Wire
 item.betterrecords:wirecutters.name=Wire Cutters
 
+# Record tooltip
+item.record.song=Song
+item.record.shuffleenabled=Shuffle Enabled
+item.record.repeatenabled=Repeat Enabled
+item.record.size=Size
+item.record.by=By
+
+## Blocks
 tile.betterrecords:recordetcher.name=Record Etcher
 tile.betterrecords:recordplayer.name=Record Player
 tile.betterrecords:frequencytuner.name=Frequency Tuner
@@ -25,12 +33,22 @@ tile.betterrecords:strobelight.name=Strobe Light
 tile.betterrecords:laser.name=Laser
 tile.betterrecords:lasercluster.name=Laser Cluster
 
+# Laser messages
+msg.laserlength.increase=Lazer length has increased to
+msg.laserlength.decrease=Lazer length has decreased to
+
+### GUI
+
+# TODO: Remove these duplicates
 gui.recordetcher=Record Etcher
 gui.frequencytuner=Crystal Tune
+
+## Shared GUI Strings
 gui.name=Name
 gui.url=URL
 gui.validating=Validating...
 
+# TODO: Make error keys more descriptive
 gui.error1=Please insert a name
 gui.error2=Name is not long enough
 gui.error3=Please insert a URL
@@ -73,21 +91,7 @@ gui.disclaimer.flashymode.rave.line3=which makes the game almost
 gui.disclaimer.flashymode.rave.line4=unplayable at times. But,
 gui.disclaimer.flashymode.rave.line5=it looks awesome.
 
-
-tutorial.laser=Connect this to a record player using wire to add a stream of color to your songs!
-tutorial.lasercluster=Connect this to a record player using wire to add some streams of color to your songs!
-tutorial.radio=Insert a tuned frequency crystal to start streaming!
-tutorial.recordplayer=Shift+Right Click while holding nothing to open and close the record player!
-tutorial.speaker=Connect this to a record player using speaker wire to increase the play radius!
-tutorial.strobelight=Connect this to a record player using wire to add some pazazz to your songs!
-
-
-item.record.song=Song
-item.record.shuffleenabled=Shuffle Enabled
-item.record.repeatenabled=Repeat Enabled
-item.record.size=Size
-item.record.by=By
-
+### Overlay
 overlay.downloading=Downloading
 overlay.playing=Now Playing
 overlay.curversion=BetterRecords Version
@@ -96,7 +100,7 @@ overlay.nowplaying.error1=Error: Please wait for song to finish downloading...
 overlay.nowplaying.error2=Error: Could not read stream.
 overlay.nowplaying.error3=Error: Could not read file.
 
-### Config Strings
+### Config
 betterrecords.config.title=BetterRecords Config
 betterrecords.general.maxspeakerradius=Max Speaker Radius
 
