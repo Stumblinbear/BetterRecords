@@ -1,9 +1,9 @@
-### MISC
+# MISC
 itemGroup.betterrecords=Better Records
 
 msg.newversion.txt=A new version of BetterRecords is available!
 
-### Items & Blocks
+# Items & Blocks
 ## Items
 item.betterrecords:record.name=Blank Record
 item.betterrecords:multirecord.name=Multi Record
@@ -12,7 +12,7 @@ item.betterrecords:frequencycrystal.name=Frequency Crystal
 item.betterrecords:wire.name=Speaker Wire
 item.betterrecords:wirecutters.name=Wire Cutters
 
-# Item Descriptions
+### Item Descriptions
 item.betterercords:record.desc.by=By: %s
 item.betterercords:record.desc.size=Size: %imb
 item.betterercords:record.desc.repeat=Repeat Enabled
@@ -34,11 +34,11 @@ tile.betterrecords:strobelight.name=Strobe Light
 tile.betterrecords:laser.name=Laser
 tile.betterrecords:lasercluster.name=Laser Cluster
 
-# Laser messages
+### Laser messages
 tile.betterrecords:laser.msg.increase=Laser length increased to %i
 tile.betterrecords:laser.msg.decrease=Laser length decreased to %i
 
-### GUI
+# GUI
 ## Shared GUI Strings
 gui.betterrecords.label.name=Name
 gui.betterrecords.label.url=URL
@@ -51,6 +51,7 @@ gui.betterrecords.status.urlUnavailable=URL unavailable (Does it exist?)
 gui.betterrecords.status.invalidUrl=Invalid URL
 gui.betterrecords.status.ioException=IO Exception
 
+## Record Etcher
 gui.betterrecords.recordetcher.etch=Etch
 gui.betterrecords.recordetcher.ready=Ready to Etch!
 gui.betterrecords.recordetcher.status.noRecord=No record to etch
@@ -60,12 +61,14 @@ gui.betterrecords.recordetcher.status.invalidFile=Invalid file
 gui.betterrecords.recordetcher.status.multiplayer=Local files are singleplayer only!
 gui.betterrecords.recordetcher.status.encodingNotSupported=%s is not supported!
 
+## Frequency Tuner
 gui.betterrecords.frequencytuner.tune=Tune
 gui.betterrecords.frequencytuner.ready=Tuner ready!
 gui.betterrecords.frequencytuner.status.noCrystal=No crystal to tune
 gui.betterrecords.frequencytuner.status.notBlank=Crystal already tuned
 gui.betterrecords.frequencytuner.status.invalidUrl=Invalid Icy Stream URL!
 
+## Disclaimer
 gui.betterrecords.disclaimer.title=Better Records Disclaimer
 gui.betterrecords.disclaimer.warning=WARNING: Parts of this mod make use of flashing lights and images. Consult a parent or guardian before continuing. I am not responsible for anything that may occur while using this mod.
 gui.betterrecords.disclaimer.flashmode.none=None
@@ -81,7 +84,7 @@ gui.betterrecords.disclaimer.flashmode.rave.line3=which makes the game almost
 gui.betterrecords.disclaimer.flashmode.rave.line4=unplayable at times. But,
 gui.betterrecords.disclaimer.flashmode.rave.line5=it looks awesome.
 
-### Overlay
+# Overlay
 overlay.downloading=Downloading
 overlay.playing=Now Playing
 overlay.curversion=BetterRecords Version
@@ -90,7 +93,7 @@ overlay.nowplaying.error1=Error: Please wait for song to finish downloading...
 overlay.nowplaying.error2=Error: Could not read stream.
 overlay.nowplaying.error3=Error: Could not read file.
 
-### Config
+# Config
 betterrecords.config.title=BetterRecords Config
 betterrecords.general.maxspeakerradius=Max Speaker Radius
 
