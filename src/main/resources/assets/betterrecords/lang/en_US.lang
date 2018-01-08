@@ -35,8 +35,8 @@ tile.betterrecords:laser.name=Laser
 tile.betterrecords:lasercluster.name=Laser Cluster
 
 # Laser messages
-msg.laserlength.increase=Lazer length has increased to
-msg.laserlength.decrease=Lazer length has decreased to
+tile.betterrecords:laser.msg.increase=Laser length increased to %i
+tile.betterrecords:laser.msg.decrease=Laser length decreased to %i
 
 ### GUI
 ## Shared GUI Strings
