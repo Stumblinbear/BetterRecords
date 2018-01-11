@@ -1,6 +1,7 @@
 package com.codingforcookies.betterrecords.library
 
 import com.codingforcookies.betterrecords.ModConfig
+import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.client.Minecraft
 import java.io.File
 import java.net.URL
@@ -38,21 +39,21 @@ object Libraries {
         val remoteLibrariesFile = File(LOCAL_LIBRARY_DIR.parent, "remoteLibraries.txt")
         with (remoteLibrariesFile) {
             if (!exists()) {
-                writeText(this::class.java.getResource("/assets/betterrecords/libraries/remoteLibraries.txt").readText())
+                writeText(BetterUtils.getResourceFromJar("assets/betterrecords/libraries/remoteLibraries.txt").readText())
             }
         }
 
         // Create an empty library for their etchings if it doesn't exist. We need at least one library.
         with (File(LOCAL_LIBRARY_DIR, "myEtchings.json")) {
             if (!exists()) {
-                writeText(this::class.java.getResource("/assets/betterrecords/libraries/empty_library.json").readText())
+                writeText(BetterUtils.getResourceFromJar("assets/betterrecords/libraries/empty_library.json").readText())
             }
         }
 
         // Load the mod's built in libraries
         if (ModConfig.client.loadDefaultLibraries) {
-            listOf("/assets/betterrecords/libraries/kevin_macleod.json")
-                    .map { RemoteLibrary(this::class.java.getResource(it)) }
+            listOf("assets/betterrecords/libraries/kevin_macleod.json")
+                    .map { RemoteLibrary(BetterUtils.getResourceFromJar(it)) }
                     .forEach { libraries.add(it) }
         }
 

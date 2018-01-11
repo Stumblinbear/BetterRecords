@@ -2,6 +2,7 @@ package com.codingforcookies.betterrecords.util
 
 import com.google.common.collect.Maps
 import net.minecraft.client.Minecraft
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.world.World
@@ -43,4 +44,11 @@ object BetterUtils {
                 else          -> min
             }
 
+    /**
+     * Reads a resource from the jar, located at [path]
+     *
+     * We need to use Minecraft::class, because our own classes use the bootstrapped class loader
+     */
+    fun getResourceFromJar(path: String) =
+            Minecraft::class.java.classLoader.getResource(path)
 }
