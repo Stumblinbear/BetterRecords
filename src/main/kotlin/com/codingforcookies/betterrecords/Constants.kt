@@ -9,3 +9,5 @@ const val CLIENT_PROXY = "com.codingforcookies.betterrecords.client.ClientProxy"
 const val SERVER_PROXY = "com.codingforcookies.betterrecords.CommonProxy"
 
 const val DEPENDENCIES = "required-after:forgelin;"
+
+const val NETWORK_CHANNEL = ID

@@ -5,7 +5,7 @@ import net.minecraft.tileentity.TileEntity
 import net.minecraftforge.fml.common.registry.GameRegistry
 import kotlin.reflect.KClass
 
-interface TileEntityProvider<T> where T : TileEntity {
+interface TileEntityProvider<out T> where T : TileEntity {
 
     fun getTileEntityClass(): KClass<out T>
 

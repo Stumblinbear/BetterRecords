@@ -5,13 +5,11 @@ import com.codingforcookies.betterrecords.api.record.IRecord
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.block.tile.TileRecordPlayer
-import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.client.render.RenderRecordPlayer
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
-import com.codingforcookies.betterrecords.common.packets.PacketHandler
-import com.codingforcookies.betterrecords.util.BetterUtils
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.item.ModItems
+import com.codingforcookies.betterrecords.network.PacketHandler
+import com.codingforcookies.betterrecords.network.PacketSoundStop
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.BlockStateContainer
 import net.minecraft.block.state.IBlockState
@@ -84,8 +82,11 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name), TESRProvi
                 } else {
                     tileRecordPlayer.record = player.heldItemMainhand
                     world.notifyBlockUpdate(pos, state!!, state, 3)
-                    if (!world.isRemote) (player.heldItemMainhand.item as IRecord).onRecordInserted(tileRecordPlayer, player.heldItemMainhand)
                     player.heldItemMainhand.count--
+                }
+
+                if (!world.isRemote) {
+                    (tileEntity.record.item as IRecord).onRecordInserted(tileRecordPlayer, tileEntity.record)
                 }
             }
         }
@@ -106,11 +107,6 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name), TESRProvi
 
     override fun onBlockPlacedBy(world: World?, pos: net.minecraft.util.math.BlockPos?, state: IBlockState?, placer: EntityLivingBase?, stack: ItemStack?) {
         world!!.setBlockState(pos!!, state!!.withProperty(BetterRecordsAPI.CARDINAL_DIRECTIONS, placer!!.horizontalFacing.opposite))
-        if (world.isRemote && !ConfigHandler.tutorials["recordplayer"]!!) {
-            ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.recordplayer")
-            ClientRenderHandler.tutorialTime = System.currentTimeMillis() + 10000
-            ConfigHandler.tutorials.put("recordplayer", true)
-        }
     }
 
     override fun removedByPlayer(state: IBlockState, world: World, pos: BlockPos, player: EntityPlayer, willHarvest: Boolean): Boolean {
@@ -152,7 +148,7 @@ class BlockRecordPlayer(name: String) : ModBlock(Material.WOOD, name), TESRProvi
             item.count = 0
 
             tileEntity.record = ItemStack.EMPTY
-            PacketHandler.sendSoundStopToAllFromServer(tileEntity.pos.x, tileEntity.pos.y, tileEntity.pos.z, world.provider.dimension)
+            PacketHandler.sendToAll(PacketSoundStop(tileEntity.pos, world.provider.dimension))
         }
     }
 }

@@ -6,11 +6,11 @@ import java.util.Random;
 
 public class SoundManager{
 
-    public boolean repeat = false;
-    public boolean shuffle = false;
+    public boolean repeat;
+    public boolean shuffle;
     public int current = -1;
-    public List<Sound> songs = new ArrayList<Sound>();
-    public List<Integer> completedSongs = new ArrayList<Integer>();
+    public List<Sound> songs = new ArrayList<>();
+    public List<Integer> completedSongs = new ArrayList<>();
     private final Random rand;
 
     public SoundManager(boolean repeat, boolean shuffle){

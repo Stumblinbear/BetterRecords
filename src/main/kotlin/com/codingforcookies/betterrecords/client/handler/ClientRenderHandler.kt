@@ -1,9 +1,9 @@
 package com.codingforcookies.betterrecords.client.handler
 
+import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.client.sound.FileDownloader
 import com.codingforcookies.betterrecords.client.sound.SoundHandler
 import com.codingforcookies.betterrecords.extensions.glMatrix
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
@@ -14,8 +14,6 @@ import java.awt.Color
 
 object ClientRenderHandler {
 
-    var tutorialText = ""
-    var tutorialTime: Long = 0
     var strobeLinger = 0f
 
     @SubscribeEvent
@@ -43,38 +41,7 @@ object ClientRenderHandler {
                         GL11.glDisable(GL11.GL_BLEND)
                         GL11.glEnable(GL11.GL_TEXTURE_2D)
                 }
-                strobeLinger -= if (ConfigHandler.flashyMode < 3) 0.01f else 0.2f
-            }
-            if (tutorialText != "") {
-                if (tutorialTime > System.currentTimeMillis()) {
-                    val str = BetterUtils.getWordWrappedString(70, tutorialText)
-                    var difference = tutorialTime - System.currentTimeMillis()
-                    if (difference > 9000)
-                        difference = 10000 - difference
-                    else if (difference > 1000) difference = 1000
-                    glMatrix {
-                        GL11.glDisable(GL11.GL_TEXTURE_2D)
-                        GL11.glTranslatef((width / 2 - 100).toFloat(), (-50 + difference / 20).toFloat(), 0f)
-                        GL11.glEnable(GL11.GL_BLEND)
-
-                        GL11.glBegin(GL11.GL_QUADS)
-                        GL11.glColor4f(0f, 0f, 0f, .75f)
-                        GL11.glVertex2f(180f, 0f)
-                        GL11.glVertex2f(0f, 0f)
-                        GL11.glVertex2f(0f, (4 + str.size * 5).toFloat())
-                        GL11.glVertex2f(180f, (4 + str.size * 5).toFloat())
-                        GL11.glEnd()
-
-                        GL11.glDisable(GL11.GL_BLEND)
-                        GL11.glEnable(GL11.GL_TEXTURE_2D)
-                        GL11.glScalef(.5f, .5f, 0f)
-                        for (i in str.indices)
-                            fontRenderer.drawStringWithShadow(str[i], (180 - fontRenderer.getStringWidth(str[i]) / 2).toFloat(), (5 + i * 10).toFloat(), 0xFFFFFF)
-                    }
-                } else {
-                    tutorialText = ""
-                    tutorialTime = 0
-                }
+                strobeLinger -= if (ModConfig.client.flashMode < 3) 0.01f else 0.2f
             }
             if (FileDownloader.isDownloading) {
                 glMatrix {

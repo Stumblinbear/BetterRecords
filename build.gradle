@@ -9,6 +9,7 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0' 
     }
 }
 
@@ -17,6 +18,9 @@ repositories {
     maven {
         url 'http://maven.shadowfacts.net/'
     }
+    maven {
+        url "http://dl.bintray.com/jetbrains/spek"
+    }
     flatDir {
         dirs 'libs'
     }
@@ -24,9 +28,15 @@ repositories {
 
 apply plugin: 'kotlin'
 apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'org.junit.platform.gradle.plugin'
 
-targetCompatibility = JavaVersion.VERSION_1_8
-sourceCompatibility = JavaVersion.VERSION_1_8
+junitPlatform {
+    filters {
+        engines {
+            include 'spek'
+        }
+    }
+}
 
 version = "$minecraft_version-$mod_version"
 
@@ -46,6 +56,10 @@ dependencies {
     compile name: 'mp3spi1.9.5'
     compile name: 'tritonus-share-0.3.7-2'
     compile name: 'vorbisspi-1.0.3-1'
+
+    testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test', version: kotlin_version
+    testCompile group: 'org.jetbrains.spek', name: 'spek-api', version: '1.1.5'
+    testRuntime group: 'org.jetbrains.spek', name: 'spek-junit-platform-engine', version : '1.1.5'
 }
 
 processResources {

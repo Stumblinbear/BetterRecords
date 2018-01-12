@@ -3,18 +3,15 @@ package com.codingforcookies.betterrecords.block
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.api.wire.IRecordWireManipulator
 import com.codingforcookies.betterrecords.block.tile.TileRadio
-import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.client.render.RenderRadio
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
-import com.codingforcookies.betterrecords.common.packets.PacketHandler
-import com.codingforcookies.betterrecords.util.BetterUtils
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.item.ModItems
+import com.codingforcookies.betterrecords.network.PacketHandler
+import com.codingforcookies.betterrecords.network.PacketRadioPlay
+import com.codingforcookies.betterrecords.network.PacketSoundStop
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
-import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
@@ -24,7 +21,6 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
-import kotlin.reflect.KClass
 
 class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name), TESRProvider<TileRadio>, ItemModelProvider {
 
@@ -45,16 +41,6 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name), TESRP
         else -> Block.FULL_BLOCK_AABB
     }
 
-    override fun onBlockPlacedBy(world: World, pos: BlockPos, state: IBlockState, placer: EntityLivingBase, itemStack: ItemStack) {
-        super.onBlockPlacedBy(world, pos, state, placer, itemStack)
-
-        if (world.isRemote && !ConfigHandler.tutorials["radio"]!!) {
-            ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.radio")
-            ClientRenderHandler.tutorialTime = System.currentTimeMillis() + 10000
-            ConfigHandler.tutorials["radio"] = true
-        }
-    }
-
     override fun onBlockActivated(world: World, pos: BlockPos, state: IBlockState, player: EntityPlayer, hand: EnumHand, side: EnumFacing, hitX: Float, hitY: Float, hitZ: Float): Boolean {
         if (player.heldItemMainhand.item is IRecordWireManipulator) return false
 
@@ -73,7 +59,13 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name), TESRP
                     world.notifyBlockUpdate(pos, state, state, 3)
                     player.heldItemMainhand.count--
                     if (!world.isRemote) {
-                        PacketHandler.sendRadioPlayToAllFromServer(te.pos.x, te.pos.y, te.pos.z, world.provider.dimension, te.songRadius, te.crystal!!.tagCompound!!.getString("name"), te.crystal!!.tagCompound!!.getString("url"))
+                        PacketHandler.sendToAll(PacketRadioPlay(
+                                pos,
+                                world.provider.dimension,
+                                te.songRadius,
+                                te.crystal.tagCompound!!.getString("name"),
+                                te.crystal.tagCompound!!.getString("url")
+                        ))
                     }
                 }
             }
@@ -113,7 +105,7 @@ class BlockRadio(name: String) : ModBlockDirectional(Material.WOOD, name), TESRP
                 world.spawnEntity(entityItem)
                 te.crystal.count = 0
                 te.crystal = ItemStack.EMPTY
-                PacketHandler.sendSoundStopToAllFromServer(te.pos.x, te.pos.y, te.pos.z, world.provider.dimension)
+                PacketHandler.sendToAll(PacketSoundStop(te.pos, world.provider.dimension))
             }
         }
     }

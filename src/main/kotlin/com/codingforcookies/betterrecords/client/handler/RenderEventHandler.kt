@@ -1,8 +1,8 @@
 package com.codingforcookies.betterrecords.client.handler
 
+import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.client.sound.SoundHandler
 import com.codingforcookies.betterrecords.extensions.glMatrix
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import com.codingforcookies.betterrecords.item.ItemWire
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
@@ -39,7 +39,7 @@ object RenderEventHandler {
                     GlStateManager.glVertex3f(0F, 3F, 0F)
                     GlStateManager.glEnd()
 
-                    if (ConfigHandler.devMode && ItemWire.connection!!.fromHome) {
+                    if (ModConfig.client.devMode && ItemWire.connection!!.fromHome) {
                         // TODO: Clean up this
                         if (SoundHandler.soundPlaying.containsKey(ItemWire.connection!!.x1.toString() + "," + ItemWire.connection!!.y1 + "," + ItemWire.connection!!.z1 + "," + mc.world.provider.dimension)) {
                             val radius = SoundHandler.soundPlaying[ItemWire.connection!!.x1.toString() + "," + ItemWire.connection!!.y1 + "," + ItemWire.connection!!.z1 + "," + mc.world.provider.dimension]!!.currentSong!!.playRadius

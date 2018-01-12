@@ -2,11 +2,8 @@ package com.codingforcookies.betterrecords.block
 
 import com.codingforcookies.betterrecords.api.wire.IRecordWire
 import com.codingforcookies.betterrecords.block.tile.TileLaser
-import com.codingforcookies.betterrecords.client.handler.ClientRenderHandler
 import com.codingforcookies.betterrecords.client.render.RenderLaser
 import com.codingforcookies.betterrecords.helper.ConnectionHelper
-import com.codingforcookies.betterrecords.util.BetterUtils
-import com.codingforcookies.betterrecords.handler.ConfigHandler
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
 import net.minecraft.entity.EntityLivingBase
@@ -42,12 +39,6 @@ class BlockLaser(name: String) : ModBlock(Material.IRON, name), TESRProvider<Til
         (world.getTileEntity(pos) as? TileLaser)?.let { te ->
             te.pitch = entityLiving.rotationPitch
             te.yaw = entityLiving.rotationYaw
-
-            if (world.isRemote && !ConfigHandler.tutorials["laser"]!!) {
-                ClientRenderHandler.tutorialText = BetterUtils.getTranslatedString("tutorial.laser")
-                ClientRenderHandler.tutorialTime = System.currentTimeMillis() + 10000
-                ConfigHandler.tutorials["laser"] = true
-            }
         }
     }
 

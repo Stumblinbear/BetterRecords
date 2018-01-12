@@ -2,6 +2,7 @@ package com.codingforcookies.betterrecords.util
 
 import com.google.common.collect.Maps
 import net.minecraft.client.Minecraft
+import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.world.World
@@ -35,6 +36,19 @@ object BetterUtils {
             WordUtils.wrap(string, maxWidth, "\n", false)
                     .replace("\\n", "\n")
                     .split("\n")
-                    .toTypedArray() // Temporary so we don't have to change too much in the old source
 
+    fun wrapInt(x: Int, min: Int, max: Int) =
+            when {
+                x in min..max -> x
+                x < min       -> max
+                else          -> min
+            }
+
+    /**
+     * Reads a resource from the jar, located at [path]
+     *
+     * We need to use Minecraft::class, because our own classes use the bootstrapped class loader
+     */
+    fun getResourceFromJar(path: String) =
+            Minecraft::class.java.classLoader.getResource(path)
 }

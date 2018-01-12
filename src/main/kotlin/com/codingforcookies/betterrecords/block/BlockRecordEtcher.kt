@@ -5,7 +5,6 @@ import com.codingforcookies.betterrecords.block.tile.TileRecordEtcher
 import com.codingforcookies.betterrecords.client.render.RenderRecordEtcher
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
@@ -16,7 +15,6 @@ import net.minecraft.util.math.BlockPos
 import net.minecraft.world.IBlockAccess
 import net.minecraft.world.World
 import java.util.*
-import kotlin.reflect.KClass
 
 class BlockRecordEtcher(name: String) : ModBlock(Material.WOOD, name), TESRProvider<TileRecordEtcher>, ItemModelProvider  {
 
