@@ -1,14 +1,9 @@
 package com.codingforcookies.betterrecords.util
 
-import net.minecraft.util.math.BlockPos
-import net.minecraft.world.World
 import net.minecraftforge.fml.common.Mod
 import org.apache.commons.lang3.text.WordUtils
 
 object BetterUtils {
-
-    fun markBlockDirty(world: World, pos: BlockPos) =
-        world.getChunkFromBlockCoords(pos).setModified(true)
 
     fun getWordWrappedString(maxWidth: Int, string: String) =
             WordUtils.wrap(string, maxWidth, "\n", false)
