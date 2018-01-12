@@ -46,7 +46,7 @@ public class ModConfig {
 
         @Config.Comment("Intensity of lights")
         @Config.RangeInt(min = -1, max = 3)
-        public int flashMode;
+        public int flashMode = -1;
 
         @Config.Comment("Should the mod's built in libraries be loaded")
         public boolean loadDefaultLibraries = true;
