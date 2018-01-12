@@ -1,6 +1,6 @@
 BetterRecords
 =============
-[Curse](https://mods.curse.com/mc-mods/minecraft/222722-better-records)
+[Curse](https://minecraft.curseforge.com/projects/better-records)
 
 Better Records adds the ability to download your favorite songs
 from the internet directly into your game, for all your friends to hear!

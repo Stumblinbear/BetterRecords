@@ -6,6 +6,7 @@ import net.minecraft.util.ResourceLocation
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.text.TextComponentTranslation
 import net.minecraft.world.World
+import net.minecraftforge.fml.common.Mod
 import org.apache.commons.lang3.text.WordUtils
 
 object BetterUtils {
@@ -47,8 +48,8 @@ object BetterUtils {
     /**
      * Reads a resource from the jar, located at [path]
      *
-     * We need to use Minecraft::class, because our own classes use the bootstrapped class loader
+     * We need to use Mod::class, because our own classes use the bootstrapped class loader
      */
     fun getResourceFromJar(path: String) =
-            Minecraft::class.java.classLoader.getResource(path)
+            Mod::class.java.classLoader.getResource(path)
 }

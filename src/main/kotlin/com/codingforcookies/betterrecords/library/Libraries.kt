@@ -3,6 +3,9 @@ package com.codingforcookies.betterrecords.library
 import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.client.Minecraft
+import net.minecraft.server.MinecraftServer
+import net.minecraftforge.fml.common.FMLCommonHandler
+import net.minecraftforge.fml.relauncher.Side
 import java.io.File
 import java.net.URL
 
@@ -22,7 +25,10 @@ import java.net.URL
 object Libraries {
 
     /** The directory where local libraries are stored */
-    private val LOCAL_LIBRARY_DIR = File(Minecraft.getMinecraft().mcDataDir, "betterrecords/library")
+    private val LOCAL_LIBRARY_DIR = File(when (FMLCommonHandler.instance().side) {
+        Side.CLIENT -> Minecraft.getMinecraft().mcDataDir
+        Side.SERVER -> File(".")
+    }, "betterrecords/library")
 
     /** All of the library files that have been loaded */
     val libraries = mutableListOf<Library>()
