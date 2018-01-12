@@ -9,6 +9,9 @@ import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
+import net.minecraft.util.text.translation.I18n as ServerI18n
 
 open class ItemRecord(name: String) : ModItem(name), IRecord {
 
@@ -36,6 +39,7 @@ open class ItemRecord(name: String) : ModItem(name), IRecord {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         stack.tagCompound?.let {
             tooltip += I18n.format("item.betterercords:record.desc.by", it.getString("author"))
@@ -47,10 +51,10 @@ open class ItemRecord(name: String) : ModItem(name), IRecord {
         }
     }
 
-    override fun getItemStackDisplayName(stack: ItemStack) =
+    override fun getItemStackDisplayName(stack: ItemStack): String =
             if (stack.hasTagCompound() && stack.tagCompound!!.hasKey("local")) {
                 stack.tagCompound!!.getString("local")
             } else {
-                I18n.format("$unlocalizedName.name")
+                ServerI18n.translateToLocal("$unlocalizedName.name")
             }
 }

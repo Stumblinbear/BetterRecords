@@ -7,11 +7,11 @@ import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
 import net.minecraft.world.World
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
+import net.minecraft.util.text.translation.I18n as ServerI18n
 
 class ItemMultiRecord(name: String) : ItemRecord(name) {
-
-    override fun getItemStackDisplayName(stack: ItemStack) =
-            I18n.format("$unlocalizedName.name")
 
     override fun isRecordValid(itemStack: ItemStack) =
             itemStack.hasTagCompound() && itemStack.tagCompound!!.hasKey("songs")
@@ -29,6 +29,7 @@ class ItemMultiRecord(name: String) : ItemRecord(name) {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         stack.tagCompound?.let {
             if (it.hasKey("songs")) {
@@ -45,4 +46,7 @@ class ItemMultiRecord(name: String) : ItemRecord(name) {
             }
         }
     }
+
+    override fun getItemStackDisplayName(stack: ItemStack): String =
+            ServerI18n.translateToLocal("$unlocalizedName.name")
 }

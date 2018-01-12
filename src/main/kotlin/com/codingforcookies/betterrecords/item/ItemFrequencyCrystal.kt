@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords.item
 
 import net.minecraft.item.ItemStack
-import net.minecraft.util.text.translation.I18n
+import net.minecraft.util.text.translation.I18n as ServerI18n
 
 class ItemFrequencyCrystal(name: String) : ModItem(name) {
 
@@ -13,6 +13,6 @@ class ItemFrequencyCrystal(name: String) : ModItem(name) {
             if (stack.hasTagCompound() && stack.tagCompound!!.hasKey("local")) {
                 stack.tagCompound!!.getString("local")
             } else {
-                I18n.translateToLocal("$unlocalizedName.name")
+                ServerI18n.translateToLocal("$unlocalizedName.name")
             }
 }
