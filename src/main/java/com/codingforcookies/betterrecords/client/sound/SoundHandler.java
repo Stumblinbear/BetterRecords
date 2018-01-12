@@ -4,9 +4,9 @@ import com.codingforcookies.betterrecords.ModConfig;
 import com.codingforcookies.betterrecords.api.connection.RecordConnection;
 import com.codingforcookies.betterrecords.api.record.IRecordAmplitude;
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome;
-import com.codingforcookies.betterrecords.util.BetterUtils;
 import com.codingforcookies.betterrecords.util.ClasspathInjector;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Loader;
@@ -98,7 +98,7 @@ public class SoundHandler{
                     if(ModConfig.client.downloadSongs) {
                         if(FileDownloader.isDownloading) {
                             System.err.println("Song downloading... Please wait...");
-                            nowPlaying = BetterUtils.INSTANCE.getTranslatedString("overlay.nowplaying.error1");
+                            nowPlaying = I18n.format("betterrecords.overlay.error.pleaseWait");
                             nowPlayingEnd = System.currentTimeMillis() + 5000;
                             return;
                         }
@@ -169,7 +169,7 @@ public class SoundHandler{
                 e.printStackTrace();
                 if (Minecraft.getMinecraft().player != null) {
                     System.err.println("Failed to stream: " + url);
-                    nowPlaying = BetterUtils.INSTANCE.getTranslatedString("overlay.nowplaying.error2");
+                    nowPlaying = I18n.format("betterrecords.overlay.error.cantReadStream");
                 }
                 nowPlayingEnd = System.currentTimeMillis() + 5000;
             }
@@ -204,11 +204,11 @@ public class SoundHandler{
             if (Minecraft.getMinecraft().player != null) {
                 switch (type) {
                     case SONG:
-                        nowPlaying = BetterUtils.INSTANCE.getTranslatedString("overlay.nowplaying.error3");
+                        nowPlaying = I18n.format("betterrecords.overlay.error.cantReadFile");
                         System.err.println("Could not read file: Local: " + snd.local + " File: " + snd.name);
                         break;
                     case RADIO:
-                        nowPlaying = BetterUtils.INSTANCE.getTranslatedString("overlay.nowplaying.error2");
+                        nowPlaying = I18n.format("betterrecords.overlay.error.cantReadStream");
                         System.err.println("Failed to stream: URL: " + snd.url);
                         break;
                     default:

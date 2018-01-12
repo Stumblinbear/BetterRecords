@@ -1,10 +1,9 @@
-msg.newversion.txt=A new version of BetterRecords is available!
-
-msg.laserlength.increase=Lazer length has increased to
-msg.laserlength.decrease=Lazer length has decreased to
-
+# MISC
 itemGroup.betterrecords=Better Records
+betterrecords.version.newAvailable=A new version of BetterRecords is available!
 
+# Items & Blocks
+## Items
 item.betterrecords:record.name=Blank Record
 item.betterrecords:multirecord.name=Multi Record
 item.betterrecords:frequencycrystal.name=Frequency Crystal
@@ -12,6 +11,15 @@ item.betterrecords:frequencycrystal.name=Frequency Crystal
 item.betterrecords:wire.name=Speaker Wire
 item.betterrecords:wirecutters.name=Wire Cutters
 
+### Item Descriptions
+item.betterercords:record.desc.by=By: %s
+item.betterercords:record.desc.size=Size: %dmb
+item.betterercords:record.desc.repeat=Repeat Enabled
+
+item.betterrecords:multirecord.desc.song=Song %d: %s
+item.betterrecords:multirecord.desc.shuffle=Shuffle Enabled
+
+## Blocks
 tile.betterrecords:recordetcher.name=Record Etcher
 tile.betterrecords:recordplayer.name=Record Player
 tile.betterrecords:frequencytuner.name=Frequency Tuner
@@ -25,78 +33,64 @@ tile.betterrecords:strobelight.name=Strobe Light
 tile.betterrecords:laser.name=Laser
 tile.betterrecords:lasercluster.name=Laser Cluster
 
-gui.recordetcher=Record Etcher
-gui.frequencytuner=Crystal Tune
-gui.name=Name
-gui.url=URL
-gui.validating=Validating...
+### Laser messages
+tile.betterrecords:laser.msg.increase=Laser length increased to %d
+tile.betterrecords:laser.msg.decrease=Laser length decreased to %d
 
-gui.error1=Please insert a name
-gui.error2=Name is not long enough
-gui.error3=Please insert a URL
-gui.error4=URL unavailable (Does it exist?)
-gui.error5=Invalid URL
-gui.error6=IO Exception
+# GUI
+## Shared GUI Strings
+gui.betterrecords.label.name=Name
+gui.betterrecords.label.url=URL
+gui.betterrecords.status.validating=Validating...
 
-gui.recordetcher.etch=Etch
-gui.recordetcher.ready=Ready to Etch!
-gui.recordetcher.error1=No record to etch
-gui.recordetcher.error2=Not a blank record
-gui.recordetcher.error3=Max file size is %imb
-gui.recordetcher.error4=Invalid file
-gui.recordetcher.error5=Local files are singleplayer only!
-gui.recordetcher.error6=%s is not supported!
+gui.betterrecords.status.noName=Please insert a name
+gui.betterrecords.status.nameTooShort=Name is not long enough
+gui.betterrecords.status.noUrl=Please insert a URL
+gui.betterrecords.status.urlUnavailable=URL unavailable (Does it exist?)
+gui.betterrecords.status.invalidUrl=Invalid URL
+gui.betterrecords.status.ioException=IO Exception
 
-gui.frequencytuner.tune=Tune
-gui.frequencytuner.ready=Tuner ready!
-gui.frequencytuner.error1=No crystal to tune
-gui.frequencytuner.error2=Crystal already tuned
-gui.frequencytuner.error3=Invalid Icy Stream URL!
+## Record Etcher
+gui.betterrecords.recordetcher.etch=Etch
+gui.betterrecords.recordetcher.ready=Ready to Etch!
+gui.betterrecords.recordetcher.status.noRecord=No record to etch
+gui.betterrecords.recordetcher.status.notBlank=Not a blank record
+gui.betterrecords.recordetcher.status.fileTooBig=Max file size is %dmb
+gui.betterrecords.recordetcher.status.invalidFile=Invalid file
+gui.betterrecords.recordetcher.status.multiplayer=Local files are singleplayer only
+gui.betterrecords.recordetcher.status.encodingNotSupported=%s is not supported
 
-gui.config.flashymode.none=None
-gui.config.flashymode.low=Low
-gui.config.flashymode.norm=Norm
-gui.config.flashymode.rave=RAVE
+## Frequency Tuner
+gui.betterrecords.frequencytuner.tune=Tune
+gui.betterrecords.frequencytuner.ready=Tuner ready!
+gui.betterrecords.frequencytuner.status.noCrystal=No crystal to tune
+gui.betterrecords.frequencytuner.status.notBlank=Crystal already tuned
+gui.betterrecords.frequencytuner.status.invalidUrl=Invalid Icy Stream URL
 
-gui.disclaimer.title=Better Records Disclaimer
-gui.disclaimer.warning=WARNING: Parts of this mod make use of flashing lights and images. Consult a parent or guardian before continuing. I am not responsible for anything that may occur while using this mod.
-gui.disclaimer.flashymode.none=Flashy Setting: None
-gui.disclaimer.flashymode.none.line1=No flashing lights/images
-gui.disclaimer.flashymode.low=Flashy Setting: Low
-gui.disclaimer.flashymode.low.line1=Some flashing lights/images
-gui.disclaimer.flashymode.norm=Flashy Setting: Normal
-gui.disclaimer.flashymode.norm.line1=Flashing lights/images
-gui.disclaimer.flashymode.rave=Flashy Setting: RAVE
-gui.disclaimer.flashymode.rave.line1=For the truly daring.
-gui.disclaimer.flashymode.rave.line2=Waaaay too much flashy stuff
-gui.disclaimer.flashymode.rave.line3=which makes the game almost
-gui.disclaimer.flashymode.rave.line4=unplayable at times. But,
-gui.disclaimer.flashymode.rave.line5=it looks awesome.
+## Disclaimer
+gui.betterrecords.disclaimer.title=Better Records Disclaimer
+gui.betterrecords.disclaimer.warning=WARNING: Parts of this mod make use of flashing lights and images. Consult a parent or guardian before continuing. I am not responsible for anything that may occur while using this mod.
+gui.betterrecords.disclaimer.flashmode.none=None
+gui.betterrecords.disclaimer.flashmode.none.line1=No flashing lights/images
+gui.betterrecords.disclaimer.flashmode.low=Low
+gui.betterrecords.disclaimer.flashmode.low.line1=Some flashing lights/images
+gui.betterrecords.disclaimer.flashmode.norm=Normal
+gui.betterrecords.disclaimer.flashmode.norm.line1=Flashing lights/images
+gui.betterrecords.disclaimer.flashmode.rave=RAVE
+gui.betterrecords.disclaimer.flashmode.rave.line1=For the truly daring.
+gui.betterrecords.disclaimer.flashmode.rave.line2=Way too much flashy stuff
+gui.betterrecords.disclaimer.flashmode.rave.line3=which makes the game almost
+gui.betterrecords.disclaimer.flashmode.rave.line4=unplayable at times.
+gui.betterrecords.disclaimer.flashmode.rave.line5=But it looks awesome.
 
+# Overlay
+betterrecords.overlay.downloading=Downloading: %s
+betterrecords.overlay.nowplaying=Now Playing: %s
+betterrecords.overlay.error.pleaseWait=Error: Please wait for song to finish downloading...
+betterrecords.overlay.error.cantReadStream=Error: Could not read stream.
+betterrecords.overlay.error.cantReadFile=Error: Could not read file.
 
-tutorial.laser=Connect this to a record player using wire to add a stream of color to your songs!
-tutorial.lasercluster=Connect this to a record player using wire to add some streams of color to your songs!
-tutorial.radio=Insert a tuned frequency crystal to start streaming!
-tutorial.recordplayer=Shift+Right Click while holding nothing to open and close the record player!
-tutorial.speaker=Connect this to a record player using speaker wire to increase the play radius!
-tutorial.strobelight=Connect this to a record player using wire to add some pazazz to your songs!
-
-
-item.record.song=Song
-item.record.shuffleenabled=Shuffle Enabled
-item.record.repeatenabled=Repeat Enabled
-item.record.size=Size
-item.record.by=By
-
-overlay.downloading=Downloading
-overlay.playing=Now Playing
-overlay.curversion=BetterRecords Version
-overlay.nowplaying=Now Playing
-overlay.nowplaying.error1=Error: Please wait for song to finish downloading...
-overlay.nowplaying.error2=Error: Could not read stream.
-overlay.nowplaying.error3=Error: Could not read file.
-
-### Config Strings
+# Config
 betterrecords.config.title=BetterRecords Config
 betterrecords.general.maxspeakerradius=Max Speaker Radius
 

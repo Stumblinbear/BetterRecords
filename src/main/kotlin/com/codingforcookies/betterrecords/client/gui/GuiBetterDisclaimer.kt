@@ -88,7 +88,7 @@ class GuiBetterDisclaimer : GuiScreen() {
             GlStateManager.enableTexture2D()
         }
 
-        val title = I18n.format("gui.disclaimer.title")
+        val title = I18n.format("gui.betterrecords.disclaimer.title")
         fontRenderer.drawString(
                 title,
                 (width - fontRenderer.getStringWidth(title)) / 2,
@@ -99,45 +99,45 @@ class GuiBetterDisclaimer : GuiScreen() {
         glMatrix {
             GlStateManager.scale(0.5F, 0.5F, 0F)
 
-            BetterUtils.getWordWrappedString(75, I18n.format("gui.disclaimer.warning"))
+            BetterUtils.getWordWrappedString(75, I18n.format("gui.betterrecords.disclaimer.warning"))
                     .forEachIndexed { index, it ->
                         fontRenderer.drawString(it, x * 2 + 6, y * 2 + 42 + index * 12, 0xFFFFFF)
                     }
         }
 
         with (fontRenderer) {
-            drawString(I18n.format("gui.config.flashymode.none"), x + 13, y + 54, 0x000000)
-            drawString(I18n.format("gui.config.flashymode.low"), x + 62, y + 54, 0x000000)
-            drawString(I18n.format("gui.config.flashymode.norm"), x + 107, y + 54, 0x000000)
-            drawString(I18n.format("gui.config.flashymode.rave"), x + 165, y + 54, 0x000000)
+            drawString(I18n.format("gui.betterrecords.disclaimer.flashmode.none"), x + 13, y + 54, 0x000000)
+            drawString(I18n.format("gui.betterrecords.disclaimer.flashmode.low"), x + 62, y + 54, 0x000000)
+            drawString(I18n.format("gui.betterrecords.disclaimer.flashmode.norm"), x + 107, y + 54, 0x000000)
+            drawString(I18n.format("gui.betterrecords.disclaimer.flashmode.rave"), x + 165, y + 54, 0x000000)
         }
 
         if (mouseX in (x + 5)..(x + 45) && mouseY in (y + 50)..(y + 65)) {
             drawHoveringText(
-                    listOf(I18n.format("gui.disclaimer.flashymode.none"),
-                            "\u00a77" + I18n.format("gui.disclaimer.flashymode.none.line1")),
+                    listOf(I18n.format("gui.betterrecords.disclaimer.flashmode.none"),
+                            "\u00a77" + I18n.format("gui.betterrecords.disclaimer.flashmode.none.line1")),
                     mouseX, mouseY, fontRenderer
             )
         } else if (mouseX in (x + 50)..(x + 90) && mouseY in (y + 50)..(y + 65)) {
             drawHoveringText(
-                    listOf(I18n.format("gui.disclaimer.flashymode.low"),
-                            "\u00a77" + I18n.format("gui.disclaimer.flashymode.low.line1")),
+                    listOf(I18n.format("gui.betterrecords.disclaimer.flashmode.low"),
+                            "\u00a77" + I18n.format("gui.betterrecords.disclaimer.flashmode.low.line1")),
                     mouseX, mouseY, fontRenderer
             )
         } else if (mouseX in (x + 95)..(x + 150) && mouseY in (y + 50)..(y + 65)) {
             drawHoveringText(
-                    listOf(I18n.format("gui.disclaimer.flashymode.norm"),
-                            "\u00a77" + I18n.format("gui.disclaimer.flashymode.norm.line1")),
+                    listOf(I18n.format("gui.betterrecords.disclaimer.flashmode.norm"),
+                            "\u00a77" + I18n.format("gui.betterrecords.disclaimer.flashmode.norm.line1")),
                     mouseX, mouseY, fontRenderer
             )
         } else if (mouseX in (x + 155)..(x + 195) && mouseY in (y + 50)..(y + 65)) {
             drawHoveringText(
-                    listOf(I18n.format("gui.disclaimer.flashymode.rave"),
-                            "\u00a77" + I18n.format("gui.disclaimer.flashymode.rave.line1"),
-                            "\u00a77" + I18n.format("gui.disclaimer.flashymode.rave.line2"),
-                            "\u00a77" + I18n.format("gui.disclaimer.flashymode.rave.line3"),
-                            "\u00a77" + I18n.format("gui.disclaimer.flashymode.rave.line4"),
-                            "\u00a77" + I18n.format("gui.disclaimer.flashymode.rave.line5")),
+                    listOf(I18n.format("gui.betterrecords.disclaimer.flashmode.rave"),
+                            "\u00a77" + I18n.format("gui.betterrecords.disclaimer.flashmode.rave.line1"),
+                            "\u00a77" + I18n.format("gui.betterrecords.disclaimer.flashmode.rave.line2"),
+                            "\u00a77" + I18n.format("gui.betterrecords.disclaimer.flashmode.rave.line3"),
+                            "\u00a77" + I18n.format("gui.betterrecords.disclaimer.flashmode.rave.line4"),
+                            "\u00a77" + I18n.format("gui.betterrecords.disclaimer.flashmode.rave.line5")),
                     mouseX, mouseY, fontRenderer
             )
         }

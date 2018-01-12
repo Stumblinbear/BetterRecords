@@ -5,11 +5,13 @@ import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
 import com.codingforcookies.betterrecords.client.sound.Sound
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketRecordPlay
-import com.codingforcookies.betterrecords.util.BetterUtils
+import net.minecraft.client.resources.I18n
 import net.minecraft.client.util.ITooltipFlag
 import net.minecraft.item.ItemStack
-import net.minecraft.util.text.translation.I18n
 import net.minecraft.world.World
+import net.minecraftforge.fml.relauncher.Side
+import net.minecraftforge.fml.relauncher.SideOnly
+import net.minecraft.util.text.translation.I18n as ServerI18n
 
 open class ItemRecord(name: String) : ModItem(name), IRecord {
 
@@ -37,21 +39,22 @@ open class ItemRecord(name: String) : ModItem(name), IRecord {
         }
     }
 
+    @SideOnly(Side.CLIENT)
     override fun addInformation(stack: ItemStack, worldIn: World?, tooltip: MutableList<String>, flagIn: ITooltipFlag) {
         stack.tagCompound?.let {
-            tooltip += BetterUtils.getTranslatedString("item.record.by") + ": " + it.getString("author")
-            tooltip += BetterUtils.getTranslatedString("item.record.size") + ": " + it.getInteger("size") + "mb"
+            tooltip += I18n.format("item.betterercords:record.desc.by", it.getString("author"))
+            tooltip += I18n.format("item.betterercords:record.desc.size", it.getInteger("size"))
             if (it.getBoolean("repeat")) {
                 tooltip += ""
-                tooltip.add("\u00a7e" + BetterUtils.getTranslatedString("item.record.repeatenabled"))
+                tooltip += "\u00a7e" + I18n.format("item.betterercords:record.desc.repeat")
             }
         }
     }
 
-    override fun getItemStackDisplayName(stack: ItemStack) =
+    override fun getItemStackDisplayName(stack: ItemStack): String =
             if (stack.hasTagCompound() && stack.tagCompound!!.hasKey("local")) {
                 stack.tagCompound!!.getString("local")
             } else {
-                I18n.translateToLocal("$unlocalizedName.name")
+                ServerI18n.translateToLocal("$unlocalizedName.name")
             }
 }

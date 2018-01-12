@@ -63,7 +63,7 @@ class BlockLaser(name: String) : ModBlock(Material.IRON, name), TESRProvider<Til
 
             if (te.length != length && !world.isRemote) {
                 val adjustment = if (te.length > length) "increase" else "decrease"
-                player.sendMessage(TextComponentTranslation("msg.laserlength.$adjustment").appendText(" ${te.length}"))
+                player.sendMessage(TextComponentTranslation("tile.betterrecords:laser.msg.$adjustment", te.length))
             }
           return true
         }

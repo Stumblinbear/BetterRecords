@@ -208,10 +208,10 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
 
     override fun drawGuiContainerForegroundLayer(mouseX: Int, mouseY: Int) {
         with(fontRenderer) {
-            drawString(I18n.format("gui.recordetcher"), 8, 6, 4210752)
+            drawString(I18n.format("tile.betterrecords:recordetcher.name"), 8, 6, 4210752)
             //drawString(I18n.format("container.inventory"), 8, 72, 4210752)
-            drawString(I18n.format("gui.name") + ": ", 10, 21, 4210752)
-            drawString(I18n.format("gui.url") + ": ", 10, 36, 4210752)
+            drawString(I18n.format("gui.betterrecords.label.name") + ": ", 10, 21, 4210752)
+            drawString(I18n.format("gui.betterrecords.label.url") + ": ", 10, 36, 4210752)
 
             drawString(selectedLibrary.name, xSize - 5 - getStringWidth(selectedLibrary.name), 8, 4210752)
 
@@ -321,19 +321,19 @@ class GuiRecordEtcher(inventoryPlayer: InventoryPlayer, val tileEntity: TileReco
      */
     private enum class Status(val translateKey: String) {
 
-        VALIDATING("gui.validating"),
-        NO_RECORD("gui.recordetcher.error1"),
-        NOT_BLANK_RECORD("gui.recordetcher.error2"),
-        NO_NAME("gui.error1"),
-        NAME_TOO_SHORT("gui.error2"),
-        NO_URL("gui.error3"),
-        INVALID_URL("gui.error5"),
-        FILE_TOO_BIG("gui.recordetcher.error3"),
-        INVALID_FILE("gui.recordetcher.error4"),
-        INVALID_FILE_ENCODING("gui.recordetcher.error6"),
-        MULTIPLAYER("gui.recordetcher.error5"),
-        IO_EXCEPTION("gui.error6"),
-        READY("gui.recordetcher.ready");
+        VALIDATING("gui.betterrecords.status.validating"),
+        NO_RECORD("gui.betterrecords.recordetcher.status.noRecord"),
+        NOT_BLANK_RECORD("gui.betterrecords.recordetcher.status.notBlank"),
+        NO_NAME("gui.betterrecords.status.noName"),
+        NAME_TOO_SHORT("gui.betterrecords.status.nameTooShort"),
+        NO_URL("gui.betterrecords.status.noUrl"),
+        INVALID_URL("gui.betterrecords.status.invalidUrl"),
+        FILE_TOO_BIG("gui.betterrecords.recordetcher.status.fileTooBig"),
+        INVALID_FILE("gui.betterrecords.recordetcher.status.invalidFile"),
+        INVALID_FILE_ENCODING("gui.betterrecords.recordetcher.status.encodingNotSupported"),
+        MULTIPLAYER("gui.betterrecords.recordetcher.status.multiplayer"),
+        IO_EXCEPTION("gui.betterrecords.status.ioException"),
+        READY("gui.betterrecords.recordetcher.ready");
 
         var arg: Any = ""
 
