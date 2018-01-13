@@ -71,7 +71,13 @@ class PacketRecordPlay @JvmOverloads constructor(
 
         val amount = buf.readInt()
         for (i in 1..amount) {
-            sounds.add(Sound.fromString(ByteBufUtils.readUTF8String(buf)))
+            sounds.add(Sound.fromString(ByteBufUtils.readUTF8String(buf)).apply {
+                this.x = this@PacketRecordPlay.pos.x
+                this.y = this@PacketRecordPlay.pos.y
+                this.z = this@PacketRecordPlay.pos.z
+                this.dimension = this@PacketRecordPlay.dimension
+                this.playRadius = this@PacketRecordPlay.playRadius
+            })
         }
 
         repeat = buf.readBoolean()
