@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.client.handler
 
+import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.client.sound.FileDownloader
 import com.codingforcookies.betterrecords.client.sound.SoundHandler
@@ -7,15 +8,18 @@ import com.codingforcookies.betterrecords.extensions.glMatrix
 import com.codingforcookies.betterrecords.util.BetterUtils
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution
+import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 import org.lwjgl.opengl.GL11
 import java.awt.Color
 
+@Mod.EventBusSubscriber(modid = ID)
 object ClientRenderHandler {
 
     var strobeLinger = 0f
 
+    @JvmStatic
     @SubscribeEvent
     fun onClientRender(event: TickEvent.RenderTickEvent) {
         if (event.phase == TickEvent.Phase.END) {

@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.client.handler
 
+import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.client.sound.SoundHandler
 import com.codingforcookies.betterrecords.extensions.glMatrix
@@ -8,11 +9,14 @@ import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.util.SoundCategory
 import net.minecraftforge.client.event.RenderWorldLastEvent
+import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import org.lwjgl.opengl.GL11
 
+@Mod.EventBusSubscriber(modid = ID)
 object RenderEventHandler {
 
+    @JvmStatic
     @SubscribeEvent
     fun onRenderEvent(event: RenderWorldLastEvent) {
         val mc = Minecraft.getMinecraft()
