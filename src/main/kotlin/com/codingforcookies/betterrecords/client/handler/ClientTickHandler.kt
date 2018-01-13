@@ -1,17 +1,21 @@
 package com.codingforcookies.betterrecords.client.handler
 
 import com.codingforcookies.betterrecords.BetterRecords
+import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
 import com.codingforcookies.betterrecords.client.sound.SoundHandler
 import net.minecraft.client.Minecraft
 import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos
+import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 
+@Mod.EventBusSubscriber(modid = ID)
 object ClientTickHandler {
 
+    @JvmStatic
     @SubscribeEvent
     fun showDisclaimer(event: TickEvent.ClientTickEvent) {
         if (event.phase == TickEvent.Phase.END) {
@@ -23,6 +27,7 @@ object ClientTickHandler {
         }
     }
 
+    @JvmStatic
     @SubscribeEvent
     fun incrementNowPlayingInt(event: TickEvent.ClientTickEvent) {
         if (event.phase == TickEvent.Phase.START) {
@@ -34,6 +39,7 @@ object ClientTickHandler {
         }
     }
 
+    @JvmStatic
     @SubscribeEvent
     fun updateVolumeBasedOnDistance(event: TickEvent.ClientTickEvent) {
         if (event.phase == TickEvent.Phase.START) {
