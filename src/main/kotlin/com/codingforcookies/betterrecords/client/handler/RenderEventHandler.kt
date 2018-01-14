@@ -11,9 +11,10 @@ import net.minecraft.util.SoundCategory
 import net.minecraftforge.client.event.RenderWorldLastEvent
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
+import net.minecraftforge.fml.relauncher.Side
 import org.lwjgl.opengl.GL11
 
-@Mod.EventBusSubscriber(modid = ID)
+@Mod.EventBusSubscriber(modid = ID, value = [Side.CLIENT])
 object RenderEventHandler {
 
     @JvmStatic
