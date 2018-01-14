@@ -11,10 +11,11 @@ import net.minecraft.client.gui.ScaledResolution
 import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
+import net.minecraftforge.fml.relauncher.Side
 import org.lwjgl.opengl.GL11
 import java.awt.Color
 
-@Mod.EventBusSubscriber(modid = ID)
+@Mod.EventBusSubscriber(modid = ID, value = [Side.CLIENT])
 object ClientRenderHandler {
 
     var strobeLinger = 0f
