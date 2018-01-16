@@ -20,5 +20,7 @@ Commits should not modify anything outside of the scope of what they are meant t
 
 Commit messages should be imperative. For example `Add xyz` and *not* `Added xyz`
 
+The only deviation we make from Gitflow is allowing small, atomic commits directly to dev.
+
 [kotlin official style guide]: https://kotlinlang.org/docs/reference/coding-conventions.html
 [gitflow]: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
