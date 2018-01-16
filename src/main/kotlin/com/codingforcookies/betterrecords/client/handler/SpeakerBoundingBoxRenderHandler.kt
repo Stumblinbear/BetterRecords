@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.client.handler
 
+import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.block.tile.TileSpeaker
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraftforge.client.event.DrawBlockHighlightEvent
@@ -8,10 +9,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly
 
-@SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber(value = Side.CLIENT)
-class SpeakerBoundingBoxRenderHandler {
+@Mod.EventBusSubscriber(modid = ID, value = [Side.CLIENT])
+object SpeakerBoundingBoxRenderHandler {
 
+    @JvmStatic
     @SubscribeEvent
     fun onSpeakerRender(event: DrawBlockHighlightEvent) {
         val pos = event.target.blockPos

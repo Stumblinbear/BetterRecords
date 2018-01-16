@@ -32,8 +32,6 @@ class ClientProxy : CommonProxy() {
     override fun init(event: FMLInitializationEvent) {
         super.init(event)
 
-        MinecraftForge.EVENT_BUS.register(SpeakerBoundingBoxRenderHandler())
-
         Item.REGISTRY
                 .filterIsInstance<ModItem>()
                 .forEach(ModItem::registerRender)
