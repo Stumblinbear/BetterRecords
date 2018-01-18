@@ -61,6 +61,10 @@ dependencies {
 
 shadowJar {
     classifier '' // Replace the default jar
+
+    dependencies {
+        exclude dependency('junit:junit')
+    }
 }
 
 reobf {
