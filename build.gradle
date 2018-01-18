@@ -61,11 +61,6 @@ dependencies {
 
 shadowJar {
     classifier '' // Replace the default jar
-
-    relocate 'org/tritonus', 'com/codingforcookies/betterrecords/repack/tritonus'
-    relocate 'javazoom', 'com/codingforcookies/betterrecords/repack/javazoom'
-    relocate 'com/jcraft', 'com/codingforcookies/betterrecords/repack/jcraft'
-    relocate 'junit', 'com/codingforcookies/betterrecords/repack/junit' // Can't be bothered to figure out why so just move it
 }
 
 reobf {
