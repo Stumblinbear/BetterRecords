@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.item
 
 import com.codingforcookies.betterrecords.api.record.IRecord
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
-import com.codingforcookies.betterrecords.client.sound.Sound
+import com.codingforcookies.betterrecords.client.old.sound.Sound
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketRecordPlay
 import net.minecraft.client.resources.I18n

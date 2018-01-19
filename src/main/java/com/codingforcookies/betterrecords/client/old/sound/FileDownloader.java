@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.client.sound;
+package com.codingforcookies.betterrecords.client.old.sound;
 
 import com.codingforcookies.betterrecords.ModConfig;
 

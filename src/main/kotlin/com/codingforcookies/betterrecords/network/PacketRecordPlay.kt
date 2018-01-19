@@ -1,7 +1,7 @@
 package com.codingforcookies.betterrecords.network
 
-import com.codingforcookies.betterrecords.client.sound.Sound
-import com.codingforcookies.betterrecords.client.sound.SoundHandler
+import com.codingforcookies.betterrecords.client.old.sound.Sound
+import com.codingforcookies.betterrecords.client.old.sound.SoundHandler
 import com.codingforcookies.betterrecords.extensions.forEachTag
 import io.netty.buffer.ByteBuf
 import net.minecraft.client.Minecraft

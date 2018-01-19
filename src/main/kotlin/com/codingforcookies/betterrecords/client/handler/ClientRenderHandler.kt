@@ -2,8 +2,8 @@ package com.codingforcookies.betterrecords.client.handler
 
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.ModConfig
-import com.codingforcookies.betterrecords.client.sound.FileDownloader
-import com.codingforcookies.betterrecords.client.sound.SoundHandler
+import com.codingforcookies.betterrecords.client.old.sound.FileDownloader
+import com.codingforcookies.betterrecords.client.old.sound.SoundHandler
 import com.codingforcookies.betterrecords.extensions.glMatrix
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.ScaledResolution

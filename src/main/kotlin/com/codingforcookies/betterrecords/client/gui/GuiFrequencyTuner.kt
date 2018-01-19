@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.client.gui
 
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.block.tile.TileFrequencyTuner
-import com.codingforcookies.betterrecords.client.sound.IcyURLConnection
+import com.codingforcookies.betterrecords.client.old.sound.IcyURLConnection
 import com.codingforcookies.betterrecords.network.PacketHandler
 import com.codingforcookies.betterrecords.network.PacketURLWrite
 import net.minecraft.client.gui.GuiTextField

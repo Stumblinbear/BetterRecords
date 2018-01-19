@@ -4,7 +4,7 @@ import com.codingforcookies.betterrecords.BetterRecords
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.ModConfig
 import com.codingforcookies.betterrecords.api.wire.IRecordWireHome
-import com.codingforcookies.betterrecords.client.sound.SoundHandler
+import com.codingforcookies.betterrecords.client.old.sound.SoundHandler
 import net.minecraft.client.Minecraft
 import net.minecraft.util.SoundCategory
 import net.minecraft.util.math.BlockPos

@@ -1,6 +1,6 @@
 package com.codingforcookies.betterrecords.network
 
-import com.codingforcookies.betterrecords.client.sound.SoundHandler
+import com.codingforcookies.betterrecords.client.old.sound.SoundHandler
 import io.netty.buffer.ByteBuf
 import net.minecraft.client.Minecraft
 import net.minecraft.util.math.BlockPos

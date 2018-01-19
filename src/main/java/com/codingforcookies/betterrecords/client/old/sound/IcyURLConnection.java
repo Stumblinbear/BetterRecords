@@ -1,4 +1,4 @@
-package com.codingforcookies.betterrecords.client.sound;
+package com.codingforcookies.betterrecords.client.old.sound;
 
 import java.io.IOException;
 import java.io.InputStream;

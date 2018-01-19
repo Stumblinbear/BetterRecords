@@ -2,7 +2,7 @@ package com.codingforcookies.betterrecords.client.handler
 
 import com.codingforcookies.betterrecords.ID
 import com.codingforcookies.betterrecords.ModConfig
-import com.codingforcookies.betterrecords.client.sound.SoundHandler
+import com.codingforcookies.betterrecords.client.old.sound.SoundHandler
 import com.codingforcookies.betterrecords.extensions.glMatrix
 import com.codingforcookies.betterrecords.item.ItemWire
 import net.minecraft.client.Minecraft
