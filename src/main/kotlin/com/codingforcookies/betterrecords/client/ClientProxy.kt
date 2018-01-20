@@ -1,6 +1,7 @@
 package com.codingforcookies.betterrecords.client
 
 import com.codingforcookies.betterrecords.CommonProxy
+import com.codingforcookies.betterrecords.client.handler.ExternalLibraryHandler
 import com.codingforcookies.betterrecords.client.old.sound.SoundHandler
 import com.codingforcookies.betterrecords.item.ModItem
 import com.codingforcookies.betterrecords.item.ModItems
@@ -24,6 +25,7 @@ class ClientProxy : CommonProxy() {
 
     override fun preInit(event: FMLPreInitializationEvent) {
         super.preInit(event)
+        ExternalLibraryHandler.init()
         SoundHandler.initalize()
     }
 

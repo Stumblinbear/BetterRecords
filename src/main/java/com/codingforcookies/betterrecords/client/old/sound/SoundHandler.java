@@ -33,16 +33,6 @@ public class SoundHandler{
     public static int nowPlayingInt = 0;
 
     public static void initalize(){
-        File libs = new File(Minecraft.getMinecraft().mcDataDir, "betterrecords/libs");
-        libs.mkdirs();
-        if(!new File(libs, "vorbisspi-1.0.3-1.jar").exists()) FileDownloader.downloadFile("vorbisspi-1.0.3-1.jar", "https://raw.githubusercontent.com/stumblinbear/Versions/master/betterrecords/libs/vorbisspi-1.0.3-1.jar", "vorbisspi-1.0.3-1", libs);
-        if(!new File(libs, "tritonus-share-0.3.7-2.jar").exists()) FileDownloader.downloadFile("tritonus-share-0.3.7-2.jar", "https://raw.githubusercontent.com/stumblinbear/Versions/master/betterrecords/libs/tritonus-share-0.3.7-2.jar", "tritonus-share-0.3.7-2.", libs);
-        if(!new File(libs, "mp3spi1.9.5.jar").exists()) FileDownloader.downloadFile("mp3spi1.9.5.jar", "https://raw.githubusercontent.com/stumblinbear/Versions/master/betterrecords/libs/mp3spi1.9.5.jar", "mp3spi1.9.5", libs);
-        if(!new File(libs, "mp3plugin.jar").exists()) FileDownloader.downloadFile("mp3plugin.jar", "https://raw.githubusercontent.com/stumblinbear/Versions/master/betterrecords/libs/mp3plugin.jar", "mp3plugin", libs);
-        loadLibrary(new File(libs, "vorbisspi-1.0.3-1.jar"));
-        loadLibrary(new File(libs, "tritonus-share-0.3.7-2.jar"));
-        loadLibrary(new File(libs, "mp3spi1.9.5.jar"));
-        loadLibrary(new File(libs, "mp3plugin.jar"));
         soundLocation = new File(Minecraft.getMinecraft().mcDataDir, "betterrecords/cache");
         soundList = new HashMap<>();
         soundPlaying = new HashMap<>();
@@ -51,21 +41,6 @@ public class SoundHandler{
             soundList.put(sound.getName(), sound);
         }
         System.out.println("Loaded sound cache of " + soundList.size() + " sounds.");
-    }
-
-    private static void loadLibrary(File file){
-        System.out.println("Injecting library " + file.getName() + ".");
-        try{
-            Loader.instance().getModClassLoader().addFile(file);
-        }catch(IOException e){
-            e.printStackTrace();
-            System.err.println("Failed to load library, trying another method: " + file.getName());
-            try{
-                ClasspathInjector.INSTANCE.addFile(file);
-            }catch(IOException e1){
-                e1.printStackTrace();
-            }
-        }
     }
 
     public static void playSound(final int x, final int y, final int z, final int dimension, final float playRadius, final List<Sound> sounds, boolean repeat, boolean shuffle){
