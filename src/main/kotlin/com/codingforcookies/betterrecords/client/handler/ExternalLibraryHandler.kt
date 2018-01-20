@@ -1,5 +1,6 @@
 package com.codingforcookies.betterrecords.client.handler
 
+import com.codingforcookies.betterrecords.BetterRecords
 import com.codingforcookies.betterrecords.client.old.sound.FileDownloader
 import com.codingforcookies.betterrecords.util.ClasspathInjector
 import net.minecraft.client.Minecraft
@@ -32,12 +33,12 @@ object ExternalLibraryHandler {
     }
 
     private fun injectLibrary(file: File) {
-        println("Injecting library: ${file.name}")
+        BetterRecords.logger.info("Injecting library: ${file.name}")
 
         try {
             Loader.instance().modClassLoader.addFile(file)
         } catch (e: IOException) {
-            println("Failed to load library, trying another method: ${file.name}")
+            BetterRecords.logger.warn("Failed to load library, trying another method: ${file.name}")
             ClasspathInjector.addFile(file)
         }
     }
