@@ -1,5 +1,5 @@
-BetterRecords
-=============
+# [BetterRecords is being continued at a new repository!](https://github.com/NicholasFeldman/BetterRecords)
+
 [Curse](https://minecraft.curseforge.com/projects/better-records)
 
 Better Records adds the ability to download your favorite songs
